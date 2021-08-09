@@ -1,0 +1,72 @@
+Package: finmix
+Type: Package
+Title: Gibbs sampling for finite mixture distributions.
+Version: 0.1
+Date: 2013-07-05
+Author: Lars Simon Zehnder
+Maintainer: Lars Simon Zehnder <simon.zehnder@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: GPL (>= 3)
+Depends: Rcpp (>= 0.10.2), RcppArmadillo (>= 0.3.6.2), graphics, 
+            mvtnorm (>= 0.9-7), KernSmooth (>= 2.23.10), dfoptim(>= 2011.8.1)
+Imports: Rcpp (>= 0.11.4), graphics, mvtnorm (>= 0.9-7), KernSmooth (>= 0.3.6.2)
+Suggests: RUnit
+LinkingTo: Rcpp, RcppArmadillo
+Collate:
+    AllGenerics.R
+    graphic_func.R
+    mixturemoments.R
+    model.R
+    modelmoments.R
+    dmodelmoments.R
+    cmodelmoments.R
+    poissonmodelmoments.R
+    binomialmodelmoments.R
+    exponentialmodelmoments.R
+    normalmodelmoments.R
+    studentmodelmoments.R
+    normultmodelmoments.R
+    studmultmodelmoments.R
+    fdata.R
+    groupmoments.R
+    sdatamoments.R
+    csdatamoments.R
+    datamoments.R
+    cdatamoments.R
+    ddatamoments.R
+    prior.R
+    mcmc.R
+    unass.R
+    mcmcstart.R
+    likelihood.R
+    distributions.R
+    dataclass.R
+    RcppExports.R
+    mcmcextract.R
+    mcmcoutputfix.R
+    mcmcoutputfixhier.R
+    mcmcoutputfixpost.R
+    mcmcoutputfixhierpost.R
+    mcmcoutputbase.R
+    mcmcoutputhier.R
+    mcmcoutputpost.R
+    mcmcoutputhierpost.R
+    mixturemcmc.R
+    mcmcpermfix.R
+    mcmcpermfixpost.R
+    mcmcpermind.R
+    mcmcpermindpost.R
+    mcmcoutputpermfix.R
+    mcmcoutputpermfixhier.R
+    mcmcoutputpermfixpost.R
+    mcmcoutputpermfixhierpost.R
+    mcmcoutputpermbase.R
+    mcmcoutputpermhier.R
+    mcmcoutputpermpost.R
+    mcmcoutputpermhierpost.R
+    mincol.R
+    mcmcpermute.R
+    mcmcestfix.R
+    mcmcestind.R
+    mcmcestimate.R
+

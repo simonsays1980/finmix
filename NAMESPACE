@@ -1,0 +1,196 @@
+useDynLib(finmix)
+exportPattern("^[[:alpha:]]+")
+
+importFrom(graphics, barplot)
+importFrom(graphics, hist)
+importFrom(graphics, persp)
+importFrom(graphics, contour)
+importFrom(graphics, pairs)
+importFrom(KernSmooth, bkde2D)
+importFrom(dfoptim, nmkb)
+importFrom(Rcpp, evalCpp)
+export( ## user-defined constructors
+        "model",
+        "modelmoments",
+        "fdata",
+        "groupmoments",
+        "sdatamoments",
+        "datamoments",
+        "prior",
+        "priordefine",
+        "mcmc",
+        "%=%",
+        "mcmcstart",
+        "dataclass",
+        "mixturemcmc",
+        "mcmcpermute",
+        "mcmcestimate"
+)
+
+exportClasses( ## all classes
+        "model",
+        "fdata",
+        "prior",
+        "mcmc"
+)
+
+exportMethods( ## name of the generic, as with other methods
+        ## 'model' class ##
+        "plotPointProc",
+        "hasWeight",
+        "hasPar",
+        "hasExp",
+        "hasT",
+        "getDist",
+        "getR", 
+        "getK",
+        "getWeight",
+        "getPar",
+        "getIndicmod",
+        "getIndicfix",
+        "getExp",
+        "getT",
+        "setDist<-", 
+        "setR<-",
+        "setK<-",
+        "setWeight<-",
+        "setPar<-",
+        "setIndicmod<-",
+        "setIndicfix<-",
+        "setExp<-",
+        "setT<-",
+
+        ## 'modelmoments' class ##
+        "getMean",
+        "getVar",
+        "getModel",
+        
+        ## 'cmodelmoments' class ##
+        "getHigher",
+        "getSkewness",
+        "getKurtosis",
+
+        ## 'dmodelmoments' class ##
+        "getOver",
+        "getFactorial",
+        "getZero",
+        
+        ## 'normultmodelmoments' class ##
+        "getB",
+        "getW",
+        "getRdet",
+        "getRtr",
+        "getCorr",
+
+        ## 'exponentialmodelmoments' class ##
+        "getExtrabinvar",
+        
+        ## 'fdata' class ##
+        "hasY",
+        "hasS",
+        "hasExp",
+        "hasT",
+        "getY",
+        "setY<-",
+        "getColY",
+        "getRowY",
+    	"getN",
+    	"setN<-",
+        "getS",
+        "setS<-",
+        "getColS",
+        "getRowS",
+        "getBycolumn",
+        "setBycolumn<-",
+        "getName",
+        "setName<-",
+        "getType",
+        "setType<-",
+        "getSim",
+        "setSim<-",
+        "getColExp",
+        "getRowExp",
+        "getColT",
+        "getRowT",
+
+        ## 'groupmoments' class ##
+        "getNK",
+        "getWK",
+        "getFdata",
+       
+        ## 'sdatamoments' class ##
+        "getGmoments",
+
+        ## 'cdatamoments' class ##
+        "getSmoments",
+
+        ## 'prior' class ##
+        "getHier",
+        "setHier<-",
+
+        ## 'mcmc' class ##
+        "getBurnin",
+        "setBurnin<-",
+        "getM",
+        "setM<-",
+        "getStoreS",
+        "setStoreS<-",
+        "getStartpar",
+        "setStartpar<-",
+        "getStorepost",
+        "setStorepost<-",
+        "getRanperm",
+        "setRanperm<-",
+
+        ## 'dataclass' class ##
+        "getLogpy",
+        "getProb",
+        "getMixlik",
+        "getLoglikcd",
+        "getPostS",
+
+        ## 'mcmcoutputfix' class ##
+        "plotTraces",
+        "plotHist",
+        "plotDens",
+        "plotSampRep",
+        "plotPostDens",
+        "subseq",
+        "swapElements",
+        "getLog",
+        "getPrior",
+
+        ## 'mcmcoutputfixhier' class ##
+        "getHyper",
+        
+        ## 'mcmcoutputfixpost' class ##
+        "getPost",
+
+        ## 'mcmcoutputbase' class ##
+        "getST",
+        "getClust",
+
+        ## 'mcmcpermfix' class ##
+        "getMperm",
+        "getParperm",
+        "getLogperm",
+
+        ## 'mcmcpermfixpost' class ##
+        "getPostperm",
+
+        ## 'mcmcpermind' class ##
+        "getRelabel",
+        "getWeightperm",
+        "getEntropyperm",
+        "getSTperm",
+        "getSperm",
+        "getNKperm",
+
+        ## 'mcmcestfix' class ##
+        "getMap",
+        "getBml",
+        "getIeavg",
+
+        ## 'mcmcind' class ##
+        "getEavg"
+)
