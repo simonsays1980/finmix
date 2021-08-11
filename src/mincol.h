@@ -15,6 +15,7 @@
 #ifndef __FINMIX_MINCOL_H__
 #define __FINMIX_MINCOL_H__
 
+// Matrix to column
 inline
 arma::vec mincol (const arma::mat& m) 
 {

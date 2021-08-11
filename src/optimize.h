@@ -45,14 +45,14 @@
  * ------------------------------------------------------------
  **/
 inline
-double obj_stephens1997a_poisson (const std::vector<double> &x, 
-        std::vector<double> &grad, void *f_data)
+double obj_stephens1997a_poisson (unsigned n, const double* x, 
+        double* grad, void *f_data)
 {
     std::vector<arma::mat*> *arma_data = static_cast<std::vector<arma::mat*>* >(f_data);
     const unsigned int M = (*arma_data)[0]->n_rows; 
     const unsigned int K = (*arma_data)[0]->n_cols;
     arma::vec rvalues(M);
-    arma::vec arma_x(x);
+    arma::vec arma_x(*x);
     arma::vec dirich(&x[0], K);
     arma::vec shape(&x[0] + K, K);
     arma::vec rate(&x[0] + 2 * K, K);
@@ -84,14 +84,14 @@ double obj_stephens1997a_poisson (const std::vector<double> &x,
  * ------------------------------------------------------------
  **/
 inline
-double obj_stephens1997a_binomial (const std::vector<double> &x, 
-        std::vector<double> &grad, void *f_data)
+double obj_stephens1997a_binomial (unsigned n, const double* x, 
+        double* grad, void *f_data)
 {
     std::vector<arma::mat*> *arma_data = static_cast<std::vector<arma::mat*>* >(f_data);
     const unsigned int M = (*arma_data)[0]->n_rows; 
     const unsigned int K = (*arma_data)[0]->n_cols;
     arma::vec rvalues(M);
-    arma::vec arma_x(x);
+    arma::vec arma_x(*x);
     arma::vec dirich(&x[0], K);
     arma::vec shape1(&x[0] + K, K);
     arma::vec shape2(&x[0] + 2 * K, K);

@@ -20,8 +20,8 @@
 inline
 double kulback_leibler(const arma::vec &values, const arma::vec &base)
 {
-    const unsigned int N = values.n_elem;
-    const unsigned int K = values.n_elem;
+    //const unsigned int N = values.n_elem;
+    //const unsigned int K = values.n_elem;
     double rvalue;
     rvalue = arma::sum(values % arma::log(values/base));   
     return rvalue;

@@ -2,10 +2,10 @@
 #include "distributions.h"
 
 ParStudmultFix::ParStudmultFix (const bool& STARTPAR,
-        const FinmixModel& model) : INDEPENDENT(true), 
-    mu(model.K, model.r), sigma(model.r, model.r, model.K), 
-    sigmainv(model.r, model.r, model.K), df(model.K), 
-    acc(model.K)
+        const FinmixModel& model) : mu(model.K, model.r), 
+        sigma(model.r, model.r, model.K), 
+        sigmainv(model.r, model.r, model.K), df(model.K), 
+        acc(model.K), INDEPENDENT(true)
 {
     acc.fill(0.0);
     if (model.par.size() > 0) {

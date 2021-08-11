@@ -26,7 +26,7 @@
 #include "algorithms.h"
 #include "optimize.h"
 #include "hungarian.h"
-#include <nlopt.hpp>
+#include <nloptrAPI.h>
 
 
 // ============================================================
@@ -83,18 +83,22 @@ arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
         row_index.at(m) = m;
     }
     /* Set up the optimizer */
-    nlopt::opt optim(nlopt::LN_NELDERMEAD, n);
+    nlopt_opt optim;
+    optim = nlopt_create(NLOPT_LN_NELDERMEAD, n);
     std::vector<arma::mat*> f_data(2);
     f_data[0] = &lambda;
     f_data[1] = &weight;
-    optim.set_max_objective(obj_stephens1997a_poisson, &f_data);
-    optim.set_lower_bounds(1e-10);
-    optim.set_upper_bounds(1e+7);
-    std::vector<double> opt_par = arma::conv_to<std::vector<double> >::from(pars);
+    double lower_bound[1] = {1e-10};
+    double upper_bound[1] = {1e+7};
+    nlopt_set_lower_bounds(optim, lower_bound);
+    nlopt_set_upper_bounds(optim, upper_bound);
+    nlopt_set_max_objective(optim, obj_stephens1997a_poisson, &f_data);
+    std::vector<double> opt_par = arma::conv_to<std::vector<double>>::from(pars);
+    
 
     while (value != value_next) {
         value = value_next;
-        nlopt::result result = optim.optimize(opt_par, value_next);
+        nlopt_optimize(optim, &opt_par[0], &value_next);
         for (unsigned int k = 0; k < K; ++k) {
             dirich.at(k)   = opt_par[k];
             shape.at(k)    = opt_par[k + K];
@@ -109,12 +113,13 @@ arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
         for (unsigned int m = 0; m < M; ++m) {
             tmp2            = arma::conv_to<arma::vec>::from(func_val.row(m));
             col_index       = arma::sort_index(tmp2, "descend");
-            ind.row(m)    = arma_perm.row(col_index(0));
+            ind.row(m)      = arma_perm.row(col_index(0));
         }
         swapmat_by_index(lambda, ind);
         swapmat_by_index(weight, ind);
         swapumat_by_index(index, ind);
     }
+    nlopt_destroy(optim);
     index += 1;
     return arma::conv_to<arma::imat>::from(index);
 }
@@ -170,18 +175,21 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
         row_index.at(m) = m;
     }
     /* Set up the optimizer */
-    nlopt::opt optim(nlopt::LN_NELDERMEAD, n);
+    nlopt_opt optim;
+    optim = nlopt_create(NLOPT_LN_NELDERMEAD, n);
     std::vector<arma::mat*> f_data(2);
     f_data[0] = &pp;
     f_data[1] = &weight;
-    optim.set_max_objective(obj_stephens1997a_binomial, &f_data);
-    optim.set_lower_bounds(1e-10);
-    optim.set_upper_bounds(1e+7);
-    std::vector<double> opt_par = arma::conv_to<std::vector<double> >::from(pars);
+    double lower_bound[1] = {1e-10};
+    double upper_bound[1] = {1e+7};
+    nlopt_set_lower_bounds(optim, lower_bound);
+    nlopt_set_upper_bounds(optim, upper_bound);
+    nlopt_set_max_objective(optim, obj_stephens1997a_binomial, &f_data);
+    std::vector<double> opt_par = arma::conv_to<std::vector<double>>::from(pars);
 
     while (value != value_next) {
         value = value_next;
-        nlopt::result result = optim.optimize(opt_par, value_next);
+        nlopt_optimize(optim, &opt_par[0], &value_next);
         for (unsigned int k = 0; k < K; ++k) {
             dirich.at(k)    = opt_par[k];
             shape1.at(k)    = opt_par[k + K];
@@ -202,6 +210,7 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
         swapmat_by_index(weight, ind);
         swapumat_by_index(index, ind);
     }
+    nlopt_destroy(optim);
     index += 1;
     return arma::conv_to<arma::imat>::from(index);
 }

@@ -1,13 +1,16 @@
 ## Use the R_HOME indirection to support installations of multiple R version
-NLOPT_VERSION = 2.3
+#NLOPT_VERSION = 2.3
 
-NLOPT_LIBS=-lnlopt -lm
+#NLOPT_LIBS=-lnlopt -lm
 
+CXX_STD = CXX11
 #PKG_CPPFLAGS = ${NLOPT_INCL} -Winvalid-pch
 #PKG_CFLAGS = -pipe ${NLOPT_INCL}
-PKG_LIBS = ${NLOPT_LIBS}  
+PKG_LIBS = $(SHLIB_OPENMP_CFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+#${NLOPT_LIBS}  
 
-PKG_CXXFLAGS = -g `Rscript -e "Rcpp:::CxxFlags()"` 
+PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS)
+#-g `Rscript -e "Rcpp:::CxxFlags()"` 
 ## As an alternative, one can also add this code in a file 'configure'
 ##
 ##    PKG_LIBS=`${R_HOME}/bin/Rscript -e "Rcpp:::LdFlags()"`
