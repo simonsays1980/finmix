@@ -144,7 +144,7 @@ setMethod( "plotTraces", signature( x     = "mcmcoutputpermpost",
               }
               if ( lik %in% c( 1, 2 ) ) {
                   ## log ##
-                  .permtraces.Log.Base( x, dev, col ) 
+                  .permtraces.Log.Base( x, dev ) 
               }
           }
 )

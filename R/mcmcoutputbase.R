@@ -127,7 +127,7 @@ setMethod( "plotDens", signature( x   = "mcmcoutputbase",
            }
 )
 
-setMethod("plotPointProc", signature(x      = "mcmcoutputhier",
+setMethod("plotPointProc", signature(x      = "mcmcoutputbase",
                                      dev    = "ANY"),
           function(x, dev = TRUE, ...)
           {

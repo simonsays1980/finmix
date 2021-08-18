@@ -20,9 +20,6 @@
  * along with finmix. If not, see <http://www.gnu.org/licenses/>.
  *
  ******************************************************************************/
-#ifndef MCMCPOISSON_CC
-#define MCMCPOISSON_CC
-
 #include <RcppArmadillo.h>		// C++ linear algebra library
 #include "FinmixData.h"
 #include "FinmixModel.h"
@@ -131,4 +128,3 @@ RcppExport SEXP mcmc_poisson_cc(SEXP data_S4, SEXP model_S4,
 		
 	return Rcpp::wrap(mcmcOutputS4O);	
 }
-#endif

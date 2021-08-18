@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // swap_cc
 Rcpp::NumericMatrix swap_cc(Rcpp::NumericMatrix values, Rcpp::IntegerMatrix index);
 RcppExport SEXP _finmix_swap_cc(SEXP valuesSEXP, SEXP indexSEXP) {
@@ -149,36 +154,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// mcmc_binomial_cc
-RcppExport SEXP mcmc_binomial_cc(SEXP fdata_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
-RcppExport SEXP _finmix_mcmc_binomial_cc(SEXP fdata_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type fdata_S4(fdata_S4SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
-    rcpp_result_gen = Rcpp::wrap(mcmc_binomial_cc(fdata_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
-    return rcpp_result_gen;
-END_RCPP
-}
-// mcmc_normult_cc
-RcppExport SEXP mcmc_normult_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
-RcppExport SEXP _finmix_mcmc_normult_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
-    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
-    rcpp_result_gen = Rcpp::wrap(mcmc_normult_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
-    return rcpp_result_gen;
-END_RCPP
-}
 // stephens1997a_poisson_cc
 arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1, Rcpp::NumericMatrix values2, arma::vec pars, const arma::umat perm);
 RcppExport SEXP _finmix_stephens1997a_poisson_cc(SEXP values1SEXP, SEXP values2SEXP, SEXP parsSEXP, SEXP permSEXP) {
@@ -270,8 +245,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_finmix_hungarian_cc", (DL_FUNC) &_finmix_hungarian_cc, 1},
     {"_finmix_moments_cc", (DL_FUNC) &_finmix_moments_cc, 1},
     {"_finmix_permmoments_cc", (DL_FUNC) &_finmix_permmoments_cc, 1},
-    {"_finmix_mcmc_binomial_cc", (DL_FUNC) &_finmix_mcmc_binomial_cc, 5},
-    {"_finmix_mcmc_normult_cc", (DL_FUNC) &_finmix_mcmc_normult_cc, 5},
     {"_finmix_stephens1997a_poisson_cc", (DL_FUNC) &_finmix_stephens1997a_poisson_cc, 4},
     {"_finmix_stephens1997a_binomial_cc", (DL_FUNC) &_finmix_stephens1997a_binomial_cc, 4},
     {"_finmix_stephens1997b_poisson_cc", (DL_FUNC) &_finmix_stephens1997b_poisson_cc, 3},

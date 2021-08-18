@@ -1,7 +1,8 @@
+useDynLib(finmix, .registration=TRUE)
+
 import(nloptr)
-useDynLib(nloptC)
-useDynLib(finmix)
-exportPattern("^[[:alpha:]]+")
+importFrom("Rcpp", "sourceCpp")
+#exportPattern("^[[:alpha:]]+")
 
 importFrom(graphics, barplot)
 importFrom(graphics, hist)
@@ -10,7 +11,6 @@ importFrom(graphics, contour)
 importFrom(graphics, pairs)
 importFrom(KernSmooth, bkde2D)
 importFrom(dfoptim, nmkb)
-importFrom(Rcpp, evalCpp)
 export( ## user-defined constructors
         "model",
         "modelmoments",

@@ -20,7 +20,6 @@
 #include "LogNormultInd.h"
 #include "PostOutNormultInd.h"
 
-//[[Rcpp::export]]
 RcppExport SEXP mcmc_normult_cc (SEXP data_S4, SEXP model_S4,
         SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4) 
 {
@@ -98,4 +97,4 @@ RcppExport SEXP mcmc_normult_cc (SEXP data_S4, SEXP model_S4,
     }
     return Rcpp::wrap(mcmcOutputS4O);
 }
-#endif
+#endif //__FINMIX_MCMC_BINOMIAL_CC__

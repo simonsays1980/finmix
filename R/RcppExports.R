@@ -2,78 +2,70 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 swap_cc <- function(values, index) {
-    .Call('_finmix_swap_cc', PACKAGE = 'finmix', values, index)
+    .Call(`_finmix_swap_cc`, values, index)
 }
 
 swap_3d_cc <- function(values, index) {
-    .Call('_finmix_swap_3d_cc', PACKAGE = 'finmix', values, index)
+    .Call(`_finmix_swap_3d_cc`, values, index)
 }
 
 swapInteger_cc <- function(values, index) {
-    .Call('_finmix_swapInteger_cc', PACKAGE = 'finmix', values, index)
+    .Call(`_finmix_swapInteger_cc`, values, index)
 }
 
 swapInd_cc <- function(values, index) {
-    .Call('_finmix_swapInd_cc', PACKAGE = 'finmix', values, index)
+    .Call(`_finmix_swapInd_cc`, values, index)
 }
 
 swapST_cc <- function(values, index) {
-    .Call('_finmix_swapST_cc', PACKAGE = 'finmix', values, index)
+    .Call(`_finmix_swapST_cc`, values, index)
 }
 
 ldgamma_cc <- function(values, shape, rate) {
-    .Call('_finmix_ldgamma_cc', PACKAGE = 'finmix', values, shape, rate)
+    .Call(`_finmix_ldgamma_cc`, values, shape, rate)
 }
 
 dgamma_cc <- function(values, shape, rate) {
-    .Call('_finmix_dgamma_cc', PACKAGE = 'finmix', values, shape, rate)
+    .Call(`_finmix_dgamma_cc`, values, shape, rate)
 }
 
 lddirichlet_cc <- function(values, par) {
-    .Call('_finmix_lddirichlet_cc', PACKAGE = 'finmix', values, par)
+    .Call(`_finmix_lddirichlet_cc`, values, par)
 }
 
 ddirichlet_cc <- function(values, par) {
-    .Call('_finmix_ddirichlet_cc', PACKAGE = 'finmix', values, par)
+    .Call(`_finmix_ddirichlet_cc`, values, par)
 }
 
 hungarian_cc <- function(cost) {
-    .Call('_finmix_hungarian_cc', PACKAGE = 'finmix', cost)
+    .Call(`_finmix_hungarian_cc`, cost)
 }
 
 moments_cc <- function(classS4) {
-    .Call('_finmix_moments_cc', PACKAGE = 'finmix', classS4)
+    .Call(`_finmix_moments_cc`, classS4)
 }
 
 permmoments_cc <- function(classS4) {
-    .Call('_finmix_permmoments_cc', PACKAGE = 'finmix', classS4)
-}
-
-mcmc_binomial_cc <- function(fdata_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4) {
-    .Call('_finmix_mcmc_binomial_cc', PACKAGE = 'finmix', fdata_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
-}
-
-mcmc_normult_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4) {
-    .Call('_finmix_mcmc_normult_cc', PACKAGE = 'finmix', data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
+    .Call(`_finmix_permmoments_cc`, classS4)
 }
 
 stephens1997a_poisson_cc <- function(values1, values2, pars, perm) {
-    .Call('_finmix_stephens1997a_poisson_cc', PACKAGE = 'finmix', values1, values2, pars, perm)
+    .Call(`_finmix_stephens1997a_poisson_cc`, values1, values2, pars, perm)
 }
 
 stephens1997a_binomial_cc <- function(values1, values2, pars, perm) {
-    .Call('_finmix_stephens1997a_binomial_cc', PACKAGE = 'finmix', values1, values2, pars, perm)
+    .Call(`_finmix_stephens1997a_binomial_cc`, values1, values2, pars, perm)
 }
 
 stephens1997b_poisson_cc <- function(values, comp_par, weight_par) {
-    .Call('_finmix_stephens1997b_poisson_cc', PACKAGE = 'finmix', values, comp_par, weight_par)
+    .Call(`_finmix_stephens1997b_poisson_cc`, values, comp_par, weight_par)
 }
 
 stephens1997b_binomial_cc <- function(values, reps, comp_par, weight_par) {
-    .Call('_finmix_stephens1997b_binomial_cc', PACKAGE = 'finmix', values, reps, comp_par, weight_par)
+    .Call(`_finmix_stephens1997b_binomial_cc`, values, reps, comp_par, weight_par)
 }
 
 stephens1997b_exponential_cc <- function(values, comp_par, weight_par) {
-    .Call('_finmix_stephens1997b_exponential_cc', PACKAGE = 'finmix', values, comp_par, weight_par)
+    .Call(`_finmix_stephens1997b_exponential_cc`, values, comp_par, weight_par)
 }
 

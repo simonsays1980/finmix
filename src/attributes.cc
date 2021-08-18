@@ -27,6 +27,7 @@
 #include "hungarian.h"
 #include "mincol.h"
 #include "moments.h"
+
 // [[Rcpp::export]]
 
 Rcpp::NumericMatrix swap_cc(Rcpp::NumericMatrix values, Rcpp::IntegerMatrix index) {

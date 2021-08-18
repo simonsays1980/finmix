@@ -20,7 +20,6 @@
  * along with finmix. If not, see <http://www.gnu.org/licenses/>.
  *
  ******************************************************************************/
-
 #include "FinmixData.h"
 #include "FinmixModel.h"
 #include "FinmixPrior.h"
@@ -37,7 +36,7 @@
 #include "ParOutBinomial.h"
 #include "PostOutBinomialInd.h"
 
-//[[Rcpp::export]]
+
 RcppExport SEXP mcmc_binomial_cc(SEXP fdata_S4, SEXP model_S4,
         SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4)
 {
