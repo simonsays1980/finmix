@@ -93,16 +93,14 @@ arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
     nlopt_set_lower_bounds(optim, lower_bound);
     nlopt_set_upper_bounds(optim, upper_bound);
     nlopt_set_max_objective(optim, obj_stephens1997a_poisson, &f_data);
-    std::vector<double> opt_par = arma::conv_to<std::vector<double>>::from(pars);
-    
 
     while (value != value_next) {
         value = value_next;
-        nlopt_optimize(optim, &opt_par[0], &value_next);
+        nlopt_optimize(optim, pars.memptr(), &value_next);
         for (unsigned int k = 0; k < K; ++k) {
-            dirich.at(k)   = opt_par[k];
-            shape.at(k)    = opt_par[k + K];
-            rate.at(k)     = opt_par[k + 2 * K];
+            dirich.at(k)   = pars[k];
+            shape.at(k)    = pars[k + K];
+            rate.at(k)     = pars[k + 2 * K];
         }
         /* Loop over permutations */
         for (unsigned int p = 0; p < P; ++p) {
@@ -185,15 +183,14 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
     nlopt_set_lower_bounds(optim, lower_bound);
     nlopt_set_upper_bounds(optim, upper_bound);
     nlopt_set_max_objective(optim, obj_stephens1997a_binomial, &f_data);
-    std::vector<double> opt_par = arma::conv_to<std::vector<double>>::from(pars);
 
     while (value != value_next) {
         value = value_next;
-        nlopt_optimize(optim, &opt_par[0], &value_next);
+        nlopt_optimize(optim, pars.memptr(), &value_next);
         for (unsigned int k = 0; k < K; ++k) {
-            dirich.at(k)    = opt_par[k];
-            shape1.at(k)    = opt_par[k + K];
-            shape2.at(k)    = opt_par[k + 2 * K];
+            dirich.at(k)    = pars[k];
+            shape1.at(k)    = pars[k + K];
+            shape2.at(k)    = pars[k + 2 * K];
         }
         /* Loop over permutations */
         for (unsigned int p = 0; p < P; ++p) {

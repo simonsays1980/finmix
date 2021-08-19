@@ -7,6 +7,7 @@ Author: Lars Simon Zehnder
 Maintainer: Lars Simon Zehnder <simon.zehnder@gmail.com>
 Description: More about what it does (maybe more than one line)
 License: GPL (>= 3)
+SystemRequirements: C++11
 Depends: Rcpp (>= 0.10.2), RcppArmadillo (>= 0.3.6.2), graphics, 
             mvtnorm (>= 0.9-7), KernSmooth (>= 2.23.10), dfoptim(>= 2011.8.1)
 Imports: Rcpp (>= 1.0.6), graphics, mvtnorm (>= 0.9-7), KernSmooth (>= 0.3.6.2), nloptr (>= 1.2.0)
