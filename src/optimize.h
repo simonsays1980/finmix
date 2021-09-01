@@ -52,14 +52,20 @@ double obj_stephens1997a_poisson (unsigned n, const double* x,
     const unsigned int M = (*arma_data)[0]->n_rows; 
     const unsigned int K = (*arma_data)[0]->n_cols;
     arma::vec rvalues(M);
-    arma::vec arma_x(*x);
     arma::vec dirich(&x[0], K);
     arma::vec shape(&x[0] + K, K);
     arma::vec rate(&x[0] + 2 * K, K);
     rvalues = lddirichlet((*(*arma_data)[1]), dirich);
-    rvalues += arma::sum(ldgamma((*(*arma_data)[0]), 
+    rvalues += arma::sum(ldgamma((*(*arma_data)[0]),
                 shape, rate), 1);
-    return arma::sum(rvalues);
+    if (rvalues.has_inf()) {
+        rvalues.elem(arma::find(rvalues == arma::datum::inf)).fill(10.0e+6);
+        rvalues.elem(arma::find(rvalues == -arma::datum::inf)).fill(-10.0e+6);
+    } else if (rvalues.has_nan()) {
+        rvalues.elem(arma::find(rvalues == arma::datum::nan)).zeros();
+    }
+    
+    return arma::as_scalar(arma::sum(rvalues));
 }
 /**
  * ------------------------------------------------------------
@@ -98,7 +104,7 @@ double obj_stephens1997a_binomial (unsigned n, const double* x,
     rvalues = lddirichlet((*(*arma_data)[1]), dirich);
     rvalues += arma::sum(ldbeta((*(*arma_data)[0]), 
                 shape1, shape2), 1);
-    return arma::sum(rvalues);
+    return arma::as_scalar(arma::sum(rvalues));
 }
 
 #endif /* __FINMIX_OPTIMIZE_H__ */

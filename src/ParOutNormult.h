@@ -36,7 +36,7 @@ class ParOutNormult {
 };
 
 ParOutNormult::ParOutNormult (const Rcpp::List& list) :
-    STOREINV(false), M(0), r(0), s(0), K(0)
+    M(0), r(0), s(0), K(0), STOREINV(false)
 {
     STOREINV = Rcpp::as<bool>(list["storeinv"]);
     /* mu is an (M x r x K) array */ 

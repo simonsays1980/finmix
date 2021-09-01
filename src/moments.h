@@ -115,7 +115,6 @@ Rcpp::List moments_fix_cc (Rcpp::S4 classS4)
                     arma::vec ss = arma::pow(tmp, m - n);
                     cm = arma::pow(tmp, m - n) % arma::pow(sigmavec, (n + 1) / 2)
                         * zm[n];
-                    double s2 = R::choose(m+1,n+1) * arma::as_scalar(weight.t() * cm);
                     higher(rr, m)   = higher(rr, m) + R::choose(m + 1, n + 1) 
                         * arma::as_scalar(weight.t() * cm);                    
                 }
@@ -244,7 +243,6 @@ Rcpp::List moments_ind_cc (Rcpp::S4 classS4)
                     arma::vec ss = arma::pow(tmp, m - n);
                     cm = arma::pow(tmp, m - n) % arma::pow(sigmavec, (n + 1) / 2)
                         * zm[n];
-                    double s2 = R::choose(m+1,n+1) * arma::as_scalar(weight.t() * cm);
                     higher(rr, m)   = higher(rr, m) + R::choose(m + 1, n + 1) 
                         * arma::as_scalar(weight.t() * cm);                    
                 }
@@ -372,7 +370,6 @@ Rcpp::List permmoments_fix_cc (Rcpp::S4 classS4)
                     arma::vec ss = arma::pow(tmp, m - n);
                     cm = arma::pow(tmp, m - n) % arma::pow(sigmavec, (n + 1) / 2)
                         * zm[n];
-                    double s2 = R::choose(m+1,n+1) * arma::as_scalar(weight.t() * cm);
                     higher(rr, m)   = higher(rr, m) + R::choose(m + 1, n + 1) 
                         * arma::as_scalar(weight.t() * cm);                    
                 }
@@ -501,7 +498,6 @@ Rcpp::List permmoments_ind_cc (Rcpp::S4 classS4)
                     arma::vec ss = arma::pow(tmp, m - n);
                     cm = arma::pow(tmp, m - n) % arma::pow(sigmavec, (n + 1) / 2)
                         * zm[n];
-                    double s2 = R::choose(m+1,n+1) * arma::as_scalar(weight.t() * cm);
                     higher(rr, m)   = higher(rr, m) + R::choose(m + 1, n + 1) 
                         * arma::as_scalar(weight.t() * cm);                    
                 }

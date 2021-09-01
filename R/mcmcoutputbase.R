@@ -366,7 +366,7 @@ setMethod("getClust", "mcmcoutputbase",
 ### @see            ?plotTraces, ?rainbow, ?gray.colors
 ### @author         Lars Simon Zehnder
 ### ------------------------------------------------------------------
-".traces.Log.Base" <- function( x, dev, col )
+".traces.Log.Base" <- function( x, dev, col=FALSE )
 {
     if ( .check.grDevice() && dev ) {
         dev.new( title = "Log Likelihood Traceplots" )

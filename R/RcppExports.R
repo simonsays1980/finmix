@@ -57,8 +57,8 @@ stephens1997a_binomial_cc <- function(values1, values2, pars, perm) {
     .Call(`_finmix_stephens1997a_binomial_cc`, values1, values2, pars, perm)
 }
 
-stephens1997b_poisson_cc <- function(values, comp_par, weight_par) {
-    .Call(`_finmix_stephens1997b_poisson_cc`, values, comp_par, weight_par)
+stephens1997b_poisson_cc <- function(values, comp_par, weight_par, max_iter = 200L) {
+    .Call(`_finmix_stephens1997b_poisson_cc`, values, comp_par, weight_par, max_iter)
 }
 
 stephens1997b_binomial_cc <- function(values, reps, comp_par, weight_par) {

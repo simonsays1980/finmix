@@ -183,15 +183,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // stephens1997b_poisson_cc
-arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values, Rcpp::NumericMatrix comp_par, Rcpp::NumericMatrix weight_par);
-RcppExport SEXP _finmix_stephens1997b_poisson_cc(SEXP valuesSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP) {
+arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values, Rcpp::NumericMatrix comp_par, Rcpp::NumericMatrix weight_par, signed int max_iter);
+RcppExport SEXP _finmix_stephens1997b_poisson_cc(SEXP valuesSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP, SEXP max_iterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type comp_par(comp_parSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type weight_par(weight_parSEXP);
-    rcpp_result_gen = Rcpp::wrap(stephens1997b_poisson_cc(values, comp_par, weight_par));
+    Rcpp::traits::input_parameter< signed int >::type max_iter(max_iterSEXP);
+    rcpp_result_gen = Rcpp::wrap(stephens1997b_poisson_cc(values, comp_par, weight_par, max_iter));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -247,7 +248,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_finmix_permmoments_cc", (DL_FUNC) &_finmix_permmoments_cc, 1},
     {"_finmix_stephens1997a_poisson_cc", (DL_FUNC) &_finmix_stephens1997a_poisson_cc, 4},
     {"_finmix_stephens1997a_binomial_cc", (DL_FUNC) &_finmix_stephens1997a_binomial_cc, 4},
-    {"_finmix_stephens1997b_poisson_cc", (DL_FUNC) &_finmix_stephens1997b_poisson_cc, 3},
+    {"_finmix_stephens1997b_poisson_cc", (DL_FUNC) &_finmix_stephens1997b_poisson_cc, 4},
     {"_finmix_stephens1997b_binomial_cc", (DL_FUNC) &_finmix_stephens1997b_binomial_cc, 4},
     {"_finmix_stephens1997b_exponential_cc", (DL_FUNC) &_finmix_stephens1997b_exponential_cc, 3},
     {"mcmc_binomial_cc",    (DL_FUNC) &mcmc_binomial_cc,    5},

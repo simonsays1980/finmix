@@ -15,17 +15,22 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
-"mcmcpermute" <- function( mcmcout, fdata = NULL, method = "kmeans" ) {
+"mcmcpermute" <- function( mcmcout, fdata = NULL, method = "kmeans", opt_ctrl=list(max_iter=200L) ) {
     ## Check arguments ##
     .check.arg.Mcmcpermute( mcmcout )
     match.arg( method, c( "kmeans", "Stephens1997a", "Stephens1997b" ) )
+    if (!is.numeric(opt_ctrl$max_iter)) {
+        stop("Max. iterations 'max_iter' in list 'opt_ctrl' needs to be of type integer.")
+    } else {
+        opt_ctrl$max_iter <- as.integer(opt_ctrl$max_iter)
+    }
     mcmcout <- .coerce.Mcmcpermute( mcmcout )
     if ( method == "kmeans" ) {
         .kmeans.Mcmcpermute(mcmcout)
     } else if ( method == "Stephens1997a" ) {
         .stephens1997a.Mcmcpermute( mcmcout )
     } else {        
-        .stephens1997b.Mcmcpermute( mcmcout, fdata )
+        .stephens1997b.Mcmcpermute( mcmcout, fdata, opt_ctrl$max_iter )
     }
 }
 
@@ -260,12 +265,12 @@
 ### if it is valid in regard to the 'model' object carried
 ### by the 'mcmcoutput' object. 
 ### If no permutation is possible, a warning is thrown.
-".stephens1997b.Mcmcpermute" <- function( obj, fdata.obj ) 
+".stephens1997b.Mcmcpermute" <- function( obj, fdata.obj, max_iter=200L ) 
 {
     .check.fdata.model.Mcmcstart( fdata.obj, obj@model )
     dist <- obj@model@dist
     if ( dist == "poisson" ) {
-        index <- .stephens1997b.poisson.Mcmcpermute( obj, fdata.obj )
+        index <- .stephens1997b.poisson.Mcmcpermute( obj, fdata.obj, max_iter=max_iter )
     } else if ( dist == "binomial" ) {
         index <- .stephens1997b.binomial.Mcmcpermute( obj, fdata.obj ) 
     } else if ( dist == "exponential" ) {
@@ -282,10 +287,10 @@
     }
 }
 
-".stephens1997b.poisson.Mcmcpermute" <- function( obj, fdata.obj )  
+".stephens1997b.poisson.Mcmcpermute" <- function( obj, fdata.obj, max_iter=200L )  
 {
     stephens1997b_poisson_cc( fdata.obj@y, obj@par$lambda,
-                                       obj@weight )
+                                       obj@weight, max_iter=max_iter )
 }
 
 ".stephens1997b.binomial.Mcmcpermute" <- function( obj, fdata.obj )

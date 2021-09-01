@@ -67,7 +67,7 @@ void find_star_in_row (const int &row, int &col,
 void find_prime_in_row (const int &row, int &col,
         const arma::umat &indM, const unsigned int &N);
 
-void augment_path (const int &path_count, arma::umat &indM,
+void augment_path (const unsigned int &path_count, arma::umat &indM,
         const arma::imat &path);
 
 void clear_covers (arma::ivec &rcov, arma::ivec &ccov);
@@ -526,7 +526,7 @@ void find_prime_in_row (const int &row, int &col,
  * @return void
  * */
 inline
-void augment_path (const int &path_count, arma::umat &indM,
+void augment_path (const unsigned int &path_count, arma::umat &indM,
         const arma::imat &path)
 {
     for (unsigned int p = 0; p < path_count; ++p) {

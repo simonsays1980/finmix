@@ -20,10 +20,18 @@
 inline
 double kulback_leibler(const arma::vec &values, const arma::vec &base)
 {
-    //const unsigned int N = values.n_elem;
+    const unsigned int N = values.n_elem;
     //const unsigned int K = values.n_elem;
     double rvalue;
-    rvalue = arma::sum(values % arma::log(values/base));   
+    if (arma::any(values == 0.0) || arma::any(base == 0.0)) {
+        arma::vec values_smoothed = (values * N + 1.0) / (N + 1.0);
+        arma::vec base_smoothed = (base * N + 1.0) / (N + 1.0);
+        rvalue = arma::sum(values_smoothed % arma::log(values_smoothed/base_smoothed));
+    } else {
+        rvalue = arma::sum(values % arma::log(values/base));
+    }
+      
+    //Rcpp::Rcout << "kullback: " << rvalue << std::endl;
     return rvalue;
 }
 

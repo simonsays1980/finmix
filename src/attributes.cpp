@@ -62,7 +62,7 @@ Rcpp::NumericVector swap_3d_cc(Rcpp::NumericVector values, Rcpp::IntegerMatrix i
     const unsigned int r = valDim[1];
     const unsigned int K = valDim[2];
     /* If dimensions of both arguments do not agree thrw an exception */
-    if ( M != index.nrow() || K != index.ncol()) {
+    if ( M != (unsigned)index.nrow() || K != (unsigned)index.ncol()) {
         throw Rcpp::exception("Matrix dimensions disagree.");
     }
     arma::cube values_arma(values.begin(), M, r, K, false, true);

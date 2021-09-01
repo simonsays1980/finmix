@@ -90,7 +90,7 @@ inline
 static double urs_a_b (const double& a, const double& b)
 {
     const double phi_a = R::dnorm(a, 0.0, 1.0, 0);
-    double x = 0.0, u = 0.0;
+    double x = 0.0;
 
     /* Upper bound of normal density on [a,b] */
     const double ub = a < 0.0 && b > 0.0 ? M1_SQRT_2PI : phi_a;

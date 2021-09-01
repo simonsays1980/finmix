@@ -53,16 +53,15 @@ RcppExport SEXP mcmc_condpoisson_cc(SEXP data_S4, SEXP model_S4,
 	Rcpp::S4 mcmcS4O(mcmc_S4);
 	Rcpp::S4 mcmcOutputS4O(mcmcoutput_S4);
 	FinmixData finData      = FinmixData(dataS4O);
-    FinmixModel finModel    = FinmixModel(modelS4O);
-    FinmixPrior finPrior    = FinmixPrior(priorS4O);
-    FinmixMCMC finMCMC      = FinmixMCMC(mcmcS4O);
+  FinmixModel finModel    = FinmixModel(modelS4O);
+  FinmixPrior finPrior    = FinmixPrior(priorS4O);
+  FinmixMCMC finMCMC      = FinmixMCMC(mcmcS4O);
 
-	const bool INDICFIX         = finModel.indicFix;
-	const bool HIER_IND         = finPrior.hier;
-	const bool POST_IND         = finMCMC.storePost;
+	const bool INDICFIX       = finModel.indicFix;
+	const bool POST_IND       = finMCMC.storePost;
 	const unsigned int BURNIN = finMCMC.burnIn;
-	const unsigned int M 		= finMCMC.M;
-	const unsigned int K 		= finModel.K;
+	const unsigned int M 		  = finMCMC.M;
+	const unsigned int K 		  = finModel.K;
 	
 	BASE* ptr;
 	typedef FIX<PriorCondPoissonFix, ParCondPoissonFix, LogCondPoissonFix, 

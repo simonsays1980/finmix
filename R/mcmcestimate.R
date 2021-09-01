@@ -16,9 +16,9 @@
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
 "mcmcestimate" <- function(mcmcout, method = "kmeans", fdata = NULL, 
-                           permOut = FALSE) {
+                           permOut = FALSE, opt_ctrl=list(max_iter=200L)) {
     ## Check input ##
-    .check.args.Mcmcestimate(mcmcout, method, fdata, permOut)
+    .check.args.Mcmcestimate(mcmcout, method, fdata, permOut, opt_ctrl)
     ## Constants
     K           <- mcmcout@model@K
     M           <- mcmcout@M
@@ -84,7 +84,7 @@
                 }
             } else {
                 ## Use function 'mcmcpermute' to permute the sample
-                mcmcoutperm <- mcmcpermute( mcmcout, method = method, fdata = fdata )
+                mcmcoutperm <- mcmcpermute( mcmcout, method = method, fdata = fdata, opt_ctrl=opt_ctrl )
                 perm    <- TRUE
                 if ( mcmcoutperm@Mperm > 0 ) {
                     ## Use ergodic average function on 'mcmcoutputperm'
@@ -148,7 +148,7 @@
 ### of three permutation algorithms in 'mcmcpermute()'.
 ### Argument 3 must be of type logical. If any case is not true 
 ### an error is thrown.
-".check.args.Mcmcestimate" <- function( obj, arg2, arg3, arg4 )
+".check.args.Mcmcestimate" <- function( obj, arg2, arg3, arg4, arg5 )
 {
     if ( !inherits( obj, c( "mcmcoutput", "mcmcoutputperm" ) ) ) {
         stop( paste( "Wrong argument: Argument 1 must be an object ",
@@ -163,6 +163,17 @@
     if ( !is.logical( arg4 ) ) {
         stop( "Wrong argument: Argument 4 must be of type 'logical'." )
     }
+    if (length(arg5) != 0){
+        if("max_iter" %in% names(arg5)) {
+            if(!is.numeric(arg5$max_iter)) {
+                stop(paste0("Wrong argument: In argument 5 'max_iter' ",
+                            "has to be of type integer."))
+            } 
+        } else {
+            stop(paste0("Wrong argument: Argument 5 must contain a variable ",
+                        "'max_iter' of type integer."))
+        }
+    } 
 }
 
 ".map.Mcmcestimate" <- function( obj ) {

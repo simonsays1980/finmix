@@ -2,9 +2,9 @@
 #include "distributions.h"
 
 ParNormultFix::ParNormultFix (const bool& STARTPAR,
-        const FinmixModel& model) : INDEPENDENT(true), 
-    mu(model.K, model.r), sigma(model.r, model.r, model.K), 
-    sigmainv(model.r, model.r, model.K)
+        const FinmixModel& model) : mu(model.K, model.r), 
+        sigma(model.r, model.r, model.K), sigmainv(model.r, model.r, model.K), 
+        INDEPENDENT(true)
 {
     if (model.par.size() > 0) {
         mu = Rcpp::as<arma::mat>(model.par["mu"]);

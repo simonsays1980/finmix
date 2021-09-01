@@ -224,7 +224,6 @@ double priormixlik_normult (const bool& INDEPENDENT, const bool& HIER,
         const arma::cube& sigma)
 {
     const unsigned int K = mu.n_cols;
-    const unsigned int r = mu.n_rows;
     double mixlik = 0.0;
     if (INDEPENDENT) {
         mixlik += logdnormult(mu, bStart, BStart, BInvStart);

@@ -27,6 +27,7 @@
 #include "optimize.h"
 #include "hungarian.h"
 #include <nloptrAPI.h>
+#include <cmath>
 
 
 // ============================================================
@@ -58,15 +59,15 @@ arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
         arma::vec pars, const arma::umat perm)
 {
     const unsigned int M = values1.rows();
-    const unsigned int K = values2.cols();
+    const unsigned int K = values1.cols();
     const unsigned int P = perm.n_rows;
     const unsigned int n = pars.n_elem;
-    double value = 1.0;
-    double value_next = 0.0;
+    double value = 0.0;
+    double value_next = -10.0e-8;
     arma::mat lambda(values1.begin(), M, K, true, true);
     arma::mat weight(values2.begin(), M, K, true, true);
     const arma::umat arma_perm = perm - 1;
-    arma::uvec row_index(M);
+    arma::uvec row_index = arma::linspace<arma::uvec>(0, M - 1, M);
     arma::uvec col_index(K);
     arma::vec tmp(M);
     arma::vec tmp2(K);
@@ -79,21 +80,16 @@ arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
     for (unsigned int k = 0; k < K; ++k) {
         index.unsafe_col(k) *= k;
     }
-    for (unsigned int m = 0; m < M; ++m) {
-        row_index.at(m) = m;
-    }
     /* Set up the optimizer */
-    nlopt_opt optim;
-    optim = nlopt_create(NLOPT_LN_NELDERMEAD, n);
     std::vector<arma::mat*> f_data(2);
     f_data[0] = &lambda;
     f_data[1] = &weight;
-    double lower_bound[1] = {1e-10};
-    double upper_bound[1] = {1e+7};
-    nlopt_set_lower_bounds(optim, lower_bound);
-    nlopt_set_upper_bounds(optim, upper_bound);
+    nlopt_opt optim;
+    optim = nlopt_create(NLOPT_LN_NELDERMEAD, n);
+    double lower_bound = 10e-6;
+    nlopt_set_lower_bounds1(optim, lower_bound);
     nlopt_set_max_objective(optim, obj_stephens1997a_poisson, &f_data);
-
+    double results;
     while (value != value_next) {
         value = value_next;
         nlopt_optimize(optim, pars.memptr(), &value_next);
@@ -152,7 +148,7 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
     const unsigned int P = perm.n_rows;
     const unsigned int n = pars.n_elem;
     double value = 1.0;
-    double value_next = 0.0;
+    double value_next = -10.0e-8;
     arma::mat pp(values1.begin(), M, K, true, true);
     arma::mat weight(values2.begin(), M, K, true, true);
     const arma::umat arma_perm = perm - 1;
@@ -203,9 +199,11 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
             col_index       = arma::sort_index(tmp2, "descend");
             ind.row(m)      = arma_perm.row(col_index(0));
         }
+        
         swapmat_by_index(pp, ind);
         swapmat_by_index(weight, ind);
         swapumat_by_index(index, ind);
+        
     }
     nlopt_destroy(optim);
     index += 1;
@@ -216,7 +214,8 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
 
 arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values, 
         Rcpp::NumericMatrix comp_par, 
-        Rcpp::NumericMatrix weight_par)
+        Rcpp::NumericMatrix weight_par, 
+        signed int max_iter=200)
 {
     unsigned int N      = values.size();
     unsigned int M      = comp_par.rows();
@@ -244,7 +243,9 @@ arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values,
         /* Save a pointer to the STL vector */
         mat_vector[m] = pmat_ptr;
     }
-    while (value != value_next) {
+    signed int iter = 0;
+    while (value != value_next){
+        iter        += 1;
         value       = value_next;
         value_next  = 0.0;
         /* For all sampled MCMC parameters a matrix 
@@ -258,8 +259,6 @@ arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values,
                     % dpoisson(arma_values.at(n), lambda.row(m)); 
                 mat_vector[m]->row(n) /= arma::sum(mat_vector[m]->row(n));
             }
-        }
-        for (unsigned int m = 0; m < M; ++m) {
             pmat_hat += *(mat_vector[m]);
         }
         /* This computes the reference estimator P_hat*/
@@ -279,7 +278,6 @@ arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values,
         for (unsigned int m = 0; m < M; ++m) {
             for (unsigned int k = 0; k < K; ++k) {
                 for (unsigned int l = 0; l < K; ++l) {                
-                    arma::vec mycol = mat_vector[m]->unsafe_col(l);
                     cost(k, l) = kulback_leibler(mat_vector[m]->unsafe_col(l), 
                             pmat_hat.unsafe_col(k));
                 }          
@@ -294,7 +292,7 @@ arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values,
         swapmat_by_index(lambda, index);
         swapmat_by_index(weight, index);        
         swapumat_by_index(index_out, index);
-        pmat_hat = arma::zeros(N, K);
+        pmat_hat.fill(0.0);
     }        
     for (unsigned int m = 0; m < M; ++m) {
         delete mat_vector[m];
@@ -370,7 +368,6 @@ arma::imat stephens1997b_binomial_cc(Rcpp::NumericVector values,
         for (unsigned int m = 0; m < M; ++m) {
             for (unsigned int k = 0; k < K; ++k) {
                 for (unsigned int l = 0; l < K; ++l) {                
-                    arma::vec mycol = mat_vector[m]->unsafe_col(l);
                     cost(k, l) = kulback_leibler(mat_vector[m]->unsafe_col(l), 
                             pmat_hat.unsafe_col(k));
                 }          
@@ -385,7 +382,7 @@ arma::imat stephens1997b_binomial_cc(Rcpp::NumericVector values,
         swapmat_by_index(p, index);
         swapmat_by_index(weight, index);        
         swapumat_by_index(index_out, index);
-        pmat_hat = arma::zeros(N, K);
+        pmat_hat.fill(0.0);
     }        
     for (unsigned int m = 0; m < M; ++m) {
         delete mat_vector[m];
@@ -475,7 +472,7 @@ arma::imat stephens1997b_exponential_cc(Rcpp::NumericVector values,
         swapmat_by_index(lambda, index);
         swapmat_by_index(weight, index);        
         swapumat_by_index(index_out, index);
-        pmat_hat = arma::zeros(N, K);
+        pmat_hat.fill(0.0);
     }        
     for (unsigned int m = 0; m < M; ++m) {
         delete mat_vector[m];
