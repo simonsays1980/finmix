@@ -89,7 +89,6 @@ arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
     double lower_bound = 10e-6;
     nlopt_set_lower_bounds1(optim, lower_bound);
     nlopt_set_max_objective(optim, obj_stephens1997a_poisson, &f_data);
-    double results;
     while (value != value_next) {
         value = value_next;
         nlopt_optimize(optim, pars.memptr(), &value_next);
