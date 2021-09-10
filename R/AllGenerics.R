@@ -146,7 +146,7 @@ setGeneric("getExp", function(object) standardGeneric("getExp"))
 
 setGeneric("setY<-", function(object, value) standardGeneric("setY<-"))
 
-setGeneric("setN<-", function(object,  value) standardGeneric("setN<-"))
+setGeneric("setN<-", function(object, value) standardGeneric("setN<-"))
 
 setGeneric("setS<-", function(object, value) standardGeneric("setS<-"))
 
@@ -178,15 +178,13 @@ setGeneric("getSmoments", function(object) standardGeneric("getSmoments"))
 
 ## Class 'prior' -----------------------------------------------------
 
-setGeneric( "hasPriorPar", function( object, model, verbose = FALSE ) standardGeneric( "hasPriorPar" ) )
+setGeneric("hasPriorPar", function(object, model, verbose = FALSE) standardGeneric("hasPriorPar"))
 
 setGeneric("hasPriorWeight", function(object, model, verbose = FALSE) standardGeneric("hasPriorWeight"))
 
-setGeneric("generatePrior", function(object, ... )
-           {
-               standardGeneric("generatePrior")
-           }
-)
+setGeneric("generatePrior", function(object, ...) {
+  standardGeneric("generatePrior")
+})
 
 setGeneric("getHier", function(object) standardGeneric("getHier"))
 
@@ -234,7 +232,7 @@ setGeneric("getLoglikcd", function(object) standardGeneric("getLoglikcd"))
 
 ## Class 'mcmcextract' --------------------------------------------------------------------------
 
-setGeneric( "moments", function( object ) standardGeneric( "moments" ) )
+setGeneric("moments", function(object) standardGeneric("moments"))
 
 ## Class 'mcmcoutputfix' ------------------------------------------------
 
@@ -252,7 +250,7 @@ setGeneric("subseq", function(object, index) standardGeneric("subseq"))
 
 setGeneric("swapElements", function(object, index) standardGeneric("swapElements"))
 
-setGeneric( "extract", function( object, index ) standardGeneric( "extract" ) )
+setGeneric("extract", function(object, index) standardGeneric("extract"))
 
 setGeneric("getLog", function(object) standardGeneric("getLog"))
 
@@ -311,16 +309,3 @@ setGeneric("getSdpost", function(object) standardGeneric("getSdpost"))
 ## Class 'mcmcestind' ------------------------------------------------------
 
 setGeneric("getEavg", function(object) standardGeneric("getEavg"))
-
-
-
-
-
-
-
-
-
-
-
-
-

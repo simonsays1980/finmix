@@ -16,57 +16,61 @@
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
 setClass("modelmoments",
-         representation(mean    = "vector",
-                        var     = "array",
-                        model   = "model"
-                        ),
-         validity = function(object) {
-             ## else: OK
-		     TRUE
-         },
-         prototype(
-                   mean     = vector(),
-                   var      = array(),
-                   model    = model()
-                   )
+  representation(
+    mean = "vector",
+    var = "array",
+    model = "model"
+  ),
+  validity = function(object) {
+    ## else: OK
+    TRUE
+  },
+  prototype(
+    mean     = vector(),
+    var      = array(),
+    model    = model()
+  )
 )
 
 "modelmoments" <- function(model) {
-    dist <- model@dist
-    if (dist == "normult") {
-        .normultmodelmoments(model = model)
-    } else if (dist == "studmult") {
-        .studmultmodelmoments(model = model)
-    } else if (dist == "student") {
-        .studentmodelmoments(model = model)
-    } else if (dist == "normal") {
-        .normalmodelmoments(model = model)
-    } else if (dist == "exponential") {
-        .exponentialmodelmoments(model = model)
-    } else if (dist %in% c("poisson", "cond.poisson")) {
-        .poissonmodelmoments(model = model)
-    } else if (dist == "binomial") {
-        .binomialmodelmoments(model = model)
-    }
+  dist <- model@dist
+  if (dist == "normult") {
+    .normultmodelmoments(model = model)
+  } else if (dist == "studmult") {
+    .studmultmodelmoments(model = model)
+  } else if (dist == "student") {
+    .studentmodelmoments(model = model)
+  } else if (dist == "normal") {
+    .normalmodelmoments(model = model)
+  } else if (dist == "exponential") {
+    .exponentialmodelmoments(model = model)
+  } else if (dist %in% c("poisson", "cond.poisson")) {
+    .poissonmodelmoments(model = model)
+  } else if (dist == "binomial") {
+    .binomialmodelmoments(model = model)
+  }
 }
 
 ## Getters ##
-setMethod("getMean", "modelmoments", 
-          function(object) {
-              return(object@mean)
-          }		
+setMethod(
+  "getMean", "modelmoments",
+  function(object) {
+    return(object@mean)
+  }
 )
 
-setMethod("getVar", "modelmoments", 
-          function(object) {
-              return(object@var)
-          }
+setMethod(
+  "getVar", "modelmoments",
+  function(object) {
+    return(object@var)
+  }
 )
 
-setMethod("getModel", "modelmoments",
-          function(object) {
-              return(object@model)
-          }
+setMethod(
+  "getModel", "modelmoments",
+  function(object) {
+    return(object@model)
+  }
 )
 
 ## Setters are not provided as users are not intended to manipulate ##

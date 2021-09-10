@@ -16,72 +16,92 @@
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
 .studentmodelmoments <- setClass("studentmodelmoments",
-                                 representation(B   = "numeric",
-                                                W   = "numeric",
-                                                R   = "numeric"
-                                                ),
-                                 contains = c("cmodelmoments"),
-                                 validity = function(object) {
-                                     ## else: OK
-                                     TRUE
-                                 },
-                                 prototype(B    = numeric(),
-                                           W    = numeric(),
-                                           R    = numeric()
-                                           )
+  representation(
+    B = "numeric",
+    W = "numeric",
+    R = "numeric"
+  ),
+  contains = c("cmodelmoments"),
+  validity = function(object) {
+    ## else: OK
+    TRUE
+  },
+  prototype(
+    B = numeric(),
+    W = numeric(),
+    R = numeric()
+  )
 )
 
-setMethod("initialize", "studentmodelmoments", 
-          function(.Object, ..., model) {
-              .Object <- callNextMethod(.Object, ..., model = model)
-              generateMoments(.Object)
-          }
+setMethod(
+  "initialize", "studentmodelmoments",
+  function(.Object, ..., model) {
+    .Object <- callNextMethod(.Object, ..., model = model)
+    generateMoments(.Object)
+  }
 )
 
-setMethod("generateMoments", "studentmodelmoments",
-          function(object) {
-              .generateMomentsStudent(object)
-          }
+setMethod(
+  "generateMoments", "studentmodelmoments",
+  function(object) {
+    .generateMomentsStudent(object)
+  }
 )
 
-setMethod("show", "studentmodelmoments", 
-          function(object) {
-              cat("Object 'modelmoments'\n")
-              cat("     mean        : Vector of",
-                  length(object@mean), "\n")
-              cat("     var         :",
-                  paste(dim(object@var), collapse = "x"), "\n")
-              cat("     higher      :",
-                  paste(dim(object@higher), collapse = "x"), "\n")
-              cat("     skewness    : Vector of",
-                  length(object@skewness), "\n")
-              cat("     kurtosis    : Vector of",
-                  length(object@kurtosis), "\n")
-              cat("     B           :", object@B, "\n")
-              cat("     W           :", object@W, "\n")
-              cat("     R           :", object@R, "\n")
-              cat("     model       : Object of class",
-                  class(object@model), "\n")
-          }
+setMethod(
+  "show", "studentmodelmoments",
+  function(object) {
+    cat("Object 'modelmoments'\n")
+    cat(
+      "     mean        : Vector of",
+      length(object@mean), "\n"
+    )
+    cat(
+      "     var         :",
+      paste(dim(object@var), collapse = "x"), "\n"
+    )
+    cat(
+      "     higher      :",
+      paste(dim(object@higher), collapse = "x"), "\n"
+    )
+    cat(
+      "     skewness    : Vector of",
+      length(object@skewness), "\n"
+    )
+    cat(
+      "     kurtosis    : Vector of",
+      length(object@kurtosis), "\n"
+    )
+    cat("     B           :", object@B, "\n")
+    cat("     W           :", object@W, "\n")
+    cat("     R           :", object@R, "\n")
+    cat(
+      "     model       : Object of class",
+      class(object@model), "\n"
+    )
+  }
 )
 
 ## Getters ##
-setMethod("getB", "studentmodelmoments",
-          function(object) {
-              return(object@B)
-          }
+setMethod(
+  "getB", "studentmodelmoments",
+  function(object) {
+    return(object@B)
+  }
 )
 
-setMethod("getW", "studentmodelmoments",
-          function(object) {
-              return(object@W)
-          }
+setMethod(
+  "getW", "studentmodelmoments",
+  function(object) {
+    return(object@W)
+  }
 )
 
-setMethod("getR", "studentmodelmoments",
-          function(object) {
-              return(object@R)
-          }
+setMethod(
+  "getR", "studentmodelmoments",
+  function(object) {
+    return(object@R)
+  }
 )
 
 ## No setters as users are not intended to manipulate ##
@@ -90,20 +110,24 @@ setMethod("getR", "studentmodelmoments",
 ### Private functions
 ### These function are not exported
 ".generateMomentsStudent" <- function(object) {
-    mu                      <- object@model@par$mu
-    sigma                   <- object@model@par$sigma
-    df                      <- object@model@par$df
-    weight                  <- object@model@weight
-    object@mean             <- sum(weight * mu)
-    object@higher <- .mixturemoments.student(object@model, 
-                                             4, object@mean)
-    dimnames(object@higher) <- list(c("1st", "2nd", "3rd", "4th"),
-                                    "")
-    object@var              <- array(object@higher[2], dim = c(1, 1))
-    object@skewness         <- object@higher[3]/object@higher[2]^1.5
-    object@kurtosis         <- object@higher[4]/object@higher[2]^2
-    object@B                <- sum(weight * (mu - object@mean)^2)
-    object@W                <- sum(weight * sigma * df/(df - 2))
-    object@R                <- 1 - object@W/object@var[1]
-    return(object)
+  mu <- object@model@par$mu
+  sigma <- object@model@par$sigma
+  df <- object@model@par$df
+  weight <- object@model@weight
+  object@mean <- sum(weight * mu)
+  object@higher <- .mixturemoments.student(
+    object@model,
+    4, object@mean
+  )
+  dimnames(object@higher) <- list(
+    c("1st", "2nd", "3rd", "4th"),
+    ""
+  )
+  object@var <- array(object@higher[2], dim = c(1, 1))
+  object@skewness <- object@higher[3] / object@higher[2]^1.5
+  object@kurtosis <- object@higher[4] / object@higher[2]^2
+  object@B <- sum(weight * (mu - object@mean)^2)
+  object@W <- sum(weight * sigma * df / (df - 2))
+  object@R <- 1 - object@W / object@var[1]
+  return(object)
 }

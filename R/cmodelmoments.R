@@ -15,39 +15,36 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
-.cmodelmoments <- setClass("cmodelmoments", 
-                           representation(
-                                          higher      = "array",
-                                          skewness    = "vector",
-                                          kurtosis    = "vector"
-                                          ),
-                           contains = c("modelmoments"),
-                           validity = function(object) {
-                               ## else: OK
-                               TRUE
-                           },
-                           prototype(
-                                     higher     = array(),
-                                     skewness   = vector(),
-                                     kurtosis   = vector()
-                                     )
+.cmodelmoments <- setClass("cmodelmoments",
+  representation(
+    higher      = "array",
+    skewness    = "vector",
+    kurtosis    = "vector"
+  ),
+  contains = c("modelmoments"),
+  validity = function(object) {
+    ## else: OK
+    TRUE
+  },
+  prototype(
+    higher     = array(),
+    skewness   = vector(),
+    kurtosis   = vector()
+  )
 )
 
 ## Getters ##
 setMethod("getHigher", "cmodelmoments", function(object) {
-							return(object@higher)
-						}
-)
+  return(object@higher)
+})
 
 setMethod("getSkewness", "cmodelmoments", function(object) {
-							return(object@skewness) 
-						}
-)
+  return(object@skewness)
+})
 
 setMethod("getKurtosis", "cmodelmoments", function(object) {
-							return(object@kurtosis)
-						}
-)
+  return(object@kurtosis)
+})
 
 ## Setters ##
 ## No setters as users should not manipulate a 'nsmodelmoments' object ##

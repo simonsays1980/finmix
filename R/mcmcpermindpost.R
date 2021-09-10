@@ -16,23 +16,22 @@
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
 .mcmcpermindpost <- setClass("mcmcpermindpost",
-                             representation(postperm = "list"),
-                             contains = c("mcmcpermind"),
-                             validity = function(object) 
-                             {
-                                 ## else: OK
-                                 TRUE
-                             },
-                             prototype(postperm = list())
+  representation(postperm = "list"),
+  contains = c("mcmcpermind"),
+  validity = function(object) {
+    ## else: OK
+    TRUE
+  },
+  prototype(postperm = list())
 )
 
 ## Getters ##
-setMethod("getPostperm", "mcmcpermindpost",
-          function(object) 
-          {
-              return(object@postperm)
-          }
+setMethod(
+  "getPostperm", "mcmcpermindpost",
+  function(object) {
+    return(object@postperm)
+  }
 )
 
-## No setters as users are not intended to manipulate 
+## No setters as users are not intended to manipulate
 ## this objects

@@ -15,24 +15,25 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
-## 'datamoments' is a virtual class from which the corresponding 
-## datamoments for 'continuous' and 'discrete' inherit	 		 
-.datamoments <- setClass("datamoments",
-                         representation(mean            = "numeric",
-                                        var             = "matrix",
-                                        fdata           = "fdata",
-                                        "VIRTUAL"
-                                        )
+## 'datamoments' is a virtual class from which the corresponding
+## datamoments for 'continuous' and 'discrete' inherit
+.datamoments <- setClass(
+  "datamoments",
+  representation(
+    mean = "numeric",
+    var = "matrix",
+    fdata = "fdata",
+    "VIRTUAL"
+  )
 )
 
 ## mutual constructor for all type of datamoments ##
-"datamoments" <- function(value = fdata()) 
-{
-        hasY(value, verbose = TRUE)
-        if (value@type == "continuous") {
-			.Object <- .cdatamoments(value = value)
-        } else { 
-			.Object <- .ddatamoments(value = value)
-        }
-		return(.Object)
+"datamoments" <- function(value = fdata()) {
+  hasY(value, verbose = TRUE)
+  if (value@type == "continuous") {
+    .Object <- .cdatamoments(value = value)
+  } else {
+    .Object <- .ddatamoments(value = value)
+  }
+  return(.Object)
 }

@@ -16,23 +16,22 @@
 # along with Rcpp.  If not, see <http://www.gnu.org/licenses/>.
 
 .mcmcpermfixpost <- setClass("mcmcpermfixpost",
-                             representation(postperm = "list"),
-                             contains = c("mcmcpermfix"),
-                             validity = function(object) 
-                             {
-                                 ## else: OK
-                                 TRUE
-                             },
-                             prototype(postperm = list())
+  representation(postperm = "list"),
+  contains = c("mcmcpermfix"),
+  validity = function(object) {
+    ## else: OK
+    TRUE
+  },
+  prototype(postperm = list())
 )
 
 ## Getters ##
-setMethod("getPostperm", "mcmcpermfixpost", 
-          function(object) 
-          {
-              return(object@postperm)
-          }
+setMethod(
+  "getPostperm", "mcmcpermfixpost",
+  function(object) {
+    return(object@postperm)
+  }
 )
 
 ## No setters implemented as users are not intended to
-## manipulate this object 
+## manipulate this object

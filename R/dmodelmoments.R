@@ -15,39 +15,36 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
-.dmodelmoments <- setClass("dmodelmoments", 
-                           representation(
-                                          over            = "numeric",
-                                          factorial       = "array",
-                                          zero            = "numeric"
-                                          ),
-                           contains = c("modelmoments"),	
-                           validity = function(object) {
-                               ## else: OK
-                               TRUE
-                           },
-                           prototype(
-                                     over       = numeric(),
-                                     factorial  = array(),
-                                     zero       = numeric()
-                                     )
+.dmodelmoments <- setClass("dmodelmoments",
+  representation(
+    over            = "numeric",
+    factorial       = "array",
+    zero            = "numeric"
+  ),
+  contains = c("modelmoments"),
+  validity = function(object) {
+    ## else: OK
+    TRUE
+  },
+  prototype(
+    over       = numeric(),
+    factorial  = array(),
+    zero       = numeric()
+  )
 )
 
 ## Getters ##
 setMethod("getOver", "dmodelmoments", function(object) {
-						return(object@over)
-					}
-)
+  return(object@over)
+})
 
 setMethod("getFactorial", "dmodelmoments", function(object) {
-							return(object@factorial)
-						}
-)
+  return(object@factorial)
+})
 
 setMethod("getZero", "dmodelmoments", function(object) {
-						return(object@zero)
-					}
-)
+  return(object@zero)
+})
 
 ## Setters ##
 ## No setters as users should not manipulate a 'dmodelmoments' object ##

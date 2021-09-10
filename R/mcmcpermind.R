@@ -15,70 +15,71 @@
 # You should have received a copy of the GNU General Public License
 # along with Rcpp.  If not, see <http://www.gnu.org/licenses/>.
 
-.mcmcpermind <- setClass("mcmcpermind", 
-                         representation(relabel     = "character",
-                                        weightperm  = "array",
-                                        entropyperm = "array",
-                                        STperm      = "array",
-                                        Sperm       = "array",
-                                        NKperm      = "array"
-                                        ),
-                         contains = c("mcmcpermfix"),
-                         validity = function(object) 
-                         {
-                             ## else: OK
-                             TRUE
-                         },
-                         prototype(relabel      = character(),
-                                   weightperm   = array(),
-                                   entropyperm  = array(),
-                                   STperm       = array(),
-                                   Sperm        = array(),
-                                   NKperm       = array()
-                                   )
+.mcmcpermind <- setClass("mcmcpermind",
+  representation(
+    relabel = "character",
+    weightperm = "array",
+    entropyperm = "array",
+    STperm = "array",
+    Sperm = "array",
+    NKperm = "array"
+  ),
+  contains = c("mcmcpermfix"),
+  validity = function(object) {
+    ## else: OK
+    TRUE
+  },
+  prototype(
+    relabel = character(),
+    weightperm = array(),
+    entropyperm = array(),
+    STperm = array(),
+    Sperm = array(),
+    NKperm = array()
+  )
 )
 
 ## Getters ##
-setMethod("getRelabel", "mcmcpermind",
-          function(object)
-          {
-              return(object@relabel)
-          }
+setMethod(
+  "getRelabel", "mcmcpermind",
+  function(object) {
+    return(object@relabel)
+  }
 )
 
-setMethod("getWeightperm", "mcmcpermind", 
-          function(object) 
-          {
-              return(object@weightperm)
-          }
+setMethod(
+  "getWeightperm", "mcmcpermind",
+  function(object) {
+    return(object@weightperm)
+  }
 )
 
-setMethod("getEntropyperm", "mcmcpermind", 
-          function(object) 
-          {
-              return(object@entropyperm)
-          }
+setMethod(
+  "getEntropyperm", "mcmcpermind",
+  function(object) {
+    return(object@entropyperm)
+  }
 )
 
-setMethod("getSTperm", "mcmcpermind", 
-          function(object) 
-          {
-              return(object@STperm)
-          }
+setMethod(
+  "getSTperm", "mcmcpermind",
+  function(object) {
+    return(object@STperm)
+  }
 )
 
-setMethod("getSperm", "mcmcpermind", 
-          function(object) 
-          {
-              return(object@STperm)
-          }
+setMethod(
+  "getSperm", "mcmcpermind",
+  function(object) {
+    return(object@STperm)
+  }
 )
 
-setMethod("getNKperm", "mcmcpermind", 
-          function(object) 
-          {
-              return(object@STperm)
-          }
+setMethod(
+  "getNKperm", "mcmcpermind",
+  function(object) {
+    return(object@STperm)
+  }
 )
 
 ## No setters as users are not intended to modify these ##
