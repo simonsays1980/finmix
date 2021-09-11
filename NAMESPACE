@@ -2,7 +2,7 @@ useDynLib(finmix, .registration=TRUE)
 
 import(nloptr)
 importFrom("Rcpp", "sourceCpp")
-#exportPattern("^[[:alpha:]]+")
+exportPattern("^[[:alpha:]]+")
 
 importFrom(graphics, barplot)
 importFrom(graphics, hist)
@@ -61,6 +61,7 @@ exportMethods( ## name of the generic, as with other methods
         "setIndicfix<-",
         "setExp<-",
         "setT<-",
+        "simulate",
 
         ## 'modelmoments' class ##
         "getMean",

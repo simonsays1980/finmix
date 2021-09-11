@@ -245,7 +245,7 @@ In the following code snippets, \code{x} is an \code{model} object and the symbo
 \examples{
     model.obj <- model(dist = "binomial", K = 2, indicfix = TRUE)
     model.obj
-    setT(model.obj)         <- as.matrix(100)
+    setT(model.obj)         <- as.matrix(as.integer(100))
     setPar(model.obj)       <- list(p = c(.3, .7))
     setWeight(model.obj)    <- matrix(c(.1, .9), nrow = 1, ncol = 2)
     plot(model.obj) 

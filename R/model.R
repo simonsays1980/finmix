@@ -15,6 +15,24 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' An S4 class to represent a finite mixture model
+#' 
+#' @slot dist A character, defining the distribution family. Possible choices
+#' are binomial, exponential, normal, normult, poisson, student, and studmult.
+#' @slot r An integer. Defines the vector dimension of a model. Is one for all
+#' univariate distributions and larger than one for normult and studmult.
+#' @slot K An integer, defining the number of components in the finite mixture.
+#' @slot weight A matrix, containing the weights of the finite mixture model. 
+#' The matrix must have dimension \code{1\times K} and weights must add to one
+#' must all be larger or equal to zero. 
+#' @slot par A list containing the parameter vectors for the finite mixture 
+#' distribution. The list can contain more than one named parameter vector. 
+#' @slot indicmod A character defining the indicator model. So far only 
+#' multinomial indicator models are possible. 
+#' @slot indicfix A logical. If \code{TRUE} the indicators are given and
+#' therefore fixed. 
+#' @slot T A matrix containing the repetitions in case of a \code{"binomial"} or 
+#'  \code{"poisson"} model.
 .model <- setClass("model",
   representation(
     dist = "character",
@@ -43,7 +61,56 @@
   )
 )
 
-## Constructor for class 'model' ##
+#' Constructor for the S4 model class
+#' 
+#' \code{model} creates a finite mixture model with given parameters. 
+#' 
+#' This is a constructor that creates a class object and guides the user in 
+#' regard to the different parameters needed to define a finite mixture model.
+#' 
+#' @param dist A character, defining the distribution family. Possible choices
+#' are \code{"binomial"}, \code{"exponential"}, \code{"normal}, 
+#' \code{"normult"}, \code{"poisson"}, \code{"student"}, and \code{"studmult"}.
+#' @param r An integer. Defines the vector dimension of a model. Is one for all
+#' univariate distributions and larger than one for \code{"normult"} and 
+#' \code{"studmult"}.
+#' @param K An integer, defining the number of components in the finite mixture. 
+#' Must be larger or equal to one. 
+#' @param weight A matrix, containing the weights of the finite mixture model. 
+#' The matrix must have dimension \code{1\times K} and weights must add to one
+#' and must all be larger or equal to zero. 
+#' @param par A list containing the parameter vectors for the finite mixture 
+#' distribution. The list can contain more than one named parameter vector. 
+#' Depending on the distribution parameters must be defined in the list as 
+#' follows: a \code{K}-dimensional vector of probabilities named \code{"p"} for 
+#' a \code{"binomial"} model, a \code{K}-dimensional vector of positive rates 
+#' named \code{"lambda"} for an \code{"exponential"} model, 
+#' \code{K}-dimensional vectors of means named \code{"mu"} and variances named 
+#' \code{sigma} for a \code{"normal"} model, a \code{r\times K}-dimensional 
+#' matrix of means named \code{"mu"} and a \code{K\times r\times r} dimensional
+#' array of variance-covariance matrices named \code{"sigma"} for a 
+#' \code{"normult"} model, a \code{K}-dimensional vector of rates named 
+#' \code{"rates"} for a \code{"poisson"} model, \code{K}-dimensional vectors of 
+#' means named \code{"mu"}, variances named \code{sigma}, and degrees of freedom
+#'  named \code{"df"} for a \code{"student"} model, a 
+#' \code{r\times K}-dimensional matrix of means named \code{"mu"}, a 
+#' \code{K\times r\times r} dimensional array of variance-covariance matrices 
+#' named \code{"sigma"}, and a \code{K}-dimensional vector of degrees of freedom
+#'  for a \code{"studmult"} model.
+#' @param indicmod A character defining the indicator model used. For now only
+#' \code{"multinomial"} is implemented.
+#' @param indicfix A logical. If \code{TRUE} the indicators are given and
+#' therefore fixed. 
+#' @param T A matrix containing the repetitions in case of a \code{"binomial"} or 
+#'  \code{"poisson"} model. Must be positive integers.
+#' @return An S4 \code{model} object.
+#' @export
+#' 
+#' @example 
+#' \preformatted(f_model <- model(dist = "poisson", K = 2, par = list(lambda = c(0.17, 0.2)),
+#' weight = matrix(c(0.5, 0.5), nrow = 1)))
+#' 
+#' @seealso \code{model}
 "model" <- function(dist = "poisson", r, K,
                     weight = matrix(), par = list(),
                     indicmod = "multinomial",
@@ -81,6 +148,19 @@
   )
 }
 
+#' Getter for weights
+#'
+#' \code{getWeight} returns the weight matrix. 
+#' 
+#' @param model An S4 model object. 
+#' @param verbose A logical indicating, if the function should give a print out.
+#' @return Matrix of weights.
+#' @export
+#'
+#' @example 
+#' \dontrun{
+#' weight <- getWeight(model)
+#' }
 setMethod(
   "hasWeight", "model",
   function(object, verbose = FALSE) {
@@ -113,6 +193,22 @@ setMethod(
   }
 )
 
+#' Checks for repetitions.
+#' 
+#' \code{hasT} chwecks if the model object possesses repetitions.
+#' 
+#' @param model An S4 model object.
+#' @param verbose A logical indicating if the function should give a print out. 
+#' @return A logical. \code{TRUE} if repetitions are existent in the model. If 
+#' values of slot \code{T} are \code{NA} it returns \code{FALSE}.
+#' @export
+#' 
+#' @example 
+#' \dontrun{
+#' if(hasT(model)) {cat('Has repetitions.)}
+#' }
+#' 
+#' @seealso \code{model}
 setMethod(
   "hasT", "model",
   function(object, verbose = FALSE) {
@@ -131,6 +227,21 @@ setMethod(
   }
 )
 
+#' Checks for parameters.
+#' 
+#' \code{hasPar} checks if the model has parameters defined. 
+#' 
+#' @param model An S4 model object.
+#' @param verbose A logical indicating, if the function should give a print out. 
+#' @return A matrix with repetitions. Can be empty, if no repetitions are set.
+#' @export
+#' 
+#' @example 
+#' \dontrun{
+#' if(hasPar(model)) {simulate(model)}
+#' }
+#' 
+#' @seealso \code{model}
 setMethod(
   "hasPar", "model",
   function(object, verbose = FALSE) {
@@ -138,23 +249,28 @@ setMethod(
   }
 )
 
-### ----------------------------------------------------------------------
-### Simulate method
-### @description    Simulates values for a specified model in an 'model'
-###                 object.
-### @par    model       an S4 'model' object; with specified parameters
-### @par    N           an R 'integer' value specifying the number of
-###                     values to be simulated
-### @par    varargin    an S4 'fdata' object; with specified variable
-###                     dimension @r and repetitions @T
-### @return         an S4 object of class 'fdata' holding the simulated
-### @see    ?simulate
-### @author Lars Simon Zehnder
-### ----------------------------------------------------------------------
+#' Simulates data from a model. 
+#' 
+#' \code{simulate} simulates values for a specified mixture model in an 
+#' S4 \code{model} object.
+#' 
+#' @param model An S4 model object with specified parameters and weights.
+#' @param N An integer specifying the number of values to be simulated. 
+#' @param varargin An S4 fdata object with specified variable dimensions.
+#' @param seed An integer specifying the seed for the RNG. 
+#' \code{r} and repetitions \code{T}.
+#' @return An S4 fdata object holding the simulated values.
+#' @export
+#' 
+#' @seealso \code{model}, \code{fdata}
+#' @example 
+#' \dontrun{
+#' f_data <- simulate(model, 100)
+#' }
 setMethod(
   "simulate", "model",
   function(model, N = 100, varargin, seed = 0) {
-    ## TODO: CHeck model for parameters. Check varargin for dimension. Check
+    ## TODO: Check model for parameters. Check varargin for dimension. Check
     ##      model anf varargin for consistency.
     if (!missing(seed)) {
       set.seed(seed)
@@ -178,7 +294,23 @@ setMethod(
   }
 )
 
-## plot ##
+#' Plots a model.
+#' 
+#' \code{plot} plots the density or probabilities of a fully specified mixture 
+#' model.
+#' 
+#' @param x An S4 model object. Must have specified parameters and weights.
+#' @param y Unused.
+#' @param dev A logical indicating, if the plot should be shown in a graphical 
+#' device. Set to \code{FALSE}, if plotted to a file. 
+#' @return Density or barplot of the S4 model object. 
+#' @export
+#' 
+#' @example \dontrun{
+#' plot(f_model)
+#' }
+#' 
+#' @seealso \code{model}
 setMethod(
   "plot", "model",
   function(x, y, dev = TRUE, ...) {
@@ -205,6 +337,23 @@ setMethod(
   }
 )
 
+#' Plots point process.
+#' 
+#' \code{plotPointProc} plots the point process of an S4 model object that 
+#' defines a finite mixture model. Only available for Poisson mixtures so far.
+#' 
+#' @param x An S4 model object with defined parameters and weigths. 
+#' @param y Unused.
+#' @param dev A logical indicating, if the plot should be shown in a graphical 
+#' device. Set to \code{FALSE}, if plotted to a file. 
+#' @return A scatter plot of weighted parameters.  
+#' @export
+#' 
+#' @example \dontrun{
+#' plotPointProc(f_model)
+#' }
+#' 
+#' @seealso \code{model}
 setMethod(
   "plotPointProc", signature(
     x = "model",
@@ -220,6 +369,25 @@ setMethod(
 )
 
 ## Marginal Mixture ##
+#' Returns the marginal distribution. 
+#' 
+#' \code{mixturemar} returns the marginal distribution of a multivariate 
+#' mixture distribution. This can only be applied on S4 model objects with 
+#' \code{dist="normult"} or \code{dist="studmult"}. 
+#' 
+#' @param object An S4 model object with a multivariate distribution.
+#' @param J An integer specifying the dimension for which the marginal 
+#' distribution should be returned.
+#' @return An S4 model object with the marginal distribution for dimension 
+#' \code{J}.
+#' @export
+#' 
+#' @example
+#' \dontrun{
+#' mar_model <- mixturemar(f_model, 1)
+#' }
+#' 
+#' @seealso \code{model}
 setMethod(
   "mixturemar", "model",
   function(object, J) {
@@ -227,7 +395,20 @@ setMethod(
   }
 )
 
-## Show ##
+#' Shows the model.
+#' 
+#' \code{show} prints model information to the console. 
+#' 
+#' @param object An S4 model object. 
+#' @return A print out of model information about all slots. 
+#' @export
+#' 
+#' @example 
+#' \dontrun{
+#' show(f_model)
+#' }
+#' 
+#' @seealso \code{model}
 setMethod(
   "show", "model",
   function(object) {
@@ -465,13 +646,13 @@ setReplaceMethod(
 
 ### Marginal model
 ".mixturemar.Model" <- function(obj, J) {
-  if (object@dist == "normult") {
+  if (obj@dist == "normult") {
     .mixturemar.normult.Model(obj, J)
-  } else if (object@dist == "studmult") {
+  } else if (obj@dist == "studmult") {
     .mixturemar.studmult.Model(obj, J)
   } else {
-    stop("A marginal distribution can only be obtained from
-              multivariate distributions.")
+    stop("A marginal distribution can only be obtained from 
+         multivariate distributions.")
   }
 }
 
@@ -720,7 +901,7 @@ setReplaceMethod(
   axis(side = 2, cex = .7, cex.axis = .7)
   axis(
     side = 1, tick = FALSE, at = bp[which(x.grid %in% label.grid)],
-    labels = label.grid, cex.axis = .7
+    labels = which(x.grid %in% label.grid), cex.axis = .7
   )
   mtext(side = 1, "x", cex = .7, cex.axis = .7, line = 3)
   mtext(side = 2, "P(x)", cex = .7, cex.axis = .7, line = 3)
@@ -2236,7 +2417,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### ------------------------------------------------------------------------------
-".init.valid.Binomial.Model" <- function(model.obj) {
+".init.valid.Binomial.Model" <- function(obj) {
   if (length(obj@par)) {
     if (!"p" %in% names(obj@par)) {
       stop(paste("Wrong specification of slot @par: ",
@@ -2304,7 +2485,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### ------------------------------------------------------------------------------
-".valid.Binomial.Model" <- function(model.obj) {
+".valid.Binomial.Model" <- function(obj) {
   if (length(obj@par)) {
     if (!"p" %in% names(obj@par)) {
       warning(paste("Wrong specification of slot @par: ",
@@ -2657,7 +2838,7 @@ setReplaceMethod(
     }
     if (!"sigma" %in% names(obj@par)) {
       warning(paste("Wrong specification of slot @par: ",
-        "univariate Normal mictures need ",
+        "univariate Normal mixtures need ",
         "a variance vector named ",
         "'sigma'",
         sep = ""
@@ -2973,7 +3154,7 @@ setReplaceMethod(
     }
     if (!"sigma" %in% names(obj@par)) {
       warning(paste("Wrong specification of slot @par: ",
-        "univariate Normal mictures need ",
+        "univariate Student-t mixtures need ",
         "a variance vector named ",
         "'sigma'",
         sep = ""
@@ -3474,6 +3655,7 @@ setReplaceMethod(
 }
 
 ### Additional functions
+#' @keywords internal
 ".get.univ.Model" <- function() {
   univ <- c(
     "poisson", "cond.poisson",
