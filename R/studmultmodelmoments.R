@@ -14,7 +14,22 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
-
+#' Finmix `studmultmodelmoments` class
+#' 
+#' @description
+#' Defines a class that holds modelmoments for a finite mixture of studmult
+#' distributions. Note that this class is not directly used, but indirectly 
+#' when calling the `modelmoments` constructor [modelmoments()].
+#' 
+#' @slot B A numeric defining the between-group heterogeneity.
+#' @slot W A numeric defining the within-group heterogeneity. 
+#' @slot R A numeric defining the coefficient of determination.
+#' @exportClass studmultmodelmoments
+#' @name studmultmodelmoments
+#' 
+#' @seealso 
+#' * [modelmoments_class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 .studmultmodelmoments <- setClass("studmultmodelmoments",
   representation(
     B = "array",
@@ -37,6 +52,24 @@
   )
 )
 
+#' Initializer of the `studmultmoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()` 
+#' to generate in the initialization step also the moments for a passed `model`
+#' object.
+#' 
+#' @param .Object An object_ see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix `model` object containing the definition of the 
+#'   finite mixture distribution.
+#' @noRd
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "studmultmodelmoments",
   function(.Object, ..., model) {
@@ -45,6 +78,15 @@ setMethod(
   }
 )
 
+#' Generate moments for studmult mixture
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of an
+#' studmult mixture distribution.
+#' 
+#' @param object An `studmultmodelmoments` object. 
+#' @return An `studmultmodelmoments` object with calculated moments.
+#' @noRd
 setMethod(
   "generateMoments", "studmultmodelmoments",
   function(object) {
@@ -52,6 +94,16 @@ setMethod(
   }
 )
 
+#' Shows a summary of an `studmultmodelmoments` object.
+#' 
+#' Calling [show()] on an `studmultmodelmoments` object gives an overview 
+#' of the moments of an studmult finite mixture. 
+#' 
+#' @param object An `studmultmodelmoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn studmultmodelmoments Shows a summary of an object
 setMethod(
   "show", "studmultmodelmoments",
   function(object) {
@@ -98,6 +150,26 @@ setMethod(
 )
 
 ## Getters ##
+#' Getter method of `studmultmodelmoments` class.
+#' 
+#' Returns the `B` slot.
+#' 
+#' @param object An `studmultmodelmoments` object.
+#' @returns The `B` slot of the `object`.
+#' @noRd
+#' @exportMethod getB
+#' @examples 
+#' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas, df = c(10, 20))
+#' f_moments       <- modelmoments(f_model)
+#' getB(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getB", "studmultmodelmoments",
   function(object) {
@@ -105,6 +177,26 @@ setMethod(
   }
 )
 
+#' Getter method of `studmultmodelmoments` class.
+#' 
+#' Returns the `W` slot.
+#' 
+#' @param object An `studmultmodelmoments` object.
+#' @returns The `W` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas, df = c(10, 20))
+#' f_moments       <- modelmoments(f_model)
+#' getW(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getW", "studmultmodelmoments",
   function(object) {
@@ -112,6 +204,26 @@ setMethod(
   }
 )
 
+#' Getter method of `studmultmodelmoments` class.
+#' 
+#' Returns the `Rdet` slot.
+#' 
+#' @param object An `studmultmodelmoments` object.
+#' @returns The `Rdet` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas, df = c(10, 20))
+#' f_moments       <- modelmoments(f_model)
+#' getRdet(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getRdet", "studmultmodelmoments",
   function(object) {
@@ -119,6 +231,26 @@ setMethod(
   }
 )
 
+#' Getter method of `studmultmodelmoments` class.
+#' 
+#' Returns the `Rtr` slot.
+#' 
+#' @param object An `studmultmodelmoments` object.
+#' @returns The `Rtr` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas, df = c(10, 20))
+#' f_moments       <- modelmoments(f_model)
+#' getRtr(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getRtr", "studmultmodelmoments",
   function(object) {
@@ -126,6 +258,26 @@ setMethod(
   }
 )
 
+#' Getter method of `studmultmodelmoments` class.
+#' 
+#' Returns the `Corr` slot.
+#' 
+#' @param object An `studmultmodelmoments` object.
+#' @returns The `Corr` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas, df = c(10, 20))
+#' f_moments       <- modelmoments(f_model)
+#' getCorr(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getCorr", "studmultmodelmoments",
   function(object) {
@@ -138,6 +290,17 @@ setMethod(
 
 ### Private functions
 ### These function are not exported
+#' Generate model moments for an studmult mixture
+#' 
+#' @description 
+#' Only called implicitly. generates all moments of an studmult mixture 
+#' distribution.
+#' 
+#' @param object An `studmultmodelmoments` object to contain all calculated
+#'   moments. 
+#' @returns An `studmultmodelmoments` object containing all moments of the 
+#'   studmult mixture distributions.
+#' @noRd
 ".generateMomentsStudmult" <- function(object) {
   mu <- object@model@par$mu
   sigma <- object@model@par$sigma

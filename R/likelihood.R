@@ -15,6 +15,26 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Computes the log-likelihood for normal mixture components
+#' 
+#' @description
+#' For internal usage only. This function calculates the likelihood of each 
+#' mixture component for the data. In addition the maximum likelihood along all 
+#' mixture components and the log-likelihood is calculated. 
+#' 
+#' @param y A matrix containing the data. Of dimension `Nx1` for 
+#'   univariate models and `Nxr` for multivariate models.
+#' @param mu A vector containing the means of the normal mixture components.
+#' @param sigma A vector containing the standard deviations of the normal 
+#'   mixture components.
+#' @return A list containing the likelihood, the maximum likelihood and the 
+#'   log-likelihood.
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [model][model_class] for the `model` class definition
+#' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.normal" <- function(y, mu, sigma) {
   N <- nrow(y)
   K <- ncol(mu)
@@ -36,6 +56,28 @@
   return(result)
 }
 
+#' Computes the log-likelihood for student mixture components
+#' 
+#' @description
+#' For internal usage only. This function calculates the likelihood of each 
+#' mixture component for the data. In addition the maximum likelihood along all 
+#' mixture components and the log-likelihood is calculated. 
+#' 
+#' @param y A matrix containing the data. Of dimension `Nx1` for 
+#'   univariate models and `Nxr` for multivariate models.
+#' @param mu A vector containing the means of the student mixture components.
+#' @param sigma A vector containing the standard deviations of the student 
+#'   mixture components.
+#' @param df A vector containing the degrees of freedom of the student mixture 
+#'   components.
+#' @return A list containing the likelihood, the maximum likelihood and the 
+#'   log-likelihood.
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [model][model_class] for the `model` class definition
+#' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.student" <- function(y, mu, sigma, df) {
   N <- nrow(y)
   K <- ncol(mu)
@@ -60,6 +102,25 @@
   return(result)
 }
 
+#' Computes the log-likelihood for exponential mixture components
+#' 
+#' @description
+#' For internal usage only. This function calculates the likelihood of each 
+#' mixture component for the data. In addition the maximum likelihood along all 
+#' mixture components and the log-likelihood is calculated. 
+#' 
+#' @param y A matrix containing the data. Of dimension `Nx1` for 
+#'   univariate models and `Nxr` for multivariate models.
+#' @param lambda A vector containing the rates of the exponential mixture 
+#'   components.
+#' @return A list containing the likelihood, the maximum likelihood and the 
+#'   log-likelihood.
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [model][model_class] for the `model` class definition
+#' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.exponential" <- function(y, lambda) {
   N <- nrow(y)
   K <- ncol(lambda)
@@ -77,6 +138,25 @@
   return(result)
 }
 
+#' Computes the log-likelihood for Poisson mixture components
+#' 
+#' @description
+#' For internal usage only. This function calculates the likelihood of each 
+#' mixture component for the data. In addition the maximum likelihood along all 
+#' mixture components and the log-likelihood is calculated. 
+#' 
+#' @param y A matrix containing the data. Of dimension `Nx1` for 
+#'   univariate models and `Nxr` for multivariate models.
+#' @param lambda A vector containing the rates of the Poisson mixture 
+#'   components.
+#' @return A list containing the likelihood, the maximum likelihood and the 
+#'   log-likelihood.
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [model][model_class] for the `model` class definition
+#' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.poisson" <- function(y, lambda) {
   N <- nrow(y)
   K <- ncol(lambda)
@@ -99,6 +179,25 @@
   return(result)
 }
 
+#' Computes the log-likelihood for Binomial mixture components
+#' 
+#' @description
+#' For internal usage only. This function calculates the likelihood of each 
+#' mixture component for the data. In addition the maximum likelihood along all 
+#' mixture components and the log-likelihood is calculated. 
+#' 
+#' @param y A matrix containing the data. Of dimension `Nx1` for 
+#'   univariate models and `Nxr` for multivariate models.
+#' @param lambda A vector containing the probabilities of the Binomial mixture 
+#'   components.
+#' @return A list containing the likelihood, the maximum likelihood and the 
+#'   log-likelihood.
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [model][model_class] for the `model` class definition
+#' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.binomial" <- function(y, T, p) {
   N <- nrow(y)
   K <- length(p)
@@ -118,6 +217,29 @@
   return(result)
 }
 
+#' Computes the log-likelihood for multivariate normal mixture components
+#' 
+#' @description
+#' For internal usage only. This function calculates the likelihood of each 
+#' mixture component for the data. In addition the maximum likelihood along all 
+#' mixture components and the log-likelihood is calculated. 
+#' 
+#' @param y A matrix containing the data. Of dimension `Nx1` for 
+#'   univariate models and `Nxr` for multivariate models.
+#' @param mu A matrix containing the means for each mixture component. Of 
+#'   dimension `rxK`
+#' @param sigmainv An array containing the inverse variance-covariance matrices 
+#'   for each mixture component. Of dimension `rxrxK`.
+#' @param logdet A vector containing the logarithmized determinants of the 
+#'   variance-covariance matrices for each component. Of dimension `1xK`.
+#' @return A list containing the likelihood, the maximum likelihood and the 
+#'   log-likelihood.
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [model][model_class] for the `model` class definition
+#' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.normult" <- function(y, mu, sigmainv, logdet) {
   N <- nrow(y)
   r <- ncol(y)
@@ -137,6 +259,29 @@
   return(results)
 }
 
+#' Computes the log-likelihood for multivariate Student-t mixture components
+#' 
+#' @description
+#' For internal usage only. This function calculates the likelihood of each 
+#' mixture component for the data. In addition the maximum likelihood along all 
+#' mixture components and the log-likelihood is calculated. 
+#' 
+#' @param y A matrix containing the data. Of dimension `Nx1` for 
+#'   univariate models and `Nxr` for multivariate models.
+#' @param mu A matrix containing the means for each mixture component. Of 
+#'   dimension `rxK`
+#' @param sigmainv An array containing the inverse variance-covariance matrices 
+#'   for each mixture component. Of dimension `rxrxK`.
+#' @param logdet A vector containing the logarithmized determinants of the 
+#'   variance-covariance matrices for each component. Of dimension `1xK`.
+#' @return A list containing the likelihood, the maximum likelihood and the 
+#'   log-likelihood.
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [model][model_class] for the `model` class definition
+#' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.studmult" <- function(y, mu, sigmainv, logdet, df) {
   N <- nrow(y)
   K <- ncol(mu)

@@ -14,7 +14,27 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
-
+#' Finmix `ddatamoments` class
+#' 
+#' Stores moments of an [fdata][fdata_class] object containing discrete data. 
+#' The `fdata` object is stored in the parent [datamoments][datamoments_class] 
+#' class.
+#' 
+#' @slot factorial An array containing the first four factorial moments of the 
+#'   discrete data stored in the `fdata` object.
+#' @slot over A vector storing the overdispersion of the discrete data in the 
+#'   corresponding `fdata` object. 
+#' @slot zero A vector storing the fractions of zeros in the observed data. <
+#' @slot smoments An `sdatamoments` object, if the `fdata` object also holds 
+#'   indicators. `NULL`, if no indicators are present in the `fdata` object. 
+#' @exportClass ddatamoments
+#' @name ddatamoments_class
+#' @seealso 
+#' * [datamoments][datamoments_class] for the parent class
+#' * [ddatamoments][ddatamoments_class] for the corresponding class for 
+#'   continuous data
+#' * [sdatamoments][sdatamoments_class] for the contained class if indicators
+#'   are present in the `fdata` object 
 .ddatamoments <- setClass("ddatamoments",
   representation(
     factorial = "array",
@@ -35,6 +55,23 @@
   )
 )
 
+#' Initializer of the `ddatamoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()` 
+#' to generate in the initialization step the moments for a passed-in `fdata`
+#' object.
+#' 
+#' @param .Object An object: see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix `fdata` object containing the observations.
+#' @noRd
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "ddatamoments",
   function(.Object, ..., value = fdata()) {
@@ -49,6 +86,15 @@ setMethod(
 )
 
 ## Generic set in 'groupmoments.R' ##
+#' Generate moments for continuous data.
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of a
+#' finite mixture with continuous data.
+#' 
+#' @param object An `ddatamoments` object. 
+#' @return An `ddatamoments` object with calculated moments.
+#' @noRd
 setMethod(
   "generateMoments", "ddatamoments",
   function(object) {
@@ -56,6 +102,16 @@ setMethod(
   }
 )
 
+#' Shows a summary of a `ddatamoments` object.
+#' 
+#' Calling [show()] on a `ddatamoments` object gives an overview 
+#' of the moments of a finit mixture with continuous data.
+#' 
+#' @param object A `ddatamoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn ddatamoments_class
 setMethod(
   "show", "ddatamoments",
   function(object) {
@@ -94,6 +150,27 @@ setMethod(
 )
 
 ## Getters ##
+#' Getter method of `ddatamoments` class.
+#' 
+#' Returns the `smoments` slot.
+#' 
+#' @param object An `ddatamoments` object.
+#' @returns The `smoments` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getSmoments(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getSmoments", "ddatamoments",
   function(object) {
@@ -101,6 +178,27 @@ setMethod(
   }
 )
 
+#' Getter method of `ddatamoments` class.
+#' 
+#' Returns the `smoments` slot.
+#' 
+#' @param object An `ddatamoments` object.
+#' @returns The `smoments` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getFactorial(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getFactorial", "ddatamoments",
   function(object) {
@@ -108,6 +206,27 @@ setMethod(
   }
 )
 
+#' Getter method of `ddatamoments` class.
+#' 
+#' Returns the `smoments` slot.
+#' 
+#' @param object An `ddatamoments` object.
+#' @returns The `smoments` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getOver(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getOver", "ddatamoments",
   function(object) {
@@ -115,6 +234,27 @@ setMethod(
   }
 )
 
+#' Getter method of `ddatamoments` class.
+#' 
+#' Returns the `smoments` slot.
+#' 
+#' @param object An `ddatamoments` object.
+#' @returns The `smoments` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getZero(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getZero", "ddatamoments",
   function(object) {
@@ -127,6 +267,17 @@ setMethod(
 
 ### Private functions
 ### These functions are not exported
+#' Generate data moments for finite mixture data
+#' 
+#' @description 
+#' Only called implicitly. generates all moments of finite mixture data in a 
+#' `fdata` object.
+#' 
+#' @param object A `ddatamoments` object to contain all calculated
+#'   moments. 
+#' @returns A `ddatamoments` object containing all moments of the 
+#'   inite mixture data.
+#' @noRd
 ".generateDdatamoments" <- function(object) {
   ## enforce column-wise ordering ##
   hasY(object@fdata, verbose = TRUE)

@@ -20,6 +20,46 @@
 #include "LogStudentInd.h"
 #include "PostOutStudentInd.h"
 
+//' Performs MCMC sampling for mixtures of Student-t distributions
+//' 
+//' @description
+//' For internal usage only. This function gets passed the `fdata`, `model`,
+//' `prior`, `mcmc` objects to perform MCMC sampling for a Student-t mixture 
+//' model. In addition an `mcmcoutput` object is given that stores the output 
+//' of MCMC sampling in R memory. Note that `finmix` relies in C++ code on 
+//' so-called "mixin" layers that help to design a software by organizing code 
+//' into layers that build upon each others and enable modularity in MCMC 
+//' sampling by allowing to combine different sampling designs, e.g. with or 
+//' without a hierarchical prior, with fixed indicators or storing posterior 
+//' density parameters. See for more information on mixin layers Smaragdakis 
+//' and Butory (1998). 
+//' 
+//' @param data_S4 An `fdata` object storing the observations and indicators.
+//' @param model_S4 A `model` object specifying the Student-t finite mixture 
+//'   model.
+//' @param prior_S4 A `prior` object specifying the prior distribution for MCMC 
+//'   sampling.
+//' @param mcmc_S4 A `mcmc` object specifying the hyper-parameters for MCMC 
+//'   sampling.
+//' @param mcmcoutput_S4 An `mcmcoutput` object storing the outcomes from MCMC 
+//'   sampling using R memory.
+//' @return An `mcmcoutput` object containing the results from MCMC sampling 
+//'   and using the R memory from the input argument `mcmcoutput_S4`. 
+//' @export 
+//' 
+//' @seealso 
+//' * [mixturemcmc()] for performing MCMC sampling
+//' * [fdata][fdata_class] for the `fdata` class definition
+//' * [model][model_class] for the `model` class definition
+//' * [prior][prior_class] for the `prior` class definition
+//' * [mcmc][mcmc_class] for the `mcmc` class definition
+//' 
+//' @references
+//' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 
+//'   mixin layers." In: Jul E. (eds) ECOOP’98 — Object-Oriented Programming. 
+//'   ECOOP 1998. Lecture Notes in Computer Science, vol 1445. Springer, 
+//'   Berlin, Heidelberg.
+// [[Rcpp::export]]
 RcppExport SEXP mcmc_student_cc(SEXP data_S4, SEXP model_S4,
                                 SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4)
 {

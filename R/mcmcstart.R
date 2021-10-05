@@ -15,6 +15,43 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix default starting values
+#' 
+#' @description 
+#' Calling [mcmcstart()] creates starting values for MCMC sampling. Starting 
+#' values are constructed for the indicators in the `fdata` argument and the 
+#' parameters in the `model` argument. In addition an `mcmc` object can be 
+#' provided in the `varargin` argument to set up all slots consistently for a 
+#' non-default setting of hyper-parameters.
+#' 
+#' To assing the returned objects directly to existing names the assignment 
+#' operator `%%=%%` can be used together with a formula concatenating each name 
+#' with a tilde `~`. See the examples.
+#' 
+#' @param fdata An `fdata` object containing the data.
+#' @param model A `model` object specifying the finite mixture model to be
+#'   estimated. 
+#' @param varargin Either `NULL` or an `mcmc` object defining (possibly 
+#'   non-default) hyper-parameters. If not provided a default `mcmc` object is 
+#'   created internally and returned.
+#' @return A list containing the `fdata` object, the `model` object and an 
+#'   `mcmc` object all set up for MCMC sampling.
+#' @export
+#' @name mcmcstart
+#' 
+#' @examples 
+#' # Specify a Poisson model.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Set up all objects for MCMC sampling.
+#' (f_data ~ f_model ~ f_mcmc) %=% mcmcstart(f_data, f_model)
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mixturemcmc()] for the starting MCMC sampling
 "mcmcstart" <- function(fdata, model, varargin) {
   ## Check arguments
   .check.fdata.model.Mcmcstart(fdata, model)
@@ -69,6 +106,26 @@
 ### non-empty data slot @y.
 ### If the distributions in 'model' do not correspond to the dimensions
 ### @r in 'fdata' an error is thrown.
+#' Check argument in `mcmcstart`
+#' 
+#' For internal usage only. This function checks the input arguments `fdata` 
+#' and `model` for consistency. Consistency has to be ensured for the slots 
+#' `@@dist` in the `model` object and the slot `@@r` in the `fdata` object. 
+#' A dimension `r>1` calls for a multivariate distribution specified in the 
+#' `model` object. Furthermore, the `fdata` object must contain data in its 
+#' `@@y` slot.
+#' 
+#' @param fdata_obj An `fdata` object containing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return None. If any check is not passed an error is thrown.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mixturemcmc()] for the starting MCMC sampling
 ".check.fdata.model.Mcmcstart" <- function(fdata.obj, model.obj) {
   .valid.Fdata(fdata.obj)
   .valid.Model(model.obj)
@@ -91,6 +148,23 @@
 }
 
 ### Check varargin: Argument 'varargin' must be an object of class 'mcmc'.
+#' Check argument `varargin` in `mcmcstart`
+#' 
+#' For internal usage only. This function checks the `varargin` input argument. 
+#' More specifically, it checks if the argument is an `mcmc` object and if it 
+#' is correctly specified.
+#' 
+#' @param fdata_obj An `fdata` object containing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return None. If any check is not passed an error is thrown.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mixturemcmc()] for the starting MCMC sampling
 ".check.mcmc.Mcmcstart" <- function(mcmc.obj) {
   if (class(mcmc.obj) != "mcmc") {
     stop(paste("Wrong argument. 'mcmc' must be an object of class ",
@@ -104,6 +178,24 @@
 ### Logic parameters: Generates starting parameters for @dist in
 ### 'model.obj'. Returns a 'model' object with starting parameters
 ### in @par.
+#' Sets starting parameters for `mcmcstart`
+#' 
+#' For internal usage only. This function sets the parameters of a finite 
+#' mixture model defined in the slots `@@par` and `@@weight`. 
+#' 
+#' @param fdata_obj An `fdata` object containing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @param mcmc_obj An `mcmc` object specifying the hyper-parameters for MCMC 
+#'   sampling.
+#' @return A `model` object with starting parameters. 
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mixturemcmc()] for the starting MCMC sampling
 ".parameters.Mcmcstart" <- function(fdata.obj, model.obj, mcmc.obj) {
   K <- model.obj@K
   dist <- model.obj@dist
@@ -121,16 +213,33 @@
   if (dist %in% c("poisson", "cond.poisson")) {
     .parameters.poisson.Mcmcstart(fdata.obj, model.obj)
   } else if (dist == "exponential") {
-    .mcmcstart.exponential.Model(fdata.obj, model.obj, mcmc.obj)
+    .parameters.exponential.Mcmcstart(fdata.obj, model.obj, mcmc.obj)
   } else if (dist == "binomial") {
     .parameters.binomial.Mcmcstart(fdata.obj, model.obj)
   } else if (dist == "normal" || dist == "student") {
-    .mcmcstart.Norstud.Model(fdata.obj, model.obj, mcmc.obj)
+    .parameters.Norstud.Mcmcstart(fdata.obj, model.obj, mcmc.obj)
   } else if (dist %in% c("normult", "studmult")) {
-    .mcmcstart.Norstudmult.Model(fdata.obj, model.obj, mcmc.obj)
+    .parameters.Norstudmult.Mcmcstart(fdata.obj, model.obj, mcmc.obj)
   }
 }
 
+#' Set up exposures in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the exposures Poisson mixture 
+#' model. If the `fdata` object already contains `exposures` these are checked 
+#' for consistency with the number of observations `N`. if exposures cannot be 
+#' set an error is thrown.
+#' 
+#' @param fdata_obj An `fdata` object containing the data.
+#' @return A matrix containing th exposures.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mixturemcmc()] for the starting MCMC sampling
 ".mcmcstart.Exp" <- function(data.obj) {
   r <- data.obj@r
   N <- data.obj@N
@@ -171,6 +280,23 @@
   return(exp)
 }
 
+#' Set up starting parameters for the weights in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting weights for a 
+#' finite mixture model, by referring to multinomial model for the indicators. 
+#' Starting weights are chosen to be equally weighted by the number of 
+#' components in the `model` object's slot `@@K`.
+#' 
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return A `model` object with starting weights. 
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mixturemcmc()] for the starting MCMC sampling
 ".parameters.multinomial.Mcmcstart" <- function(model.obj) {
   K <- model.obj@K
   if (!hasWeight(model.obj)) {
@@ -179,6 +305,21 @@
   return(model.obj)
 }
 
+#' Set up starting parameters for a Poisson mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting parameters for 
+#' a Poisson mixture model specified by its argument. 
+#' 
+#' @param fdata_obj An `fdata_obj` storing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
 ".parameters.poisson.Mcmcstart" <- function(fdata.obj, model.obj) {
   K <- model.obj@K
   datam <- getColY(fdata.obj)
@@ -200,6 +341,23 @@
   return(model.obj)
 }
 
+#' Set up starting parameters for an exponential mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting parameters for 
+#' an exponential mixture model specified by its argument. 
+#' 
+#' @param fdata_obj An `fdata_obj` storing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @param mcmc_obj An `mcmc` object containing all hyper-parameters for MCMC
+#'   sampling.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
 ".parameters.exponential.Mcmcstart" <- function(fdata.obj, model.obj,
                                                 mcmc.obj) {
   if (!hasPar(model.obj)) {
@@ -215,6 +373,21 @@
   return(model.obj)
 }
 
+#' Set up starting parameters for a Binomial mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting parameters for 
+#' a Binomial mixture model specified by its argument. 
+#' 
+#' @param fdata_obj An `fdata_obj` storing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
 ".parameters.binomial.Mcmcstart" <- function(fdata.obj, model.obj) {
   if (!hasPar(model.obj) && hasT(fdata.obj, verbose = TRUE)) {
     datam <- getColY(fdata.obj)
@@ -231,7 +404,24 @@
   return(model.obj)
 }
 
-".mcmcstart.Norstud.Model" <- function(fdata.obj, model.obj,
+#' Set up starting parameters for a normal or Student-t mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting parameters for 
+#' a normal or Student-t mixture model specified by its argument. 
+#' 
+#' @param fdata_obj An `fdata_obj` storing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @param mcmc_obj An `mcmc` object containing all hyper-parameters for MCMC
+#'   sampling.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+".parameters.Norstud.Mcmcstart" <- function(fdata.obj, model.obj,
                                        mcmc.obj) {
   datam <- getColY(fdata.obj)
   K <- model.obj@K
@@ -268,7 +458,24 @@
   return(model.obj)
 }
 
-".mcmcstart.Norstudmult.Model" <- function(fdata.obj, model.obj,
+#' Set up starting parameters for a multivariate mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting parameters for 
+#' a multivariate normal or Student-t mixture model specified by its argument. 
+#' 
+#' @param fdata_obj An `fdata_obj` storing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @param mcmc_obj An `mcmc` object containing all hyper-parameters for MCMC
+#'   sampling.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+".parameters.Norstudmult.Mcmcstart" <- function(fdata.obj, model.obj,
                                            mcmc.obj) {
   K <- model.obj@K
   r <- model.obj@r
@@ -314,11 +521,26 @@
   return(model.obj)
 }
 
+#' Set up starting degrees of freedom for a Student-t mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting degrees of 
+#' freedom for a Student-t mixture model specified by its argument. 
+#' 
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
 ".mcmcstart.Student.Df" <- function(model.obj) {
+  K <- model.obj@K
   has.par <- (length(model.obj@par) > 0)
   if (has.par) {
     has.df <- "df" %in% names(model.obj@par)
-    if (!df.in.model) {
+    if (!has.df) {
       model.obj@pari$df <- array(10, dim = c(1, K))
       validObject(model.obj)
     }
@@ -330,6 +552,21 @@
 
 ### Logic indicators: Returns an 'fdata' object with generated
 ### indicators.
+#' Set up starting indicators for a finite mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting indicators for 
+#' a finite mixture model specified by its argument. 
+#' 
+#' @param fdata_obj An `fdata_obj` storing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
 ".indicators.Mcmcstart" <- function(fdata.obj, model.obj) {
   dist <- model.obj@dist
   if (dist %in% c("poisson", "cond.poisson", "exponential")) {
@@ -349,6 +586,21 @@
 ### to find initial indicators. If indicators are already
 ### in slot @S of the 'fdata' object, the 'fdata' object is
 ### immediately returned.
+#' Set up starting indicators for a Poisson mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting indicators for 
+#' a Poisson or exponential mixture model specified by its argument. 
+#' 
+#' @param fdata_obj An `fdata_obj` storing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
 ".indicators.poisson.Mcmcstart" <- function(fdata.obj, model.obj) {
   K <- model.obj@K
   if (!hasS(fdata.obj)) {
@@ -366,6 +618,21 @@
   return(fdata.obj)
 }
 
+#' Set up starting indicators for a Binomial mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting indicators for 
+#' a Binomial mixture model specified by its argument. 
+#' 
+#' @param fdata_obj An `fdata_obj` storing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
 ".indicators.binomial.Mcmcstart" <- function(fdata.obj, model.obj) {
   if (!hasS(fdata.obj)) {
     K <- model.obj@K
@@ -400,14 +667,33 @@
   return(fdata.obj)
 }
 
+#' Set up starting indicators for a normal or Student-t mixture in `mcmcstart`
+#' 
+#' For internal usage only. This function sets up the starting indicators for 
+#' a normal or Student-t mixture model specified by its argument. 
+#' 
+#' @param fdata_obj An `fdata_obj` storing the data.
+#' @param model_obj A `model` object specifying the finite mixture model.
+#' @return A `model` object with starting parameters.
+#' @noRd
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [model][model_class] for the definition of the `model` class
+#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
 ".mcmcstart.Ind.Norstud" <- function(data.obj, model.obj) {
   K <- model.obj@K
-  has.S <- .mcmcstart.valid.Ind(data.obj)
-  datam <- .mcmcstart.Data(data.obj)
+  # Checks, if slot 'S' ist in 'data.obj'. If not, throws an error
+  .valid.S.Fdata(data.obj)
+  # Because of the line above, we can set this.``
+  has.S <- TRUE
   if (has.S) {
     return(data.obj)
   } else {
     if (data.obj@bycolumn) {
+      .valid.y.Fdata(data.obj)
+      datam <- data.obj@y
       data.obj@S <- as.matrix(kmeans(datam^.5,
         centers = K,
         nstart = K

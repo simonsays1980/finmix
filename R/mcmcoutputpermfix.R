@@ -15,6 +15,28 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `mcmcoutputpermfix` class 
+#' 
+#' @description 
+#' This class defines objects to store the outputs from permuting the MCMC 
+#' samples. Due to label switching the sampled component parameters are usually 
+#' not assigned to the same component in each iteration. To overcome this issue 
+#' the samples are permuted by using a relabeling algorithm (usually K-means) 
+#' to reassign parameters. Note that due to assignment of parameters from the 
+#' same iteration to the same component, the sample size could shrink. 
+#' 
+#' This class stores the permuted parameters together with the new MCMC sample 
+#' size and the mixture log-likelihood, the prior log-likelihood, and the 
+#' complete data posterior log-likelihood.
+#' 
+#' Note that this class inherits all of its slots from the parent classes.
+#' 
+#' @exportClass mcmcoutputpermfix
+#' @describeIn mcmcoutputperm_class
+#' @seealso 
+#' * [mcmcoutputfix][mcmcoutput_class] for the parent class
+#' * [mcmcpermfix][mcmcperm_class] for the parent class
+#' * [mcmcpermute()] for performing permutation of MCMC samples
 .mcmcoutputpermfix <- setClass("mcmcoutputpermfix",
   contains = c("mcmcpermfix", "mcmcoutputfix"),
   validity = function(object) {
@@ -23,6 +45,28 @@
   }
 )
 
+#' Initializer of the `mcmcoutputpermfix` class
+#' 
+#' @description
+#' Only used implicitly. The initializer stores the data into the slots of the 
+#' passed-in object.
+#' 
+#' @param .Object An object: see the "initialize Methods" section in 
+#'   [initialize].
+#' @param mcmcoutput An `mcmcoutput` class containing the results from MCMC 
+#'   sampling.
+#' @param Mperm An integer defining the number of permuted MCMC samples.
+#' @param parperm A named list containing the permuted component parameter 
+#'   samples from MCMC sampling
+#' @param logperm A named list containing the mixture log-likelihood, the 
+#'   prior log-likelihood, and the complete data posterior log-likelihood 
+#'   for the permuted MCMC samples.
+#' 
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "mcmcoutputpermfix",
   function(.Object, mcmcoutput, Mperm = integer(),
@@ -41,6 +85,17 @@ setMethod(
   }
 )
 
+#' Shows a summary of an `mcmcoutputpermfix` object.
+#' 
+#' @description
+#' Calling [show()] on an `mcmcoutputpermfix` object gives an overview 
+#' of the `mcmcoutputpermfix` object.
+#' 
+#' @param object An `mcmcoutputpermfix` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn mcmcoutputperm_class
 setMethod(
   "show", "mcmcoutputpermfix",
   function(object) {
@@ -77,6 +132,54 @@ setMethod(
   }
 )
 
+#' Plot traces of MCMC sampling
+#' 
+#' @description 
+#' Calling [plotTraces()] plots the MCMC traces of the mixture log-likelihood 
+#' , the mixture log-likelihood of the prior distribution, the log-likelihood 
+#' of the complete data posterior, or the weights and parameters if `lik` is 
+#' set to `1`.s 
+#' 
+#' If `lik` is set to `0` the parameters of the components and the posterior 
+#' parameters are plotted together with `K-1` weights.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param lik An integer indicating, if the log-likelihood traces should be 
+#'   plotted (default). If set to `0` the traces for the parameters 
+#'   and weights are plotted instead. 
+#' @param col A logical indicating, if the plot should be colored.
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return A plot of the traces of the MCMC samples.
+#' @exportMethod plotTraces 
+#' @describeIn mcmcoutputperm_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Do not use a hierarchical prior.
+#' setHier(f_prior) <- FALSE
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_outputperm <- mcmcpermute(f_output)
+#' plotTraces(f_outputperm, lik = 0)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [mcmcpermute()] for permuting MCMC samples 
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPointProc()] for plotting point processes for sampled values
+#' * [plotPostDens()] for plotting the posterior density of component parameters
 setMethod(
   "plotTraces", signature(
     x = "mcmcoutputpermfix",
@@ -110,6 +213,45 @@ setMethod(
   }
 )
 
+#' Plot histograms of the parameters and weights
+#' 
+#' @description 
+#' Calling [plotHist()] plots histograms of the sampled component parameters  
+#' from MCMC sampling. 
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Histograms of the MCMC samples.
+#' @exportMethod plotHist 
+#' @describeIn mcmcoutputperm_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Do not use a hierarchical prior.
+#' setHier(f_prior) <- FALSE
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_outputperm <- mcmcpermute(f_output)
+#' plotHist(f_outputperm)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [mcmcpermute()] for permuting MCMC samples
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPointProc()] for plotting point processes for sampled values
+#' * [plotPostDens()] for plotting the posterior density of component parameters
 setMethod(
   "plotHist", signature(
     x = "mcmcoutputpermfix",
@@ -125,6 +267,45 @@ setMethod(
   }
 )
 
+#' Plot densities of the parameters and weights
+#' 
+#' @description 
+#' Calling [plotDens()] plots densities of the sampled component parameters  
+#' from MCMC sampling. 
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Densities of the MCMC samples.
+#' @exportMethod plotDens
+#' @describeIn mcmcoutputperm_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Do not use a hierarchical prior.
+#' setHier(f_prior) <- FALSE
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_outputperm <- mcmcpermute(f_output)
+#' plotDens(f_outputperm)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [mcmcpermute()] for permuting MCMC samples
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPointProc()] for plotting point processes for sampled values
+#' * [plotPostDens()] for plotting the posterior density of component parameters
 setMethod(
   "plotDens", signature(
     x = "mcmcoutputpermfix",
@@ -140,6 +321,45 @@ setMethod(
   }
 )
 
+#' Plot point processes of the component parameters
+#' 
+#' @description 
+#' Calling [plotPointProc()] plots point processes of the sampled component 
+#' parameters from MCMC sampling.  
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Densities of the MCMC samples.
+#' @exportMethod plotPointProc
+#' @describeIn mcmcoutputperm_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Do not use a hierarchical prior.
+#' setHier(f_prior) <- FALSE
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_outputperm <- mcmcpermute(f_output)
+#' plotPointProc(f_outputperm)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [mcmcpermute()] for permuting MCMC samples
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPostDens()] for plotting posterior densities for sampled values
 setMethod(
   "plotPointProc", signature(
     x = "mcmcoutputpermfix",
@@ -155,6 +375,45 @@ setMethod(
   }
 )
 
+#' Plot sampling representations for the component parameters
+#' 
+#' @description 
+#' Calling [plotSampRep()] plots sampling representations of the sampled 
+#' component parameters from MCMC sampling.  
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Sampling represetnation of the MCMC samples.
+#' @exportMethod plotSampRep
+#' @describeIn mcmcoutputperm_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Do not use a hierarchical prior.
+#' setHier(f_prior) <- FALSE
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_outputperm <- mcmcpermute(f_output)
+#' plotSampRep(f_outputperm)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [mcmcpermute()] for permuting MCMC samples
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotPointProc()] for plotting point processes of sampled values
+#' * [plotPostDens()] for plotting posterior densities for sampled values
 setMethod(
   "plotSampRep", signature(
     x = "mcmcoutputpermfix",
@@ -170,6 +429,45 @@ setMethod(
   }
 )
 
+#' Plot posterior densities of the component parameters
+#' 
+#' @description 
+#' Calling [plotPostDens()] plots posterior densities of the sampled component 
+#' parameters from MCMC sampling, if the number of components is two. 
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Posterior densities of the MCMC samples.
+#' @exportMethod plotPostDens
+#' @describeIn mcmcoutputperm_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Do not use a hierarchical prior.
+#' setHier(f_prior) <- FALSE
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_outputperm <- mcmcpermute(f_output)
+#' plotPostDens(f_outputperm)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [mcmcpermute()] for permuting MCMC samples
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPointProc()] for plotting point processes for sampled values
 setMethod(
   "plotPostDens", signature(
     x = "mcmcoutputpermfix",
@@ -189,7 +487,20 @@ setMethod(
 ### These functions are not exported.
 
 ### Traces
-### Traces Poisson: Plots the traces of the Poisson parameter.
+#' Plots traces of Poisson mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a Poisson mixture model.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a graphical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".permtraces.Poisson" <- function(x, dev) {
   K <- x@model@K
   trace.n <- K
@@ -216,6 +527,20 @@ setMethod(
   mtext(side = 1, "Iterations", cex = 0.7, line = 3)
 }
 
+#' Plots traces of Binomial mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a Binomial mixture model.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".permtraces.Binomial" <- function(x, dev) {
   K <- x@model@K
   trace.n <- K
@@ -242,18 +567,20 @@ setMethod(
   mtext(side = 1, "Iterations", cex = 0.7, line = 3)
 }
 
-### --------------------------------------------------------------------
-### .permtraces.Exponential
-### @description    Plots traces for parameters of Exponential mixture.
-### @par    x       an object of class mcmcoutputfix
-###         dev     an object of class 'logical'
-### @detail         Plots the traces for each component parameter of an
-###                 Exponential mixture. If 'dev' is set to FALSE
-###                 (TRUE is default) no device is created, instead
-###                 the graphic can be stored to a file.
-### @see            ?mcmcoutput, ?plotTraces
-### @author         Lars Simon Zehnder
-### --------------------------------------------------------------------
+#' Plots traces of exponential mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a exponential mixture model.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".permtraces.Exponential" <- function(x, dev) {
   K <- x@model@K
   trace.n <- K
@@ -280,19 +607,20 @@ setMethod(
   mtext(side = 1, "Iterations", cex = .7, line = 3)
 }
 
-### --------------------------------------------------------------------
-### .permtraces.Normal
-### @description    Plots traces for parameters of a univariate Normal
-###                 mixture.
-### @par    x       an object of class mcmcoutputfix
-###         dev     an object of class 'logical'
-### @detail         Plots the traces for each component parameter of an
-###                 Normal mixture. If 'dev' is set to FALSE
-###                 (TRUE is default) no device is created, instead
-###                 the graphic can be stored to a file.
-### @see            ?mcmcoutput, ?plotTraces
-### @author         Lars Simon Zehnder
-### --------------------------------------------------------------------
+#' Plots traces of Normal mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a Normal mixture model.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".permtraces.Normal" <- function(x, dev) {
   K <- x@model@K
   trace.n <- 2 * K
@@ -331,19 +659,20 @@ setMethod(
   mtext(side = 1, "Iterations", cex = .7, line = 3)
 }
 
-### --------------------------------------------------------------------
-### .permtraces.Student
-### @description    Plots traces for parameters of a univariate Student
-###                 mixture.
-### @par    x       an object of class mcmcoutputfix
-###         dev     an object of class 'logical'
-### @detail         Plots the traces for each component parameter of an
-###                 Student mixture. If 'dev' is set to FALSE
-###                 (TRUE is default) no device is created, instead
-###                 the graphic can be stored to a file.
-### @see            ?mcmcoutput, ?plotTraces
-### @author         Lars Simon Zehnder
-### --------------------------------------------------------------------
+#' Plots traces of Student-t mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a Student-t mixture model.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".permtraces.Student" <- function(x, dev) {
   K <- x@model@K
   trace.n <- 3 * K
@@ -394,19 +723,20 @@ setMethod(
   mtext(side = 1, "Iterations", cex = .7, line = 3)
 }
 
-### -------------------------------------------------------------------------
-### .permtraces.Normult
-### @description    Plots the traces of parameters and moments of a multi-
-###                 variate Normal distribution.
-### @par    x       an mcmcoutputfix object
-###         dev     a logical
-###         col     a logical
-### @return         a graphical device
-### @detail         If dev = FALSE, the plot can be sent to a file. In case
-###                 col = TRUE, rainbow colors are used.
-### @see            ?plotTraces
-### @author Lars Simon Zehnder
-### -------------------------------------------------------------------------
+#' Plots traces of multivariate normal mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a multivariate normal mixture model.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".permtraces.Normult" <- function(x, dev, col) {
   K <- x@model@K
   r <- x@model@r
@@ -562,19 +892,20 @@ setMethod(
   }
 }
 
-### -------------------------------------------------------------------------
-### .permtraces.Studmult
-### @description    Plots the traces of parameters and moments of a multi-
-###                 variate Student-t distribution.
-### @par    x       an mcmcoutputfix object
-###         dev     a logical
-###         col     a logical
-### @return         a graphical device
-### @detail         If dev = FALSE, the plot can be sent to a file. In case
-###                 col = TRUE, rainbow colors are used.
-### @see            ?plotTraces
-### @author Lars Simon Zehnder
-### -------------------------------------------------------------------------
+#' Plots traces of multivariate Student-t mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a multivariate Student-t mixture model.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".permtraces.Studmult" <- function(x, dev, col) {
   K <- x@model@K
   r <- x@model@r
@@ -752,8 +1083,20 @@ setMethod(
   }
 }
 
-### Traces log-likelihood: Plots the traces of the log-
-### likelihoods.
+#' Plots traces of log-likelihood samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from any mixture model.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".permtraces.Log" <- function(x, dev, col) {
   if (.check.grDevice() && dev) {
     dev.new(title = "Log Likelihood Traceplots")
@@ -792,8 +1135,21 @@ setMethod(
 }
 
 ### Histograms
-### Histograms Poisson: Plots histograms for all Poisson
-### parameters.
+
+#' Plot histograms of Poisson samples
+#' 
+#' @description 
+#' For internal usage only. This function plots histograms of sampled Poisson 
+#' parameters.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with histograms for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotHist()] for the calling function
 ".permhist.Poisson" <- function(x, dev) {
   K <- x@model@K
   if (.check.grDevice() && dev) {
@@ -807,6 +1163,20 @@ setMethod(
   .symmetric.Hist(lambda, lab.names)
 }
 
+#' Plot histograms of Binomial samples
+#' 
+#' @description 
+#' For internal usage only. This function plots histograms of sampled Binomial 
+#' parameters.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with histograms for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotHist()] for the calling function
 ".permhist.Binomial" <- function(x, dev) {
   K <- x@model@K
   if (.check.grDevice() && dev) {
@@ -820,8 +1190,21 @@ setMethod(
   .symmetric.Hist(p, lab.names)
 }
 ### Densities
-### Densities Poisson: Plots densities for all Poisson
-### parameters.
+
+#' Plot densities of Poisson samples
+#' 
+#' @description 
+#' For internal usage only. This function plots densities of sampled Poisson 
+#' parameters.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with densities for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotDens()] for the calling function
 ".permdens.Poisson" <- function(x, dev) {
   K <- x@model@K
   if (.check.grDevice() && dev) {
@@ -835,6 +1218,20 @@ setMethod(
   .symmetric.Dens(lambda, lab.names)
 }
 
+#' Plot densities of Binomial samples
+#' 
+#' @description 
+#' For internal usage only. This function plots densities of sampled Binomial 
+#' parameters.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with densities for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotDens()] for the calling function
 ".permdens.Binomial" <- function(x, dev) {
   K <- x@model@K
   if (.check.grDevice() && dev) {
@@ -849,15 +1246,28 @@ setMethod(
 }
 
 ### Plot Point Processes
-### Plot Point Process Poisson: Plots the point process
-### for the MCMC draws for lambda. The values are plotted
-### against a random normal sample.
+
+#' Plot point processes of Poisson samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the point process of sampled 
+#' Poisson parameters and weights against a random normal sample.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with the point process for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotPointProc()] for the calling function
 ".permpointproc.Poisson" <- function(x, dev) {
   K <- x@model@K
-  M <- x@M
+  M <- x@Mperm
   if (.check.grDevice() && dev) {
     dev.new("Point Process Representation (MCMC permuted)")
   }
+  # Produces an M x K grid
   y.grid <- replicate(K, rnorm(M))
   if (median(x@parperm$lambda) < 1) {
     lambda <- log(x@parperm$lambda)
@@ -890,6 +1300,20 @@ setMethod(
   )
 }
 
+#' Plot point processes of Binomial samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the point process of sampled 
+#' Binomial parameters and weights against a random normal sample.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with the point process for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotPointProc()] for the calling method
 ".permpointproc.Binomial" <- function(x, dev) {
   K <- x@model@K
   M <- x@M
@@ -925,9 +1349,23 @@ setMethod(
 }
 
 ### Plot sampling representation
-### Plot sampling representation Poisson: Plots the sampling
-### representation for Poisson parameters. Each parameter sample
-### is combined with the other samples.
+
+#' Plot sampling representation of Poisson samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the sampling representation of 
+#' sampled Poisson parameters and weights. Each parameter sample is plotted 
+#' against its permuted counterpart.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with the sampling representation for the sampled parameters 
+#'   and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotSampRep()] for the calling function
 ".permsamprep.Poisson" <- function(x, dev) {
   K <- x@model@K
   if (K == 1) {
@@ -938,8 +1376,8 @@ setMethod(
     ))
     return(FALSE)
   }
-  M <- x@M
-  n <- min(2000, x@M)
+  M <- x@Mperm
+  n <- min(2000, x@Mperm)
   n.perm <- choose(K, 2) * factorial(2)
   lambda <- x@parperm$lambda
   if (.check.grDevice() && dev) {
@@ -964,6 +1402,22 @@ setMethod(
   )
 }
 
+#' Plot sampling representation of Binomial samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the sampling representation of 
+#' sampled Binomial parameters and weights. Each parameter sample is plotted 
+#' against its permuted counterpart.
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with the sampling representation for the sampled parameters 
+#'   and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotSampRep()] for the calling function
 ".permsamprep.Binomial" <- function(x, dev) {
   K <- x@model@K
   if (K == 1) {
@@ -1001,8 +1455,22 @@ setMethod(
 }
 
 ### Posterior Density
-### Posterior Density Poisson: Plots a contour plot of the
-### posterior density of the sampled parameters for K = 2.
+
+#' Plot posterior density of Poisson samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the posterior density of 
+#' sampled Poisson parameters and weights. 
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with the posterior density for the sampled parameters 
+#'   and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotPostdens()] for the calling function
 ".permpostdens.Poisson" <- function(x, dev) {
   K <- x@model@K
   if (K != 2) {
@@ -1048,6 +1516,21 @@ setMethod(
   }
 }
 
+#' Plot posterior density of Binomial samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the posterior density of 
+#' sampled Binomial parameters and weights. 
+#' 
+#' @param x An `mcmcoutputpermfix` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with the posterior density for the sampled parameters 
+#'   and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotPostDens()] for the calling function
 ".permpostdens.Binomial" <- function(x, dev) {
   K <- x@model@K
   if (K != 2) {

@@ -13,308 +13,384 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 
 // swap_cc
 Rcpp::NumericMatrix swap_cc(Rcpp::NumericMatrix values, Rcpp::IntegerMatrix index);
-RcppExport SEXP _finmix_swap_cc(SEXP valuesSEXP, SEXP indexSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(swap_cc(values, index));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_swap_cc(SEXP valuesSEXP, SEXP indexSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
+    rcpp_result_gen = Rcpp::wrap(swap_cc(values, index));
+    return rcpp_result_gen;
+END_RCPP
 }
 // swap_3d_cc
 Rcpp::NumericVector swap_3d_cc(Rcpp::NumericVector values, Rcpp::IntegerMatrix index);
-RcppExport SEXP _finmix_swap_3d_cc(SEXP valuesSEXP, SEXP indexSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(swap_3d_cc(values, index));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_swap_3d_cc(SEXP valuesSEXP, SEXP indexSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
+    rcpp_result_gen = Rcpp::wrap(swap_3d_cc(values, index));
+    return rcpp_result_gen;
+END_RCPP
 }
 // swapInteger_cc
 Rcpp::IntegerMatrix swapInteger_cc(Rcpp::IntegerMatrix values, Rcpp::IntegerMatrix index);
-RcppExport SEXP _finmix_swapInteger_cc(SEXP valuesSEXP, SEXP indexSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(swapInteger_cc(values, index));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_swapInteger_cc(SEXP valuesSEXP, SEXP indexSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
+    rcpp_result_gen = Rcpp::wrap(swapInteger_cc(values, index));
+    return rcpp_result_gen;
+END_RCPP
 }
 // swapInd_cc
 Rcpp::IntegerMatrix swapInd_cc(Rcpp::IntegerMatrix values, Rcpp::IntegerMatrix index);
-RcppExport SEXP _finmix_swapInd_cc(SEXP valuesSEXP, SEXP indexSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(swapInd_cc(values, index));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_swapInd_cc(SEXP valuesSEXP, SEXP indexSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
+    rcpp_result_gen = Rcpp::wrap(swapInd_cc(values, index));
+    return rcpp_result_gen;
+END_RCPP
 }
 // swapST_cc
 Rcpp::IntegerVector swapST_cc(Rcpp::IntegerVector values, Rcpp::IntegerMatrix index);
-RcppExport SEXP _finmix_swapST_cc(SEXP valuesSEXP, SEXP indexSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(swapST_cc(values, index));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_swapST_cc(SEXP valuesSEXP, SEXP indexSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerMatrix >::type index(indexSEXP);
+    rcpp_result_gen = Rcpp::wrap(swapST_cc(values, index));
+    return rcpp_result_gen;
+END_RCPP
 }
 // ldgamma_cc
 Rcpp::NumericMatrix ldgamma_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector shape, Rcpp::NumericVector rate);
-RcppExport SEXP _finmix_ldgamma_cc(SEXP valuesSEXP, SEXP shapeSEXP, SEXP rateSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type shape(shapeSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type rate(rateSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(ldgamma_cc(values, shape, rate));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_ldgamma_cc(SEXP valuesSEXP, SEXP shapeSEXP, SEXP rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type shape(shapeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type rate(rateSEXP);
+    rcpp_result_gen = Rcpp::wrap(ldgamma_cc(values, shape, rate));
+    return rcpp_result_gen;
+END_RCPP
 }
 // dgamma_cc
 arma::mat dgamma_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector shape, Rcpp::NumericVector rate);
-RcppExport SEXP _finmix_dgamma_cc(SEXP valuesSEXP, SEXP shapeSEXP, SEXP rateSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type shape(shapeSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type rate(rateSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(dgamma_cc(values, shape, rate));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_dgamma_cc(SEXP valuesSEXP, SEXP shapeSEXP, SEXP rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type shape(shapeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type rate(rateSEXP);
+    rcpp_result_gen = Rcpp::wrap(dgamma_cc(values, shape, rate));
+    return rcpp_result_gen;
+END_RCPP
 }
 // lddirichlet_cc
 Rcpp::NumericVector lddirichlet_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector par);
-RcppExport SEXP _finmix_lddirichlet_cc(SEXP valuesSEXP, SEXP parSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type par(parSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(lddirichlet_cc(values, par));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_lddirichlet_cc(SEXP valuesSEXP, SEXP parSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type par(parSEXP);
+    rcpp_result_gen = Rcpp::wrap(lddirichlet_cc(values, par));
+    return rcpp_result_gen;
+END_RCPP
 }
 // ddirichlet_cc
 arma::vec ddirichlet_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector par);
-RcppExport SEXP _finmix_ddirichlet_cc(SEXP valuesSEXP, SEXP parSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type par(parSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(ddirichlet_cc(values, par));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_ddirichlet_cc(SEXP valuesSEXP, SEXP parSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type par(parSEXP);
+    rcpp_result_gen = Rcpp::wrap(ddirichlet_cc(values, par));
+    return rcpp_result_gen;
+END_RCPP
 }
 // hungarian_cc
 arma::imat hungarian_cc(const arma::mat cost);
-RcppExport SEXP _finmix_hungarian_cc(SEXP costSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                          rcpp_result_gen;
-   Rcpp::RNGScope                                         rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< const arma::mat >::type cost(costSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(hungarian_cc(cost));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_hungarian_cc(SEXP costSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat >::type cost(costSEXP);
+    rcpp_result_gen = Rcpp::wrap(hungarian_cc(cost));
+    return rcpp_result_gen;
+END_RCPP
 }
 // moments_cc
 Rcpp::List moments_cc(Rcpp::S4 classS4);
-RcppExport SEXP _finmix_moments_cc(SEXP classS4SEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                   rcpp_result_gen;
-   Rcpp::RNGScope                                  rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::S4 >::type classS4(classS4SEXP);
-
-   rcpp_result_gen = Rcpp::wrap(moments_cc(classS4));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_moments_cc(SEXP classS4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::S4 >::type classS4(classS4SEXP);
+    rcpp_result_gen = Rcpp::wrap(moments_cc(classS4));
+    return rcpp_result_gen;
+END_RCPP
 }
 // permmoments_cc
 Rcpp::List permmoments_cc(Rcpp::S4 classS4);
-RcppExport SEXP _finmix_permmoments_cc(SEXP classS4SEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                   rcpp_result_gen;
-   Rcpp::RNGScope                                  rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::S4 >::type classS4(classS4SEXP);
-
-   rcpp_result_gen = Rcpp::wrap(permmoments_cc(classS4));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_permmoments_cc(SEXP classS4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::S4 >::type classS4(classS4SEXP);
+    rcpp_result_gen = Rcpp::wrap(permmoments_cc(classS4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_binomial_cc
+RcppExport SEXP mcmc_binomial_cc(SEXP fdata_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_binomial_cc(SEXP fdata_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type fdata_S4(fdata_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_binomial_cc(fdata_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_condpoisson_cc
+RcppExport SEXP mcmc_condpoisson_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_condpoisson_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_condpoisson_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_exponential_cc
+RcppExport SEXP mcmc_exponential_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_exponential_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_exponential_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_normal_cc
+RcppExport SEXP mcmc_normal_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_normal_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_normal_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_normult_cc
+RcppExport SEXP mcmc_normult_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_normult_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_normult_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_poisson_cc
+RcppExport SEXP mcmc_poisson_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_poisson_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_poisson_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_student_cc
+RcppExport SEXP mcmc_student_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_student_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_student_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_studmult_cc
+RcppExport SEXP mcmc_studmult_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_studmult_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_studmult_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
 }
 // stephens1997a_poisson_cc
 arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1, Rcpp::NumericMatrix values2, arma::vec pars, const arma::umat perm);
-RcppExport SEXP _finmix_stephens1997a_poisson_cc(SEXP values1SEXP, SEXP values2SEXP, SEXP parsSEXP, SEXP permSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values1(values1SEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values2(values2SEXP);
-   Rcpp::traits::input_parameter< arma::vec >::type           pars(parsSEXP);
-   Rcpp::traits::input_parameter< const arma::umat >::type    perm(permSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(stephens1997a_poisson_cc(values1, values2, pars, perm));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_stephens1997a_poisson_cc(SEXP values1SEXP, SEXP values2SEXP, SEXP parsSEXP, SEXP permSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values1(values1SEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values2(values2SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type pars(parsSEXP);
+    Rcpp::traits::input_parameter< const arma::umat >::type perm(permSEXP);
+    rcpp_result_gen = Rcpp::wrap(stephens1997a_poisson_cc(values1, values2, pars, perm));
+    return rcpp_result_gen;
+END_RCPP
 }
 // stephens1997a_binomial_cc
 arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1, Rcpp::NumericMatrix values2, arma::vec pars, const arma::umat perm);
-RcppExport SEXP _finmix_stephens1997a_binomial_cc(SEXP values1SEXP, SEXP values2SEXP, SEXP parsSEXP, SEXP permSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                               rcpp_result_gen;
-   Rcpp::RNGScope                                              rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix& >::type values1(values1SEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type  values2(values2SEXP);
-   Rcpp::traits::input_parameter< arma::vec >::type            pars(parsSEXP);
-   Rcpp::traits::input_parameter< const arma::umat >::type     perm(permSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(stephens1997a_binomial_cc(values1, values2, pars, perm));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_stephens1997a_binomial_cc(SEXP values1SEXP, SEXP values2SEXP, SEXP parsSEXP, SEXP permSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix& >::type values1(values1SEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type values2(values2SEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type pars(parsSEXP);
+    Rcpp::traits::input_parameter< const arma::umat >::type perm(permSEXP);
+    rcpp_result_gen = Rcpp::wrap(stephens1997a_binomial_cc(values1, values2, pars, perm));
+    return rcpp_result_gen;
+END_RCPP
 }
 // stephens1997b_poisson_cc
 arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values, Rcpp::NumericMatrix comp_par, Rcpp::NumericMatrix weight_par, signed int max_iter);
-RcppExport SEXP _finmix_stephens1997b_poisson_cc(SEXP valuesSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP, SEXP max_iterSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type comp_par(comp_parSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type weight_par(weight_parSEXP);
-   Rcpp::traits::input_parameter< signed int >::type          max_iter(max_iterSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(stephens1997b_poisson_cc(values, comp_par, weight_par, max_iter));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_stephens1997b_poisson_cc(SEXP valuesSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP, SEXP max_iterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type comp_par(comp_parSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type weight_par(weight_parSEXP);
+    Rcpp::traits::input_parameter< signed int >::type max_iter(max_iterSEXP);
+    rcpp_result_gen = Rcpp::wrap(stephens1997b_poisson_cc(values, comp_par, weight_par, max_iter));
+    return rcpp_result_gen;
+END_RCPP
 }
 // stephens1997b_binomial_cc
 arma::imat stephens1997b_binomial_cc(Rcpp::NumericVector values, Rcpp::NumericVector reps, Rcpp::NumericMatrix comp_par, Rcpp::NumericMatrix weight_par);
-RcppExport SEXP _finmix_stephens1997b_binomial_cc(SEXP valuesSEXP, SEXP repsSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type reps(repsSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type comp_par(comp_parSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type weight_par(weight_parSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(stephens1997b_binomial_cc(values, reps, comp_par, weight_par));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_stephens1997b_binomial_cc(SEXP valuesSEXP, SEXP repsSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type reps(repsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type comp_par(comp_parSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type weight_par(weight_parSEXP);
+    rcpp_result_gen = Rcpp::wrap(stephens1997b_binomial_cc(values, reps, comp_par, weight_par));
+    return rcpp_result_gen;
+END_RCPP
 }
 // stephens1997b_exponential_cc
 arma::imat stephens1997b_exponential_cc(Rcpp::NumericVector values, Rcpp::NumericMatrix comp_par, Rcpp::NumericMatrix weight_par);
-RcppExport SEXP _finmix_stephens1997b_exponential_cc(SEXP valuesSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP)
-{
-   BEGIN_RCPP
-   Rcpp::RObject                                              rcpp_result_gen;
-   Rcpp::RNGScope                                             rcpp_rngScope_gen;
-   Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type comp_par(comp_parSEXP);
-   Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type weight_par(weight_parSEXP);
-
-   rcpp_result_gen = Rcpp::wrap(stephens1997b_exponential_cc(values, comp_par, weight_par));
-   return rcpp_result_gen;
-
-   END_RCPP
+RcppExport SEXP _finmix_stephens1997b_exponential_cc(SEXP valuesSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type comp_par(comp_parSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type weight_par(weight_parSEXP);
+    rcpp_result_gen = Rcpp::wrap(stephens1997b_exponential_cc(values, comp_par, weight_par));
+    return rcpp_result_gen;
+END_RCPP
 }
 
-RcppExport SEXP              mcmc_binomial_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP              mcmc_condpoisson_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP              mcmc_exponential_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP              mcmc_normal_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP              mcmc_normult_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP              mcmc_poisson_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP              mcmc_student_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
-RcppExport SEXP              mcmc_studmult_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP mcmc_binomial_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP mcmc_condpoisson_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP mcmc_exponential_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP mcmc_normal_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP mcmc_normult_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP mcmc_poisson_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP mcmc_student_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
+RcppExport SEXP mcmc_studmult_cc(SEXP, SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
-   { "_finmix_swap_cc",                      (DL_FUNC)&_finmix_swap_cc,                      2 },
-   { "_finmix_swap_3d_cc",                   (DL_FUNC)&_finmix_swap_3d_cc,                   2 },
-   { "_finmix_swapInteger_cc",               (DL_FUNC)&_finmix_swapInteger_cc,               2 },
-   { "_finmix_swapInd_cc",                   (DL_FUNC)&_finmix_swapInd_cc,                   2 },
-   { "_finmix_swapST_cc",                    (DL_FUNC)&_finmix_swapST_cc,                    2 },
-   { "_finmix_ldgamma_cc",                   (DL_FUNC)&_finmix_ldgamma_cc,                   3 },
-   { "_finmix_dgamma_cc",                    (DL_FUNC)&_finmix_dgamma_cc,                    3 },
-   { "_finmix_lddirichlet_cc",               (DL_FUNC)&_finmix_lddirichlet_cc,               2 },
-   { "_finmix_ddirichlet_cc",                (DL_FUNC)&_finmix_ddirichlet_cc,                2 },
-   { "_finmix_hungarian_cc",                 (DL_FUNC)&_finmix_hungarian_cc,                 1 },
-   { "_finmix_moments_cc",                   (DL_FUNC)&_finmix_moments_cc,                   1 },
-   { "_finmix_permmoments_cc",               (DL_FUNC)&_finmix_permmoments_cc,               1 },
-   { "_finmix_stephens1997a_poisson_cc",     (DL_FUNC)&_finmix_stephens1997a_poisson_cc,     4 },
-   { "_finmix_stephens1997a_binomial_cc",    (DL_FUNC)&_finmix_stephens1997a_binomial_cc,    4 },
-   { "_finmix_stephens1997b_poisson_cc",     (DL_FUNC)&_finmix_stephens1997b_poisson_cc,     4 },
-   { "_finmix_stephens1997b_binomial_cc",    (DL_FUNC)&_finmix_stephens1997b_binomial_cc,    4 },
-   { "_finmix_stephens1997b_exponential_cc", (DL_FUNC)&_finmix_stephens1997b_exponential_cc, 3 },
-   { "mcmc_binomial_cc",                     (DL_FUNC)&mcmc_binomial_cc,                     5 },
-   { "mcmc_condpoisson_cc",                  (DL_FUNC)&mcmc_condpoisson_cc,                  5 },
-   { "mcmc_exponential_cc",                  (DL_FUNC)&mcmc_exponential_cc,                  5 },
-   { "mcmc_normal_cc",                       (DL_FUNC)&mcmc_normal_cc,                       5 },
-   { "mcmc_normult_cc",                      (DL_FUNC)&mcmc_normult_cc,                      5 },
-   { "mcmc_poisson_cc",                      (DL_FUNC)&mcmc_poisson_cc,                      5 },
-   { "mcmc_student_cc",                      (DL_FUNC)&mcmc_student_cc,                      5 },
-   { "mcmc_studmult_cc",                     (DL_FUNC)&mcmc_studmult_cc,                     5 },
-   { NULL,                                   NULL,                                           0 }
+    {"_finmix_swap_cc", (DL_FUNC) &_finmix_swap_cc, 2},
+    {"_finmix_swap_3d_cc", (DL_FUNC) &_finmix_swap_3d_cc, 2},
+    {"_finmix_swapInteger_cc", (DL_FUNC) &_finmix_swapInteger_cc, 2},
+    {"_finmix_swapInd_cc", (DL_FUNC) &_finmix_swapInd_cc, 2},
+    {"_finmix_swapST_cc", (DL_FUNC) &_finmix_swapST_cc, 2},
+    {"_finmix_ldgamma_cc", (DL_FUNC) &_finmix_ldgamma_cc, 3},
+    {"_finmix_dgamma_cc", (DL_FUNC) &_finmix_dgamma_cc, 3},
+    {"_finmix_lddirichlet_cc", (DL_FUNC) &_finmix_lddirichlet_cc, 2},
+    {"_finmix_ddirichlet_cc", (DL_FUNC) &_finmix_ddirichlet_cc, 2},
+    {"_finmix_hungarian_cc", (DL_FUNC) &_finmix_hungarian_cc, 1},
+    {"_finmix_moments_cc", (DL_FUNC) &_finmix_moments_cc, 1},
+    {"_finmix_permmoments_cc", (DL_FUNC) &_finmix_permmoments_cc, 1},
+    {"_finmix_mcmc_binomial_cc", (DL_FUNC) &_finmix_mcmc_binomial_cc, 5},
+    {"_finmix_mcmc_condpoisson_cc", (DL_FUNC) &_finmix_mcmc_condpoisson_cc, 5},
+    {"_finmix_mcmc_exponential_cc", (DL_FUNC) &_finmix_mcmc_exponential_cc, 5},
+    {"_finmix_mcmc_normal_cc", (DL_FUNC) &_finmix_mcmc_normal_cc, 5},
+    {"_finmix_mcmc_normult_cc", (DL_FUNC) &_finmix_mcmc_normult_cc, 5},
+    {"_finmix_mcmc_poisson_cc", (DL_FUNC) &_finmix_mcmc_poisson_cc, 5},
+    {"_finmix_mcmc_student_cc", (DL_FUNC) &_finmix_mcmc_student_cc, 5},
+    {"_finmix_mcmc_studmult_cc", (DL_FUNC) &_finmix_mcmc_studmult_cc, 5},
+    {"_finmix_stephens1997a_poisson_cc", (DL_FUNC) &_finmix_stephens1997a_poisson_cc, 4},
+    {"_finmix_stephens1997a_binomial_cc", (DL_FUNC) &_finmix_stephens1997a_binomial_cc, 4},
+    {"_finmix_stephens1997b_poisson_cc", (DL_FUNC) &_finmix_stephens1997b_poisson_cc, 4},
+    {"_finmix_stephens1997b_binomial_cc", (DL_FUNC) &_finmix_stephens1997b_binomial_cc, 4},
+    {"_finmix_stephens1997b_exponential_cc", (DL_FUNC) &_finmix_stephens1997b_exponential_cc, 3},
+    {"mcmc_binomial_cc",    (DL_FUNC) &mcmc_binomial_cc,    5},
+    {"mcmc_condpoisson_cc", (DL_FUNC) &mcmc_condpoisson_cc, 5},
+    {"mcmc_exponential_cc", (DL_FUNC) &mcmc_exponential_cc, 5},
+    {"mcmc_normal_cc",      (DL_FUNC) &mcmc_normal_cc,      5},
+    {"mcmc_normult_cc",     (DL_FUNC) &mcmc_normult_cc,     5},
+    {"mcmc_poisson_cc",     (DL_FUNC) &mcmc_poisson_cc,     5},
+    {"mcmc_student_cc",     (DL_FUNC) &mcmc_student_cc,     5},
+    {"mcmc_studmult_cc",    (DL_FUNC) &mcmc_studmult_cc,    5},
+    {NULL, NULL, 0}
 };
 
-RcppExport void R_init_finmix(DllInfo *dll)
-{
-   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
-   R_useDynamicSymbols(dll, FALSE);
+RcppExport void R_init_finmix(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

@@ -15,6 +15,100 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Performs MCMC sampling for finite mixture models
+#' 
+#' @description 
+#' Calling [mixturemcmc()] performs MCMC sampling on the observations stored 
+#' in the `fdata` object for the finite mixture model defined in the `model` 
+#' object. MCMC sampling is performed with a Gibbs sampler for all finite 
+#' mixture models using a prior that must be defined in the `prior` object. 
+#' There are possibilities to control the MCMC sampling by hyperparameters 
+#' stored in the `mcmc` object. 
+#' 
+#' @details 
+#' ## Performance
+#' This function is the central part of the `finmix` package. For MCMC sampling 
+#' it relies on high-performance C++ code using the `Rcpp` and `RcppArmadillo` 
+#' packages. More specifically, these packages simplify the usage of external 
+#' C++ code on the objects in `R` memory (enabled by `R`'s `C` interface). 
+#' Execution of MCMC sampling with the default of 10,000 iterations and a 
+#' burn-in of 1,000 iterations should finish in a few seconds. 
+#' 
+#' ## Algorithms
+#' The algorithms used here are for the most part specified in the excellent 
+#' book \emph{Finite Mixture and Markov Switching Models} by 
+#' Sylvia Fr\"uwirth-Schnatter. These algorithms rely on Gibbs sampling by 
+#' alternating between sampling the component and weight parameters of the 
+#' finite mixture model and the indicators of the data. Thereby, a so-called 
+#' random permutation is performed at each iteration of the algorithm, i.e. the 
+#' indicators `S` and the component and weight parameters are permuted by their 
+#' index. As explained by Fr\"uwirth-Schnatter (2006, Section 3.5.5) label 
+#' switching in estimation of finite mixture distributions has to be addressed 
+#' explicitly when Bayesian estimation is used. While in maximum likelihood 
+#' estimation this is of no concern because only one of the equivalent modes of 
+#' likelihood function needs to be found, Bayesian estimation needs to explore 
+#' the full mixture posterior distribution and label switching occurs randomly, 
+#' but frequently during MCMC sampling. to overcome these issues the sampler is 
+#' forced to switch labels in a controlled form by randomly permuting the 
+#' labels of the components. This results in a balanced label switching and as 
+#' a result the sampler explores the full mixture posterior more thoroughly 
+#' leading to more robust estimations. 
+#' 
+#' ### Starting by sampling the parameters
+#' As laid out in the description of the input parameters sampling can start 
+#' either by sampling the indicators using starting parameters or by sampling 
+#' the parameters using starting indicators. The latter is for example applied, 
+#' if indicators are fixed (because they might be known). For starting by 
+#' sampling the parameters the slot `@@startpar` in the `mcmc` input argument 
+#' must be set to `TRUE` (default) and starting indicators must be present in 
+#' slot `@@S` of the `fdata` object. 
+#' 
+#' @param fdata An `fdata` object storing the observations in slot `@@y` and 
+#'   the (starting) indicators in slot `@@S`. If sampling should start by 
+#'   sampling the parameters the starting indicators must be defined. 
+#' @param model A `model` object specifying the finite mixture model. If it 
+#'   should be started by sampling the indicators starting parameters and 
+#'   weights must be defined in slots `@@par` and `@@weight` respectively. 
+#' @param prior A `prior` object specifying the prior distribution for Bayesian 
+#'   estimation. This object must be fully specified regardless, if sampling 
+#'   should start with the indicators or parameters. See [priordefine()] for 
+#'   choosing automatically a data dependent prior distribution. 
+#' @param mcmc An `mcmc` object storing the hyper-parameters for MCMC sampling. 
+#'   If slot `@@startpar` is `TRUE` sampling starts by sampling the parameters. 
+#'   Henceforth, it needs starting indicators. 
+#' @return An object of class [mcmcoutput][mcmcoutput_class] storing the MCMC 
+#'   sampling results. 
+#' @export
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc()
+#' # Complete object slots for consistency. 
+#' (f_data ~ f_model ~ f_mcmc) %=% mcmcstart(f_data, f_model, f_mcmc)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' # Get the sampled model parameters.
+#' getPar(f_output)
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [model][model_class] for the `model` class definition
+#' * [prior][prior-class] for the `prior` class definition
+#' * [prior()] for the `prior` class constructor
+#' * [priordefine()] for the advanced class constructor of the `prior` class
+#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [mcmc()] for the `mcmc` class constructor
+#' * [mcmcstart()] for defining starting parameters and/or indicators
+#' 
+#' @references 
+#' Fr\"uwirth-Schnatter, S. (2006), "Finite Mixture Models and Markov Switching 
+#' Models", Springer
 "mixturemcmc" <- function(fdata, model, prior, mcmc) {
   ## Check arguments
   mcmc <- .check.args.Mixturemcmc(fdata, model, prior, mcmc, nargs())
@@ -49,17 +143,39 @@
 ### Private functions
 ### These functions are not exported
 
-### Checking
-### Check arguments: 'fdata' must contain valid data in @y and in case of
-### starting with sampling the parameters indicators in @S. Further,
-### the data in @y must match with the specified distribution in @dist
-### of 'model'.
-### If it should started with sampling the indicators, 'model' must
-### contain valid starting parameters in @par and @weight.
-### The 'prior' object must contain valid parameters for the prior
-### distribution.
-### Further, if a fixed indicator model is used, @startpar in 'mcmc'
-### must be TRUE and @ranperm must be FALSE.
+#' Checks input arguments for MCMC sampling
+#' 
+#' @description 
+#' For internal usage only. This function checks if the input arguments passed 
+#' in to [mixturemcmc()] are valid, i.e. `fdata` must contain valid data in 
+#' slot `@@y` and in case of starting with sampling the parameters indicators 
+#' in slot `@@S`. Furthermore, the data in slot `@@y` must match with the 
+#' specified distribution in `@@dist` of the `model` object. 
+#' If MCMC sampling should start by sampling the indicators, the `model` object 
+#' must contain valid starting parameters in slots `@@par` and `@@weight`. 
+#' The `prior` object must contain valid parameters for the prior distribution. 
+#' Finally, if a fixed indicator model is used, `@@startpar` in `mcmc` must be 
+#' `TRUE` and `@@ranperm` must be `FALSE`.
+#' 
+#' In addition this function checks for consistency between the four input 
+#' objects and modifies the hyper-parameters in the `mcmc` object accordingly 
+#' for the user.
+#' 
+#' @param fdata.obj An `fdata` object containing the data.
+#' @param model.obj A `model` object specifying the finite mixture model.
+#' @param prior.obj A `prior` object specifying the prior distribution. 
+#' @param mcmc.obj An `mcmc` object defining the hyper-parameters for MCMC 
+#'   sampling.
+#' @param n.args An integer specifying how many arguments have been provided 
+#'   by the user. As all arguments must be provided values below four throw an 
+#'   error. 
+#' @return An object of class [mcmc][mcmc_class]. If any check does not pass an 
+#'   error is thrown to let the user know, why MCMC sampling cannot be 
+#'   performed with the actual setting.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for the calling function
 ".check.args.Mixturemcmc" <- function(fdata.obj, model.obj,
                                       prior.obj, mcmc.obj, n.args) {
   ## Check if all arguments are provided
@@ -187,14 +303,26 @@
   return(mcmc.obj)
 }
 
-### Validity
-### For a Binomial model either the 'data' object
-### or the 'model' object must have specified
-### repetitions 'T'. This can be either a 'matrix'
-### object of dimension N x 1 or 1 x 1 (if all
-### repetitions are the same)
+#' Checks validity of repetitions for MCMC sampling
+#' 
+#' @description 
+#' For a Binomial model either the `fdata` object or the `model` object must 
+#' have specified repetitions in slot `@@T`. This can be either a `matrix` 
+#' object of dimension `N x 1` or `1 x 1` (if all repetitions are the 
+#' same).
+#' 
+#' @param data An `fdata` object containing the data.
+#' @param model A `model` object specifying the finite mixture model.
+#' @return None. If any check does not pass an error is thrown to inform the 
+#'   user of the detected inconsistency. 
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [model][model_class] for the `model` class definition
 ".valid.Reps.Binomial" <- function(data, model) {
   has.reps <- !all(is.na(data@T))
+  N        <- data@N
   if (has.reps) {
     if (data@bycolumn) {
       if (nrow(data@T) != N && nrow(data@T) != 1) {
@@ -278,9 +406,25 @@
 
 ### MCMC
 ### For each model the MCMC output has to be prepared
-### MCMC Poisson: Prepares all data containers for MCMC sampling for
-### Poisson mixture models regarding the specifications in 'prior.obj'
-### 'model.obj' and 'mcmc.obj'.
+
+#' Perform MCMC sampling for Poisson mixtures
+#' 
+#' @description 
+#' For internal usage only. This function prepares all data containers for MCMC 
+#' sampling for Poisson mixture models regarding the specifications in the 
+#' passed-in objects.
+#' 
+#' @param fdata.obj An `fdata` object containing the data.
+#' @param model.obj A `model` object specifying the mixture model.
+#' @param prior.obj A `prior` object specifying the prior distribution.
+#' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
+#'   sampling.
+#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#'   results of MCMC sampling.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for the calling function
 ".do.MCMC.Poisson" <- function(fdata.obj, model.obj, prior.obj, mcmc.obj) {
   ## Base slots inherited to every derived class
   K <- model.obj@K
@@ -489,18 +633,24 @@
   } ## end no indicfix
 }
 
-### ----------------------------------------------------------------------------
-### .do.MCMC.Binomial
-### @description    Performs MCMC simulation for A Binomial mixture model using
-###                 the Gibbs Sampler.
-### @par    fdata.obj   an S4 object of class 'fdata'
-### @par    model.obj   an S4 object of class 'model'
-### @par    prior.obj   an S4 object of class 'prior'
-### @par    mcmc.obj    an S4 object of class 'mcmc'
-### @return         an S4 object of class 'mcmcoutput'
-### @see ?mixturemcmc, ?fdata, ?model, ?prior, ?mcmc, ?mcmcoutput
-### @author Lars Simon Zehnder
-### ----------------------------------------------------------------------------
+#' Perform MCMC sampling for Binomial mixtures
+#' 
+#' @description 
+#' For internal usage only. This function prepares all data containers for MCMC 
+#' sampling for Binomial mixture models regarding the specifications in the 
+#' passed-in objects.
+#' 
+#' @param fdata.obj An `fdata` object containing the data.
+#' @param model.obj A `model` object specifying the mixture model.
+#' @param prior.obj A `prior` object specifying the prior distribution.
+#' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
+#'   sampling.
+#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#'   results of MCMC sampling.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for the calling function
 ".do.MCMC.Binomial" <- function(fdata.obj, model.obj, prior.obj, mcmc.obj) {
   ## Base slots inherited to every derived 'mcmcoutput' class
   K <- model.obj@K
@@ -603,19 +753,24 @@
   } ## End no indicfix
 }
 
-### -------------------------------------------------------------------------
-### .do.MCMC.Exponential
-### @description    Prepares all object for the MCMC simulation of an
-###                 Exponential model.
-### @param  fdata.obj   an S4 object of class 'fdata.obj'
-### @param  model.obj   an S4 object of class 'model'
-### @param  prior.obj   an S4 object of class 'prior'
-### @param  mcmc.obj    an S4 object of class 'mcmc'
-### @return an S4 object of class union 'mcmcoutput'
-### @detail Internally the C++ routine 'mcmc_exponential_cc' is called
-### @see    ?mixturemcmc, mcmc_exponential_cc
-### @author Lars Simon Zehnder
-### -------------------------------------------------------------------------
+#' Perform MCMC sampling for exponential mixtures
+#' 
+#' @description 
+#' For internal usage only. This function prepares all data containers for MCMC 
+#' sampling for exponential mixture models regarding the specifications in the 
+#' passed-in objects.
+#' 
+#' @param fdata.obj An `fdata` object containing the data.
+#' @param model.obj A `model` object specifying the mixture model.
+#' @param prior.obj A `prior` object specifying the prior distribution.
+#' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
+#'   sampling.
+#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#'   results of MCMC sampling.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for the calling function
 ".do.MCMC.Exponential" <- function(fdata.obj, model.obj, prior.obj, mcmc.obj) {
   # Base slots inherited to each derived class
   K <- model.obj@K
@@ -703,6 +858,24 @@
   return(mcmcout)
 }
 
+#' Perform MCMC sampling for conditional Poisson mixtures
+#' 
+#' @description 
+#' For internal usage only. This function prepares all data containers for MCMC 
+#' sampling for conditional Poisson mixture models regarding the specifications 
+#' in the passed-in objects.
+#' 
+#' @param fdata.obj An `fdata` object containing the data.
+#' @param model.obj A `model` object specifying the mixture model.
+#' @param prior.obj A `prior` object specifying the prior distribution.
+#' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
+#'   sampling.
+#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#'   results of MCMC sampling.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for the calling function
 ".do.MCMC.CondPoisson" <- function(fdata.obj, model.obj, prior.obj, mcmc.obj) {
   if (nrow(fdata.obj@exp) == 1) {
     if (is.na(fdata.obj@exp)) {
@@ -920,6 +1093,24 @@
   } ## end no indicfix
 }
 
+#' Perform MCMC sampling for normal mixtures
+#' 
+#' @description 
+#' For internal usage only. This function prepares all data containers for MCMC 
+#' sampling for normal mixture models regarding the specifications in the 
+#' passed-in objects.
+#' 
+#' @param fdata.obj An `fdata` object containing the data.
+#' @param model.obj A `model` object specifying the mixture model.
+#' @param prior.obj A `prior` object specifying the prior distribution.
+#' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
+#'   sampling.
+#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#'   results of MCMC sampling.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for the calling function
 ".do.MCMC.Normal" <- function(fdata.obj, model.obj, prior.obj,
                               mcmc.obj) {
   ## Base slots inherited to each derived class
@@ -927,7 +1118,7 @@
   N <- fdata.obj@N
   M <- mcmc.obj@M
   ranperm <- mcmc.obj@ranperm
-  burnin <- mcmc.obj@burnin
+  burnin<- mcmc.obj@burnin
   ## Set for MCMC default exposures:
   pars <- list(
     mu = array(numeric(), dim = c(M, K)),
@@ -988,7 +1179,7 @@
       hypers <- list(C = array(numeric(), dim = c(M, 1)))
       ## Model with NO posterior parameters stored
       if (!mcmc.obj@storepost) {
-        mcmcout <- mcmcoutputfixhier(
+        mcmcout <- .mcmcoutputfixhier(
           M = M, burnin = burnin,
           ranperm = ranperm,
           par = pars, log = logs,
@@ -1003,10 +1194,10 @@
         return(mcmcout)
       } else {
         ## Model with posterior parameters stored
-        mcmcout <- mcmcoutputfixhierpost(
+        mcmcout <- .mcmcoutputfixhierpost(
           M = M, burnin = burnin,
           ranperm = ranperm,
-          par = pars, log = logd,
+          par = pars, log = logs,
           hyper = hypers, post = posts,
           model = model.obj,
           prior = prior.obj
@@ -1103,7 +1294,7 @@
           PACKAGE = "finmix"
         )
         if (mcmc.obj@storeS == 0) {
-          mcmcout@S <- as.array(ias.integer(NA))
+          mcmcout@S <- as.array(is.integer(NA))
         }
         return(mcmcout)
       } else {
@@ -1132,6 +1323,24 @@
   } ## end no indicfix
 }
 
+#' Perform MCMC sampling for Student-t mixtures
+#' 
+#' @description 
+#' For internal usage only. This function prepares all data containers for MCMC 
+#' sampling for Student-t mixture models regarding the specifications in the 
+#' passed-in objects.
+#' 
+#' @param fdata.obj An `fdata` object containing the data.
+#' @param model.obj A `model` object specifying the mixture model.
+#' @param prior.obj A `prior` object specifying the prior distribution.
+#' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
+#'   sampling.
+#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#'   results of MCMC sampling.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for the calling function
 ".do.MCMC.Student" <- function(fdata.obj, model.obj, prior.obj,
                                mcmc.obj) {
   ## Base slots inherited to each derived class
@@ -1202,7 +1411,7 @@
       hypers <- list(C = array(numeric(), dim = c(M, 1)))
       ## Model with NO posterior parameters stored
       if (!mcmc.obj@storepost) {
-        mcmcout <- mcmcoutputfixhier(
+        mcmcout <- .mcmcoutputfixhier(
           M = M, burnin = burnin,
           ranperm = ranperm,
           par = pars, log = logs,
@@ -1217,10 +1426,10 @@
         return(mcmcout)
       } else {
         ## Model with posterior parameters stored
-        mcmcout <- mcmcoutputfixhierpost(
+        mcmcout <- .mcmcoutputfixhierpost(
           M = M, burnin = burnin,
           ranperm = ranperm,
-          par = pars, log = logd,
+          par = pars, log = logs,
           hyper = hypers, post = posts,
           model = model.obj,
           prior = prior.obj
@@ -1346,6 +1555,24 @@
   } ## end no indicfix
 }
 
+#' Perform MCMC sampling for multivariate normal mixtures
+#' 
+#' @description 
+#' For internal usage only. This function prepares all data containers for MCMC 
+#' sampling for multivariate normal mixture models regarding the specifications 
+#' in the passed-in objects.
+#' 
+#' @param fdata.obj An `fdata` object containing the data.
+#' @param model.obj A `model` object specifying the mixture model.
+#' @param prior.obj A `prior` object specifying the prior distribution.
+#' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
+#'   sampling.
+#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#'   results of MCMC sampling.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for the calling function
 ".do.MCMC.Normult" <- function(fdata.obj, model.obj, prior.obj, mcmc.obj) {
   ## Base slots inherited to each derived class
   K <- model.obj@K
@@ -1502,14 +1729,14 @@
         return(mcmcout)
       } else {
         ## Model output with posterior parameters stored
-        mcmcout <- .mcmcoutpupost(
+        mcmcout <- .mcmcoutputpost(
           M = M, burnin = burnin,
           ranperm = ranperm,
           par = pars, log = logs,
           weight = weights,
           entropy = entropies,
           ST = STm, S = Sm, NK = NKm,
-          clust = clustm, post = postm,
+          clust = clustm, post = posts,
           model = model.obj, prior = prior.obj
         )
         .Call("mcmc_normult_cc", fdata.obj, model.obj, prior.obj,
@@ -1574,6 +1801,24 @@
   } ## end no indicfix
 }
 
+#' Perform MCMC sampling for multivariate Student-t mixtures
+#' 
+#' @description 
+#' For internal usage only. This function prepares all data containers for MCMC 
+#' sampling for multivariate Student-t mixture models regarding the 
+#' specifications in the passed-in objects.
+#' 
+#' @param fdata.obj An `fdata` object containing the data.
+#' @param model.obj A `model` object specifying the mixture model.
+#' @param prior.obj A `prior` object specifying the prior distribution.
+#' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
+#'   sampling.
+#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#'   results of MCMC sampling.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for the calling function
 ".do.MCMC.Studmult" <- function(fdata.obj, model.obj, prior.obj, mcmc.obj) {
   ## Base slots inherited to each derived class
   K <- model.obj@K
@@ -1732,14 +1977,14 @@
         return(mcmcout)
       } else {
         ## Model output with posterior parameters stored
-        mcmcout <- .mcmcoutpupost(
+        mcmcout <- .mcmcoutputpost(
           M = M, burnin = burnin,
           ranperm = ranperm,
           par = pars, log = logs,
           weight = weights,
           entropy = entropies,
           ST = STm, S = Sm, NK = NKm,
-          clust = clustm, post = postm,
+          clust = clustm, post = posts,
           model = model.obj, prior = prior.obj
         )
         .Call("mcmc_studmult_cc", fdata.obj, model.obj, prior.obj,

@@ -17,13 +17,17 @@
 
 #' An S4 class to represent a finite mixture model
 #' 
+#' @description 
+#' This class specifies a finite mixture model. Entities are created from it by 
+#' calling its constructor [model()]. 
+#' 
 #' @slot dist A character, defining the distribution family. Possible choices
 #' are binomial, exponential, normal, normult, poisson, student, and studmult.
 #' @slot r An integer. Defines the vector dimension of a model. Is one for all
 #' univariate distributions and larger than one for normult and studmult.
 #' @slot K An integer, defining the number of components in the finite mixture.
 #' @slot weight A matrix, containing the weights of the finite mixture model. 
-#' The matrix must have dimension \code{1\times K} and weights must add to one
+#' The matrix must have dimension \code{1 x K} and weights must add to one
 #' must all be larger or equal to zero. 
 #' @slot par A list containing the parameter vectors for the finite mixture 
 #' distribution. The list can contain more than one named parameter vector. 
@@ -33,6 +37,8 @@
 #' therefore fixed. 
 #' @slot T A matrix containing the repetitions in case of a \code{"binomial"} or 
 #'  \code{"poisson"} model.
+#' @noRd
+#' @exportClass model
 .model <- setClass("model",
   representation(
     dist = "character",
@@ -69,7 +75,7 @@
 #' regard to the different parameters needed to define a finite mixture model.
 #' 
 #' @param dist A character, defining the distribution family. Possible choices
-#' are \code{"binomial"}, \code{"exponential"}, \code{"normal}, 
+#' are \code{"binomial"}, \code{"exponential"}, \code{"normal"}, 
 #' \code{"normult"}, \code{"poisson"}, \code{"student"}, and \code{"studmult"}.
 #' @param r An integer. Defines the vector dimension of a model. Is one for all
 #' univariate distributions and larger than one for \code{"normult"} and 
@@ -77,7 +83,7 @@
 #' @param K An integer, defining the number of components in the finite mixture. 
 #' Must be larger or equal to one. 
 #' @param weight A matrix, containing the weights of the finite mixture model. 
-#' The matrix must have dimension \code{1\times K} and weights must add to one
+#' The matrix must have dimension \code{1 x K} and weights must add to one
 #' and must all be larger or equal to zero. 
 #' @param par A list containing the parameter vectors for the finite mixture 
 #' distribution. The list can contain more than one named parameter vector. 
@@ -86,15 +92,15 @@
 #' a \code{"binomial"} model, a \code{K}-dimensional vector of positive rates 
 #' named \code{"lambda"} for an \code{"exponential"} model, 
 #' \code{K}-dimensional vectors of means named \code{"mu"} and variances named 
-#' \code{sigma} for a \code{"normal"} model, a \code{r\times K}-dimensional 
-#' matrix of means named \code{"mu"} and a \code{K\times r\times r} dimensional
+#' \code{sigma} for a \code{"normal"} model, a \code{r x K}-dimensional 
+#' matrix of means named \code{"mu"} and a \code{K x r x r} dimensional
 #' array of variance-covariance matrices named \code{"sigma"} for a 
 #' \code{"normult"} model, a \code{K}-dimensional vector of rates named 
 #' \code{"rates"} for a \code{"poisson"} model, \code{K}-dimensional vectors of 
 #' means named \code{"mu"}, variances named \code{sigma}, and degrees of freedom
 #'  named \code{"df"} for a \code{"student"} model, a 
-#' \code{r\times K}-dimensional matrix of means named \code{"mu"}, a 
-#' \code{K\times r\times r} dimensional array of variance-covariance matrices 
+#' \code{r x K}-dimensional matrix of means named \code{"mu"}, a 
+#' \code{K x r x r} dimensional array of variance-covariance matrices 
 #' named \code{"sigma"}, and a \code{K}-dimensional vector of degrees of freedom
 #'  for a \code{"studmult"} model.
 #' @param indicmod A character defining the indicator model used. For now only
@@ -103,14 +109,14 @@
 #' therefore fixed. 
 #' @param T A matrix containing the repetitions in case of a \code{"binomial"} or 
 #'  \code{"poisson"} model. Must be positive integers.
-#' @return An S4 \code{model} object.
+#' @return An S4 `model` object.
 #' @export
 #' 
-#' @example 
-#' \preformatted(f_model <- model(dist = "poisson", K = 2, par = list(lambda = c(0.17, 0.2)),
-#' weight = matrix(c(0.5, 0.5), nrow = 1)))
+#' @examples 
+#' f_model <- model(dist = "poisson", K = 2, par = list(lambda = c(0.17, 0.2)))
 #' 
-#' @seealso \code{model}
+#' @seealso 
+#' * [model][model_class] for the class definition
 "model" <- function(dist = "poisson", r, K,
                     weight = matrix(), par = list(),
                     indicmod = "multinomial",
@@ -150,17 +156,18 @@
 
 #' Getter for weights
 #'
-#' \code{getWeight} returns the weight matrix. 
+#' \code{hasWeight} returns the weight matrix. 
 #' 
 #' @param model An S4 model object. 
 #' @param verbose A logical indicating, if the function should give a print out.
 #' @return Matrix of weights.
-#' @export
+#' @exportMethod hasWeight
 #'
-#' @example 
+#' @examples
 #' \dontrun{
-#' weight <- getWeight(model)
+#' weight <- hasWeight(model)
 #' }
+#' @rdname model_class
 setMethod(
   "hasWeight", "model",
   function(object, verbose = FALSE) {
@@ -201,11 +208,11 @@ setMethod(
 #' @param verbose A logical indicating if the function should give a print out. 
 #' @return A logical. \code{TRUE} if repetitions are existent in the model. If 
 #' values of slot \code{T} are \code{NA} it returns \code{FALSE}.
-#' @export
+#' @exportMethod hasT
 #' 
-#' @example 
+#' @examples
 #' \dontrun{
-#' if(hasT(model)) {cat('Has repetitions.)}
+#' if(hasT(model)) {cat('Has repetitions.')}
 #' }
 #' 
 #' @seealso \code{model}
@@ -234,9 +241,9 @@ setMethod(
 #' @param model An S4 model object.
 #' @param verbose A logical indicating, if the function should give a print out. 
 #' @return A matrix with repetitions. Can be empty, if no repetitions are set.
-#' @export
+#' @exportMethod hasPar
 #' 
-#' @example 
+#' @examples 
 #' \dontrun{
 #' if(hasPar(model)) {simulate(model)}
 #' }
@@ -260,10 +267,11 @@ setMethod(
 #' @param seed An integer specifying the seed for the RNG. 
 #' \code{r} and repetitions \code{T}.
 #' @return An S4 fdata object holding the simulated values.
-#' @export
+#' @exportMethod simulate
+#' @describeIn model_class Simulates data from a finite mixture model
 #' 
 #' @seealso \code{model}, \code{fdata}
-#' @example 
+#' @examples 
 #' \dontrun{
 #' f_data <- simulate(model, 100)
 #' }
@@ -304,9 +312,9 @@ setMethod(
 #' @param dev A logical indicating, if the plot should be shown in a graphical 
 #' device. Set to \code{FALSE}, if plotted to a file. 
 #' @return Density or barplot of the S4 model object. 
-#' @export
+#' @exportMethod plot
 #' 
-#' @example \dontrun{
+#' @examples \dontrun{
 #' plot(f_model)
 #' }
 #' 
@@ -347,9 +355,10 @@ setMethod(
 #' @param dev A logical indicating, if the plot should be shown in a graphical 
 #' device. Set to \code{FALSE}, if plotted to a file. 
 #' @return A scatter plot of weighted parameters.  
-#' @export
+#' @exportMethod plotPointProc
 #' 
-#' @example \dontrun{
+#' @examples 
+#' \dontrun{
 #' plotPointProc(f_model)
 #' }
 #' 
@@ -380,9 +389,9 @@ setMethod(
 #' distribution should be returned.
 #' @return An S4 model object with the marginal distribution for dimension 
 #' \code{J}.
-#' @export
+#' @exportMethod mixturemar
 #' 
-#' @example
+#' @examples
 #' \dontrun{
 #' mar_model <- mixturemar(f_model, 1)
 #' }
@@ -401,9 +410,9 @@ setMethod(
 #' 
 #' @param object An S4 model object. 
 #' @return A print out of model information about all slots. 
-#' @export
+#' @exportMethod show
 #' 
-#' @example 
+#' @examples 
 #' \dontrun{
 #' show(f_model)
 #' }
@@ -442,6 +451,8 @@ setMethod(
 )
 
 ## Getters ##
+#' @name model_class
+#' @exportMethod getDist
 setMethod(
   "getDist", "model",
   function(object) {
@@ -449,6 +460,8 @@ setMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod getR
 setMethod(
   "getR", "model",
   function(object) {
@@ -456,6 +469,8 @@ setMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod getK
 setMethod(
   "getK", "model",
   function(object) {
@@ -463,6 +478,8 @@ setMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod getWeight
 setMethod(
   "getWeight", "model",
   function(object) {
@@ -470,6 +487,8 @@ setMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod getPar
 setMethod(
   "getPar", "model",
   function(object) {
@@ -477,6 +496,8 @@ setMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod getIndicmod
 setMethod(
   "getIndicmod", "model",
   function(object) {
@@ -484,6 +505,8 @@ setMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod getIndicfix
 setMethod(
   "getIndicfix", "model",
   function(object) {
@@ -491,6 +514,8 @@ setMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod getT
 setMethod(
   "getT", "model",
   function(object) {
@@ -499,6 +524,8 @@ setMethod(
 )
 
 ## Setters ##
+#' @name model_class
+#' @exportMethod setDist<-
 setReplaceMethod(
   "setDist", "model",
   function(object, value) {
@@ -508,6 +535,8 @@ setReplaceMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod setR<-
 setReplaceMethod(
   "setR", "model",
   function(object, value) {
@@ -517,6 +546,8 @@ setReplaceMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod setK<-
 setReplaceMethod(
   "setK", "model",
   function(object, value) {
@@ -533,6 +564,8 @@ setReplaceMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod setWeight<-
 setReplaceMethod(
   "setWeight", "model",
   function(object, value) {
@@ -543,6 +576,8 @@ setReplaceMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod setPar<-
 setReplaceMethod(
   "setPar", "model",
   function(object, value) {
@@ -552,6 +587,8 @@ setReplaceMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod setIndicmod<-
 setReplaceMethod(
   "setIndicmod", "model",
   function(object, value) {
@@ -560,6 +597,8 @@ setReplaceMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod setIndicfix<-
 setReplaceMethod(
   "setIndicfix", "model",
   function(object, value) {
@@ -568,6 +607,8 @@ setReplaceMethod(
   }
 )
 
+#' @name model_class
+#' @exportMethod setT<-
 setReplaceMethod(
   "setT", "model",
   function(object, value) {
@@ -591,6 +632,8 @@ setReplaceMethod(
 ### of components is set to the number of columns of the weights.
 ### If argument 'weight' is missing from the call, the number of
 ### components is assumed to be one.
+
+#' @noRd
 ".check.K.Model" <- function(weight) {
   if (!all(is.na(weight))) {
     return(NCOL(weight))
@@ -603,6 +646,7 @@ setReplaceMethod(
 ### the defined distribution in argument 'dist' (if missing the
 ### default is 'poisson'). For univariate distributions it is set
 ### to one and for multivariate distribution as a default to two.
+#' @noRd
 ".check.r.Model" <- function(dist) {
   univ <- .get.univ.Model()
   multiv <- .get.multiv.Model()
@@ -620,6 +664,7 @@ setReplaceMethod(
 
 ### Check weight: If argument 'weight' is missing from the call
 ### equally balanced weights are given as a default.
+#' @noRd
 ".check.weight.Model" <- function(K) {
   weight <- matrix(1 / K, nrow = 1, ncol = K)
   return(weight)
@@ -629,6 +674,7 @@ setReplaceMethod(
 ### to validity. In case of non-numeric objects an error is thrown.
 ### In case of objects of type 'numeric' it is implicitly converted
 ### to type 'integer'.
+#' @noRd
 ".check.T.Model" <- function(T) {
   if (!all(is.na(T))) {
     if (!is.numeric(T)) {
@@ -645,6 +691,7 @@ setReplaceMethod(
 }
 
 ### Marginal model
+#' @noRd
 ".mixturemar.Model" <- function(obj, J) {
   if (obj@dist == "normult") {
     .mixturemar.normult.Model(obj, J)
@@ -656,6 +703,7 @@ setReplaceMethod(
   }
 }
 
+#' @noRd
 ".mixturemar.normult.Model" <- function(obj, J) {
   dist <- ifelse(length(J) == 1, "normal", "normult")
   r <- length(J)
@@ -676,6 +724,7 @@ setReplaceMethod(
   return(margin.model)
 }
 
+#' @noRd
 ".mixturemar.studmult.Model" <- function(obj, J) {
   dist <- ifelse(length(J) == 1, "student", "studmult")
   r <- length(J)
@@ -715,6 +764,7 @@ setReplaceMethod(
 ### --------------------------------------------------------------
 
 ### TODO: Implement C++ function.
+#' @noRd
 ".simulate.indicators.Model" <- function(obj, N) {
   K <- obj@K
   if (K == 1) {
@@ -747,6 +797,7 @@ setReplaceMethod(
 ### @see    ?fdata, ?simulate
 ### @author Lars Simon Zehnder
 ### ---------------------------------------------------------------------
+#' @noRd
 ".simulate.data.Model" <- function(obj, N, fdata.obj) {
   dist <- obj@dist
   if (dist == "poisson" || dist == "cond.poisson") {
@@ -775,6 +826,18 @@ setReplaceMethod(
 ### @see    ?simulate, model:::.simulate.data.Model, ?rpois
 ### @author Lars Simon Zehnder
 ### ---------------------------------------------------------------------
+#' Simulate data from a Poisson finite mixture model
+#' 
+#' @description 
+#' Simulates values from a Poisson mixture using pre-specified model and 
+#' indicators.
+#' 
+#' @param obj A `model` object specifying the finite mixture model. 
+#' @param N An integer specifying the sample size.
+#' @param fdata.obj An `fdata` object to store the simulated data.
+#' @return An `fdata` object with simulated data.
+#' @importFrom stats rpois
+#' @noRd
 ".simulate.data.poisson.Model" <- function(obj, N, fdata.obj) {
   fdata.obj@type <- "discrete"
   fdata.obj@sim <- TRUE
@@ -782,17 +845,22 @@ setReplaceMethod(
   return(fdata.obj)
 }
 
-### ---------------------------------------------------------------------
-### .simulate.data.binomial.Model
-### @description    Simulates values from a Binomial mixture using pre-
-###                 specified model and indicators
-### @par    obj         an S4 object of class 'model'
-### @par    N           an R 'integer' object; number of simulated values
-### @par    fdata.obj   an S4 object of class 'fdata'
-### @return         an S4 object of class 'fdata' with simulated values
-### @see    ?simulate, model:::.simulate.data.Model, ?rbinom
-### @author Lars Simon Zehnder
-### ---------------------------------------------------------------------
+#' Simulate data from Binomial mixture model
+#' 
+#' @description 
+#' Simulates values from a Binomial mixture using pre-specified model and 
+#' indicators
+#' @param obj An `model` object specifying the mixture model.
+#' @param N An integer specifying the size of the simulated sample.
+#' @param fdata.obj An `fdata` object to store the simulated sample. If the 
+#'   `fdata` object contains repetitions in slot `@@T`, the repetitions are 
+#'   used in sampling.
+#' @return An `fdata` object containing the simulated values.
+#' @importFrom stats rbinom
+#' @noRd
+#' 
+#' @seealso 
+#' [simulate()][model_class] for the calling function
 ".simulate.data.binomial.Model" <- function(obj, N, fdata.obj) {
   if (!hasT(fdata.obj)) {
     fdata.obj@T <- as.matrix(1)
@@ -803,17 +871,20 @@ setReplaceMethod(
   return(fdata.obj)
 }
 
-### ---------------------------------------------------------------------
-### .simulate.data.exponential.Model
-### @description    Simulates values from an Exponential mixture using
-###                 specified model and indicators.
-### @param  obj         an S4 object of class 'model'
-### @param  N           an R 'integer' object; number of simulated values
-### @param  fdata.obj   an S4 object of class 'fdata'
-### @return an S4 object of class 'fdata' with simulated values
-### @see    ?simulate, model:::.simulate.data.Model, ?rexp
-### @author Lars Simon Zehnder
-### ---------------------------------------------------------------------
+#' Simulate data from exponential mixture model
+#' 
+#' @description 
+#' Simulates values from a exponential mixture using pre-specified model and 
+#' indicators
+#' @param obj An `model` object specifying the mixture model.
+#' @param N An integer specifying the size of the simulated sample.
+#' @param fdata.obj An `fdata` object to store the simulated sample. 
+#' @return An `fdata` object containing the simulated values.
+#' @importFrom stats rexp
+#' @noRd
+#' 
+#' @seealso 
+#' [simulate()][model_class] for the calling function
 ".simulate.data.exponential.Model" <- function(obj, N, fdata.obj) {
   fdata.obj@type <- "continuous"
   fdata.obj@sim <- TRUE
@@ -821,17 +892,19 @@ setReplaceMethod(
   return(fdata.obj)
 }
 
-### ---------------------------------------------------------------------
-### .simulate.data.normal.Model
-### @description    Simulates values from a Normal mixture using
-###                 specified model and indicators.
-### @param  obj         an S4 object of class 'model'
-### @param  N           an R 'integer' object; number of simulated values
-### @param  fdata.obj   an S4 object of class 'fdata'
-### @return an S4 object of class 'fdata' with simulated values
-### @see    ?simulate, model:::.simulate.data.Model, ?rnorm
-### @author Lars Simon Zehnder
-### ---------------------------------------------------------------------
+#' Simulate data from Normal mixture model
+#' 
+#' @description 
+#' Simulates values from a Normal mixture using pre-specified model and 
+#' indicators
+#' @param obj An `model` object specifying the mixture model.
+#' @param N An integer specifying the size of the simulated sample.
+#' @param fdata.obj An `fdata` object to store the simulated sample. 
+#' @return An `fdata` object containing the simulated values.
+#' @noRd
+#' 
+#' @seealso 
+#' [simulate()][model_class] for the calling function
 ".simulate.data.normal.Model" <- function(obj, N, fdata.obj) {
   fdata.obj@type <- "continuous"
   fdata.obj@sim <- TRUE
@@ -842,6 +915,22 @@ setReplaceMethod(
   return(fdata.obj)
 }
 
+#' Simulate data from Student-t mixture model
+#' 
+#' @description 
+#' Simulates values from a Student-t mixture using pre-specified model and 
+#' indicators
+#' @param obj An `model` object specifying the mixture model.
+#' @param N An integer specifying the size of the simulated sample.
+#' @param fdata.obj An `fdata` object to store the simulated sample. If the 
+#'   `fdata` object contains repetitions in slot `@@T`, the repetitions are 
+#'   used in sampling.
+#' @return An `fdata` object containing the simulated values.
+#' @importFrom stats rgamma
+#' @noRd
+#' 
+#' @seealso 
+#' [simulate()][model_class] for the calling function
 ".simulate.data.student.Model" <- function(obj, N, fdata.obj) {
   fdata.obj@type <- "continuous"
   fdata.obj@sim <- TRUE
@@ -854,6 +943,22 @@ setReplaceMethod(
   return(fdata.obj)
 }
 
+#' Simulate data from a multivariate Normal mixture model
+#' 
+#' @description 
+#' Simulates values from a multivariate Normal mixture using pre-specified 
+#' model and indicators
+#' @param obj An `model` object specifying the mixture model.
+#' @param N An integer specifying the size of the simulated sample.
+#' @param fdata.obj An `fdata` object to store the simulated sample. If the 
+#'   `fdata` object contains repetitions in slot `@@T`, the repetitions are 
+#'   used in sampling.
+#' @return An `fdata` object containing the simulated values.
+#' @importFrom mvtnorm rmvnorm
+#' @noRd
+#' 
+#' @seealso 
+#' [simulate()][model_class] for the calling function
 ".simulate.data.normult.Model" <- function(obj, N, fdata.obj) {
   fdata.obj@type <- "continuous"
   fdata.obj@sim <- TRUE
@@ -875,6 +980,9 @@ setReplaceMethod(
 ### The range for the x-axis is determined via the
 ### quantiles of the largest and smallest Poisson model
 ### in the mixture.
+#' @importFrom stats qpois dpois
+#' @importFrom grDevices axisTicks
+#' @noRd 
 ".plot.Poisson.Model" <- function(model.obj, dev, ...) {
   if (.check.grDevice() && dev) {
     dev.new(title = "Model plot")
@@ -911,6 +1019,8 @@ setReplaceMethod(
 ### models and line model is used.
 ### The grid for the x-axis is determined by taking
 ### the
+#' @importFrom stats dbinom
+#' @noRd
 ".plot.Binomial.Model" <- function(model.obj, dev, ...) {
   if (.check.grDevice() && dev) {
     dev.new(title = "Model plot")
@@ -933,6 +1043,8 @@ setReplaceMethod(
   points(x.grid, y.grid, pch = 20)
 }
 
+#' @importFrom stats qexp dexp
+#' @noRd
 ".plot.Exponential.Model" <- function(model.obj, dev, ...) {
   if (.check.grDevice() && dev) {
     dev.new(title = "Model plot")
@@ -957,6 +1069,8 @@ setReplaceMethod(
   )
 }
 
+#' @importFrom stats qt dt
+#' @noRd
 ".plot.Student.Model" <- function(model.obj, dev, ...) {
   if (.check.grDevice() && dev) {
     dev.new(title = "Model plot")
@@ -985,6 +1099,8 @@ setReplaceMethod(
   )
 }
 
+#' @importFrom stats qnorm dnorm
+#' @noRd
 ".plot.Normal.Model" <- function(model.obj, dev, ...) {
   if (.check.grDevice() && dev) {
     dev.new(title = "Model Plot")
@@ -1014,11 +1130,12 @@ setReplaceMethod(
   )
 }
 
+#' @noRd
 ".plot.Normult.Model" <- function(model.obj, dev, ...) {
   K <- model.obj@K
   r <- model.obj@r
   if (r == 2) {
-    if (.check.gr.Device() && dev) {
+    if (.check.grDevice() && dev) {
       dev.new(title = "Model: Perspective plot")
     }
     xyz.grid <- .generate.Grid.Normal(model.obj)
@@ -1070,11 +1187,12 @@ setReplaceMethod(
   }
 }
 
-".plot.Normult.Model" <- function(model.obj, dev, ...) {
+#' @noRd
+".plot.Studmult.Model" <- function(model.obj, dev, ...) {
   K <- model.obj@K
   r <- model.obj@r
   if (r == 2) {
-    if (.check.gr.Device() && dev) {
+    if (.check.grDevice() && dev) {
       dev.new(title = "Model: Perspective plot")
     }
     xyz.grid <- .generate.Grid.Student(model.obj)
@@ -1126,7 +1244,10 @@ setReplaceMethod(
   }
 }
 
+#' @importFrom mvtnorm qmvnorm dmvnorm
+#' @noRd
 ".generate.Grid.Normal" <- function(model.obj) {
+  K <- model.obj@k
   mu <- model.obj@par$mu
   sigma <- model.obj@par$sigma
   weight <- model.obj@weight
@@ -1155,13 +1276,16 @@ setReplaceMethod(
   xy.grid <- t(apply(xy.grid, 1, "+", max.mu))
   z.grid <- outer(xy.grid[, 1], xy.grid[, 2], func)
   grid.list <- list(
-    x = xy.grid[, 1], y = y.grid[, 2],
+    x = xy.grid[, 1], y = xy.grid[, 2],
     z = z.grid
   )
   return(grid.list)
 }
 
+#' @importFrom mvtnorm qmvt dmvt
+#' @noRd
 ".generate.Grid.Student" <- function(model.obj) {
+  K <- model.obj@K
   mu <- model.obj@par$mu
   sigma <- model.obj@par$sigma
   df <- model.obj@par$df
@@ -1192,13 +1316,14 @@ setReplaceMethod(
   xy.grid <- t(apply(xy.grid, 1, "+", max.mu))
   z.grid <- outer(xy.grid[, 1], xy.grid[, 2], func)
   grid.list <- list(
-    x = xy.grid[, 1], y = y.grid[, 2],
+    x = xy.grid[, 1], y = xy.grid[, 2],
     z = z.grid
   )
   return(grid.list)
 }
 
 ### plotPointProc
+#' @noRd
 ".plotpointproc.Poisson" <- function(x, dev) {
   K <- x@K
   if (.check.grDevice() && dev) {
@@ -1236,6 +1361,7 @@ setReplaceMethod(
 
 ### Has
 ### Checks if a 'model' object has specified parameters.
+#' @noRd
 ".haspar.Model" <- function(obj, verbose) {
   if (length(obj@par) > 0) {
     dist <- obj@dist
@@ -1277,6 +1403,7 @@ setReplaceMethod(
 ###                 specified or not. In case verbose == FALSE an
 ###                 error is thrown.
 ### -----------------------------------------------------------------
+#' @noRd
 ".haspar.poisson.Model" <- function(obj, verbose) {
   if (length(obj@par) == 0) {
     if (verbose) {
@@ -1325,6 +1452,7 @@ setReplaceMethod(
 ###                 specified or not. In case verbose == TRUE an
 ###                 error is thrown.
 ### -------------------------------------------------------------------
+#' @noRd
 ".haspar.binomial.Model" <- function(obj, verbose) {
   if (length(obj@par) == 0) {
     if (verbose) {
@@ -1335,7 +1463,7 @@ setReplaceMethod(
       return(FALSE)
     }
   } else {
-    if ("p" %in% names(obj@par)) {
+    if (!"p" %in% names(obj@par)) {
       if (verbose) {
         stop(paste("Wring specification of slot @par ",
           "in 'model' object. Binomial models ",
@@ -1376,6 +1504,7 @@ setReplaceMethod(
 ### @return either TRUE or FALSE if parameters are fully specified or
 ###         nor. In case verbose == TRUE an error is thrown .
 ### ------------------------------------------------------------------
+#' @noRd
 ".haspar.exponential.Model" <- function(obj, verbose) {
   if (length(obj@par) == 0) {
     if (verbose) {
@@ -1428,6 +1557,7 @@ setReplaceMethod(
 ### @return either TRUE or FALSE if parameters are fully specified or
 ###         not. In case verbose == TRUE an error is thrown .
 ### ------------------------------------------------------------------
+#' @noRd
 ".haspar.normal.Model" <- function(obj, verbose) {
   K <- obj@K
   if (length(obj@par) == 0) {
@@ -1504,6 +1634,7 @@ setReplaceMethod(
 ### @return either TRUE or FALSE if parameters are fully specified or
 ###         not. In case verbose == TRUE an error is thrown .
 ### ------------------------------------------------------------------
+#' @noRd
 ".haspar.normult.Model" <- function(obj, verbose) {
   K <- obj@K
   if (length(obj@par) == 0) {
@@ -1580,6 +1711,7 @@ setReplaceMethod(
 ### @return either TRUE or FALSE if parameters are fully specified or
 ###         not. In case verbose == TRUE an error is thrown .
 ### ------------------------------------------------------------------
+#' @noRd
 ".haspar.student.Model" <- function(obj, verbose) {
   K <- obj@K
   if (length(obj@par) == 0) {
@@ -1669,6 +1801,7 @@ setReplaceMethod(
 ### @return either TRUE or FALSE if parameters are fully specified or
 ###         not. In case verbose == TRUE an error is thrown .
 ### ------------------------------------------------------------------
+#' @noRd
 ".haspar.studmult.Model" <- function(obj, verbose) {
   K <- obj@K
   if (length(obj@par) == 0) {
@@ -1765,6 +1898,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix'), .init.valid.*, .valid.*
 ### @author         Lars Simon Zehnder
 ### -----------------------------------------------------------------------------
+#' @noRd
 ".init.valid.Model" <- function(obj) {
   .valid.dist.Model(obj)
   .init.valid.K.Model(obj)
@@ -1783,6 +1917,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix'), .init.valid.*, .valid.*
 ### @author         Lars Simon Zehnder
 ### -----------------------------------------------------------------------------
+#' @noRd
 ".valid.Model" <- function(obj) {
   .valid.dist.Model(obj)
   .valid.K.Model(obj)
@@ -1800,6 +1935,7 @@ setReplaceMethod(
 ### @return         An error in case the distribution is unknown.
 ### @see            ?model, ?vignette('finmix')i
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".valid.dist.Model" <- function(obj) {
   dists <- c(
     "normal", "normult", "exponential",
@@ -1838,6 +1974,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".init.valid.K.Model" <- function(obj) {
   if (obj@K < 1) {
     stop(paste("Wrong specification of slot 'K' of ",
@@ -1874,6 +2011,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".valid.K.Model" <- function(obj) {
   if (obj@K < 1) {
     stop(paste("Wrong specification of slot 'K' of ",
@@ -1908,6 +2046,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".init.valid.r.Model" <- function(obj) {
   univ <- .get.univ.Model()
   multiv <- .get.multiv.Model()
@@ -1952,6 +2091,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".valid.r.Model" <- function(obj) {
   univ <- .get.univ.Model()
   multiv <- .get.multiv.Model()
@@ -1997,6 +2137,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".init.valid.weight.Model" <- function(obj) {
   if (!all(is.na(obj@weight))) {
     if (nrow(obj@weight) > 1) {
@@ -2067,6 +2208,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### -------------------------------------------------------------------------------------
+#' @noRd
 ".valid.weight.Model" <- function(obj) {
   if (!all(is.na(obj@weight))) {
     if (nrow(obj@weight) > 1) {
@@ -2135,6 +2277,7 @@ setReplaceMethod(
 ###                 the wrong dimension, or non-positive values.
 ### @see            ?model, ?vignette('finmix')
 ### --------------------------------------------------------------------------------------
+#' @noRd
 ".init.valid.T.Model" <- function(obj) {
   if (!all(is.na(obj@T))) {
     if (!is.integer(obj@T)) {
@@ -2174,6 +2317,7 @@ setReplaceMethod(
 ###                 the wrong dimension, or non-positive values.
 ### @see            ?model, ?vignette('finmix')
 ### --------------------------------------------------------------------------------------
+#' @noRd
 ".valid.T.Model" <- function(obj) {
   if (!all(is.na(obj@T))) {
     if (!is.integer(obj@T)) {
@@ -2217,6 +2361,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### --------------------------------------------------------------------------------
+#' @noRd
 ".init.valid.par.Model" <- function(obj) {
   dist <- obj@dist
   if (length(obj@par) > 0) {
@@ -2248,6 +2393,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### --------------------------------------------------------------------------------
+#' @noRd
 ".valid.par.Model" <- function(obj) {
   dist <- obj@dist
   if (length(obj@par) > 0) {
@@ -2283,6 +2429,7 @@ setReplaceMethod(
 ### @see        ?model
 ### @author     Lars Simon Zehnder
 ### -------------------------------------------------------------------------------
+#' @noRd
 ".init.valid.Poisson.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if ("lambda" %in% names(obj@par)) {
@@ -2351,6 +2498,7 @@ setReplaceMethod(
 ### @see        $model
 ### @author     Lars Simon Zehnder
 ### -----------------------------------------------------------------------------
+#' @noRd
 ".valid.Poisson.Model" <- function(obj) {
   if (length(par) > 0) {
     if ("lambda" %in% names(obj@par)) {
@@ -2417,6 +2565,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### ------------------------------------------------------------------------------
+#' @noRd
 ".init.valid.Binomial.Model" <- function(obj) {
   if (length(obj@par)) {
     if (!"p" %in% names(obj@par)) {
@@ -2462,7 +2611,7 @@ setReplaceMethod(
       )
     }
   }
-  if (dim(model.obj@T)[1] > 1 && dim(model.obj@T)[2] > 1) {
+  if (dim(obj@T)[1] > 1 && dim(obj@T)[2] > 1) {
     stop(paste(
       "Dimensions of repetitions 'T' for binomial mixture",
       "model do not match conditions. Only one-dimensional",
@@ -2485,6 +2634,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### ------------------------------------------------------------------------------
+#' @noRd
 ".valid.Binomial.Model" <- function(obj) {
   if (length(obj@par)) {
     if (!"p" %in% names(obj@par)) {
@@ -2530,7 +2680,7 @@ setReplaceMethod(
       )
     }
   }
-  if (dim(model.obj@T)[1] > 1 && dim(model.obj@T)[2] > 1) {
+  if (dim(obj@T)[1] > 1 && dim(obj@T)[2] > 1) {
     stop(paste(
       "Dimensions of repetitions 'T' for binomial mixture",
       "model do not match conditions. Only one-dimensional",
@@ -2555,6 +2705,7 @@ setReplaceMethod(
 ### @see        ?model
 ### @author     Lars Simon Zehnder
 ### -------------------------------------------------------------------------------
+#' @noRd
 ".init.valid.Exponential.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if ("lambda" %in% names(obj@par)) {
@@ -2623,6 +2774,7 @@ setReplaceMethod(
 ### @see        $model
 ### @author     Lars Simon Zehnder
 ### -----------------------------------------------------------------------------
+#' @noRd
 ".valid.Exponential.Model" <- function(obj) {
   if (length(par) > 0) {
     if ("lambda" %in% names(obj@par)) {
@@ -2695,6 +2847,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### -------------------------------------------------------------------------------
+#' @noRd
 ".init.valid.Normal.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if (!"mu" %in% names(obj@par)) {
@@ -2799,6 +2952,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### -------------------------------------------------------------------------------
+#' @noRd
 ".valid.Normal.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if (!"mu" %in% names(obj@par)) {
@@ -2903,6 +3057,7 @@ setReplaceMethod(
 ### @see        ?model, ?vignette('finmix')
 ### @author     Lars Simon Zehnder
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".init.valid.Normult.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if (!"mu" %in% names(obj@par)) {
@@ -3009,6 +3164,7 @@ setReplaceMethod(
 ### @see        ?model, ?vignette('finmix')
 ### @author     Lars Simon Zehnder
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".valid.Normult.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if (!"mu" %in% names(obj@par)) {
@@ -3115,6 +3271,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### -------------------------------------------------------------------------------
+#' @noRd
 ".init.valid.Student.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if (!"mu" %in% names(obj@par)) {
@@ -3254,6 +3411,7 @@ setReplaceMethod(
 ### @see            ?model, ?vignette('finmix')
 ### @author         Lars Simon Zehnder
 ### -------------------------------------------------------------------------------
+#' @noRd
 ".valid.Student.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if (!"mu" %in% names(obj@par)) {
@@ -3393,6 +3551,7 @@ setReplaceMethod(
 ### @see        ?model, ?vignette('finmix')
 ### @author     Lars Simon Zehnder
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".init.valid.Studmult.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if (!"mu" %in% names(obj@par)) {
@@ -3534,6 +3693,7 @@ setReplaceMethod(
 ### @see        ?model, ?vignette('finmix')
 ### @author     Lars Simon Zehnder
 ### ----------------------------------------------------------------------------
+#' @noRd
 ".valid.Studmult.Model" <- function(obj) {
   if (length(obj@par) > 0) {
     if (!"mu" %in% names(obj@par)) {
@@ -3655,7 +3815,13 @@ setReplaceMethod(
 }
 
 ### Additional functions
-#' @keywords internal
+#' Returns all univariate distributions
+#' 
+#' @description 
+#' For internal usage only. 
+#' 
+#' @return A character vector containing all univariate distributions.
+#' @noRd
 ".get.univ.Model" <- function() {
   univ <- c(
     "poisson", "cond.poisson",
@@ -3665,6 +3831,13 @@ setReplaceMethod(
   return(univ)
 }
 
+#' Returns all multivariate distributions
+#' 
+#' @description 
+#' For internal usage only. 
+#' 
+#' @return A character vector containing all multivariate distributions.
+#' @noRd
 ".get.multiv.Model" <- function() {
   multiv <- c("normult", "studmult")
   return(multiv)

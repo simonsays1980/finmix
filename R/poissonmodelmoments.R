@@ -14,7 +14,22 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
-
+#' Finmix `poissonmodelmoments` class
+#' 
+#' @description
+#' Defines a class that holds modelmoments for a finite mixture of poisson
+#' distributions. Note that this class is not directly used, but indirectly 
+#' when calling the `modelmoments` constructor [modelmoments()].
+#' 
+#' @slot B A numeric defining the between-group heterogeneity.
+#' @slot W A numeric defining the within-group heterogeneity. 
+#' @slot R A numeric defining the coefficient of determination.
+#' @exportClass poissonmodelmoments
+#' @name poissonmodelmoments
+#' 
+#' @seealso 
+#' * [modelmoments_class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 .poissonmodelmoments <- setClass("poissonmodelmoments",
   contains = c("dmodelmoments"),
   validity = function(object) {
@@ -23,6 +38,24 @@
   }
 )
 
+#' Initializer of the `poissonmoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()` 
+#' to generate in the initialization step also the moments for a passed `model`
+#' object.
+#' 
+#' @param .Object An object_ see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix `model` object containing the definition of the 
+#'   finite mixture distribution.
+#' @noRd
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "poissonmodelmoments",
   function(.Object, ..., model) {
@@ -31,6 +64,15 @@ setMethod(
   }
 )
 
+#' Generate moments for poisson mixture
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of an
+#' poisson mixture distribution.
+#' 
+#' @param object An `poissonmodelmoments` object. 
+#' @return An `poissonmodelmoments` object with calculated moments.
+#' @noRd
 setMethod(
   "generateMoments", "poissonmodelmoments",
   function(object) {
@@ -38,6 +80,15 @@ setMethod(
   }
 )
 
+#' Shows a summary of an `poissonmodelmoments` object.
+#' 
+#' Calling [show()] on an `poissonmodelmoments` object gives an overview 
+#' of the moments of an poisson finite mixture. 
+#' 
+#' @param object An `poissonmodelmoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @describeIn poissonmodelmoments
 setMethod(
   "show", "poissonmodelmoments",
   function(object) {
@@ -69,6 +120,17 @@ setMethod(
 
 ### Private functions
 ### These functions are not exported
+#' Generate model moments for an poisson mixture
+#' 
+#' @description 
+#' Only called implicitly. generates all moments of an poisson mixture 
+#' distribution.
+#' 
+#' @param object An `poissonmodelmoments` object to contain all calculated
+#'   moments. 
+#' @returns An `poissonmodelmoments` object containing all moments of the 
+#'   poisson mixture distributions.
+#' @noRd
 ".generateMomentsPoisson" <- function(object) {
   hasPar(object@model, verbose = TRUE)
   K <- object@model@K

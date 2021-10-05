@@ -15,6 +15,28 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `csdatamoments` class
+#' 
+#' Stores moments for indicators of continuous data. Inherited directly from 
+#' the [sdatamoments][sdatamoments_class] class. 
+#' 
+#' @slot B A vector storing the between-group heterogeneity.
+#' @slot W A vector storing the within-group heterogeneity.
+#' @slot T A vector storing the total variance.
+#' @slot R A numeric storing the coefficient of determination for univariate 
+#'   data.
+#' @slot Rdet A numeric storing the coefficient of determination using the 
+#'   trace for multivariate data.
+#' @slot Rtr A numeric storing the coefficient of determination using the 
+#'   determinants for multivariate data. 
+#' @exportClass csdatamoments
+#' @name csdatamoments_class
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for data moments
+#' * [datamoments()] for the constructor of any object of the `datamoments` 
+#'   class family
+#' * [sdatamoments][csdatamoments_class] for the corresponding class defining
+#'   moments for data from a discrete-valued finite mixture
 .csdatamoments <- setClass("csdatamoments",
   representation(
     B = "vector",
@@ -39,8 +61,33 @@
   )
 )
 
+#' Finmix class union of `csdatamoments` and `NULL`
+#' 
+#' @description
+#' Defines a class union such that the object held by a child class can also
+#' be `NULL`.
+#' 
+#' @export
+#' @noRd
 setClassUnion("csdatamomentsOrNULL", members = c("csdatamoments", "NULL"))
 
+#' Initializer of the `csdatamoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()`
+#' to generate in the initialization step the moments for a passed-in `fdata` 
+#' object.
+#' 
+#' @param .Object An object: see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix [fdata][fdata_class] object containing the observations.
+#' @noRd
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "csdatamoments",
   function(.Object, ..., value = fdata()) {
@@ -52,6 +99,15 @@ setMethod(
   }
 )
 
+#' Generate moments for indicators from a mixture with continuous data
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of a
+#' finite mixture with continuous data.
+#' 
+#' @param object An `csdatamoments` object. 
+#' @return An `csdatamoments` object with calculated moments.
+#' @noRd
 setMethod(
   "generateMoments", "csdatamoments",
   function(object) {
@@ -59,6 +115,16 @@ setMethod(
   }
 )
 
+#' Shows a summary of an `csdatamoments` object.
+#' 
+#' Calling [show()] on an `csdatamoments` object gives an overview 
+#' of the moments of a finite mixture with continuous data.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn csdatamoments_class
 setMethod(
   "show", "csdatamoments",
   function(object) {
@@ -91,6 +157,30 @@ setMethod(
 )
 
 ## Getters ##
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `gmoments` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `gmoments` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getGmoments(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][csdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getGmoments", "csdatamoments",
   function(object) {
@@ -98,6 +188,30 @@ setMethod(
   }
 )
 
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `WK` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `WK` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getWK(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][sdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getWK", "csdatamoments",
   function(object) {
@@ -105,6 +219,30 @@ setMethod(
   }
 )
 
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `var` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `var` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getVar(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][sdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getVar", "csdatamoments",
   function(object) {
@@ -112,6 +250,30 @@ setMethod(
   }
 )
 
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `B` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `B` slot of the `object`.
+#' @describeIn datamoments_class
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getB(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][sdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getB", "csdatamoments",
   function(object) {
@@ -119,6 +281,30 @@ setMethod(
   }
 )
 
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `W` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `W` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getW(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][sdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getW", "csdatamoments",
   function(object) {
@@ -126,6 +312,30 @@ setMethod(
   }
 )
 
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `T` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `T` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getT(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][sdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getT", "csdatamoments",
   function(object) {
@@ -133,6 +343,30 @@ setMethod(
   }
 )
 
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `R` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `R` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getR(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][sdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getR", "csdatamoments",
   function(object) {
@@ -140,6 +374,30 @@ setMethod(
   }
 )
 
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `Rtr` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `Rtr` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getRtr(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][sdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getRtr", "csdatamoments",
   function(object) {
@@ -147,6 +405,30 @@ setMethod(
   }
 )
 
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `Rdet` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `Rdet` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getRdet(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][sdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getRdet", "csdatamoments",
   function(object) {
@@ -154,6 +436,30 @@ setMethod(
   }
 )
 
+#' Getter method of `csdatamoments` class.
+#' 
+#' Returns the `fdata` slot.
+#' 
+#' @param object An `csdatamoments` object.
+#' @returns The `fdata` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_sdatamoms <- sdatamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getFdata(f_sdatamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#'   class family
+#' * [csdatamoments][sdatamoments_class] for the class definition
+#' * [sdatamoments()][sdatamoments] for the constructor of the class
 setMethod(
   "getFdata", "csdatamoments",
   function(object) {
@@ -166,6 +472,17 @@ setMethod(
 
 ### Private functions
 ### These functions are not exported
+#' Generate data moments for finite mixture data
+#' 
+#' @description 
+#' Only called implicitly. generates all moments of finite mixture data in a 
+#' `fdata` object.
+#' 
+#' @param object A `csdatamoments` object to contain all calculated
+#'   moments. 
+#' @returns A `csdatamoments` object containing all moments of the 
+#'   inite mixture data.
+#' @noRd
 ".generateCsdatamoments" <- function(object) {
   ## enforce column.wise ordering ##
   datam <- getColY(object@fdata)
@@ -187,7 +504,7 @@ setMethod(
   ## Calculate coefficient of determination ##
   ## 'Rtr' is an 1 x 1 numeric ##
   ## 'Rdet' is an 1 x 1 numeric ##
-  if (object@data@r > 1) {
+  if (object@fdata@r > 1) {
     r <- NA
     object@R <- as.numeric(r)
     object@Rtr <- 1 - sum(diag(object@W), na.rm = TRUE) /

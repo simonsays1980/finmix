@@ -15,6 +15,24 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `cmodelmoments` class
+#' 
+#' @description 
+#' This class defines the general theoretical moments of a finite mixture model 
+#' with continuous data. 
+#' 
+#' @slot higher An array containing the four higher centralized moments of the 
+#'   (in case of multivariate data marginal) finite mixture.
+#' @slot skewness A vector containing the skewness(es) of the finite mixture 
+#'   model.
+#' @slot kurtosis A vector containing the kurtosis(es) of the finite mixture 
+#'   model.
+#' @exportClass cmodelmoments
+#' @name cmodelmoments
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class
+#' * [modelmoments()] for the constructor of any `modelmoments` inherited class
 .cmodelmoments <- setClass("cmodelmoments",
   representation(
     higher      = "array",
@@ -34,14 +52,65 @@
 )
 
 ## Getters ##
+#' Getter method of `cmodelmoments` class.
+#' 
+#' Returns the `higher` slot.
+#' 
+#' @param object An `cmodelmoments` object.
+#' @returns The `higher` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
+#'                  weight=matrix(c(0.3, 0.7), nrow=1))
+#' f_moments <- modelmoments(f_model)
+#' getHigher(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod("getHigher", "cmodelmoments", function(object) {
   return(object@higher)
 })
 
+#' Getter method of `cmodelmoments` class.
+#' 
+#' Returns the `skewness` slot.
+#' 
+#' @param object An `cmodelmoments` object.
+#' @returns The `skewness` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
+#'                  weight=matrix(c(0.3, 0.7), nrow=1))
+#' f_moments <- modelmoments(f_model)
+#' getSkewness(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod("getSkewness", "cmodelmoments", function(object) {
   return(object@skewness)
 })
 
+#' Getter method of `cmodelmoments` class.
+#' 
+#' Returns the `kurtosis` slot.
+#' 
+#' @param object An `cmodelmoments` object.
+#' @returns The `kurtosis` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
+#'                  weight=matrix(c(0.3, 0.7), nrow=1))
+#' f_moments <- modelmoments(f_model)
+#' getKurtosis(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod("getKurtosis", "cmodelmoments", function(object) {
   return(object@kurtosis)
 })

@@ -15,6 +15,15 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+# TODO: For fixed indicators permutations are still performed. This is probably 
+# wrong. Check, if mcmcestimate needs an MCMC permute object.
+#' Permute MCMC samples
+#' 
+#' @description 
+#' This function 
+#' 
+#' @export mcmcpermute
+#' @import nloptr
 "mcmcpermute" <- function(mcmcout, fdata = NULL, method = "kmeans", opt_ctrl = list(max_iter = 200L)) {
   ## Check arguments ##
   .check.arg.Mcmcpermute(mcmcout)
@@ -281,7 +290,7 @@
   } else if (dist == "binomial") {
     index <- .stephens1997b.binomial.Mcmcpermute(obj, fdata.obj)
   } else if (dist == "exponential") {
-    index <- .stephens1997b.exponential.Mcmcmpermute(obj, fdata.obj)
+    index <- .stephens1997b.exponential.Mcmcpermute(obj, fdata.obj)
   }
   ## Create 'mcmcoutputperm' objects.
   startidx <- matrix(seq(1, obj@model@K),
@@ -329,7 +338,8 @@
     .mcmcoutputpermfixhier(obj,
       Mperm        = obj.swap@M,
       parperm      = obj.swap@par,
-      logperm      = obj.swap@log
+      logperm      = obj.swap@log,
+      hyperperm    = obj.swap@hyper
     )
   } else if (class(obj) == "mcmcoutputfixpost") {
     .mcmcoutputpermfixpost(obj,
@@ -343,6 +353,7 @@
       Mperm        = obj.swap@M,
       parperm      = obj.swap@par,
       logperm      = obj.swap@log,
+      hyperperm    = obj.swap@hyper,
       postperm     = obj.swap@post
     )
   } else if (class(obj) == "mcmcoutputbase") {
@@ -364,6 +375,7 @@
       relabel      = method,
       weightperm   = obj.swap@weight,
       logperm      = obj.swap@log,
+      hyperperm    = obj.swap@hyper,
       entropyperm  = obj.swap@entropy,
       STperm       = obj.swap@ST,
       Sperm        = obj.swap@S,
@@ -389,6 +401,7 @@
       relabel      = method,
       weightperm   = obj.swap@weight,
       logperm      = obj.swap@log,
+      hyperperm    = obj.swap@hyper,
       postperm     = obj.swap@post,
       entropyperm  = obj.swap@entropy,
       STperm       = obj.swap@ST,

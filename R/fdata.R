@@ -15,6 +15,31 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix fdata class
+#' 
+#' The [fdata] class holds the data for finite mixture distributions.
+#' 
+#' @slot y A matrix containing the observations for finite mixture estimation. 
+#'   Can be by column or row depending on the slot `bycolumn`.
+#' @slot N An integer holding the number of observations.
+#' @slot r An integer defining the dimension of the data. Only for multivariate
+#'   distributions like `normult` or `studmult` the dimension is 
+#'   larger one. 
+#' @slot S A matrix containing the indicators of the data. If the `fdata` class
+#'   contains indicators estimation is performed with a fixed indicator 
+#'   approach.
+#' @slot bycolumn A logical indicating if the data in `y` and `S` is sorted by
+#'   by column (`TRUE`) or row (`FALSE`).
+#' @slot name A character specifying a name for the data. Optional.
+#' @slot type A character specifying the data type: either `discrete` for 
+#'   discrete data or `continuous` for continuous data. The two data types are
+#'   treated differently when calculating data moments. 
+#' @slot sim A logical indicating, if the data was simulated. 
+#' @slot exp A matrix containing the *exposures* of Poisson data.
+#' @slot T A matrix containing the (optional) repetitions of binomial or Poisson
+#'   data. Must be of type integer. 
+#' @exportClass fdata
+#' @name fdata_class
 .fdata <- setClass("fdata",
   representation(
     y = "matrix",
@@ -48,6 +73,42 @@
 )
 
 ## Constructor for the data class ##
+#' Constructs an `fdata` object
+#' 
+#' @description 
+#' Calling [fdata()] constructs an `fdata` object. Can be called without 
+#' arguments.
+#' 
+#' @param y A matrix containing the observations for finite mixture estimation. 
+#'   Can be by column or row depending on the slot `bycolumn`. 
+#' @param N An integer holding the number of observations.
+#' @param r An integer defining the dimension of the data. Only for multivariate
+#'   distributions like `normult` or `studmult` the dimension is 
+#'   larger one. 
+#' @param S A matrix containing the indicators of the data. If the `fdata` class
+#'   contains indicators estimation is performed with a fixed indicator 
+#'   approach.
+#' @param bycolumn A logical indicating if the data in `y` and `S` is sorted by
+#'   by column (`TRUE`) or row (`FALSE`).
+#' @param name A character specifying a name for the data. Optional.
+#' @param type A character specifying the data type: either `discrete` for 
+#'   discrete data or `continuous` for continuous data. The two data types are
+#'   treated differently when calculating data moments. 
+#' @param sim A logical indicating, if the data was simulated. 
+#' @param exp A matrix containing the *exposures* of Poisson data.
+#' @param T A matrix containing the (optional) repetitions of binomial or Poisson
+#'   data. Must be of type integer. 
+#' @export
+#' 
+#' @examples
+#' # Call the constructor without arguments.
+#' f_data <- fdata()
+#' 
+#' # Create simulated data.
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' 
+#' @seealso [fdata] class that describes the slots and the getters, setters and
+#'   and checkers
 "fdata" <- function(y = matrix(), N = 1, r = 1, S = matrix(),
                     bycolumn = TRUE, name = character(),
                     type = "discrete", sim = FALSE,
@@ -91,6 +152,27 @@
   )
 }
 
+#' Plots the data
+#' 
+#' @description
+#' [plot()] plots the data in an [fdata] object by either a histogram in case of
+#' continuous data or a barplot in case of discrete data.
+#' 
+#' @param x An `fdata` object. Cannot be empty.
+#' @param y Unused.
+#' @param dev A logical indicating if the plot should be output via a graphical
+#'   device.
+#' @param ... Further arguments passed to the plotting functions `hist` or 
+#'   `barplot`. 
+#' @exportMethod plot
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' # Generate Poisson data and plot it. 
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' plot(f_data)
+#' 
+#' @seealso [fdata] class
 setMethod(
   "plot", signature(
     x = "fdata",
@@ -109,6 +191,23 @@ setMethod(
   }
 )
 
+#' Shows a summary of an `fdata` object.
+#' 
+#' Calling [show()] on an `fdata` object gives an overview of the different 
+#' slots and dimensions. 
+#' 
+#' @param object An `fdata` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn fdata_class
+#' 
+#' @examples 
+#' # Generate some Poisson data and show the `fdata` object
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' show(f_data)
+#' 
+#' @seealso [fdata] class for an overview of the slots
 setMethod(
   "show", "fdata",
   function(object) {
@@ -152,6 +251,25 @@ setMethod(
 ### TRUE if it is not NA and FALSE if it is NA.
 ### If argument 'verbose' is set to TRUE, an error is thrown, if
 ### the 'fdata' object has not the questioned slot filled.
+#' Checker method for `y` slot of an `fdata` object. 
+#' 
+#' @description 
+#' [hasY()] checks, if the object contains `y` data.
+#' 
+#' @param object An `fdata` object. 
+#' @param verbose A logical indicating, if the function should print out 
+#'   messages.
+#' @returns Either `FALSE`/`TRUE`, if `verbose` is `FALSE` and the `y` slot is 
+#'   empty or filled or a message, if `verbose` is `TRUE`.
+#' @exportMethod hasY
+#' @describeIn fdata_class
+#' 
+#' @examples 
+#' # Generate an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' hasY(f_data)
+#' 
+#' @seealso [fdata] class for an overview of its slots
 setMethod(
   "hasY", "fdata",
   function(object, verbose = FALSE) {
@@ -170,6 +288,24 @@ setMethod(
   }
 )
 
+#' Checker method for `S` slot of an `fdata` object. 
+#' 
+#' @description 
+#' [hasY()] checks, if the object contains `S` data.
+#' 
+#' @param object An `fdata` object. 
+#' @param verbose A logical indicating, if the function should print out 
+#'   messages.
+#' @returns Either `FALSE`/`TRUE`, if `verbose` is `FALSE` and the `S` slot is 
+#'   empty or filled or a message, if `verbose` is `TRUE`.
+#' @describeIn fdata_class
+#' @exportMethod hasS
+#' @examples 
+#' # Generate an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' hasS(f_data)
+#' 
+#' @seealso [fdata] class for an overview of its slots
 setMethod(
   "hasS", "fdata",
   function(object, verbose = FALSE) {
@@ -188,6 +324,25 @@ setMethod(
   }
 )
 
+#' Checker method for `exp` slot of an `fdata` object. 
+#' 
+#' @description 
+#' [hasY()] checks, if the object contains `exp` data.
+#' 
+#' @param object An `fdata` object. 
+#' @param verbose A logical indicating, if the function should print out 
+#'   messages.
+#' @returns Either `FALSE`/`TRUE`, if `verbose` is `FALSE` and the `exp` slot is 
+#'   empty or filled or a message, if `verbose` is `TRUE`.
+#' @exportMethod hasExp
+#' @describeIn fdata_class
+#' 
+#' @examples 
+#' # Generate an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' hasExp(f_data)
+#' 
+#' @seealso [fdata] class for an overview of its slots
 setMethod(
   "hasExp", "fdata",
   function(object, verbose = FALSE) {
@@ -206,6 +361,25 @@ setMethod(
   }
 )
 
+#' Checker method for `T` slot of an `fdata` object. 
+#' 
+#' @description 
+#' [hasY()] checks, if the object contains `T` data.
+#' 
+#' @param object An `fdata` object. 
+#' @param verbose A logical indicating, if the function should print out 
+#'   messages.
+#' @returns Either `FALSE`/`TRUE`, if `verbose` is `FALSE` and the `T` slot is 
+#'   empty or filled or a message, if `verbose` is `TRUE`.
+#' @exportMethod hasT
+#' @describeIn fdata_class
+#' 
+#' @examples 
+#' # Generate an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' hasT(f_data)
+#' 
+#' @seealso [fdata] class for an overview of its slots
 setMethod(
   "hasT", "fdata",
   function(object, verbose = FALSE) {
@@ -225,7 +399,22 @@ setMethod(
 )
 
 ### getCol/getRow: These methods return the data in the slots @y,
-### @S, @exp and @T either as column-ordered or ro-ordered matrix.
+### @S, @exp and @T either as column-ordered or row-ordered matrix.
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `y` slot as a column-ordered matrix. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `y` slot of the `object` as a column-ordered matrix.
+#' @exportMethod getColY
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getColY(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getColY", "fdata",
   function(object) {
@@ -237,6 +426,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `y` slot as a row-ordered matrix. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `y` slot of the `object` as a row-ordered matrix.
+#' @exportMethod getRowY
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getRowY(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getRowY", "fdata",
   function(object) {
@@ -248,6 +452,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `S` slot as a column-ordered matrix. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `S` slot of the `object` as a column-ordered matrix.
+#' @exportMethod getColS
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getColS(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getColS", "fdata",
   function(object) {
@@ -259,6 +478,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `S` slot as a row-ordered matrix. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `S` slot of the `object` as a row-ordered matrix.
+#' @exportMethod getRowS
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getRowS(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getRowS", "fdata",
   function(object) {
@@ -270,6 +504,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `exp` slot as a column-ordered matrix. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `exp` slot of the `object` as a column-ordered matrix.
+#' @exportMethod getColExp
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getColExp(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getColExp", "fdata",
   function(object) {
@@ -281,6 +530,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `exp` slot as a row-ordered matrix. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `exp` slot of the `object` as a row-ordered matrix.
+#' @exportMethod getRowExp
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getRowExp(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getRowExp", "fdata",
   function(object) {
@@ -292,6 +556,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `T` slot as a column-ordered matrix. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `T` slot of the `object` as a column-ordered matrix.
+#' @exportMethod getColT
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getColT(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getColT", "fdata",
   function(object) {
@@ -303,6 +582,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `T` slot as a row-ordered matrix. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `T` slot of the `object` as a row-ordered matrix.
+#' @exportMethod getRowT
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getRowT(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getRowT", "fdata",
   function(object) {
@@ -316,6 +610,21 @@ setMethod(
 
 ## Setters and Getters as a user interface to manipulate the slots
 ## Combined Getter and Setter
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `y` slot in the order defined by the slot `bycolumn`. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `y` slot of the `object` in the order defined `bycolumn`.
+#' @exportMethod getY
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getY(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getY", "fdata",
   function(object) {
@@ -323,6 +632,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `N` slot of an `fdata` object. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `N` slot of the `object`.
+#' @exportMethod getN
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getN(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getN", "fdata",
   function(object) {
@@ -330,6 +654,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `r` slot of an `fdata` object. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `r` slot of the `object`.
+#' @exportMethod getR
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getR(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getR", "fdata",
   function(object) {
@@ -337,6 +676,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `S` slot in the order defined by the slot `bycolumn`. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `S` slot of the `object` in the order defined `bycolumn`.
+#' @exportMethod getS
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getS(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getS", "fdata",
   function(object) {
@@ -344,6 +698,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `bycolumn` slot of an `fdata` object. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `bycolumn` slot of the `object`.
+#' @exportMethod getBycolumn
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getBycolumn(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getBycolumn", "fdata",
   function(object) {
@@ -351,6 +720,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `name` slot of an `fdata` object. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `name` slot of the `object`.
+#' @exportMethod getName
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getName(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getName", "fdata",
   function(object) {
@@ -358,6 +742,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `type` slot of an `fdata` object. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `type` slot of the `object`.
+#' @exportMethod getType
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getType(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getType", "fdata",
   function(object) {
@@ -365,6 +764,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `sim` slot of an `fdata` object. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `sim` slot of the `object`.
+#' @exportMethod getSim
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getSim(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getSim", "fdata",
   function(object) {
@@ -372,6 +786,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `exp` slot in the order defined by the slot `bycolumn`. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `exp` slot of the `object` in the order defined `bycolumn`.
+#' @exportMethod getExp
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getExp(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getExp", "fdata",
   function(object) {
@@ -379,6 +808,21 @@ setMethod(
   }
 )
 
+#' Getter method of `fdata` class.
+#' 
+#' Returns the `T` slot in the order defined by the slot `bycolumn`. 
+#' 
+#' @param object An `fdata` object.
+#' @returns The `T` slot of the `object` in the order defined `bycolumn`.
+#' @exportMethod getT
+#' @describeIn fdata_class 
+#' 
+#' @examples 
+#' # Create an fdata object with Poisson data
+#' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
+#' getT(f_data)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setMethod(
   "getT", "fdata",
   function(object) {
@@ -387,6 +831,24 @@ setMethod(
 )
 
 ## Setters ##
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `y` of an `fdata` object and validates the slot data before 
+#' setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `y` should be set.
+#' @param value A matrix that should be set as `y` slot of the `fdata` object.
+#' @returns The `fdata` object with slot `y` set to `value` or an error message
+#'   if the `value` cannot be set as slot `y`.
+#' @exportMethod setY<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' f_data <- fdata()
+#' setY(f_data) <- rpois(100, 312)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setY", "fdata",
   function(object, value) {
@@ -409,15 +871,51 @@ setReplaceMethod(
   }
 )
 
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `N` of an `fdata` object and validates the slot data before 
+#' setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `N` should be set.
+#' @param value An integer that should be set as `N` slot of the `fdata` object.
+#' @returns The `fdata` object with slot `N` set to `value` or an error message
+#'   if the `value` cannot be set as slot `N`.
+#' @exportMethod setN<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' f_data <- fdata()
+#' setN(f_data) <- as.integer(100)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setN", "fdata",
   function(object, value) {
     object@N <- as.integer(value)
-    init.valid.Fdata(object)
+    .init.valid.Fdata(object)
     return(object)
   }
 )
 
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `R` of an `fdata` object and validates the slot data before 
+#' setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `R` should be set.
+#' @param value An integer that should be set as `R` slot of the `fdata` object.
+#' @returns The `fdata` object with slot `R` set to `value` or an error message
+#'   if the `value` cannot be set as slot `R`.
+#' @exportMethod setR<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' f_data <- fdata()
+#' setR(f_data) <- as.integer(2)
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setR", "fdata",
   function(object, value) {
@@ -427,6 +925,26 @@ setReplaceMethod(
   }
 )
 
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `S` of an `fdata` object and validates the slot data before 
+#' setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `S` should be set.
+#' @param value A matrix that should be set as `S` slot of the `fdata` object. 
+#'   Has to be of type integer.
+#' @returns The `fdata` object with slot `S` set to `value` or an error message
+#'   if the `value` cannot be set as slot `S`.
+#' @exportMethod setS<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' # Generate an empty fdata object.
+#' f_data <- fdata()
+#' setS(f_data) <- matrix(sample.int(4, 100, replace = TRUE))
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setS", "fdata",
   function(object, value) {
@@ -441,6 +959,26 @@ setReplaceMethod(
   }
 )
 
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `bycolumn` of an `fdata` object and validates the slot data 
+#' before setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `bycolumn` should be set.
+#' @param value A logical that should be set as `bycolumn` slot of the `fdata` 
+#'   object. 
+#' @returns The `fdata` object with slot `bycolumn` set to `value` or an error message
+#'   if the `value` cannot be set as slot `bycolumn`.
+#' @exportMethod setBycolumn<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' # Generate an empty fdata object.
+#' f_data <- fdata()
+#' setBycolumn(f_data) <- TRUE
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setBycolumn", "fdata",
   function(object, value) {
@@ -466,6 +1004,26 @@ setReplaceMethod(
   }
 )
 
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `name` of an `fdata` object and validates the slot data before 
+#' setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `name` should be set.
+#' @param value A matrix that should be set as `name` slot of the `fdata` object. 
+#'   Has to be of type integer.
+#' @returns The `fdata` object with slot `name` set to `value` or an error message
+#'   if the `value` cannot be set as slot `name`.
+#' @exportMethod setName<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' # Generate an empty fdata object.
+#' f_data <- fdata()
+#' setName(f_data) <- "poisson_data"
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setName", "fdata",
   function(object, value) {
@@ -474,6 +1032,26 @@ setReplaceMethod(
   }
 )
 
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `type` of an `fdata` object and validates the slot data before 
+#' setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `type` should be set.
+#' @param value A character that should be set as `type` slot of the `fdata` object. 
+#'   Has to be of type integer.
+#' @returns The `fdata` object with slot `type` set to `value` or an error message
+#'   if the `value` cannot be set as slot `type`.
+#' @exportMethod setType<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' # Generate an empty fdata object.
+#' f_data <- fdata()
+#' setType(f_data) <- "discrete"
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setType", "fdata",
   function(object, value) {
@@ -483,6 +1061,26 @@ setReplaceMethod(
   }
 )
 
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `sim` of an `fdata` object and validates the slot data before 
+#' setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `sim` should be set.
+#' @param value A logical that should be set as `sim` slot of the `fdata` object. 
+#'   Has to be of type integer.
+#' @returns The `fdata` object with slot `sim` set to `value` or an error message
+#'   if the `value` cannot be set as slot `sim`.
+#' @exportMethod setSim<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' # Generate an empty fdata object.
+#' f_data <- fdata()
+#' setSim(f_data) <- TRUE
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setSim", "fdata",
   function(object, value) {
@@ -492,6 +1090,26 @@ setReplaceMethod(
   }
 )
 
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `exp` of an `fdata` object and validates the slot data before 
+#' setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `exp` should be set.
+#' @param value A matrix that should be set as `exp` slot of the `fdata` object. 
+#'   Has to be of type integer.
+#' @returns The `fdata` object with slot `exp` set to `value` or an error message
+#'   if the `value` cannot be set as slot `exp`.
+#' @exportMethod setExp<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' # Generate an empty fdata object.
+#' f_data <- fdata()
+#' setExp(f_data) <- matrix(rep(100, 100))
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setExp", "fdata",
   function(object, value) {
@@ -507,6 +1125,26 @@ setReplaceMethod(
   }
 )
 
+#' Setter method of `fdata` class
+#' 
+#' @description
+#' Sets the slot `T` of an `fdata` object and validates the slot data before 
+#' setting. 
+#' 
+#' @param object An `fdata` objects, whose slot `T` should be set.
+#' @param value A matrix that should be set as `T` slot of the `fdata` object. 
+#'   Has to be of type integer.
+#' @returns The `fdata` object with slot `T` set to `value` or an error message
+#'   if the `value` cannot be set as slot `T`.
+#' @exportMethod setT<-
+#' @describeIn fdata_class
+#' 
+#' @examples
+#' # Generate an empty fdata object.
+#' f_data <- fdata()
+#' setT(f_data) <- matrix(rep(100, 100))
+#' 
+#' @seealso [fdata] for all slots of the `fdata` class
 setReplaceMethod(
   "setT", "fdata",
   function(object, value) {
@@ -528,6 +1166,17 @@ setReplaceMethod(
 ### Checking.
 ### Check data: The data @y has to either of type 'integer'
 ### or of type 'numeric'.
+#' Checks validity of slot `y`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setY()] the setter of the slot `y`.
 ".check.y.Fdata" <- function(y) {
   if (!all(is.na(y))) {
     ## Only data of type 'numeric' or
@@ -546,6 +1195,17 @@ setReplaceMethod(
 ### is set to 'discrete', else 'continuous'.
 ### If @y is NA for all entries, the type is the default:
 ### 'discrete'.
+#' Checks validity of slot `type`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setType()] the setter of the slot `type`.
 ".check.type.Fdata" <- function(y) {
   if (!all(is.na(y))) {
     if (is.integer(y)) {
@@ -567,6 +1227,17 @@ setReplaceMethod(
 ### If the data in @y is empty, it is checked in the same way if
 ### bycolumn can be derived from @S, @exp or @T. If any data slot is
 ### emtpy the default is used: TRUE.
+#' Checks validity of slot `bycolumn`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setBycolumn()] the setter of the slot `bycolumn`.
 ".check.bycolumn.Fdata" <- function(y, S, exp, T) {
   if (!all(is.na(y))) {
     if (NROW(y) > NCOL(y)) {
@@ -607,6 +1278,17 @@ setReplaceMethod(
 ### set after @bycolumn. So, if @bycolumn is TRUE, the rows are
 ### assumed to be the number of observations. Otherwise, columns
 ### of @y are assumed to define @N.
+#' Checks validity of slot `N`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setN()] the setter of the slot `N`.
 ".check.N.Fdata" <- function(y, S, exp, T, bycolumn) {
   if (!all(is.na(y))) {
     if (bycolumn) {
@@ -647,6 +1329,17 @@ setReplaceMethod(
 ### after @bycolumn. So, if @bycolum is TRUE, the columns are assumed
 ### to determine the number of variables. Otherwise, rows of @y are
 ### assumed to define @r.
+#' Checks validity of slot `r`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setR()] the setter of the slot `r`.
 ".check.r.Fdata" <- function(y, bycolumn) {
   if (!all(is.na(y))) {
     if (bycolumn) {
@@ -662,6 +1355,17 @@ setReplaceMethod(
 ### Check S: Indicators must be of type 'integer'. If this is the case
 ### the indicators are turned into a matrix object with storage mode
 ### 'integer'.
+#' Checks validity of slot `S`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setS()] the setter of the slot `S`.
 ".check.S.Fdata" <- function(S) {
   if (!all(is.na(S))) {
     if (!is.numeric(S)) {
@@ -682,6 +1386,17 @@ setReplaceMethod(
 ### Check T: Repetitions must be of type 'integer'. If this is the case
 ### the repetitions are turned into a matrix object with storage mode
 ### 'integer'.
+#' Checks validity of slot `T`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setT()] the setter of the slot `T`.
 ".check.T.Fdata" <- function(T) {
   if (!all(is.na(T))) {
     if (!is.numeric(T)) {
@@ -699,6 +1414,17 @@ setReplaceMethod(
 
 ### Check exp: Exposures must be of of type 'numeric'. If this is
 ### the case exposures are turned into a matrix.
+#' Checks validity of slot `exp`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setY()] the setter of the slot `exp`.
 ".check.exp.Fdata" <- function(exp) {
   if (!all(is.na(exp))) {
     if (!is.numeric(exp)) {
@@ -715,6 +1441,17 @@ setReplaceMethod(
 
 ### Check bycolumn: @bycolumn has to be of type 'logical'. If this is not
 ### the case an error is thrown.
+#' Checks validity of slot `bycolumn`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setBycolumn()] the setter of the slot `bycolumn`.
 ".check.setBycolumn.Fdata" <- function(value) {
   if (!is.logical(value)) {
     stop(paste("Wrong specification of value for slot 'bycolumn' ",
@@ -727,6 +1464,17 @@ setReplaceMethod(
 
 ### Check sim: @sim has to be of type 'logical'. If this is not
 ### the case an error is thrown.
+#' Checks validity of slot `sim`
+#' 
+#' @param y An object passed in by the user. 
+#' @returns None. Checks for validity and if validity is not ensured throws an
+#'   error.
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [setSim()] the setter of the slot `sim`.
 ".check.setSim.Fdata" <- function(value) {
   if (!is.logical(value)) {
     stop(paste("Wrong specification of value for slot 'sim' ",
@@ -742,11 +1490,23 @@ setReplaceMethod(
 ### is implemented. The functions plots a barplot.
 ### If the data in @y has names given, these names
 ### are used in the plot.
+#' Plots discrete data of an `fdata` object
+#' 
+#' @param obj An `fdata` object. Must contain data.
+#' @returns A barplot. 
+#' 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [plot()] the plot function of the `fdata` class.
+#' * [barplot()] the default plotting function for bar plots in R. 
 ".plot.discrete.Fdata" <- function(obj) {
-  if (has.Y(obj, verbose = TRUE)) {
+  if (hasY(obj, verbose = TRUE)) {
     datam <- getColY(obj)
   }
-  if (has.Exp(obj)) {
+  if (hasExp(obj)) {
     exp <- getColExp(obj)
     datam <- datam * exp
   }
@@ -778,11 +1538,33 @@ setReplaceMethod(
 ### returns histograms for all variables in @y and a pairs
 ### diagram: a matrix containing scatter plots for all
 ### variables' combinations.
+#' Plots discrete data of an `fdata` object
+#' 
+#' @description 
+#' Continuous data: Either the data is one-dimensional or multi-dimensional. In 
+#' the one-dimensional case a histogram of the data is plotted. In the 
+#' two-dimensional case a bivariate kernel density estimation is used to return 
+#' a contour plot and a perspective plot of the density. In the case of 
+#' higher-dimensional data, the functions returns histograms for all variables 
+#' in `@@y` and a pairs diagram: a matrix containing scatter plots for all 
+#' variables' combinations.
+#' 
+#' @param obj An `fdata` object. Must contain data.
+#' @returns A histogram. 
+#' @importFrom KernSmooth bkde2D
+#' @importFrom stats sd
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata()] the constructor of the `fdata` class.
+#' * [plot()] the plot function of the `fdata` class.
+#' * [hist()] the default plotting function for histogram plots in R. 
 ".plot.continuous.Fdata" <- function(obj, dev) {
   datam <- getColY(obj)
   if (obj@r == 1) {
     .symmetric.Hist(datam, colnames(datam))
-  } else if (x@r == 2) { ## 2-dimensional
+  } else if (obj@r == 2) { ## 2-dimensional
     .symmetric.Hist(datam, colnames(datam))
     if (.check.grDevice() && dev) {
       dev.new(title = "Contour plot")
@@ -858,6 +1640,22 @@ setReplaceMethod(
 ### the user may define the slots step by step.
 ### 'fdata()'. To avoid cumbersome behavior of slot setting,
 ### only warnings are thrown.
+#' Checks consistency of `fdata` object
+#' 
+#' @description
+#' Checks the consistency of `fdata` object when the constructor or a setter is
+#' called. The different slots are strongly related and it has to be checked if 
+#' the setting of one slot does not interfere with the definition of another 
+#' one. Is called during initialization of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [fdata()] for the constructor and the conditions for slots. 
 ".init.valid.Fdata" <- function(obj) {
   .init.valid.y.Fdata(obj)
   .init.valid.S.Fdata(obj)
@@ -872,6 +1670,22 @@ setReplaceMethod(
 ### errors thrown in case of inconsistency of slots.
 ### Furthermore, the validity check during initialisation relies on fully
 ### specified 'fdata' objects and checks consistency of slots strongly.
+#' Checks consistency of `fdata` object
+#' 
+#' @description
+#' Checks the consistency of `fdata` object when the constructor or a setter is
+#' called. The different slots are strongly related and it has to be checked if 
+#' the setting of one slot does not interfere with the definition of another 
+#' one. Is called during by setters of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [fdata()] for the constructor and the conditions for slots. 
 ".valid.Fdata" <- function(obj) {
   .valid.y.Fdata(obj)
   .valid.S.Fdata(obj)
@@ -883,6 +1697,22 @@ setReplaceMethod(
 ### Valid y: Data in @y must be of type 'integer' or 'numeric'. Further,
 ### the number of observations @N, the dimension of observations @r
 ### and the ordering @bycolumn must be group-consistent.
+#' Checks consistency of slot `y` of an `fdata` object
+#' 
+#' @description
+#' Checks the consistency of slot `y` of an `fdata` object when the constructor 
+#' or a setter is called. The different slots are strongly related and it has to
+#'  be checked if the setting of one slot does not interfere with the definition 
+#'  of another one. Is called during initialization of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [fdata()] for the constructor and the conditions for slots. 
 ".init.valid.y.Fdata" <- function(obj) {
   if (!all(is.na(obj@y))) {
     if (!is.numeric(obj@y) && !is.integer(obj@y)) {
@@ -925,6 +1755,22 @@ setReplaceMethod(
   }
 }
 
+#' Checks consistency of slot `y` of an `fdata` object
+#' 
+#' @description
+#' Checks the consistency of slot `y` of an `fdata` object when the constructor 
+#' or a setter is called. The different slots are strongly related and it has to
+#'  be checked if the setting of one slot does not interfere with the definition 
+#'  of another one. Is called from the setter of slot `y` of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [setY()] for the constructor and the conditions for slots. 
 ".valid.y.Fdata" <- function(obj) {
   if (!all(is.na(obj@y))) {
     if (!is.numeric(obj@y) && !is.integer(obj@y)) {
@@ -973,6 +1819,22 @@ setReplaceMethod(
 ### @bycolumn.
 ### Indicators must be positive integers. If any element of @S
 ### is smaller than one, an error is thrown.
+#' Checks consistency of slot `S` of an `fdata` object
+#' 
+#' @description
+#' Checks the consistency of slot `S` of an `fdata` object when the constructor 
+#' or a setter is called. The different slots are strongly related and it has to
+#'  be checked if the setting of one slot does not interfere with the definition 
+#'  of another one. Is called during initialization of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [fdata()] for the constructor and the conditions for slots. 
 ".init.valid.S.Fdata" <- function(obj) {
   if (!all(is.na(obj@S))) {
     if (!is.integer(obj@S)) {
@@ -1026,6 +1888,22 @@ setReplaceMethod(
   }
 }
 
+#' Checks consistency of slot `S` of an `fdata` object
+#' 
+#' @description
+#' Checks the consistency of slot `S` of an `fdata` object when the constructor 
+#' or a setter is called. The different slots are strongly related and it has to
+#'  be checked if the setting of one slot does not interfere with the definition 
+#'  of another one. Is called from the setter of slot `S` of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [setS()] for the constructor and the conditions for slots. 
 ".valid.S.Fdata" <- function(obj) {
   if (!all(is.na(obj@S))) {
     if (!is.integer(obj@S)) {
@@ -1083,6 +1961,22 @@ setReplaceMethod(
 ### Furthermore dimensions must be conform with dimensions of data in @y.
 ### Exposures can only be one-dimensional and must be positive. If not
 ### an error is thrown.
+#' Checks consistency of slot `exp` of an `fdata` object
+#' 
+#' @description
+#' Checks the consistency of slot `exp` of an `fdata` object when the constructor 
+#' or a setter is called. The different slots are strongly related and it has to
+#'  be checked if the setting of one slot does not interfere with the definition 
+#'  of another one. Is called during initialization of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [fdata()] for the constructor and the conditions for slots. 
 ".init.valid.exp.Fdata" <- function(obj) {
   if (!all(is.na(obj@exp))) {
     if (!is.numeric(obj@exp) && !is.integer(obj@exp)) {
@@ -1135,6 +2029,22 @@ setReplaceMethod(
   }
 }
 
+#' Checks consistency of slot `exp` of an `fdata` object
+#' 
+#' @description
+#' Checks the consistency of slot `exp` of an `fdata` object when the constructor 
+#' or a setter is called. The different slots are strongly related and it has to
+#'  be checked if the setting of one slot does not interfere with the definition 
+#'  of another one. Is called from the setter of slot `exp` of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [setExp()] for the constructor and the conditions for slots. 
 ".valid.exp.Fdata" <- function(obj) {
   if (!all(is.na(obj@exp))) {
     if (!is.numeric(obj@exp)) {
@@ -1191,6 +2101,22 @@ setReplaceMethod(
 ### dimensions of @T must be consistent with @y in regard to the
 ### ordering in @bycolumn.
 ### If any element in @T is smaller than one, an error is thrown.
+#' Checks consistency of slot `T` of an `fdata` object
+#' 
+#' @description
+#' Checks the consistency of slot `T` of an `fdata` object when the constructor 
+#' or a setter is called. The different slots are strongly related and it has to
+#'  be checked if the setting of one slot does not interfere with the definition 
+#'  of another one. Is called during initialization of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [fdata()] for the constructor and the conditions for slots. 
 ".init.valid.T.Fdata" <- function(obj) {
   if (!all(is.na(obj@T))) {
     if (!is.integer(obj@T)) {
@@ -1243,6 +2169,22 @@ setReplaceMethod(
   }
 }
 
+#' Checks consistency of slot `T` of an `fdata` object
+#' 
+#' @description
+#' Checks the consistency of slot `T` of an `fdata` object when the constructor 
+#' or a setter is called. The different slots are strongly related and it has to
+#'  be checked if the setting of one slot does not interfere with the definition 
+#'  of another one. Is called from the setter of slot `T` of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [setT()] for the constructor and the conditions for slots. 
 ".valid.T.Fdata" <- function(obj) {
   if (!all(is.na(obj@T))) {
     if (!is.integer(obj@T)) {
@@ -1298,6 +2240,22 @@ setReplaceMethod(
 ### Valid type: The description of data type in @type must be either
 ### 'discrete' or 'continuous' with no exclusion. Any other choice
 ### throws an error.
+#' Checks consistency of slot `type` of an `fdata` object
+#' 
+#' @description
+#' Checks the consistency of slot `type` of an `fdata` object when the constructor 
+#' or a setter is called. The different slots are strongly related and it has to
+#'  be checked if the setting of one slot does not interfere with the definition 
+#'  of another one. Is called from the setter of slot `type` of an `fdata` object.
+#' 
+#' @param obj An `fdata` object to be checked.
+#' @returns None. Throws an error, if a certain condition is not true. 
+#' @describeIn fdata_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [fdata] for all slots and setters of the `fdata` class.
+#' * [setType()] for the constructor and the conditions for slots. 
 ".valid.type.Fdata" <- function(obj) {
   if (!(obj@type %in% c("discrete", "continuous"))) {
     stop(paste("Wrong choice for slot 'type'. Data can be only ",

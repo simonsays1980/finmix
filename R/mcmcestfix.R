@@ -15,6 +15,47 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `mcmcestfix` class
+#' 
+#' @description 
+#' This class stores the point estimators for component parameters and weights 
+#' as well as corresponding information from MCMC sampling. Three point 
+#' estimators are calculated: the maximum a posterior (MAP), the Bayesian 
+#' maximum likelihood (BML) and the Identified ergodic average (IEAVG). See 
+#' Fr\"uhwirth-Schnatter (2006) for detailed information about how these 
+#' estimators are defined. 
+#' 
+#' @slot dist A character specifying the distribution family of the mixture 
+#'   model used in MCMC sampling.
+#' @slot K An integer specifying the number of components in the mixture model. 
+#' @slot indicmod A character specifying the indicator model. At this moment 
+#'   only a multinomial model can be chosen. 
+#' @slot burnin An integer specifying the number of iterations in the burn-in 
+#'   phase of MCMC sampling. 
+#' @slot M An integer specifying the number of iterations to store in MCMC 
+#'   sampling.
+#' @slot ranperm A logical specifying, if random permutation has been used 
+#'   during MCMC sampling. 
+#' @slot relabel A character specifying the re-labeling algorithm used during 
+#'   parameter estimation for the identified ergodic average. 
+#' @slot map A named list containing the parameter estimates of the MAP. The 
+#'   element `par` is a named list and contains the component parameters and 
+#'   the element `weight` contains the weights. 
+#' @slot bml A named list containing the parameter estimates of the BML. The 
+#'   element `par` is a named list and contains the component parameters and 
+#'   the element `weight` contains the weights. 
+#' @slot A named list containing the parameter estimates of the IEAVG. The 
+#'   element `par` is a named list and contains the component parameters and 
+#'   the element `weight` contains the weights.
+#' @slot sdpost A named list containing the standard deviations of the 
+#'   parameter estimates from the posterior distributions.
+#' @exportClass mcmcestfix
+#' @name mcmcest_class
+#' 
+#' @seealso
+#' * [mcmcestind][mcmcest_class] for the equivalent class for models with 
+#'   unknown indicators
+#' * [mcmcestimate()] to calculate point estimates
 .mcmcestfix <- setClass("mcmcestfix",
   representation(
     dist = "character",
@@ -48,6 +89,16 @@
   )
 )
 
+#' Shows a summary of an `mcmcestfix` object.
+#' 
+#' Calling [show()] on an `mcmcestfix` object gives an overview 
+#' of the `mcmcestfix` object.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn mcmcest_class
 setMethod(
   "show", "mcmcestfix",
   function(object) {
@@ -81,6 +132,19 @@ setMethod(
   }
 )
 
+#' Shows an advanced summary of an `mcmcestfix` object.
+#' 
+#' Calling [show()] on an `mcmcestfix` object gives an advanced overview 
+#' of the `mcmcestfix` object.
+#' 
+#' Note, this method is so far only implemented for mixtures of Poisson 
+#' distributions.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns A console output listing the formatted slots and summary 
+#'   information about each of them. 
+#' @exportMethod Summary
+#' @describeIn mcmcest_class
 setMethod(
   "Summary", "mcmcestfix",
   function(x, ..., na.rm = FALSE) {
@@ -136,6 +200,34 @@ setMethod(
 )
 
 ## Getters ##
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `dist` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `dist` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getDist(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getDist", "mcmcestfix",
   function(object) {
@@ -143,6 +235,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `K` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `K` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getK(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getK", "mcmcestfix",
   function(object) {
@@ -150,6 +270,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `indicmod` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `indicmod` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getIndicmod(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getIndicmod", "mcmcestfix",
   function(object) {
@@ -157,6 +305,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `burnin` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `burnin` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getBurnin(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getBurnin", "mcmcestfix",
   function(object) {
@@ -164,6 +340,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `M` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `M` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getM(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getM", "mcmcestfix",
   function(object) {
@@ -171,6 +375,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `ranperm` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `ranperm` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getRanperm(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getRanperm", "mcmcestfix",
   function(object) {
@@ -178,6 +410,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `relabel` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `relabel` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getRelabel(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getRelabel", "mcmcestfix",
   function(object) {
@@ -185,6 +445,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `map` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `map` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getMap(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getMap", "mcmcestfix",
   function(object) {
@@ -192,6 +480,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `bml` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `bml` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getBml(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getBml", "mcmcestfix",
   function(object) {
@@ -199,6 +515,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `ieavg` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `ieavg` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getIeavg(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getIeavg", "mcmcestfix",
   function(object) {
@@ -206,6 +550,34 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcestfix` class.
+#' 
+#' Returns the `ieavg` slot.
+#' 
+#' @param object An `mcmcestfix` object.
+#' @returns The `ieavg` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getIeavg(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#'   with unknown indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getSdpost", "mcmcestfix",
   function(object) {
@@ -220,16 +592,42 @@ setMethod(
 ### These functions are not exported.
 
 ### Summary
-### Summary Map estimates: Creates a matrix with Map
-### estimates.
+
+#' Summarize MAP estimates
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' MAP estimates. 
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestfix` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the MAP. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.map.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.map.poisson.Mcmcestfix(obj)
   }
 }
 
-### Summary Map estimates Poisson: Creates a matrix
-### with Map estimates for Poisson parameters.
+#' Summarize MAP estimates form Poisson mixture models
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' MAP estimates of Poisson mixture models.
+#' 
+#' @param obj An `mcmcestfix` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the MAP. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.map.poisson.Mcmcestfix" <- function(obj) {
   parout <- matrix(0, nrow = obj@K, ncol = 2)
   for (k in seq(1, obj@K)) {
@@ -239,16 +637,41 @@ setMethod(
   return(parout)
 }
 
-### Summary Bml estimates: Creates a matrix with Bml
-### estimates.
+#' Summarize BML estimates
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' BML estimates. 
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestfix` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the BML. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.bml.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.bml.poisson.Mcmcestfix(obj)
   }
 }
 
-### Summary Bml estimates Poisson: Creates a matrix
-### with Bml estimates for Poisson parameters.
+#' Summarize BML estimates for Poisson mixture models
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' BML estimates. 
+#' 
+#' @param obj An `mcmcestfix` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the BML. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.bml.poisson.Mcmcestfix" <- function(obj) {
   parout <- matrix(0, nrow = obj@K, ncol = 2)
   for (k in seq(1, obj@K)) {
@@ -258,16 +681,41 @@ setMethod(
   return(parout)
 }
 
-### Summary Ieavg estimates: Creates a matrix with Ieavg
-### estimates.
+#' Summarize IEAVG estimates
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' IEAVG estimates. 
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestfix` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the IEAVG. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.ieavg.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.ieavg.poisson.Mcmcestfix(obj)
   }
 }
 
-### Summary Bml estimates Poisson: Creates a matrix
-### with Bml estimates for Poisson parameters.
+#' Summarize IEAVG estimates for Poisson mixture models
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' IEAVG estimates. 
+#' 
+#' @param obj An `mcmcestfix` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the IEAVG. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.ieavg.poisson.Mcmcestfix" <- function(obj) {
   parout <- matrix(0, nrow = obj@K, ncol = 2)
   for (k in seq(1, obj@K)) {
@@ -277,15 +725,40 @@ setMethod(
   return(parout)
 }
 
-### Summary rownames: Creates rownames for the summary.
+#' Create summary row names
+#' 
+#' @description 
+#' For internal usage only. This function generates row names for the explicit 
+#' summaries.
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestfix` object containing the parameter estimates.
+#' @return A vector with the row names for the advanced summary.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".rownames.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     .rownames.poisson.Mcmcestfix(obj)
   }
 }
 
-### Summary rownames Poisson: Creates the row names
-### for the summary of Poisson estimates.
+#' Create summary row names for Poisson mixture models
+#' 
+#' @description 
+#' For internal usage only. This function generates row names for the explicit 
+#' summaries.
+#' 
+#' @param obj An `mcmcestfix` object containing the parameter estimates.
+#' @return A vector with the row names for the advanced summary over estimates 
+#'   for a Poisson mixture model.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".rownames.poisson.Mcmcestfix" <- function(obj) {
   rnames <- rep("", obj@K)
   for (k in seq(1, obj@K)) {
@@ -294,8 +767,22 @@ setMethod(
   return(rnames)
 }
 
-### Summary parameter names: Creates parameter
-### names for the components.
+#' Create parameter names for components
+#' 
+#' @description 
+#' For internal usage only. This function generates parameter names to be used 
+#' in the advanced summary. 
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestfix` object containing the parameter estimates.
+#' @return A vector with the names of the component parameters to be used in 
+#'   the advanced summary.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".parnames.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     parnames <- c("lambda")

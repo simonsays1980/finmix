@@ -14,7 +14,9 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
+# USED IN modelmoments 
 
+#' @noRd
 ".mixturemoments.normal" <- function(model, J, meanm) {
   zm <- array(0, dim = c(J, 1))
   zm[seq(2, J, by = 2)] <- exp(cumsum(log(seq(1, (J - 1), by = 2))))
@@ -27,11 +29,12 @@
       cm <- diff^(m - n) * model@par$sigma^(n / 2) * zm[n]
       moments[m] <- moments[m] + choose(m, n) * sum(model@weight * cm)
     }
-  }
+  } 
 
   return(moments)
 }
 
+#' @noRd
 ".mixturemoments.student" <- function(model, J, meanm) {
   moments <- array(0, dim = c(J, 1))
   sigma <- model@par$sigma
@@ -51,6 +54,7 @@
   return(moments)
 }
 
+#' @noRd
 ".mixturemoments.exponential" <- function(model, J, meanm) {
   moments <- array(0, dim = c(J, 1))
   lambda <- model@par$lambda
@@ -67,6 +71,7 @@
   return(moments)
 }
 
+#' @noRd
 ".raw.moments.student" <- function(n, sigma, degrees) {
   value <- array(0, dim = c(1, length(degrees)))
   if (n > 0 && n %% 2 == 0) {
@@ -80,6 +85,7 @@
   return(value)
 }
 
+#' @noRd
 ".raw.moments.exponential" <- function(n, lambda) {
   values <- rep(0, length(lambda))
   for (i in seq(0, n)) {

@@ -34,26 +34,39 @@
 // Stephens Relabeling Algorithm (1997a)
 // ------------------------------------------------------------
 
-/**
- * ------------------------------------------------------------
- * stephens1997a_poisson_cc
- * @brief   Defines Stephens (1997a) relabelling algorithm for
- *          Poisson models. The nlopt library is used for
- *          optimization (Nelder-Mead algorithm)
- * @par values1 sampled lambda parameters; M x K
- * @par values2 sampled weight parameters; M x K
- * @par pars    Gamma and Dirichlet hyper parameters
- * @par perm    matrix with all possible permutations of labels;
- * @return  matrix indicating the optimal labeling of sampled
- *          parameters; M x K
- * @detail  See Stephens (1997a)
- * @see nlopt
- * @author  Lars Simon Zehnder
- * ------------------------------------------------------------
- **/
-
+//' Relabeling algorithm from Stephens (1997a) for Poisson mixture models
+//' 
+//' @description
+//' For internal usage only. This function runs the re-labeling algorithm from 
+//' Stephens (1997a) for MCMC samples of a Poisson mixture distribution. For 
+//' optimization a Nelder-Mead-Algorithm from the NLopt library is used. This 
+//' is also the reason why the package depends on the `nloptr` package which 
+//' provides a header file for direct access to the C routines.
+//' 
+//' @param values1 A matrix containing the sampled component parameters 
+//'   `lambda`.
+//' @param values2 A matrix containing the sampled weights.
+//' @param pars A vector containing the parameters of the prior distributions 
+//'   of the component parameters and weights. More specifically, the 
+//'   parameters of the Dirichlet distribution for the weights and the 
+//'   shape and rate parameters for the Gamma distributions of the component 
+//'   parameters. 
+//' @param perm A matrix with all possible permutations of the labels. 
+//' @return A matrix of dimension `MxK` that holding the optimal labeling.
+//' @export
+//' 
+//' @seealso 
+//' * \code{\link{mcmcpermute}} for the calling function 
+//' * \code{\link{stephens1997b_poisson_cc}} for the re-labeling algorithm from 
+//'   Stephens (1997b)
+//' * \code{\link{stephens1997a_binomial_cc}} for the equivalent implementation 
+//'   for mixtures of Binomial distributions
+//' 
+//' @references
+//' * Stephens, Matthew (1997a), Discussion of "On Bayesian Analysis of 
+//'   Mixtures with an Unknown Number of Components",  Journal of the Royal 
+//'   Statistical Society: Series B (Statistical Methodology), 59: 731-792.
 // [[Rcpp::export]]
-
 arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
                                     Rcpp::NumericMatrix values2,
                                     arma::vec pars, const arma::umat perm)
@@ -126,27 +139,38 @@ arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
    return arma::conv_to<arma::imat>::from(index);
 }
 
-
-/**
- * ------------------------------------------------------------
- * stephens1997a_poisson_cc
- * @brief   Defines Stephens (1997a) relabelling algorithm for
- *          Binomial models. The nlopt library is used for
- *          optimization (Nelder-Mead algorithm)
- * @par values1 sampled lambda parameters; M x K
- * @par values2 sampled weight parameters; M x K
- * @par pars    Beta and Dirichlet hyper parameters
- * @par perm    matrix with all possible permutations of labels;
- * @return  matrix indicating the optimal labeling of sampled
- *          parameters; M x K
- * @detail  See Stephens (1997a)
- * @see nlopt
- * @author  Lars Simon Zehnder
- * ------------------------------------------------------------
- **/
-
+//' Relabeling algorithm from Stephens (1997a) for Binomial mixture models
+//'
+//' @description For internal usage only. This function runs the re-labeling
+//' algorithm from Stephens (1997a) for MCMC samples of a Binomial mixture
+//' distribution. For optimization a Nelder-Mead-Algorithm from the NLopt
+//' library is used. This is also the reason why the package depends on the
+//' `nloptr` package which provides a header file for direct access to the C
+//' routines.
+//'
+//' @param values1 A matrix containing the sampled component parameters `p`.
+//' @param values2 A matrix containing the sampled weights.
+//' @param pars A vector containing the parameters of the posterior
+//'   distributions of the component parameters and weights. More specifically,
+//'   the parameters of the Dirichlet distribution for the weights and the shape
+//'   and rate parameters for the Beta distributions of the component
+//'   parameters.
+//' @param perm A matrix with all possible permutations of the labels.
+//' @return A matrix of dimension `MxK` that holding the optimal labeling.
+//' @export
+//' 
+//' @seealso 
+//' * \code{\link{mcmcpermute}} for the calling function 
+//' * \code{\link{stephens1997b_poisson_cc}} for the re-labeling algorithm from 
+//'   Stephens (1997b)
+//' * \code{\link{stephens1997a_binomial_cc}} for the equivalent implementation 
+//'   for mixtures of Binomial distributions
+//' 
+//' @references
+//' * Stephens, Matthew (1997a), Discussion of "On Bayesian Analysis of 
+//'   Mixtures with an Unknown Number of Components",  Journal of the Royal 
+//'   Statistical Society: Series B (Statistical Methodology), 59: 731-792.
 // [[Rcpp::export]]
-
 arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
                                      Rcpp::NumericMatrix values2,
                                      arma::vec pars, const arma::umat perm)
@@ -227,8 +251,34 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
    return arma::conv_to<arma::imat>::from(index);
 }
 
+//' Relabeling algorithm from Stephens (1997b) for Poisson mixture models
+//' 
+//' @description
+//' For internal usage only. This function runs the re-labeling algorithm from 
+//' Stephens (1997b) for MCMC samples of a Poisson mixture distribution. 
+//' 
+//' @param values A matrix of observations of dimension `Nx1`.
+//' @param comp_par An array of component parameter samples from MCMC sampling. 
+//'   Dimension is `MxK`.
+//' @param weight An array of weight parameter samples from MCMC sampling. 
+//'   Dimension is `MxK`.
+//' @param max_iter A signed integer specifying the number of iterations to be 
+//'   run in optimization. Unused.  
+//' @return An integer matrix of dimension `MxK` that holding the optimal 
+//'   labeling.
+//' @export
+//' 
+//' @seealso 
+//' * \code{\link{mcmcpermute}} for the calling function 
+//' * \code{\link{stephens1997a_poisson_cc}} for the re-labeling algorithm from 
+//'   Stephens (1997a)
+//' * \code{\link{stephens1997b_binomial_cc}} for the equivalent implementation 
+//'   for mixtures of Binomial distributions
+//' 
+//' @references
+//' * Stephens, Matthew (1997a), Bayesian methods for mixtures of normal 
+//'   distributions, DPhil Thesis, University of Oxford, Oxford. 
 // [[Rcpp::export]]
-
 arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values,
                                     Rcpp::NumericMatrix comp_par,
                                     Rcpp::NumericMatrix weight_par,
@@ -328,8 +378,34 @@ arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values,
    return arma::conv_to<arma::imat>::from(index_out);
 }
 
+//' Relabeling algorithm from Stephens (1997b) for Binomial mixture models
+//' 
+//' @description
+//' For internal usage only. This function runs the re-labeling algorithm from 
+//' Stephens (1997b) for MCMC samples of a Binomial mixture distribution. 
+//' 
+//' @param values A matrix of observations of dimension `Nx1`.
+//' @param comp_par An array of component parameter samples from MCMC sampling. 
+//'   Dimension is `MxK`.
+//' @param weight An array of weight parameter samples from MCMC sampling. 
+//'   Dimension is `MxK`.
+//' @param max_iter A signed integer specifying the number of iterations to be 
+//'   run in optimization. Unused.  
+//' @return An integer matrix of dimension `MxK` that holding the optimal 
+//'   labeling.
+//' @export
+//' 
+//' @seealso 
+//' * \code{\link{mcmcpermute}} for the calling function 
+//' * \code{\link{stephens1997a_binomial_cc}} for the re-labeling algorithm from 
+//'   Stephens (1997a)
+//' * \code{\link{stephens1997b_poisson_cc}} for the equivalent implementation 
+//'   for mixtures of Poisson distributions
+//' 
+//' @references
+//' * Stephens, Matthew (1997a), Bayesian methods for mixtures of normal 
+//'   distributions, DPhil Thesis, University of Oxford, Oxford.
 // [[Rcpp::export]]
-
 arma::imat stephens1997b_binomial_cc(Rcpp::NumericVector values,
                                      Rcpp::NumericVector reps, Rcpp::NumericMatrix comp_par,
                                      Rcpp::NumericMatrix weight_par)
@@ -429,8 +505,34 @@ arma::imat stephens1997b_binomial_cc(Rcpp::NumericVector values,
    return arma::conv_to<arma::imat>::from(index_out);
 }
 
+//' Relabeling algorithm from Stephens (1997b) for Exponential mixture models
+//' 
+//' @description
+//' For internal usage only. This function runs the re-labeling algorithm from 
+//' Stephens (1997b) for MCMC samples of a Exponential mixture distribution. 
+//' 
+//' @param values A matrix of observations of dimension `Nx1`.
+//' @param comp_par An array of component parameter samples from MCMC sampling. 
+//'   Dimension is `MxK`.
+//' @param weight An array of weight parameter samples from MCMC sampling. 
+//'   Dimension is `MxK`.
+//' @param max_iter A signed integer specifying the number of iterations to be 
+//'   run in optimization. Unused.  
+//' @return An integer matrix of dimension `MxK` that holding the optimal 
+//'   labeling.
+//' @export
+//' 
+//' @seealso 
+//' * \code{\link{mcmcpermute}} for the calling function 
+//' * \code{\link{stephens1997b_poisson_cc}} for the equivalent implementation 
+//'   for mixtures of Poisson distributions
+//' * \code{\link{stephens1997b_binomial_cc}} for the equivalent implementation 
+//'   for mixtures of Binomial distributions
+//' 
+//' @references
+//' * Stephens, Matthew (1997a), Bayesian methods for mixtures of normal 
+//'   distributions, DPhil Thesis, University of Oxford, Oxford.
 // [[Rcpp::export]]
-
 arma::imat stephens1997b_exponential_cc(Rcpp::NumericVector values,
                                         Rcpp::NumericMatrix comp_par,
                                         Rcpp::NumericMatrix weight_par)
@@ -529,4 +631,3 @@ arma::imat stephens1997b_exponential_cc(Rcpp::NumericVector values,
    }
    return arma::conv_to<arma::imat>::from(index_out);
 }
-

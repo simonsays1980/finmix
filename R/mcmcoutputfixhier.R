@@ -15,6 +15,19 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `mcmcoutput` class for hierarchical priors
+#' 
+#' @description 
+#' This class stores in addition to the information from its parent class 
+#' `mcmcoutputfix` also the sampled parameters from the hierarchical prior. 
+#' 
+#' @slot hyper A list storing the sampled parameters from the hierarchical 
+#'   prior. 
+#' @exportClass mcmcoutputfixhier
+#' @describeIn mcmcoutput_class
+#' 
+#' @seealso 
+#' * [mcmcoutputfix][mcmcoutput_class] for the parent class``
 .mcmcoutputfixhier <- setClass("mcmcoutputfixhier",
   representation(hyper = "list"),
   contains = c("mcmcoutputfix"),
@@ -25,6 +38,16 @@
   prototype(hyper = list())
 )
 
+#' Shows a summary of an `mcmcoutputfixhier` object.
+#' 
+#' Calling [show()] on an `mcmcoutputfixhier` object gives an overview 
+#' of the `mcmcoutputfixhier` object.
+#' 
+#' @param object An `mcmcoutputfixhier` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn mcmcoutput_class
 setMethod(
   "show", "mcmcoutputfixhier",
   function(object) {
@@ -62,6 +85,50 @@ setMethod(
   }
 )
 
+#' Plot traces of MCMC sampling
+#' 
+#' @description 
+#' Calling [plotTraces()] plots the MCMC traces of the mixture log-likelihood 
+#' , the mixture log-likelihood of the prior distribution, the log-likelihood 
+#' of the complete data posterior, or the weights and parameters if `lik` is 
+#' set to `0`. 
+#' 
+#' If `lik` is set to `0` the parameters of the components and the posterior 
+#' parameters are plotted together with `K-1` weights.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param lik An integer indicating, if the log-likelihood traces should be 
+#'   plotted (default). If set to `0` the traces for the parameters 
+#'   and weights are plotted instead. 
+#' @param col A logical indicating, if the plot should be colored.
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return A plot of the traces of the MCMC samples.
+#' @exportMethod plotTraces
+#' @describeIn mcmcoutput_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' plotTraces(f_output, lik = 0)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPointProc()] for plotting point processes for sampled values
+#' * [plotPostDens()] for plotting the posterior density of component parameters
 setMethod(
   "plotTraces", signature(
     x = "mcmcoutputfixhier",
@@ -95,6 +162,42 @@ setMethod(
   }
 )
 
+#' Plot histograms of the parameters and weights
+#' 
+#' @description 
+#' Calling [plotHist()] plots histograms of the sampled parameters and weights 
+#' from MCMC sampling.More specifically, all component parameters, `K-1` of the 
+#' weights and the posterior parameters are considered in the histogram plots. 
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Histograms of the MCMC samples.
+#' @exportMethod plotHist
+#' @describeIn mcmcoutput_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' plotHist(f_output)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPointProc()] for plotting point processes for sampled values
+#' * [plotPostDens()] for plotting the posterior density of component parameters
 setMethod(
   "plotHist", signature(
     x = "mcmcoutputfixhier",
@@ -120,6 +223,42 @@ setMethod(
   }
 )
 
+#' Plot densities of the parameters and weights
+#' 
+#' @description 
+#' Calling [plotDens()] plots densities of the sampled parameters and weights 
+#' from MCMC sampling.More specifically, all component parameters, `K-1` of the 
+#' weights and the posterior parameters are considered in the density plots. 
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Densities of the MCMC samples.
+#' @exportMethod plotDens
+#' @describeIn mcmcoutput_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' plotDens(f_output)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPointProc()] for plotting point processes for sampled values
+#' * [plotPostDens()] for plotting the posterior density of component parameters
 setMethod(
   "plotDens", signature(
     x = "mcmcoutputfixhier",
@@ -145,6 +284,41 @@ setMethod(
   }
 )
 
+#' Plot point processes of the component parameters
+#' 
+#' @description 
+#' Calling [plotPointProc()] plots point processes of the sampled component 
+#' parameters from MCMC sampling.  
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Point process of the MCMC samples.
+#' @exportMethod plotPointProc
+#' @describeIn mcmcoutput_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' plotPointProc(f_output)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPostDens()] for plotting posterior densities for sampled values
 setMethod(
   "plotPointProc", signature(
     x = "mcmcoutputfixhier",
@@ -156,6 +330,41 @@ setMethod(
   }
 )
 
+#' Plot sampling representations for the component parameters.
+#' 
+#' @description 
+#' Calling [plotSampRep()] plots sampling representations of the sampled 
+#' component parameters from MCMC sampling.  
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Sampling representation of the MCMC samples.
+#' @exportMethod plotSampRep
+#' @describeIn mcmcoutput_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' plotSampRep(f_output)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotPointProc()] for plotting point processes of sampled values
+#' * [plotPostDens()] for plotting posterior densities for sampled values
 setMethod(
   "plotSampRep", signature(
     x = "mcmcoutputfixhier",
@@ -167,6 +376,41 @@ setMethod(
   }
 )
 
+#' Plot posterior densities of the component parameters
+#' 
+#' @description 
+#' Calling [plotPostDens()] plots posterior densities of the sampled component 
+#' parameters from MCMC sampling, if the number of components is two. 
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return Posterior densities of the MCMC samples.
+#' @exportMethod plotPostDens
+#' @describeIn mcmcoutput_class
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' plotPostDens(f_output)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotSampRep()] for plotting sampling representations of sampled values
+#' * [plotPointProc()] for plotting point processes for sampled values
 setMethod(
   "plotPostDens", signature(
     x = "mcmcoutputfixhier",
@@ -178,6 +422,19 @@ setMethod(
   }
 )
 
+#' Constructs a sub-chain of MCMC samples 
+#' 
+#' @description 
+#' Calling [subseq()] constructs an MCMC sub-chain from the samples in the 
+#' passed-in `mcmcoutput` object specfied by the index `array` in `index`. This 
+#' can be advantageous, if chains are non-stationary. For successful MCMC 
+#' sampling the chain must be converged to the target distribution, the true 
+#' distribution of parameters, weights and indicators.
+#' 
+#' @param object An `mcmcoutput` object containing all sampled values.
+#' @param index An array specifying the extraction of the sub-chain.
+#' @return An `mcmcoutput` object containing the values from the sub-chain.
+#' @noRd
 setMethod(
   "subseq", signature(
     object = "mcmcoutputfixhier",
@@ -185,21 +442,28 @@ setMethod(
   ),
   function(object, index) {
     ## Call 'subseq()' from 'mcmcoutputfix'
-    callNextMethod(object, index)
+    object <- callNextMethod(object, index)
     dist <- object@model@dist
     ## hyper ##
     if (dist == "poisson") {
       .subseq.Poisson.Hier(object, index)
-    } else if (dist == "normal" || dist == "student") {
-      .subseq.Normal.Hier(object, index)
     } else if (dist %in% c("normal", "student")) {
-      .subseq.Norstud.Hier.(object, index)
+      .subseq.Norstud.Hier(object, index)
     } else if (dist %in% c("normult", "studmult")) {
       .subseq.Normultstud.Hier(object, index)
     }
   }
 )
 
+#' Swaps elements between components
+#' 
+#' @description 
+#' Not yet implemented.
+#' 
+#' @param object An `mcmcoutput` object containing the sampled values.
+#' @param index An array specifying the extraction of the values.
+#' @return An `mcmcoutput` object with swapped elements.
+#' @noRd 
 setMethod(
   "swapElements", signature(
     object = "mcmcoutputfixhier",
@@ -217,6 +481,32 @@ setMethod(
   }
 )
 
+#' Getter method of `mcmcoutput` class.
+#' 
+#' Returns the `hyper` slot.
+#' 
+#' @param object An `mcmcoutput` object.
+#' @returns The `hyper` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+#'                  indicfix = TRUE)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' # Get the slot.
+#' getHyper(f_output)
+#' 
+#' @seealso 
+#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getHyper", "mcmcoutputfixhier",
   function(object) {
@@ -224,8 +514,8 @@ setMethod(
   }
 )
 
-## No setters for this object as it is not intended ##
-## that users manipulate this object. 		    	##
+## No setters for this object as it is not intended 
+## that users manipulate this object. 		    	
 
 ### Private functions
 ### These functions are not exported.
@@ -235,10 +525,25 @@ setMethod(
 ### Plot Traces
 ### Plot traces Poisson: Plots traces for each component
 ### parameter of a Poisson mixture and the hyper parameter 'b'.
+
+#' Plots traces of Poisson mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a Poisson mixture model.
+#' 
+#' @param x An `mcmcoutput` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".traces.Poisson.Hier" <- function(x, dev) {
   K <- x@model@K
   trace.n <- K + 1
-  if (.check.grDevice() && y) {
+  if (.check.grDevice() && dev) {
     dev.new(title = "Traceplots")
   }
   par(
@@ -268,6 +573,20 @@ setMethod(
   mtext(side = 1, "Iterations", cex = 0.7, line = 3)
 }
 
+#' Plots traces of normal mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a normal mixture model.
+#' 
+#' @param x An `mcmcoutput` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".traces.Normal.Hier" <- function(x, dev) {
   K <- x@model@K
   trace.n <- 2 * K + 1
@@ -313,19 +632,20 @@ setMethod(
   mtext(side = 1, "Iterations", cex = .7, line = 3)
 }
 
-### --------------------------------------------------------------------
-### .traces.Student.Hier
-### @description    Plots traces for parameters of a univariate Student
-###                 mixture.
-### @par    x       an object of class mcmcoutputfix
-###         dev     an object of class 'logical'
-### @detail         Plots the traces for each component parameter of an
-###                 Student mixture. If 'dev' is set to FALSE
-###                 (TRUE is default) no device is created, instead
-###                 the graphic can be stored to a file.
-### @see            ?mcmcoutput, ?plotTraces
-### @author         Lars Simon Zehnder
-### --------------------------------------------------------------------
+#' Plots traces of Student-t mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a Student-t mixture model.
+#' 
+#' @param x An `mcmcoutput` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".traces.Student.Hier" <- function(x, dev) {
   K <- x@model@K
   trace.n <- 3 * K + 1
@@ -386,7 +706,21 @@ setMethod(
   mtext(side = 1, "Iterations", cex = .7, line = 3)
 }
 
-"traces.Normult.Hier" <- function(x, dev, col) {
+#' Plots traces of multivariate normal mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a multivariate normal mixture model.
+#' 
+#' @param x An `mcmcoutput` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
+".traces.Normult.Hier" <- function(x, dev, col) {
   .traces.Normult(x, dev, col)
   r <- x@model@r
   K <- x@model@K
@@ -437,6 +771,20 @@ setMethod(
   mtext(side = 1, "Iterations", cex = .7, line = 3)
 }
 
+#' Plots traces of multivariate Student-t mixture samples
+#' 
+#' @description 
+#' For internal usage only. This function plots the traces for sampled values 
+#' from a multivariate Student-t mixture model.
+#' 
+#' @param x An `mcmcoutput` object containing all samples.
+#' @param dev A logical indicating if the plot should be shown by a grapical 
+#'   device.
+#' @return A plot of the traces of sampled values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotTraces()] for the calling function
 ".traces.Studmult.Hier" <- function(x, dev, col) {
   .traces.Studmult(x, dev, col)
   r <- x@model@r
@@ -489,8 +837,22 @@ setMethod(
 }
 
 ### Plot Histograms
-### Plot hist Poisson: Plots histograms for each component
-### parameter and the hyper parameter 'b'.
+
+#' Plot histograms of Poisson samples
+#' 
+#' @description 
+#' For internal usage only. This function plots histograms of sampled Poisson 
+#' parameters and weights. In addition it plots the histogram of the 
+#' parameter `b` of the hierarchical prior.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with histograms for the smapled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotHist()] for the calling function
 ".hist.Poisson.Hier" <- function(x, dev) {
   K <- x@model@K
   if (.check.grDevice() && dev) {
@@ -512,6 +874,21 @@ setMethod(
   }
 }
 
+#' Plot histograms of normal samples
+#' 
+#' @description 
+#' For internal usage only. This function plots histograms of sampled normal
+#' parameters and weights. In addition it plots the sampled parameter `C` of 
+#' the hierarchical prior.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with histograms for the smapled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotHist()] for the calling function
 ".hist.Normal.Hier" <- function(x, dev) {
   K <- x@model@K
   mu <- x@par$mu
@@ -548,6 +925,21 @@ setMethod(
   .symmetric.Hist(C, "C")
 }
 
+#' Plot histograms of Student-t samples
+#' 
+#' @description 
+#' For internal usage only. This function plots histograms of sampled Student-t
+#' parameters and weights. In addition it plots the sampled parameter `C` of 
+#' the hierarchical prior.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with histograms for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotHist()] for the calling function
 ".hist.Student.Hier" <- function(x, dev) {
   K <- x@model@K
   mu <- x@par$mu
@@ -595,6 +987,21 @@ setMethod(
   .symmetric.Hist(C, "C")
 }
 
+#' Plot histograms of multivariate normal samples
+#' 
+#' @description 
+#' For internal usage only. This function plots histograms of sampled 
+#' multivariate normal parameters and weights. In addition it plots the 
+#' the logarithmised determinant and the trace of the parameter matrix `C`.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with histograms for the smapled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotHist()] for the calling function
 ".hist.Normult.Hier" <- function(x, dev) {
   K <- x@model@K
   r <- x@model@r
@@ -650,6 +1057,21 @@ setMethod(
   .symmetric.Hist(cbind(logdetC, trC), C.lab.names)
 }
 
+#' Plot histograms of multivariate Student-t samples
+#' 
+#' @description 
+#' For internal usage only. This function plots histograms of sampled 
+#' multivariate Student-t parameters and weights. In addition it plots the 
+#' the logarithmised determinant and the trace of the parameter matrix `C`.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with histograms for the smapled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotHist()] for the calling function
 ".hist.Studmult.Hier" <- function(x, dev) {
   K <- x@model@K
   r <- x@model@r
@@ -728,8 +1150,22 @@ setMethod(
 }
 
 ### Plot Densities
-### Plot Dens Poisson Hier: Plots Kernel densities for each
-### component parameter and the hyper parameter 'b'.
+
+#' Plot densities of Poisson samples
+#' 
+#' @description 
+#' For internal usage only. This function plots densities of sampled Poisson 
+#' parameters and weights. In addition it plots the Kernel densities of the 
+#' parameter `b` of the hierarchical prior.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with densities for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotDens()] for the calling function
 ".dens.Poisson.Hier" <- function(x, dev) {
   K <- x@model@K
   if (.check.grDevice() && dev) {
@@ -751,6 +1187,21 @@ setMethod(
   }
 }
 
+#' Plot densities of normal samples
+#' 
+#' @description 
+#' For internal usage only. This function plots densities of sampled normal 
+#' parameters and weights. In addiiton it plots the Kernel densities of the 
+#' parameter `C` of the hierarchical prior.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with densities for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotDens()] for the calling function
 ".dens.Normal.Hier" <- function(x, dev) {
   K <- x@model@K
   mu <- x@par$mu
@@ -787,6 +1238,21 @@ setMethod(
   .symmetric.Dens(C, "C")
 }
 
+#' Plot densities of Student-t samples
+#' 
+#' @description 
+#' For internal usage only. This function plots densities of sampled Student-t 
+#' parameters and weights. In addiiton it plots the Kernel densities of the 
+#' parameter `C` of the hierarchical prior.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with densities for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotDens()] for the calling function
 ".dens.Student.Hier" <- function(x, dev) {
   K <- x@model@K
   mu <- x@par$mu
@@ -834,7 +1300,23 @@ setMethod(
   .symmetric.Dens(C, "C")
 }
 
-"dens.Normult.Hier" <- function(x, dev) {
+#' Plot densities of multivariate normal samples
+#' 
+#' @description 
+#' For internal usage only. This function plots densities of sampled 
+#' multivariate normal parameters and weights. In addition it plots Kernel 
+#' densities of the logarithmized determinant and the trace of the parameter 
+#' matrix `C` of the hierarchical prior.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with densities for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotDens()] for the calling function
+".dens.Normult.Hier" <- function(x, dev) {
   K <- x@model@K
   r <- x@model@r
   mu <- x@par$mu
@@ -889,7 +1371,23 @@ setMethod(
   .symmetric.Dens(cbind(logdetC, trC), C.lab.names)
 }
 
-"dens.Studmult.Hier" <- function(x, dev) {
+#' Plot densities of multivariate Student-t samples
+#' 
+#' @description 
+#' For internal usage only. This function plots densities of sampled 
+#' multivariate Student-t parameters and weights. In addition it plots Kernel 
+#' densities of the logarithmized determinant and the trace of the parameter 
+#' matrix `C` of the hierarchical prior.
+#' 
+#' @param x An `mcmcoutput` object containing all sampled values.
+#' @param dev A logical indicating, if the plots should be shown on a graphical 
+#'   device.
+#' @return A plot with densities for the sampled parameters and weights.
+#' @noRd
+#' 
+#' @seealso 
+#' * [plotDens()] for the calling function
+".dens.Studmult.Hier" <- function(x, dev) {
   K <- x@model@K
   r <- x@model@r
   mu <- x@par$mu
@@ -962,7 +1460,23 @@ setMethod(
 
 ### Logic
 ### Logic subseq Hier: Creates a subsequence for the sample
-### of the Poisson hyper parameter 'b'.
+### of the Poisson hyper parameter 'b'. 
+
+#' Generates sub-chains from Poisson MCMC samples with hierarchical prior
+#' 
+#' @description 
+#' For internal usage only. This function generates sub-chains from an 
+#' `mcmcoutput` object with a Poisson `model` by defining an `index` array 
+#' specifying how extraction of sub-samples should be performed. Has errors for 
+#' some `mcmcoutput` sub-classes.
+#' 
+#' @param obj An `mcmcoutput` object containing all MCMC samples.
+#' @param index An array specifying the extraction of sub-samples.
+#' @return An `mcmcoutput` object containing sub-chains.
+#' @noRd
+#' 
+#' @seealso 
+#' * [subseq()] for the calling method
 ".subseq.Poisson.Hier" <- function(obj, index) {
   obj@hyper$b <- array(obj@hyper$b[index],
     dim = c(obj@M, 1)
@@ -970,6 +1484,22 @@ setMethod(
   return(obj)
 }
 
+#' Generates sub-chains from Normal and Student-t MCMC samples with 
+#' hierarchical prior
+#' 
+#' @description 
+#' For internal usage only. This function generates sub-chains from an 
+#' `mcmcoutput` object with a Normal or Student-t `model` by defining an 
+#' `index` array specifying how extraction of sub-samples should be performed. 
+#' Has errors for some `mcmcoutput` sub-classes.
+#' 
+#' @param obj An `mcmcoutput` object containing all MCMC samples.
+#' @param index An array specifying the extraction of sub-samples.
+#' @return An `mcmcoutput` object containing sub-chains.
+#' @noRd
+#' 
+#' @seealso 
+#' * [subseq()] for the calling method
 ".subseq.Norstud.Hier" <- function(obj, index) {
   obj@hyper$C <- array(obj@hyper$C[index],
     dim = c(obj@M, 1)
@@ -977,6 +1507,22 @@ setMethod(
   return(obj)
 }
 
+#' Generates sub-chains from multivariate Normal and Student-t MCMC samples with 
+#' hierarchical prior
+#' 
+#' @description 
+#' For internal usage only. This function generates sub-chains from an 
+#' `mcmcoutput` object with a multivariate Normal or Student-t `model` by 
+#' defining an `index` array specifying how extraction of sub-samples should be 
+#' performed. Has errors for some `mcmcoutput` sub-classes.
+#' 
+#' @param obj An `mcmcoutput` object containing all MCMC samples.
+#' @param index An array specifying the extraction of sub-samples.
+#' @return An `mcmcoutput` object containing sub-chains.
+#' @noRd
+#' 
+#' @seealso 
+#' * [subseq()] for the calling method
 ".subseq.Normultstud.Hier" <- function(obj, index) {
   obj@hyper$C <- array(obj@hyper$C[index, ],
     dim = c(obj@M, obj@model@K)

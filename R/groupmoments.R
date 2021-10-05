@@ -15,6 +15,29 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `groupmoments` class
+#' 
+#' Stores moments for finite mixture component distributions. These are only
+#' available, if the data contains in addition to observations also indicators 
+#' defining to which component a certain observation belongs. These indicators 
+#' are stored in an [fdata][fdata_class] object in the slot `S`. 
+#' 
+#' @slot NK An array containing the group sizes for each component.
+#' @slot mean A matrix containing the group averages for each component.
+#' @slot WK An array containing the within-group variability. For multivariate 
+#'   data this is an array of dimension `K x r x r` and for univariate 
+#'   data this is simply an array of dimension `1 x K`.
+#' @slot var An array containing the within-group (co)variance. For multivariate 
+#'   data this is an array of dimension `K x r x r` and for univariate 
+#'   data this is simply an array of dimension `1 x K`.
+#' @slot fdata An [fdata][fdata_class] object containing the data. 
+#' @exportClass groupmoments
+#' @name groupmoments_class
+#' @seealso 
+#' * [groupmoments()] for the class constructor
+#' * [datamoments][datamoments_class] for the base class for data moments
+#' * [datamoments()] for the constructor of any object of the `datamoments` 
+#'   class family
 .groupmoments <- setClass("groupmoments",
   representation(
     NK = "array",
@@ -36,6 +59,36 @@
   )
 )
 
+#' Finmix `groupmoments` class constructor
+#' 
+#' @description
+#' Calling [groupmoments()] creates an object holding various 
+#' component-specific moments. These moments can only constructed if the 
+#' [fdata][fdata_class] object contains in addition to observations also 
+#' indicators defining from which component a certain observation stems.
+#' 
+#' @param value An `fdata` object containing observations in slot `y` and 
+#'   indicators in slot `S`.
+#' @return A `groupmoments` object containing component-specific moments of the 
+#'   `fdata` object.
+#' @export
+#' @name groupmoments
+#' 
+#' @example 
+#' # Define a mixture model with exponential components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Create group moments of the data.
+#' groupmoments(f_data)
+#' 
+#' @seealso 
+#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#'   class
+#' * [datamoments][datamoments_class] for the base class for data moments
+#' * [datamoments()] for the constructor of any object of the `datamoments` 
+#'   class family
 "groupmoments" <- function(value = fdata()) {
   hasY(value, verbose = TRUE)
   hasS(value, verbose = TRUE)
@@ -44,6 +97,23 @@
 
 ## initializes by immediately calling method ##
 ## 'generateMoments' ##
+#' Initializer of the `groupmoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()` 
+#' object. to generate in the initialization step the moments for a passed-in 
+#' `fdata` object.
+#' 
+#' @param .Object An object: see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix [fdata][fdata_class] object containing the observations.
+#' @noRd
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "groupmoments",
   function(.Object, ..., value) {
@@ -52,6 +122,15 @@ setMethod(
   }
 )
 
+#' Generate moments
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of a
+#' finite mixture with continuous data.
+#' 
+#' @param object A `groupmoments` object. 
+#' @return An `groupmoments` object with calculated moments.
+#' @noRd
 setMethod(
   "generateMoments", "groupmoments",
   function(object) {
@@ -60,6 +139,16 @@ setMethod(
 )
 
 ## R usual 'show' function ##
+#' Shows a summary of a `groupmoments` object.
+#' 
+#' Calling [show()] on a `groupmoments` object gives an overview 
+#' of the moments of a finit mixture with continuous data.
+#' 
+#' @param object A `groupmoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn groupmoments_class
 setMethod(
   "show", "groupmoments",
   function(object) {
@@ -88,6 +177,28 @@ setMethod(
 )
 
 ## R usual Getters ##
+#' Getter method of `groupmoments` class.
+#' 
+#' Returns the `NK` slot.
+#' 
+#' @param object An `groupmoments` object.
+#' @returns The `NK` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_gmoments <- groupmoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getNK(f_gmoments)
+#' 
+#' @seealso 
+#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#'   class
+#' * [groupmoments()] for the class constructor
 setMethod(
   "getNK", "groupmoments",
   function(object) {
@@ -95,6 +206,28 @@ setMethod(
   }
 )
 
+#' Getter method of `groupmoments` class.
+#' 
+#' Returns the `mean` slot.
+#' 
+#' @param object An `groupmoments` object.
+#' @returns The `mean` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_gmoments <- groupmoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getMean(f_gmoments)
+#' 
+#' @seealso 
+#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#'   class
+#' * [groupmoments()] for the class constructor
 setMethod(
   "getMean", "groupmoments",
   function(object) {
@@ -102,6 +235,28 @@ setMethod(
   }
 )
 
+#' Getter method of `groupmoments` class.
+#' 
+#' Returns the `WK` slot.
+#' 
+#' @param object An `groupmoments` object.
+#' @returns The `WK` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_gmoments <- groupmoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getWK(f_gmoments)
+#' 
+#' @seealso 
+#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#'   class
+#' * [groupmoments()] for the class constructor
 setMethod(
   "getWK", "groupmoments",
   function(object) {
@@ -109,6 +264,28 @@ setMethod(
   }
 )
 
+#' Getter method of `groupmoments` class.
+#' 
+#' Returns the `Var` slot.
+#' 
+#' @param object An `groupmoments` object.
+#' @returns The `Var` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_gmoments <- groupmoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getVar(f_gmoments)
+#' 
+#' @seealso 
+#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#'   class
+#' * [groupmoments()] for the class constructor
 setMethod(
   "getVar", "groupmoments",
   function(object) {
@@ -127,6 +304,17 @@ setMethod(
 
 ### Private functions
 ### These functions are not exported
+#' Generate data moments for finite mixture data
+#' 
+#' @description 
+#' Only called implicitly. generates all moments of finite mixture data in a 
+#' `fdata` object.
+#' 
+#' @param object A `groupmoments` object to contain all calculated
+#'   moments. 
+#' @returns A `groupmoments` object containing all moments of the 
+#'   finite mixture data.
+#' @noRd
 ".generateGroupMoments" <- function(object) {
   if (!hasS(object@fdata)) {
     return(object)

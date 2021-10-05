@@ -22,6 +22,13 @@
 ### This function checks, if an option 'title' for the
 ### graphical device used by R is available. If the answer
 ### is TRUE, the title can be set by a 'plot()' function.
+#' Checks if graphical device has `title` option
+#' 
+#' @description
+#' For internal use only. 
+#' 
+#' @returns `TRUE` if `title` option exists. 
+#' @name graphic_funs
 ".check.grDevice" <- function() {
   ## title argument ##
   any(names(formals(getOption("device")))
@@ -32,6 +39,17 @@
 ### This functions checks the dimension of a dataset 'y'
 ### an distributes histograms for each variable in the
 ### dataset symmetrically around the graphical grid.
+#' Layout historams symmetrically along grid
+#' 
+#' @description
+#' For internal use only. 
+#' 
+#' @param y A matrix containing data from a finite mixture. Can be univariate 
+#'   or multivariate.
+#' @param lab.names A vector of characters describing the axis names.
+#' @return A plot containing the histograms of each of `y`'s dimensions.
+#' @describeIn graphical_funs
+#' @noRd 
 ".symmetric.Hist" <- function(y, lab.names) {
   r <- NCOL(y)
   if (r == 1) {
@@ -136,6 +154,17 @@
 ### This functions checks the dimension of a dataset 'y'
 ### an distributes Kernel densities for each variable in the
 ### dataset symmetrically around the graphical grid.
+#' Layout density plots symmetrically along grid
+#' 
+#' @description
+#' For internal use only. 
+#' 
+#' @param y A matrix containing data from a finite mixture. Can be univariate 
+#'   or multivariate.
+#' @param lab.names A vector of characters describing the axis names.
+#' @return A plot containing the densities of each of `y`'s dimensions.
+#' @describeIn graphical_funs
+#' @noRd 
 ".symmetric.Dens" <- function(y, lab.names) {
   r <- NCOL(y)
   if (r == 1) {
@@ -240,6 +269,19 @@
 ### This function plots a histogram with 'finmix' specific
 ### settings. In addition it uses 'rug()' to plot the data
 ### points.
+#' Plots histogram with `finmix`-specific settings
+#' 
+#' @description
+#' For internal use only. 
+#' 
+#' @param y A matrix containing data from a finite mixture. Only univariate 
+#'   data is allowed.
+#' @param lab.name A vector of characters describing the axis names.
+#' @return A plot containing the histogram of the data stored in `y` together
+#'   with rug representation of the data. 
+#' @describeIn graphical_funs
+#' @import graphics
+#' @noRd 
 ".comb.Hist" <- function(y, lab.name) {
   hist(y,
     col = "gray65",
@@ -257,6 +299,19 @@
 ### This function plots a Kernel density with 'finmix' specific
 ### settings. In addition it uses 'rug()' to plot the data
 ### points.
+#' Plots density with `finmix`-specific settings
+#' 
+#' @description
+#' For internal use only. 
+#' 
+#' @param y A matrix containing data from a finite mixture. Only univariate 
+#'   data is allowed.
+#' @param lab.name A vector of characters describing the axis names.
+#' @return A plot containing the density of the data stored in `y` together
+#'   with rug representation of the data. 
+#' @describeIn graphical_funs
+#' @importFrom KernSmooth bkde
+#' @noRd 
 ".comb.Dens" <- function(y, lab.name) {
   dens <- bkde(y)
   plot(dens$x, dens$y,

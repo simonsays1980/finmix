@@ -15,6 +15,31 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `cdatamoments` class
+#' 
+#' Stores moments of an [fdata][fdata_class] object containing continuous data. 
+#' The `fdata` object is stored in the parent [datamoments][datamoments_class] 
+#' class.
+#' 
+#' @slot higher An array containing the four higher centralized moments of the 
+#'   continuous data stored in the `fdata` object.
+#' @slot skewness A vector storing the skewness of the continuous data in the 
+#'   corresponding `fdata` object. 
+#' @slot kurtosis A vector storing the kurtosis of the continuous data in the 
+#'   corresponding `fdata` object. 
+#' @slot corr A matrix containing the correlations between the data dimensions 
+#'   in case of multivariate data (i.e. slot `r` in the `fdata` object is 
+#'   larger than one).
+#' @slot smoments A `csdatamoments` object, if the `fdata` object also holds 
+#'   indicators. `NULL`, if no indicators are present in the `fdata` object. 
+#' @exportClass cdatamoments
+#' @name cdatamoments_class
+#' @seealso 
+#' * [datamoments][datamoments_class] for the parent class
+#' * [ddatamoments][ddatamoments_class] for the corresponding class for 
+#'   discrete data
+#' * [csdatamoments][csdatamoments_class] for the contained class if indicators
+#'   are present in the `fdata` object 
 .cdatamoments <- setClass("cdatamoments",
   representation(
     higher = "array",
@@ -37,6 +62,23 @@
   )
 )
 
+#' Initializer of the `cdatamoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()` 
+#' to generate in the initialization step the moments for a passed-in `fdata`
+#' object.
+#' 
+#' @param .Object An object: see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix `fdata` object containing the observations.
+#' @noRd
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "cdatamoments",
   function(.Object, ..., value = fdata()) {
@@ -50,6 +92,15 @@ setMethod(
   }
 )
 
+#' Generate moments for continuous data.
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of a
+#' finite mixture with continuous data.
+#' 
+#' @param object An `cdatamoments` object. 
+#' @return An `cdatamoments` object with calculated moments.
+#' @noRd
 setMethod(
   "generateMoments", "cdatamoments",
   function(object) {
@@ -57,6 +108,16 @@ setMethod(
   }
 )
 
+#' Shows a summary of a `cdatamoments` object.
+#' 
+#' Calling [show()] on a `cdatamoments` object gives an overview 
+#' of the moments of a finit mixture with continuous data.
+#' 
+#' @param object A `cdatamoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn cdatamoments_class
 setMethod(
   "show", "cdatamoments",
   function(object) {
@@ -101,6 +162,27 @@ setMethod(
 )
 
 ## Getters ##
+#' Getter method of `cdatamoments` class.
+#' 
+#' Returns the `smoments` slot.
+#' 
+#' @param object An `cdatamoments` object.
+#' @returns The `smoments` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getSmoments(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getSmoments", "cdatamoments",
   function(object) {
@@ -108,6 +190,27 @@ setMethod(
   }
 )
 
+#' Getter method of `cdatamoments` class.
+#' 
+#' Returns the `higher` slot.
+#' 
+#' @param object An `cdatamoments` object.
+#' @returns The `higher` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Use the getter.
+#' getHigher(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getHigher", "cdatamoments",
   function(object) {
@@ -115,6 +218,27 @@ setMethod(
   }
 )
 
+#' Getter method of `cdatamoments` class.
+#' 
+#' Returns the `skewness` slot.
+#' 
+#' @param object An `cdatamoments` object.
+#' @returns The `skewness` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Use the getter.
+#' getSkewness(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getSkewness", "cdatamoments",
   function(object) {
@@ -122,6 +246,27 @@ setMethod(
   }
 )
 
+#' Getter method of `cdatamoments` class.
+#' 
+#' Returns the `kurtosis` slot.
+#' 
+#' @param object An `cdatamoments` object.
+#' @returns The `kurtosis` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Use the getter.
+#' getKurtosis(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getKurtosis", "cdatamoments",
   function(object) {
@@ -129,6 +274,27 @@ setMethod(
   }
 )
 
+#' Getter method of `cdatamoments` class.
+#' 
+#' Returns the `corr` slot.
+#' 
+#' @param object An `cdatamoments` object.
+#' @returns The `corr` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Use the getter.
+#' getCorr(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getCorr", "cdatamoments",
   function(object) {
@@ -140,6 +306,18 @@ setMethod(
 
 ### Private functions
 ### These function are not exported
+#' Generate data moments for finite mixture data
+#' 
+#' @description 
+#' Only called implicitly. generates all moments of finite mixture data in a 
+#' `fdata` object.
+#' 
+#' @param object An `cdatamoments` object to contain all calculated
+#'   moments. 
+#' @returns An `cdatamoments` object containing all moments of the 
+#'   inite mixture data.
+#' @importFrom stats var cor
+#' @noRd
 ".generateCdatamoments" <- function(object) {
   ## enforce column-wise ordering ##
   hasY(object@fdata, verbose = TRUE)

@@ -15,6 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `mcmcoutput` class for fixed indicators and posterior parameters
+#' 
+#' @description 
+#' This class defines the storage of parameters of the posterior distribution. 
+#' It inherits from the 
+#' 
+#' @exportClass mcmcoutputpermfixpost
+#' @describeIn mcmcoutputperm_class
 .mcmcoutputpermfixpost <- setClass("mcmcoutputpermfixpost",
   contains = c(
     "mcmcpermfixpost",

@@ -28,8 +28,27 @@
 #include "mincol.h"
 #include "moments.h"
 
+//' Swaps values in each row
+//' 
+//' @description
+//' This function swaps the values in each row of a matrix by permuting the 
+//' columns via the indices provided in the `index` matrix. All 
+//' `swapElements()`-methods use this function internally. The code is extended 
+//' to `C++` using the packages `Rcpp` and `RcppArmadillo`.
+//' 
+//' @param values A matrix containing the values to be swapped. 
+//' @param index An integer matrix defining how values should be swapped. 
+//' @return A matrix with swapped values. 
+//' @export
+//' 
+//' @examples 
+//' values <- matrix(rnorm(10), nrow = 2)
+//' index <- matrix(c(2,1), nrow = 5, ncol = 2)
+//' swap_cc(values, index)
+//' 
+//' @seealso
+//' * [swapElements()][mcmcoutput_class] for the calling function
 // [[Rcpp::export]]
-
 Rcpp::NumericMatrix swap_cc(Rcpp::NumericMatrix values, Rcpp::IntegerMatrix index)
 {
    /* If dimensions of both arguments do not agree throw an exception */
@@ -58,6 +77,26 @@ Rcpp::NumericMatrix swap_cc(Rcpp::NumericMatrix values, Rcpp::IntegerMatrix inde
    return Rcpp::wrap(values_copy);
 }
 
+//' Swap elements in a 3d array
+//' 
+//' @description
+//' This function swaps the elements in a three-dimensional array by using the 
+//' scheme provided in the `index` matrix. 
+//' 
+//' @param values An array of dimension `M x r x K` of values to swap. 
+//' @param index An integer matrix of dimension `M x K`. containing the scheme 
+//'   by which values should be swapped.
+//' @param A three-dimensional array with swapped values.
+//' @export
+//' 
+//' @examples
+//' values <- array(rnorm(40), dim = c(10, 2, 2))
+//' index <- matrix(c(1,2), nrow = 10, ncol = 2)
+//' swap_3d_cc(values, index)
+//' 
+//' @seealso 
+//' * [swapElements()][mcmcoutput_class] for the calling method
+//' * [swap_cc()] for the equivalent function for 2-dimensional arrays 
 // [[Rcpp::export]]
 Rcpp::NumericVector swap_3d_cc(Rcpp::NumericVector values, Rcpp::IntegerMatrix index)
 {
@@ -66,7 +105,7 @@ Rcpp::NumericVector swap_3d_cc(Rcpp::NumericVector values, Rcpp::IntegerMatrix i
    const unsigned int  r      = valDim[1];
    const unsigned int  K      = valDim[2];
 
-   /* If dimensions of both arguments do not agree thrw an exception */
+   /* If dimensions of both arguments do not agree throw an exception */
    if (M != (unsigned)index.nrow() || K != (unsigned)index.ncol())
    {
       throw Rcpp::exception("Matrix dimensions disagree.");
@@ -105,8 +144,28 @@ Rcpp::NumericVector swap_3d_cc(Rcpp::NumericVector values, Rcpp::IntegerMatrix i
    return Rcpp::wrap(output);
 }
 
+//' Swap values in an integer matrix
+//' 
+//' @description
+//' This function swaps the values in an integer matrix column-wise defined 
+//' by the `index` matrix. This function is used mainly for the 
+//' `swapElements()`-method of MCMC samples to swap the indicator values.
+//' 
+//' @param values An integer matrix containing the values to swap. 
+//' @param index An integer matrix containing the indices by which values 
+//'   should be swapped.
+//' @return An integer matrix containing the swapped values.
+//' @export
+//' 
+//' @examples 
+//' values <- matrix(c(2, 4, 1, 3), nrow = 10, ncol = 2)
+//' index <- matrix(c(1, 2), nrow = 10, ncol = 2)
+//' swapInteger_cc(values, index)
+//' 
+//' @seealso 
+//' * [swap_cc()] for the equivalent function for numeric values
+//' * [swap_3d_cc()] for the equivalent function for three-dimensional arrays
 // [[Rcpp::export]]
-
 Rcpp::IntegerMatrix swapInteger_cc(Rcpp::IntegerMatrix values, Rcpp::IntegerMatrix index)
 {
    /* If dimensions of both arguments do not agree throw an exception */
@@ -135,8 +194,29 @@ Rcpp::IntegerMatrix swapInteger_cc(Rcpp::IntegerMatrix values, Rcpp::IntegerMatr
    return Rcpp::wrap(values_copy);
 }
 
+//' Swap values of stored indicators
+//' 
+//' @description
+//' This function is used to swap elements in the stored indicators from MCMC 
+//' sampling. Note that this function reuses R memory and should therefore be 
+//' treated with caution. Do not use this function unless you really know what 
+//' you are doing. 
+//' 
+//' @param values An integer matrix containing the last indicators stored in 
+//'   MCMC sampling. The number of these last stored indicators is defined by 
+//'   the hpyer-parameter `storeS` in the `mcmc` object.
+//' @param index An integer matrix defining the swapping scheme. 
+//' @return A matrix with swapped values.
+//' @export
+//' 
+//' @seealso
+//' * [mcmc()] for the hyper-parameter `storeS`
+//' * [swapElements()][mcmcoutput_class] for the calling method 
+//' * [swapInteger_cc()] for the equivalent function that swaps simple integer 
+//'   matrices
+//' * [swap_3d_cc()] for a function that swaps values in three-dimensional 
+//'   arrays
 // [[Rcpp::export]]
-
 Rcpp::IntegerMatrix swapInd_cc(Rcpp::IntegerMatrix values, Rcpp::IntegerMatrix index)
 {
    /* If dimensions of both arguments do not agree throw an exception */
@@ -164,8 +244,24 @@ Rcpp::IntegerMatrix swapInd_cc(Rcpp::IntegerMatrix values, Rcpp::IntegerMatrix i
    return Rcpp::wrap(values_copy);
 }
 
+//' Swap the `ST` slot in the MCMC output
+//' 
+//' @description
+//' This function is used to swap the elements in slot `ST` of an `mcmcoutput` 
+//' object (An MCMC sampling output). The main difference to the 
+//' [swapInteger_cc()] function is that this function reuses memory from R. Do 
+//' only use this function, if you really know what you are doing.
+//' 
+//' @param values An integer matrix containing the values to swap in R memory.
+//' @param index An integer matrix containing the swapping scheme. 
+//' @return An integer matrix with swapped values.
+//' @export
+//' 
+//' @seealso 
+//' * [swapInteger_cc()] for the equivalent function not using R memory
+//' * [swap_3d_cc()] for an equivalent function for three-dimensional arrays 
+//' * [swapElements()][mcmcoutput_class] for the calling method
 // [[Rcpp::export]]
-
 Rcpp::IntegerVector swapST_cc(Rcpp::IntegerVector values, Rcpp::IntegerMatrix index)
 {
    /* If dimensions of both arguments do not agree throw an exception */
@@ -188,8 +284,23 @@ Rcpp::IntegerVector swapST_cc(Rcpp::IntegerVector values, Rcpp::IntegerMatrix in
    return Rcpp::wrap(values_copy);
 }
 
+//' Computes the log density of the Gamma distribution 
+//' 
+//' @description
+//' For each shape and rate parameter pair the log gamma density is computed. 
+//' Inside the function the unsafe access functions of Armadillo `at()` and 
+//' `unsafe_col()` are used, so now boundary check is performed. In each step 
+//' the `lngamma()` function from Rcpp's `R` namespace is used. At this time 
+//' unused.
+//' 
+//' @param values A matrix of dimension `M x K` for which the log-density 
+//'   should be calculated. 
+//' @param shape A vector of dimension `K x 1` with Gamma shape parameters.
+//' @param rate A vector of dimension `K x 1` with Gamma rate parameters.
+//' @return A matrix of Gamma log-density values for each pair of parameters 
+//'   in a column.
+//' @export
 // [[Rcpp::export]]
-
 Rcpp::NumericMatrix ldgamma_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector shape,
                                Rcpp::NumericVector rate)
 {
@@ -205,8 +316,23 @@ Rcpp::NumericMatrix ldgamma_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector s
    return Rcpp::wrap(arma_return);
 }
 
+//' Computes the density of the Gamma distribution 
+//' 
+//' @description
+//' For each shape and rate parameter pair the gamma density is computed. 
+//' Inside the function the unsafe access functions of Armadillo `at()` and 
+//' `unsafe_col()` are used, so now boundary check is performed. In each step 
+//' the `lngamma()` function from Rcpp's `R` namespace is used. At this time 
+//' unused.
+//' 
+//' @param values A matrix of dimension `M x K` for which the density 
+//'   should be calculated. 
+//' @param shape A vector of dimension `K x 1` with Gamma shape parameters.
+//' @param rate A vector of dimension `K x 1` with Gamma rate parameters.
+//' @return A matrix of Gamma density values for each pair of parameters 
+//'   in a column.
+//' @export
 // [[Rcpp::export]]
-
 arma::mat dgamma_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector shape,
                     Rcpp::NumericVector rate)
 {
@@ -222,8 +348,22 @@ arma::mat dgamma_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector shape,
    return arma_return;
 }
 
+//' Computes the log density of the Dirichlet distribution 
+//' 
+//' @description
+//' For each shape and rate parameter pair the log-Dirichlet density is 
+//' computed. Inside the function the unsafe access functions of Armadillo 
+//' `at()` and `unsafe_col()` are used, so now boundary check is performed. 
+//' In each step the `lgammafn()` function from Rcpp's `R` namespace is used. 
+//' At this time unused.
+//' 
+//' @param values A matrix of dimension `M x K` for which the log-density 
+//'   should be calculated. 
+//' @param par A vector of dimension `K x 1` containing the Dirichlet 
+//'   parameters.
+//' @return A vector of Dirichlet log-density values. 
+//' @export
 // [[Rcpp::export]]
-
 Rcpp::NumericVector lddirichlet_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector par)
 {
    /* Reuse memory from R */
@@ -237,8 +377,22 @@ Rcpp::NumericVector lddirichlet_cc(Rcpp::NumericMatrix values, Rcpp::NumericVect
    return Rcpp::wrap(arma_return);
 }
 
+//' Computes the density of the Dirichlet distribution 
+//' 
+//' @description
+//' For each shape and rate parameter pair the Dirichlet density is 
+//' computed. Inside the function the unsafe access functions of Armadillo 
+//' `at()` and `unsafe_col()` are used, so now boundary check is performed. 
+//' In each step the `lgammafn()` function from Rcpp's `R` namespace is used. 
+//' At this time unused.
+//' 
+//' @param values A matrix of dimension `M x K` for which the log-density 
+//'   should be calculated. 
+//' @param par A vector of dimension `K x 1` containing the Dirichlet 
+//'   parameters.
+//' @return A vector of Dirichlet density values. 
+//' @export
 // [[Rcpp::export]]
-
 arma::vec ddirichlet_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector par)
 {
    /* Reuse memory from R */
@@ -252,8 +406,28 @@ arma::vec ddirichlet_cc(Rcpp::NumericMatrix values, Rcpp::NumericVector par)
    return arma_return;
 }
 
+//' Compute the hungarian matrix
+//' 
+//' @description
+//' This function calls an implementation of the Hungarian algorithm by Munkres. 
+//' The Hungarian algorithm solves a weighted assignment problem on a bipartite 
+//' graph. Note, here this algorithm is used in the re-labeling algorithm by 
+//' Stephens (1997b).
+//' 
+//' @param cost A matrix containing the costs for each row source and column 
+//'   target. 
+//' @return An integer matrix defining the best solution to the assignment 
+//'   problem.
+//' @export
+//' @seealso 
+//' * [mcmcpermute()] for the calling function 
+//' * [mcmcestimate()] for the function that uses the re-labeling algorithm by 
+//'   Stephens (1997b)
+//' 
+//' @references
+//' * Stephens, Matthew (1997b), "Dealing with Label-Switching in Mixture 
+//'   Models", Journal of the Royal Statistical Society Series B, 62(4)
 // [[Rcpp::export]]
-
 arma::imat hungarian_cc(const arma::mat cost)
 {
    arma::umat indM = hungarian(cost);
@@ -261,8 +435,23 @@ arma::imat hungarian_cc(const arma::mat cost)
    return arma::conv_to<arma::imat>::from(indM);
 }
 
+//' Calculate moments on samples of multivariate mixture models 
+//' 
+//' @description
+//' This function calculates the moments for MCMC samples of multivariate 
+//' mixture models. Moments like means, standard deviations, kurtosis and 
+//' skewness are computed for each iteration in MCMC sampling. The moments are 
+//' used when plotting the traces of an MCMC sample output. 
+//' 
+//' @param classS4 An `mcmcoutput` class containing the MCMC samples.
+//' @return A named list with vectors containing the data moments for each 
+//'   iteration in the MCMC sample.
+//' @export
+//' @seealso 
+//' * [mcmcoutput][mcmcoutput_class] for the `mcmcoutput` class definition
+//' * [mixturemcmc()] for performing MCMC sampling
+//' * [plotTraces][mcmcoutput_class] for the calling function
 // [[Rcpp::export]]
-
 Rcpp::List moments_cc(Rcpp::S4 classS4)
 {
    Rcpp::S4   model    = Rcpp::as<Rcpp::S4>((SEXP)classS4.slot("model"));
@@ -278,8 +467,25 @@ Rcpp::List moments_cc(Rcpp::S4 classS4)
    }
 }
 
+//' Calculate moments on permuted samples of multivariate mixture models 
+//' 
+//' @description
+//' This function calculates the moments for re-labeled MCMC samples of 
+//' multivariate mixture models. Moments like means, standard deviations, 
+//' kurtosis and skewness are computed for each iteration in MCMC sampling. The 
+//' moments are used when plotting the traces of an MCMC sample output. 
+//' 
+//' @param classS4 An `mcmcoutputperm` class containing the re-labeled MCMC 
+//'   samples.
+//' @return A named list with vectors containing the data moments for each 
+//'   iteration in the re-labeled MCMC sample.
+//' @export
+//' @seealso 
+//' * [mcmcoutputperm][mcmcoutputperm_class] for the `mcmcoutput` class definition
+//' * [mixturemcmc()] for performing MCMC sampling
+//' * [mcmcpermute()] for re-labeling MCMC samples
+//' * [plotTraces][mcmcoutputperm_class] for the calling function
 // [[Rcpp::export]]
-
 Rcpp::List permmoments_cc(Rcpp::S4 classS4)
 {
    Rcpp::S4   model    = Rcpp::as<Rcpp::S4>((SEXP)classS4.slot("model"));
@@ -294,4 +500,3 @@ Rcpp::List permmoments_cc(Rcpp::S4 classS4)
       return Rcpp::wrap(permmoments_ind_cc(classS4));
    }
 }
-

@@ -15,6 +15,53 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Calculate point estimators from MCMC samples
+#' 
+#' @description 
+#' Calling [mcmcestimate()] calculates the following point estimates from the 
+#' MCMC samples: 
+#' * MAP: The maximum a posterior estimates are defined as the mode of the 
+#'   (joint) posterior density.
+#' * BML: The Bayesian maximum likelihood estimator is based on the mixture 
+#'   log-likelihood function and defines the mode of this function.
+#' * EAVG: The ergodic average is calculated as an average over the MCMC traces 
+#'   of component parameters and weights (in case of unknown parameters).  
+#' * IEAVG: The identified ergodic average is defined similar to the EAVG, 
+#'   however, in contrast to the latter it is based on re-labeled MCMC traces. 
+#'   This is especially important in case of random permutation during MCMC
+#'   sampling as component parameters then have to be re-assigned to their 
+#'   (probably) correct component.
+#'   
+#' For a more detailed outlay of point estimators from Bayesian mixture model 
+#' estimation, see Fr\"uhwirth-Schnatter (2006).
+#' 
+#' @param mcmcout An `mcmcoutput` object containing the sampled parameters and 
+#'   informaiton about the finite mixture model.
+#' @param method A character defining the re-labeling method in case of a model 
+#'   with unknown indicators. For most distributions there exists only a single 
+#'   choice, namely "kmeans". For Poisson and Binomial distributions the 
+#'   re-labeling algorithms "Stephens1997a" and "Stephens1997b" can be chosen. 
+#' @param fdata An `fdata` model containing the observations. Optional.
+#' @param permOut A logical indicating, if the permuted MCMC samples should be 
+#'   returned as well. Optional.
+#' @param opt_ctrl A list with an element `max_iter` controlling the number of 
+#'   iterations in case the "Stephens1997a" re-labeling algorithm is chosen.
+#' @return An `mcmcest` object cotnaining the point estimates together with 
+#'   additional information about the underlying finite mixture model, MCMC 
+#'   sampling hyper-parameters and the data. In case `permOut` is set to 
+#'   `TRUE`, the output of this function is a named list with an `mcmcest` 
+#'   object containing parameter estimates and in addition an `mcmcoutputperm` 
+#'   object containing the permuted (re-labeled) MCMC samples.
+#' @export
+#' @name mcmcestimate
+#'   
+#' @seealso 
+#' * [mcmcestfix][mcmcest_class] for object storing the parameter estimates in 
+#'   case of fixed indicators
+#' * [mcmcestfix][mcmcest_class] for object storing the parameter estimates in 
+#'   case of unknown indicators
+#' * [mcmcoutputperm][mcmcoutputperm_class] for classes storing re-labeled 
+#'   MCMC samples
 "mcmcestimate" <- function(mcmcout, method = "kmeans", fdata = NULL,
                            permOut = FALSE, opt_ctrl = list(max_iter = 200L)) {
   ## Check input ##
@@ -155,19 +202,33 @@
   }
   ## New 'mcmcestimate' object.
 
-  ## In case the permOut = TRUE the mcmcout object is
+  ## In case the permOut = TRUE the mcmcoutperm object is
   ## returned as well in a list
 }
 
 ### Private functions
 ### These functions are not exported.
 
-### Checking
-### Check arguments: The 'mcmcout' object must inherit from
-### 'mcmcoutput' or 'mcmcoutputperm'. Argument 2 must match one
-### of three permutation algorithms in 'mcmcpermute()'.
-### Argument 3 must be of type logical. If any case is not true
-### an error is thrown.
+#' Check arguments for [mcmcestimate()]
+#' 
+#' @description 
+#' For internal usage only. This function checks the arguments to the 
+#' [mcmcestimate()] function and throws an error, if the checks do not pass. 
+#' More specifically it checks for the classes of objects and the choices in 
+#' case of a character argument.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing MCMC 
+#'   samples.
+#' @param arg2 The second argument to the `mcmcestimate()` function. 
+#' @param arg3 The second argument to the `mcmcestimate()` function. 
+#' @param arg4 The second argument to the `mcmcestimate()` function. 
+#' @param arg5 The second argument to the `mcmcestimate()` function.
+#' @return None. If checks do not pass, an error is thrown with a user-friendly 
+#'   message.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function 
 ".check.args.Mcmcestimate" <- function(obj, arg2, arg3, arg4, arg5) {
   if (!inherits(obj, c("mcmcoutput", "mcmcoutputperm"))) {
     stop(paste("Wrong argument: Argument 1 must be an object ",
@@ -203,6 +264,19 @@
   }
 }
 
+#' Calculates the MAP
+#' 
+#' @description 
+#' For internal usage only. This function calculates the MAP estimates from the 
+#' MCMC samples. 
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object storing the MCMC 
+#'   samples.
+#' @return An integer specifying the index of the parameter values that lead 
+#'   to the highest posterior log likelihood. 
+#' @noRd
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".map.Mcmcestimate" <- function(obj) {
   ## Take the value with the highest posterior log
   ## likelihood
@@ -212,6 +286,20 @@
   return(as.integer(map.index))
 }
 
+#' Calculates the BML
+#' 
+#' @description 
+#' For internal usage only. This function calculates the BML estimates from the 
+#' MCMC samples. 
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object storing the MCMC 
+#'   samples.
+#' @return An integer specifying the index of the parameter values that lead 
+#'   to the highest mixture log-likelihood. 
+#' @noRd
+#' @importFrom utils tail
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".bml.Mcmcestimate" <- function(obj) {
   ## Take the value with the highest log likelihood
   mixlik <- obj@log$mixlik
@@ -220,6 +308,22 @@
   return(bml.index)
 }
 
+#' Extract estimates from MCMC samples
+#' 
+#' @description 
+#' For internal usage only. This function extracts a row of MCMC samples by 
+#' index. The index in this case are the indices at which the log-likelihood 
+#' functions have their empirical mode.
+#' 
+#' @param obj An `mcmcoutput` object containing the MCMC samples.
+#' @param m An integer defining the index at which index parameters and 
+#'   log-likelihood function values should be extracted.
+#' @return A named list with elements `par` containing the extracted 
+#'   parameters and `log` containing the log-likelihood values.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".extract.Mcmcestimate" <- function(obj, m) {
   ## Extract the 'm'th row in each slot of an mcmcout
   ## object
@@ -267,6 +371,22 @@
   return(est.list)
 }
 
+#' Calculate the EAVG
+#' 
+#' @description 
+#' For internal usage only. This function calculates the identified ergodic 
+#' average from the (re-labeled) MCMC traces. In the case of permuted MCMC 
+#' samples the ergodic average is the so-called identified ergodic average.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing MCMC 
+#'   samples.
+#' @return A list containing the ergodic average estimates for the component 
+#'   parameters in element `par` and the corresponding weight estimates in 
+#'   element `weigth`.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".eavg.Mcmcestimate" <- function(obj) {
   ## Check arguments ##
   dist <- obj@model@dist
@@ -444,6 +564,21 @@
   }
 }
 
+#' Calculate the standard deviation of the posterior
+#' 
+#' @description 
+#' For internal usage only. This function calculates the standard deviations of 
+#' the posterior parameter distribution.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sampled parameter values.
+#' @param perm A logical indicating, if the samples have been re-labeled.
+#' @return A list containing the standard deviations of the posterior 
+#'   densities. 
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".sdpost.Mcmcestimate" <- function(obj, perm) {
   dist <- obj@model@dist
   if (dist %in% c("poisson", "cond.poisson", "exponential")) {
@@ -461,6 +596,22 @@
   }
 }
 
+# TODO: Throws error that weights are not available, if `indicfix=TRUE` 
+#' Calculate the standard deviation of the posterior from Poisson mixtures
+#' 
+#' @description 
+#' For internal usage only. This function calculates the standard deviations of 
+#' the posterior parameter distribution.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sampled parameter values.
+#' @param perm A logical indicating, if the samples have been re-labeled.
+#' @return A list containing the standard deviations of the posterior 
+#'   densities. 
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".sdpost.poisson.Mcmcestimate" <- function(obj, perm) {
   if (perm) {
     sdpar <- apply(obj@parperm$lambda, 2, sd, na.rm = TRUE)
@@ -488,6 +639,21 @@
   return(sdlist)
 }
 
+#' Calculate the standard deviation of the posterior from Binomial mixtures
+#' 
+#' @description 
+#' For internal usage only. This function calculates the standard deviations of 
+#' the posterior parameter distribution.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sampled parameter values.
+#' @param perm A logical indicating, if the samples have been re-labeled.
+#' @return A list containing the standard deviations of the posterior 
+#'   densities. 
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".sdpost.binomial.Mcmcestimate" <- function(obj, perm) {
   if (perm) {
     sdpar <- apply(obj@parperm$p, 2, sd, na.rm = TRUE)
@@ -518,6 +684,21 @@
   return(sdlist)
 }
 
+#' Calculate the standard deviation of the posterior from Normal mixtures
+#' 
+#' @description 
+#' For internal usage only. This function calculates the standard deviations of 
+#' the posterior parameter distribution.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sampled parameter values.
+#' @param perm A logical indicating, if the samples have been re-labeled.
+#' @return A list containing the standard deviations of the posterior 
+#'   densities. 
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".sdpost.normal.Mcmcestimate" <- function(obj, perm) {
   if (perm) {
     sdmu <- apply(obj@parperm$mu, 2, sd, na.rm = TRUE)
@@ -551,6 +732,21 @@
   return(sdlist)
 }
 
+#' Calculate the standard deviation of the posterior from Student-t mixtures
+#' 
+#' @description 
+#' For internal usage only. This function calculates the standard deviations of 
+#' the posterior parameter distribution.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sampled parameter values.
+#' @param perm A logical indicating, if the samples have been re-labeled.
+#' @return A list containing the standard deviations of the posterior 
+#'   densities. 
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".sdpost.student.Mcmcestimate" <- function(obj, perm) {
   if (perm) {
     sdmu <- apply(obj@parperm$mu, 2, sd, na.rm = TRUE)
@@ -596,6 +792,21 @@
   return(sdlist)
 }
 
+#' Calculate the std. dev. of the posterior from multivariate Normal mixtures
+#' 
+#' @description 
+#' For internal usage only. This function calculates the standard deviations of 
+#' the posterior parameter distribution.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sampled parameter values.
+#' @param perm A logical indicating, if the samples have been re-labeled.
+#' @return A list containing the standard deviations of the posterior 
+#'   densities. 
+#' @noRd
+#' @importFrom stats cov
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".sdpost.normult.Mcmcestimate" <- function(obj, perm) {
   r <- obj@model@r
   K <- obj@model@K
@@ -672,6 +883,21 @@
   return(sdlist)
 }
 
+#' Calculate the std. dev. of the posterior from multivariate Student-t mixtures
+#' 
+#' @description 
+#' For internal usage only. This function calculates the standard deviations of 
+#' the posterior parameter distribution.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sampled parameter values.
+#' @param perm A logical indicating, if the samples have been re-labeled.
+#' @return A list containing the standard deviations of the posterior 
+#'   densities. 
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".sdpost.studmult.Mcmcestimate" <- function(obj, perm) {
   r <- obj@model@r
   K <- obj@model@K
@@ -754,10 +980,40 @@
   return(sdlist)
 }
 
+#' Calculate the std. dev. for unidentified MCMC samples 
+#' 
+#' @description 
+#' For internal usage only. This function calculates the standard deviations of 
+#' the posterior parameter distribution in case that no re-labeling has been 
+#' performed.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sampled parameter values.
+#' @return A list containing the standard deviations of the posterior 
+#'   densities in case of samples that are not re-labeled.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".sdpost.unidentified.Mcmcestimate" <- function(obj) {
   .sdpost.unidentified.poisson.Mcmcestimate(obj)
 }
 
+#' Calculate the std. dev. for unidentified Poisson MCMC samples 
+#' 
+#' @description 
+#' For internal usage only. This function calculates the standard deviations of 
+#' the posterior parameter distribution in case that no re-labeling has been 
+#' performed.
+#' 
+#' @param obj An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sampled parameter values.
+#' @return A list containing the standard deviations of the posterior 
+#'   densities in case of samples that are not re-labeled.
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcestimate()] for the calling function
 ".sdpost.unidentified.poisson.Mcmcestimate" <- function(obj) {
   sdpar <- apply(obj@par$lambda, 2, sd)
   sdweight <- apply(obj@weight, 2, sd)

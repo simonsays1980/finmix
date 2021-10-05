@@ -14,7 +14,22 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
-
+#' Finmix `normultmodelmoments` class
+#' 
+#' @description
+#' Defines a class that holds modelmoments for a finite mixture of normult
+#' distributions. Note that this class is not directly used, but indirectly 
+#' when calling the `modelmoments` constructor [modelmoments()].
+#' 
+#' @slot B A numeric defining the between-group heterogeneity.
+#' @slot W A numeric defining the within-group heterogeneity. 
+#' @slot R A numeric defining the coefficient of determination.
+#' @exportClass normultmodelmoments
+#' @name normultmodelmoments
+#' 
+#' @seealso 
+#' * [modelmoments_class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 .normultmodelmoments <- setClass("normultmodelmoments",
   representation(
     B = "array",
@@ -37,6 +52,24 @@
   )
 )
 
+#' Initializer of the `normultmoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()` 
+#' to generate in the initialization step also the moments for a passed `model`
+#' object.
+#' 
+#' @param .Object An object_ see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix `model` object containing the definition of the 
+#'   finite mixture distribution.
+#' @noRd
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "normultmodelmoments",
   function(.Object, ..., model) {
@@ -45,6 +78,15 @@ setMethod(
   }
 )
 
+#' Generate moments for normult mixture
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of an
+#' normult mixture distribution.
+#' 
+#' @param object An `normultmodelmoments` object. 
+#' @return An `normultmodelmoments` object with calculated moments.
+#' @noRd
 setMethod(
   "generateMoments", "normultmodelmoments",
   function(object) {
@@ -52,6 +94,15 @@ setMethod(
   }
 )
 
+#' Shows a summary of an `normultmodelmoments` object.
+#' 
+#' Calling [show()] on an `normultmodelmoments` object gives an overview 
+#' of the moments of an normult finite mixture. 
+#' 
+#' @param object An `normultmodelmoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @describeIn normultmodelmoments
 setMethod(
   "show", "normultmodelmoments",
   function(object) {
@@ -101,6 +152,26 @@ setMethod(
 )
 
 ## Getters ##
+#' Getter method of `normultmodelmoments` class.
+#' 
+#' Returns the `B` slot.
+#' 
+#' @param object An `normultmodelmoments` object.
+#' @returns The `B` slot of the `object`.
+#' @describeIn datamoments_class Getter method for slot `B`
+#' 
+#' @examples 
+#' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' f_moments       <- modelmoments(f_model)
+#' getB(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getB", "normultmodelmoments",
   function(object) {
@@ -108,6 +179,26 @@ setMethod(
   }
 )
 
+#' Getter method of `normultmodelmoments` class.
+#' 
+#' Returns the `W` slot.
+#' 
+#' @param object An `normultmodelmoments` object.
+#' @returns The `W` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' f_moments       <- modelmoments(f_model)
+#' getW(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getW", "normultmodelmoments",
   function(object) {
@@ -115,13 +206,52 @@ setMethod(
   }
 )
 
+#' Getter method of `normultmodelmoments` class.
+#' 
+#' Returns the `Rdet` slot.
+#' 
+#' @param object An `normultmodelmoments` object.
+#' @returns The `Rdet` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' f_moments       <- modelmoments(f_model)
+#' getRdet(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getRdet", "normultmodelmoments",
   function(object) {
-    return(object@B)
+    return(object@Rdet)
   }
 )
 
+#' Getter method of `normultmodelmoments` class.
+#' 
+#' Returns the `Rtr` slot.
+#' 
+#' @param object An `normultmodelmoments` object.
+#' @returns The `Rtr` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' getRtr(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getRtr", "normultmodelmoments",
   function(object) {
@@ -129,6 +259,25 @@ setMethod(
   }
 )
 
+#' Getter method of `normultmodelmoments` class.
+#' 
+#' Returns the `Corr` slot.
+#' 
+#' @param object An `normultmodelmoments` object.
+#' @returns The `Corr` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
+#' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
+#' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
+#' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' getCorr(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getCorr", "normultmodelmoments",
   function(object) {
@@ -141,6 +290,17 @@ setMethod(
 
 ### private functions
 ### these function are not exported
+#' Generate model moments for an normult mixture
+#' 
+#' @description 
+#' Only called implicitly. generates all moments of an normult mixture 
+#' distribution.
+#' 
+#' @param object An `normultmodelmoments` object to contain all calculated
+#'   moments. 
+#' @returns An `normultmodelmoments` object containing all moments of the 
+#'   normult mixture distributions.
+#' @noRd
 ".generateMomentsNormult" <- function(object) {
   mu <- object@model@par$mu
   sigma <- object@model@par$sigma

@@ -14,7 +14,22 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
-
+#' Finmix `normalmodelmoments` class
+#' 
+#' @description
+#' Defines a class that holds theoretical moments for a finite mixture of 
+#' normal distributions. Note that this class is not directly used, but 
+#' indirectly when calling the `modelmoments` constructor [modelmoments()].
+#' 
+#' @slot B A numeric defining the between-group heterogeneity.
+#' @slot W A numeric defining the within-group heterogeneity. 
+#' @slot R A numeric defining the coefficient of determination.
+#' @exportClass normalmodelmoments
+#' @name normalmodelmoments
+#' 
+#' @seealso 
+#' * [modelmoments_class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 .normalmodelmoments <- setClass("normalmodelmoments",
   representation(
     B = "numeric",
@@ -33,6 +48,24 @@
   )
 )
 
+#' Initializer of the `normalmodelmoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()` 
+#' to generate in the initialization step also the moments for a passed `model`
+#' object.
+#' 
+#' @param .Object An object: see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix `model` object containing the definition of the 
+#'   finite mixture distribution.
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "normalmodelmoments",
   function(.Object, ..., model) {
@@ -42,6 +75,15 @@ setMethod(
   }
 )
 
+#' Generate moments for normal mixture
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of an
+#' normal mixture distribution.
+#' 
+#' @param object An `normalmodelmoments` object. 
+#' @return An `normalmodelmoments` object with calculated moments.
+#' @keywords internal
 setMethod(
   "generateMoments", "normalmodelmoments",
   function(object) {
@@ -49,6 +91,15 @@ setMethod(
   }
 )
 
+#' Shows a summary of an `normalmodelmoments` object.
+#' 
+#' Calling [show()] on an `normalmodelmoments` object gives an overview 
+#' of the moments of an normal finite mixture. 
+#' 
+#' @param object An `normalmodelmoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @describeIn normalmodelmoments
 setMethod(
   "show", "normalmodelmoments",
   function(object) {
@@ -84,6 +135,25 @@ setMethod(
 )
 
 ## Getters ##
+#' Getter method of `normalmodelmoments` class.
+#' 
+#' Returns the `B` slot.
+#' 
+#' @param object An `normalmodelmoments` object.
+#' @returns The `B` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normal", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- c(-2, 2)
+#' sigmas          <- matrix(c(2, 4), nrow=1)
+#' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' f_moments       <- modelmoments(f_model)
+#' getB(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getB", "normalmodelmoments",
   function(object) {
@@ -91,6 +161,25 @@ setMethod(
   }
 )
 
+#' Getter method of `normalmodelmoments` class.
+#' 
+#' Returns the `W` slot.
+#' 
+#' @param object An `normalmodelmoments` object.
+#' @returns The `W` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normal", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- c(-2, 2)
+#' sigmas          <- matrix(c(2, 4), nrow=1)
+#' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' f_moments       <- modelmoments(f_model)
+#' getW(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getW", "normalmodelmoments",
   function(object) {
@@ -98,6 +187,25 @@ setMethod(
   }
 )
 
+#' Getter method of `normalmodelmoments` class.
+#' 
+#' Returns the `R` slot.
+#' 
+#' @param object An `normalmodelmoments` object.
+#' @returns The `R` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normal", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- c(-2, 2)
+#' sigmas          <- matrix(c(2, 4), nrow=1)
+#' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' f_moments       <- modelmoments(f_model)
+#' getR(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getR", "normalmodelmoments",
   function(object) {
@@ -110,6 +218,17 @@ setMethod(
 
 ### Private functions
 ### This functions are not exported
+#' Generate model moments for an normal mixture
+#' 
+#' @description 
+#' Only called implicitly. generates all moments of an normal mixture 
+#' distribution.
+#' 
+#' @param object An `normalmodelmoments` object to contain all calculated
+#'   moments. 
+#' @returns An `normalmodelmoments` object containing all moments of the 
+#'   normal mixture distributions.
+#' @keywords internal
 ".generateMomentsNormal" <- function(object) {
   mu <- object@model@par$mu
   sigma <- object@model@par$sigma

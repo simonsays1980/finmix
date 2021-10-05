@@ -15,6 +15,29 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `mcmcestfix` class
+#' 
+#' @description 
+#' This class stores the point estimators for component parameters and weights 
+#' as well as corresponding information from MCMC sampling. Three point 
+#' estimators are calculated: the maximum a posterior (MAP), the Bayesian 
+#' maximum likelihood (BML) and the Identified ergodic average (IEAVG). See 
+#' Fr\"uhwirth-Schnatter (2006) for detailed information about how these 
+#' estimators are defined. 
+#' 
+#' Note that this class inherits almost all of its slots from the `mcmcestfix` 
+#' class, the corresponding class for fixed indicators.
+#' 
+#' @slot eavg A named list containing the estimates of the ergodic average. The 
+#'   element `par` is a list and contains the component parameter estimates and 
+#'   `weight` contains the weight estimates. The difference between the EAVG 
+#'   and the IEAVG is that the IEAVG is based on re-labeled samples.
+#' @exportClass mcmcestind
+#' @describeIn mcmcest_class Finmix `mcmcestind` class
+#' 
+#' @seealso
+#' * [mcmcestfix][mcmcest_class] for the parent class with fixed indicators
+#' * [mcmcestimate()] to calculate point estimates
 .mcmcestind <- setClass("mcmcestind",
   representation(eavg = "list"),
   contains = c("mcmcestfix"),
@@ -25,6 +48,14 @@
   prototype(eavg = list())
 )
 
+#' Finmix `mcmcest` class union
+#' 
+#' @description 
+#' This class union includes all classes that define objects for storing the 
+#' parameter estimates and is used to dispatch methods for `mcmcest` objects.
+#' 
+#' @exportClass mcmcest
+#' @noRd
 setClassUnion(
   "mcmcest",
   c(
@@ -33,6 +64,16 @@ setClassUnion(
   )
 )
 
+#' Shows a summary of an `mcmcestind` object.
+#' 
+#' Calling [show()] on an `mcmcestind` object gives an overview 
+#' of the `mcmcestind` object.
+#' 
+#' @param object An `mcmcestind` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @describeIn mcmcest_class
 setMethod(
   "show", "mcmcestind",
   function(object) {
@@ -70,6 +111,20 @@ setMethod(
   }
 )
 
+# TODO: The Std. Error is the same for both components.
+#' Shows an advanced summary of an `mcmcestind` object.
+#' 
+#' Calling [show()] on an `mcmcestind` object gives an advanced overview 
+#' of the `mcmcestind` object.
+#' 
+#' Note, this method is so far only implemented for mixtures of Poisson 
+#' distributions.
+#' 
+#' @param object An `mcmcestind` object.
+#' @returns A console output listing the formatted slots and summary 
+#'   information about each of them. 
+#' @exportMethod Summary
+#' @describeIn mcmcest_class
 setMethod(
   "Summary", "mcmcestind",
   function(x, ..., na.rm = FALSE) {
@@ -141,6 +196,32 @@ setMethod(
 )
 
 ## Getters ##
+#' Getter method of `mcmcestind` class.
+#' 
+#' Returns the `eavg` slot.
+#' 
+#' @param object An `mcmcestind` object.
+#' @returns The `eavg` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' f_est <- mcmcestimate(f_output)
+#' # Get the slot.
+#' getEavg(f_output)
+#' 
+#' @seealso 
+#' * [mcmcestfix][mcmcoutput_class] for the parent class with fixed indicators
+#' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getEavg", "mcmcestind",
   function(object) {
@@ -155,16 +236,41 @@ setMethod(
 ### These functions are not exported.
 
 ### Summary
-### Summary Map estimates: Creates a matrix with Map
-### estimates.
+
+#' Summarize MAP estimates
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' MAP estimates of models with unknown indicators. 
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the MAP.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.map.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.map.poisson.Mcmcestind(obj)
   }
 }
 
-### Summary Map estimates Poisson: Creates a matrix
-### with Map estimates for Poisson parameters.
+#' Summarize MAP estimates form Poisson mixture models
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' MAP estimates of Poisson mixture models when indicators are unknown.
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the MAP. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.map.poisson.Mcmcestind" <- function(obj) {
   K <- obj@K
   parout <- matrix(0, nrow = 2 * K, ncol = 2)
@@ -179,16 +285,41 @@ setMethod(
   return(parout)
 }
 
-### Summary Bml estimates: Creates a matrix with Bml
-### estimates.
+#' Summarize BML estimates
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' BML estimates. 
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the BML. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.bml.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.bml.poisson.Mcmcestind(obj)
   }
 }
 
-### Summary Bml estimates Poisson: Creates a matrix
-### with Bml estimates for Poisson parameters.
+#' Summarize BML estimates for Poisson mixture models
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' BML estimates. 
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the BML. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.bml.poisson.Mcmcestind" <- function(obj) {
   K <- obj@K
   parout <- matrix(0, nrow = 2 * K, ncol = 2)
@@ -203,16 +334,41 @@ setMethod(
   return(parout)
 }
 
-### Summary Ieavg estimates: Creates a matrix with Ieavg
-### estimates.
+#' Summarize IEAVG estimates
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' IEAVG estimates. 
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the IEAVG. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.ieavg.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.ieavg.poisson.Mcmcestind(obj)
   }
 }
 
-### Summary Bml estimates Poisson: Creates a matrix
-### with Bml estimates for Poisson parameters.
+#' Summarize IEAVG estimates for Poisson mixture models
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' IEAVG estimates. 
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the IEAVG. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.ieavg.poisson.Mcmcestind" <- function(obj) {
   K <- obj@K
   parout <- matrix(0, nrow = 2 * K, ncol = 2)
@@ -227,16 +383,42 @@ setMethod(
   return(parout)
 }
 
-### Summary Eavg estimates: Creates a matrix with Eavg
-### estimates.
+#' Summarize IEAVG estimates
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' EAVG estimates. The difference between the EAVG and the IEAVG is that the 
+#' IEAVG is based on re-labeled samples.
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the EAVG. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.eavg.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.eavg.poisson.Mcmcestind(obj)
   }
 }
 
-### Summary Bml estimates Poisson: Creates a matrix
-### with Bml estimates for Poisson parameters.
+#' Summarize EAVG estimates for Poisson mixture models
+#' 
+#' @description 
+#' For internal usage only. This function generates explicit summaries for the 
+#' EAVG estimates. 
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A matrix with parameter estimates from the EAVG. In addition the 
+#'   standard deviations of the posterior density are presented.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".pars.eavg.poisson.Mcmcestind" <- function(obj) {
   K <- obj@K
   parout <- matrix(0, nrow = 2 * K, ncol = 2)
@@ -252,16 +434,40 @@ setMethod(
   return(parout)
 }
 
-### Summary rownames: Creates row names for all
-### parameters.
+#' Create summary row names
+#' 
+#' @description 
+#' For internal usage only. This function generates row names for the explicit 
+#' summaries.
+#' 
+#' Note that at this time advanced summaries are only available for Poisson 
+#' mixture models.
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A vector with the row names for the advanced summary.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".rownames.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .rownames.poisson.Mcmcestind(obj)
   }
 }
 
-### Summary rownames: Creates row names for
-### each model.
+#' Create summary row names for Poisson mixture models
+#' 
+#' @description 
+#' For internal usage only. This function generates row names for the explicit 
+#' summaries.
+#' 
+#' @param obj An `mcmcestind` object containing the parameter estimates.
+#' @return A vector with the row names for the advanced summary over estimates 
+#'   for a Poisson mixture model.
+#' @noRd 
+#' 
+#' @seealso 
+#' * [summary][mcmcest_class] for the calling function
 ".rownames.poisson.Mcmcestind" <- function(obj) {
   rnames <- rep("", 2 * obj@K)
   for (k in seq(1, obj@K)) {

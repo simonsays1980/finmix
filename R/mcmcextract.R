@@ -1,3 +1,20 @@
+#' Finmix `mcmcextract` class
+#' 
+#' @desfription
+#' This is a leight-weighted class containing the major results from MCMC 
+#' sampling to calculate model moments from MCMC samples. Note that momentarily
+#' only methods for the multivariate Normal mixture are implemented.
+#' 
+#' @slot dist A character defining the finite mixture model that has been used 
+#'   in MCMC sampling.
+#' @slot K An integer specifying the number of components of the mixture model.
+#' @slot r An integer specifying the number of dimensions of the mixture model.
+#' @slot par A list storing the sample component parameters from MCMC sampling. 
+#' @slot weight A n array storing the sample weight parameters from MCMC 
+#' sampling.
+#' 
+#' @exportClass mcmcextract
+#' @noRd
 .mcmcextract <- setClass("mcmcextract",
   representation(
     dist = "character",
@@ -19,6 +36,22 @@
   )
 )
 
+#' Calculate the model moments of MCMC samples
+#' 
+#' @description 
+#' For internal usage only. This function calculates the finite mixture moments 
+#' of a mixture model from the MCMC samples. Note that this function is 
+#' momentarily only implemented for a mixture of multivariate Normal 
+#' distributions. 
+#' 
+#' @param obj An `mcmcextract` object containing the parameters and weights 
+#'   from MCMC sampling.
+#' @return A list containing the model moments calculated from MCMC samples.
+#' @exportMethod moments
+#' @noRd
+#' @seealso 
+#' * [mcmcoutput][mcmcoutput_class] for the results from MCMC sampling
+#' * [extract()][mcmcoutput_class] for the calling method
 setMethod(
   "moments", signature(object = "mcmcextract"),
   function(object) {
@@ -29,9 +62,19 @@ setMethod(
   }
 )
 
-### --------------------------------------------------------------
-### Moments
-### --------------------------------------------------------------
+#' Calculate the model moments of multivariate Normal MCMC samples
+#' 
+#' @description 
+#' For internal usage only. This function calculates the finite mixture moments 
+#' of a multivariate Normal mixture model from the MCMC samples. 
+#' 
+#' @param obj An `mcmcextract` object containing the parameters and weights 
+#'   from MCMC sampling.
+#' @return A list containing the model moments calculated from MCMC samples.
+#' @noRd
+#' @seealso 
+#' * [mcmcoutput][mcmcoutput_class] for the results from MCMC sampling
+#' * [extract()][mcmcoutput_class] for the calling method
 ".moments.Normult.Mcmcextract" <- function(obj) {
   K <- obj@K
   r <- obj@r

@@ -15,6 +15,22 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `studentmodelmoments` class
+#' 
+#' @description
+#' Defines a class that holds theoretical moments for a finite mixture of 
+#' student distributions. Note that this class is not directly used, but 
+#' indirectly when calling the `modelmoments` constructor [modelmoments()].
+#' 
+#' @slot B A numeric defining the between-group heterogeneity.
+#' @slot W A numeric defining the within-group heterogeneity. 
+#' @slot R A numeric defining the coefficient of determination.
+#' @exportClass studentmodelmoments
+#' @name studentmodelmoments
+#' 
+#' @seealso 
+#' * \code{\link{modelmoments_class}} for the base class for model moments
+#' * \code{\link{modelmoments}} for the constructor of `modelmoments` classes
 .studentmodelmoments <- setClass("studentmodelmoments",
   representation(
     B = "numeric",
@@ -33,6 +49,24 @@
   )
 )
 
+#' Initializer of the `studentmodelmoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()` 
+#' to generate in the initialization step also the moments for a passed `model`
+#' object.
+#' 
+#' @param .Object An object: see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix `model` object containing the definition of the 
+#'   finite mixture distribution.
+#' @noRd
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "studentmodelmoments",
   function(.Object, ..., model) {
@@ -41,6 +75,15 @@ setMethod(
   }
 )
 
+#' Generate moments for student mixture
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of an
+#' student mixture distribution.
+#' 
+#' @param object An `studentmodelmoments` object. 
+#' @return An `studentmodelmoments` object with calculated moments.
+#' @noRd
 setMethod(
   "generateMoments", "studentmodelmoments",
   function(object) {
@@ -48,6 +91,15 @@ setMethod(
   }
 )
 
+#' Shows a summary of an `studentmodelmoments` object.
+#' 
+#' Calling [show()] on an `studentmodelmoments` object gives an overview 
+#' of the moments of an student finite mixture. 
+#' 
+#' @param object An `studentmodelmoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @describeIn studentmodelmoments
 setMethod(
   "show", "studentmodelmoments",
   function(object) {
@@ -83,6 +135,25 @@ setMethod(
 )
 
 ## Getters ##
+#' Getter method of `studentmodelmoments` class.
+#' 
+#' Returns the `B` slot.
+#' 
+#' @param object An `studentmodelmoments` object.
+#' @returns The `B` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normal", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- c(-2, 2)
+#' sigmas          <- matrix(c(2, 4), nrow=1)
+#' setPar(f_model) <- list(mu = means, sigma = sigmas, df = c(20, 40))
+#' f_moments       <- modelmoments(f_model)
+#' getB(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getB", "studentmodelmoments",
   function(object) {
@@ -90,6 +161,25 @@ setMethod(
   }
 )
 
+#' Getter method of `studentmodelmoments` class.
+#' 
+#' Returns the `W` slot.
+#' 
+#' @param object An `studentmodelmoments` object.
+#' @returns The `W` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normal", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- c(-2, 2)
+#' sigmas          <- matrix(c(2, 4), nrow=1)
+#' setPar(f_model) <- list(mu = means, sigma = sigmas, df = c(20, 40))
+#' f_moments       <- modelmoments(f_model)
+#' getW(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getW", "studentmodelmoments",
   function(object) {
@@ -97,6 +187,25 @@ setMethod(
   }
 )
 
+#' Getter method of `studentmodelmoments` class.
+#' 
+#' Returns the `R` slot.
+#' 
+#' @param object An `studentmodelmoments` object.
+#' @returns The `R` slot of the `object`.
+#' @noRd
+#' 
+#' @examples 
+#' f_model         <- model("normal", weight = matrix(c(.3, .7), nrow = 1))
+#' means           <- c(-2, 2)
+#' sigmas          <- matrix(c(2, 4), nrow=1)
+#' setPar(f_model) <- list(mu = means, sigma = sigmas, df = c(20, 40))
+#' f_moments       <- modelmoments(f_model)
+#' getR(f_moments)
+#' 
+#' @seealso 
+#' * [modelmoments] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getR", "studentmodelmoments",
   function(object) {

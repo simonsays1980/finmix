@@ -9,13 +9,19 @@ Description: An R package for Bayesian estimation of finite mixture
     distributions. The package uses heavily C++ code to enable high performance 
     MCMC sampling. Each distribution comes along with some support functions 
     that create needed objects and start parameters. The following mixtures are 
-    available: Poisson, binomial, exponential, Normal, multivariate Normal, 
-    Student, and Multivariate Student. 
+    available: Poisson, Binomial, Exponential, Normal, Multivariate Normal, 
+    Student-t, and Multivariate Student-t. 
 License: GPL (>= 3)
 SystemRequirements: C++11
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends: 
+    R (>= 3.0.2)
 Imports: 
     Rcpp (>= 1.0.7), 
     RcppArmadillo (>= 0.10.6),
+    methods,
+    stats,
     graphics, 
     mvtnorm, 
     KernSmooth, 
@@ -68,8 +74,10 @@ Collate:
     mcmcoutputhierpost.R
     mixturemcmc.R
     mcmcpermfix.R
+    mcmcpermfixhier.R
     mcmcpermfixpost.R
     mcmcpermind.R
+    mcmcpermindhier.R
     mcmcpermindpost.R
     mcmcoutputpermfix.R
     mcmcoutputpermfixhier.R
