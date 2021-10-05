@@ -1478,7 +1478,7 @@ setMethod(
 #' @seealso 
 #' * [subseq()] for the calling method
 ".subseq.Poisson.Hier" <- function(obj, index) {
-  obj@hyper$b <- array(obj@hyper$b[index],
+  obj@hyper$b <- array(obj@hyper$b[index,],
     dim = c(obj@M, 1)
   )
   return(obj)
@@ -1501,7 +1501,7 @@ setMethod(
 #' @seealso 
 #' * [subseq()] for the calling method
 ".subseq.Norstud.Hier" <- function(obj, index) {
-  obj@hyper$C <- array(obj@hyper$C[index],
+  obj@hyper$C <- array(obj@hyper$C[index,],
     dim = c(obj@M, 1)
   )
   return(obj)
