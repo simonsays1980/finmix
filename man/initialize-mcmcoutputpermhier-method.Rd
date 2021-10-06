@@ -12,6 +12,7 @@
   relabel = character(),
   weightperm = array(),
   logperm = list(),
+  hyperperm = list(),
   entropyperm = array(),
   STperm = array(),
   Sperm = array(),

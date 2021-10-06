@@ -4,7 +4,53 @@
 \name{mcmcoutputpermfix-class}
 \alias{mcmcoutputpermfix-class}
 \alias{.mcmcoutputpermfix}
+\alias{plotTraces,mcmcoutputpermfix-method}
+\alias{plotHist,mcmcoutputpermfix-method}
+\alias{plotDens,mcmcoutputpermfix-method}
+\alias{plotPointProc,mcmcoutputpermfix-method}
+\alias{plotSampRep,mcmcoutputpermfix-method}
+\alias{plotPostDens,mcmcoutputpermfix-method}
 \title{Finmix \code{mcmcoutputpermfix} class}
+\usage{
+\S4method{plotTraces}{mcmcoutputpermfix}(x, dev = TRUE, lik = 1, col = FALSE, ...)
+
+\S4method{plotHist}{mcmcoutputpermfix}(x, dev = TRUE, ...)
+
+\S4method{plotDens}{mcmcoutputpermfix}(x, dev = TRUE, ...)
+
+\S4method{plotPointProc}{mcmcoutputpermfix}(x, dev = TRUE, ...)
+
+\S4method{plotSampRep}{mcmcoutputpermfix}(x, dev = TRUE, ...)
+
+\S4method{plotPostDens}{mcmcoutputpermfix}(x, dev = TRUE, ...)
+}
+\arguments{
+\item{x}{An \code{mcmcoutputpermfix} object containing all sampled values.}
+
+\item{dev}{A logical indicating, if the plots should be shown by a graphical
+device. If plots should be stored to a file set \code{dev} to \code{FALSE}.}
+
+\item{lik}{An integer indicating, if the log-likelihood traces should be
+plotted (default). If set to \code{0} the traces for the parameters
+and weights are plotted instead.}
+
+\item{col}{A logical indicating, if the plot should be colored.}
+
+\item{...}{Further arguments to be passed to the plotting function.}
+}
+\value{
+A plot of the traces of the MCMC samples.
+
+Histograms of the MCMC samples.
+
+Densities of the MCMC samples.
+
+Densities of the MCMC samples.
+
+Sampling represetnation of the MCMC samples.
+
+Posterior densities of the MCMC samples.
+}
 \description{
 This class defines objects to store the outputs from permuting the MCMC
 samples. Due to label switching the sampled component parameters are usually
@@ -18,11 +64,199 @@ size and the mixture log-likelihood, the prior log-likelihood, and the
 complete data posterior log-likelihood.
 
 Note that this class inherits all of its slots from the parent classes.
+
+Calling \code{\link[=plotTraces]{plotTraces()}} plots the MCMC traces of the mixture log-likelihood
+, the mixture log-likelihood of the prior distribution, the log-likelihood
+of the complete data posterior, or the weights and parameters if \code{lik} is
+set to \code{1}.s
+
+If \code{lik} is set to \code{0} the parameters of the components and the posterior
+parameters are plotted together with \code{K-1} weights.
+
+Calling \code{\link[=plotHist]{plotHist()}} plots histograms of the sampled component parameters
+from MCMC sampling.
+
+Calling \code{\link[=plotDens]{plotDens()}} plots densities of the sampled component parameters
+from MCMC sampling.
+
+Calling \code{\link[=plotPointProc]{plotPointProc()}} plots point processes of the sampled component
+parameters from MCMC sampling.
+
+Calling \code{\link[=plotSampRep]{plotSampRep()}} plots sampling representations of the sampled
+component parameters from MCMC sampling.
+
+Calling \code{\link[=plotPostDens]{plotPostDens()}} plots posterior densities of the sampled component
+parameters from MCMC sampling, if the number of components is two.
+}
+\section{Functions}{
+\itemize{
+\item \code{plotTraces,mcmcoutputpermfix-method}: 
+
+\item \code{plotHist,mcmcoutputpermfix-method}: 
+
+\item \code{plotDens,mcmcoutputpermfix-method}: 
+
+\item \code{plotPointProc,mcmcoutputpermfix-method}: 
+
+\item \code{plotSampRep,mcmcoutputpermfix-method}: 
+
+\item \code{plotPostDens,mcmcoutputpermfix-method}: 
+}}
+
+\examples{
+# Define a Poisson mixture model with two components.
+f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+                 indicfix = TRUE)
+# Simulate data from the mixture model.
+f_data <- simulate(f_model)
+# Define the hyper-parameters for MCMC sampling.
+f_mcmc <- mcmc(storepost = FALSE)
+# Define the prior distribution by relying on the data.
+f_prior <- priordefine(f_data, f_model)
+# Do not use a hierarchical prior.
+setHier(f_prior) <- FALSE
+# Start MCMC sampling.
+f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+f_outputperm <- mcmcpermute(f_output)
+plotTraces(f_outputperm, lik = 0)
+
+\dontrun{
+# Define a Poisson mixture model with two components.
+f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+                 indicfix = TRUE)
+# Simulate data from the mixture model.
+f_data <- simulate(f_model)
+# Define the hyper-parameters for MCMC sampling.
+f_mcmc <- mcmc(storepost = FALSE)
+# Define the prior distribution by relying on the data.
+f_prior <- priordefine(f_data, f_model)
+# Do not use a hierarchical prior.
+setHier(f_prior) <- FALSE
+# Start MCMC sampling.
+f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+f_outputperm <- mcmcpermute(f_output)
+plotDens(f_outputperm)
+}
+
+\dontrun{
+# Define a Poisson mixture model with two components.
+f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+                 indicfix = TRUE)
+# Simulate data from the mixture model.
+f_data <- simulate(f_model)
+# Define the hyper-parameters for MCMC sampling.
+f_mcmc <- mcmc(storepost = FALSE)
+# Define the prior distribution by relying on the data.
+f_prior <- priordefine(f_data, f_model)
+# Do not use a hierarchical prior.
+setHier(f_prior) <- FALSE
+# Start MCMC sampling.
+f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+f_outputperm <- mcmcpermute(f_output)
+plotPointProc(f_outputperm)
+}
+
+\dontrun{
+# Define a Poisson mixture model with two components.
+f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+                 indicfix = TRUE)
+# Simulate data from the mixture model.
+f_data <- simulate(f_model)
+# Define the hyper-parameters for MCMC sampling.
+f_mcmc <- mcmc(storepost = FALSE)
+# Define the prior distribution by relying on the data.
+f_prior <- priordefine(f_data, f_model)
+# Do not use a hierarchical prior.
+setHier(f_prior) <- FALSE
+# Start MCMC sampling.
+f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+f_outputperm <- mcmcpermute(f_output)
+plotSampRep(f_outputperm)
+}
+
+\dontrun{
+# Define a Poisson mixture model with two components.
+f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+                 indicfix = TRUE)
+# Simulate data from the mixture model.
+f_data <- simulate(f_model)
+# Define the hyper-parameters for MCMC sampling.
+f_mcmc <- mcmc(storepost = FALSE)
+# Define the prior distribution by relying on the data.
+f_prior <- priordefine(f_data, f_model)
+# Do not use a hierarchical prior.
+setHier(f_prior) <- FALSE
+# Start MCMC sampling.
+f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+f_outputperm <- mcmcpermute(f_output)
+plotPostDens(f_outputperm)
+}
+
 }
 \seealso{
 \itemize{
-\item \link[=mcmcoutput_class]{mcmcoutputfix} for the parent class
-\item \link[=mcmcperm_class]{mcmcpermfix} for the parent class
+\item \linkS4class{mcmcoutputfix} for the parent class
+\item \linkS4class{mcmcpermfix} for the parent class
 \item \code{\link[=mcmcpermute]{mcmcpermute()}} for performing permutation of MCMC samples
+}
+
+\itemize{
+\item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for permuting MCMC samples
+\item \code{\link[=plotHist]{plotHist()}} for plotting histograms of sampled values
+\item \code{\link[=plotDens]{plotDens()}} for plotting densities of sampled values
+\item \code{\link[=plotSampRep]{plotSampRep()}} for plotting sampling representations of sampled values
+\item \code{\link[=plotPointProc]{plotPointProc()}} for plotting point processes for sampled values
+\item \code{\link[=plotPostDens]{plotPostDens()}} for plotting the posterior density of component parameters
+}
+
+\itemize{
+\item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for permuting MCMC samples
+\item \code{\link[=plotTraces]{plotTraces()}} for plotting the traces of sampled values
+\item \code{\link[=plotDens]{plotDens()}} for plotting densities of sampled values
+\item \code{\link[=plotSampRep]{plotSampRep()}} for plotting sampling representations of sampled values
+\item \code{\link[=plotPointProc]{plotPointProc()}} for plotting point processes for sampled values
+\item \code{\link[=plotPostDens]{plotPostDens()}} for plotting the posterior density of component parameters
+}
+
+\itemize{
+\item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for permuting MCMC samples
+\item \code{\link[=plotTraces]{plotTraces()}} for plotting the traces of sampled values
+\item \code{\link[=plotHist]{plotHist()}} for plotting histograms of sampled values
+\item \code{\link[=plotSampRep]{plotSampRep()}} for plotting sampling representations of sampled values
+\item \code{\link[=plotPointProc]{plotPointProc()}} for plotting point processes for sampled values
+\item \code{\link[=plotPostDens]{plotPostDens()}} for plotting the posterior density of component parameters
+}
+
+\itemize{
+\item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for permuting MCMC samples
+\item \code{\link[=plotTraces]{plotTraces()}} for plotting the traces of sampled values
+\item \code{\link[=plotHist]{plotHist()}} for plotting histograms of sampled values
+\item \code{\link[=plotDens]{plotDens()}} for plotting densities of sampled values
+\item \code{\link[=plotSampRep]{plotSampRep()}} for plotting sampling representations of sampled values
+\item \code{\link[=plotPostDens]{plotPostDens()}} for plotting posterior densities for sampled values
+}
+
+\itemize{
+\item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for permuting MCMC samples
+\item \code{\link[=plotTraces]{plotTraces()}} for plotting the traces of sampled values
+\item \code{\link[=plotHist]{plotHist()}} for plotting histograms of sampled values
+\item \code{\link[=plotDens]{plotDens()}} for plotting densities of sampled values
+\item \code{\link[=plotPointProc]{plotPointProc()}} for plotting point processes of sampled values
+\item \code{\link[=plotPostDens]{plotPostDens()}} for plotting posterior densities for sampled values
+}
+
+\itemize{
+\item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for permuting MCMC samples
+\item \code{\link[=plotTraces]{plotTraces()}} for plotting the traces of sampled values
+\item \code{\link[=plotHist]{plotHist()}} for plotting histograms of sampled values
+\item \code{\link[=plotDens]{plotDens()}} for plotting densities of sampled values
+\item \code{\link[=plotSampRep]{plotSampRep()}} for plotting sampling representations of sampled values
+\item \code{\link[=plotPointProc]{plotPointProc()}} for plotting point processes for sampled values
 }
 }

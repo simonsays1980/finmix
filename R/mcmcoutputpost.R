@@ -426,7 +426,7 @@ setMethod(
   ),
   function(object, index) {
     ## Call 'subseq()' from 'mcmcoutputbase'
-    callNextMethod(object, index)
+    object <- callNextMethod(object, index)
     ## Change owned slots ##
     dist <- object@model@dist
     if (dist == "poisson") {

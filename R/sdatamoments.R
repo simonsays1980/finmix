@@ -69,7 +69,7 @@ setClassUnion("sdatamomentsOrNULL", members = c("sdatamoments", "NULL"))
 #' @export
 #' @name sdatamoments
 #' 
-#' @example
+#' @examples
 #' # Define a model of exponential mixtures.
 #' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
 #' # Simulate data from the model.

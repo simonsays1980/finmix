@@ -20,6 +20,15 @@ component-specific moments. These moments can only constructed if the
 \link[=fdata_class]{fdata} object contains in addition to observations also
 indicators defining from which component a certain observation stems.
 }
+\examples{
+# Define a mixture model with exponential components.
+f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+# Simulate data from the mixture model.
+f_data <- simulate(f_model)
+# Create group moments of the data.
+groupmoments(f_data)
+
+}
 \seealso{
 \itemize{
 \item \link[=fdata_class]{fdata} for the \code{fdata} class definition

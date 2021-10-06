@@ -64,8 +64,8 @@ f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
 # Call the default constructor.
 f_prior <- prior()
 # Check if the prior has appropriate parameters defined.
-hasPriorPar(f_prior)
-hasPriorPar(f_prior, TRUE)
+hasPriorPar(f_prior, f_model)
+hasPriorPar(f_prior, f_model, TRUE)
 
 # Define a Poisson mixture model.
 f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)

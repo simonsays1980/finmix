@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Rcpp.  If not, see <http://www.gnu.org/licenses/>.
 
-#' Finmix `mcmcpermfixpost` class
+#' Finmix `mcmcpermindhier` class
 #' 
 #' @description 
 #' This class defines objects to store the outputs from permuting the MCMC 
@@ -26,53 +26,51 @@
 #' same iteration to the same component, the sample size could shrink. 
 #' 
 #' This class is supplementing the parent class by adding a slot to store the 
-#' permuted parameter samples of the posterior densities.
+#' permuted parameter samples of the hierarchical prior.
 #' 
 #' Note that for models with fixed indicators `weight`s do not get permuted.
 #' 
-#' @slot postperm A named list containing a named list `par` with array(s) of 
-#'   parameters from the posterior density. 
-#'   
-#' @exportClass mcmcpermfixpost
-#' @rdname mcmcpermfixpost-class
+#' @slot hyperperm A named list containing the (permuted) parameters of the 
+#'   hierarchical prior. 
+#' @exportClass mcmcpermindhier
+#' @describeIn mcmcperm_class
 #' 
 #' @seealso 
-#' * [mcmcpermute()] for the calling function
-#' * [mcmcpermfix-class] for the parent class definition
-#' * [mcmcpermindpost-class]for the corresponding class for models with 
-#'   unknown indicators
-.mcmcpermfixpost <- setClass("mcmcpermfixpost",
-  representation(postperm = "list"),
-  contains = c("mcmcpermfix"),
-  validity = function(object) {
-    ## else: OK
-    TRUE
-  },
-  prototype(postperm = list())
+#' * \code{\link{mcmcpermute()}} for the calling function
+#' * \code{\link{mcmcpermind}} for the parent class definition
+#' * \code{\link{mcmcpermfixhier}} for the corresponding class for models with 
+#'   fixed indicators
+.mcmcpermindhier <- setClass("mcmcpermindhier",
+                             representation(hyperperm = "list"),
+                             contains = c("mcmcpermind"),
+                             validity = function(object) {
+                               ## else: OK
+                               TRUE
+                             },
+                             prototype(hyperperm = list())
 )
 
 ## Getters ##
 
-#' Getter method of `mcmcpermfixpost` class.
+#' Getter method of `mcmcperminfhier` class.
 #' 
-#' Returns the `postperm` slot.
+#' Returns the `hyperperm` slot.
 #' 
-#' @param object An `mcmcpermfixpost` object.
-#' @returns The `postperm` slot of the `object`.
+#' @param object An `mcmcpermindhier` object.
+#' @returns The `hyperperm` slot of the `object`.
 #' @noRd
 #' 
 #' @examples 
-#' \dontrun{getMperm(mcmcperm)}
+#' \dontrun{getHyperpem(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermfix][mcmcoutput_class] for the inheriting class
-#' * [mcmcpermute()] for function permuting MCMC samples
+#' * \code{\link{mcmcoutputpermind}} for the inheriting class
+#' * \code{\link{mcmcpermute}} for function permuting MCMC samples
 setMethod(
-  "getPostperm", "mcmcpermfixpost",
+  "getHyperperm", "mcmcpermfixpost",
   function(object) {
-    return(object@postperm)
+    return(object@hyperperm)
   }
 )
-
 ## No setters implemented as users are not intended to
 ## manipulate this object

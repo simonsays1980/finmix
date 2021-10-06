@@ -434,7 +434,7 @@ setMethod(
 #' @param object An `mcmcoutput` object containing all sampled values.
 #' @param index An array specifying the extraction of the sub-chain.
 #' @return An `mcmcoutput` object containing the values from the sub-chain.
-#' @noRd
+#' @exportMethod subseq
 setMethod(
   "subseq", signature(
     object = "mcmcoutputfixhier",

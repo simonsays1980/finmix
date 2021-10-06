@@ -470,7 +470,7 @@ setMethod(
 #' @param object An `mcmcoutput` object containing all sampled values.
 #' @param index An array specifying the extraction of the sub-chain.
 #' @return An `mcmcoutput` object containing the values from the sub-chain.
-#' @noRd
+#' @exportMethod subseq
 setMethod(
   "subseq", signature(
     object = "mcmcoutputfix",
@@ -2498,10 +2498,10 @@ setMethod(
 #' @seealso 
 #' * [subseq()] for the calling method
 ".subseq.Log.Fix" <- function(obj, index) {
-  obj@log$mixlik <- matrix(obj@log$mixlik[index],
+  obj@log$mixlik <- matrix(obj@log$mixlik[index,],
     nrow = obj@M, ncol = 1
   )
-  obj@log$mixprior <- matrix(obj@log$mixprior[index],
+  obj@log$mixprior <- matrix(obj@log$mixprior[index,],
     nrow = obj@M, ncol = 1
   )
   return(obj)
@@ -2528,7 +2528,7 @@ setMethod(
       nrow = obj@M, ncol = 1
     )
   } else {
-    obj@par$lambda <- obj@par$lambda[index, ]
+    obj@par$lambda <- obj@par$lambda[index,]
   }
   return(obj)
 }

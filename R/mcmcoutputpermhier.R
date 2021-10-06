@@ -27,19 +27,19 @@
 #' 
 #' This class stores the permuted parameters together with the new MCMC sample 
 #' size and the mixture log-likelihood, the prior log-likelihood, and the 
-#' complete data posterior log-likelihood.
+#' complete data posterior log-likelihood. 
 #' 
 #' Note that this class inherits all of its slots from the parent classes.
 #' 
 #' @exportClass mcmcoutputpermhier
-#' @describeIn mcmcoutputperm_class
+#' @rdname mcmcoutputperm-class
 #' @seealso 
-#' * [mcmcoutputbase][mcmcoutput_class] for the parent class
-#' * [mcmcpermind][mcmcperm_class] for the parent class
+#' * [mcmcoutputhier-class] for the parent class
+#' * [mcmcpermindhier-class] for the parent class
 #' * [mcmcpermute()] for performing permutation of MCMC samples
 .mcmcoutputpermhier <- setClass("mcmcoutputpermhier",
   contains = c(
-    "mcmcpermind",
+    "mcmcpermindhier",
     "mcmcoutputhier"
   ),
   validity = function(object) {
@@ -90,8 +90,8 @@ setMethod(
   function(.Object, mcmcoutput, Mperm = integer(),
            parperm = list(), relabel = character(),
            weightperm = array(), logperm = list(),
-           entropyperm = array(), STperm = array(),
-           Sperm = array(), NKperm = array()) {
+           hyperperm = list(), entropyperm = array(), 
+           STperm = array(), Sperm = array(), NKperm = array()) {
     .Object@M <- mcmcoutput@M
     .Object@burnin <- mcmcoutput@burnin
     .Object@ranperm <- mcmcoutput@ranperm
@@ -110,6 +110,7 @@ setMethod(
     .Object@relabel <- relabel
     .Object@weightperm <- weightperm
     .Object@logperm <- logperm
+    .Object@hyperperm <- hyperperm
     .Object@entropyperm <- entropyperm
     .Object@STperm <- STperm
     .Object@Sperm <- Sperm

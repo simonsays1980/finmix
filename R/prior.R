@@ -179,17 +179,19 @@
 #' @describeIn prior-class Checks for parameters in `prior` object 
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
 #' # Call the default constructor.
 #' f_prior <- prior()
 #' # Check if the prior has appropriate parameters defined.
-#' hasPriorPar(f_prior)
-#' hasPriorPar(f_prior, TRUE)
+#' hasPriorPar(f_prior, f_model)
+#' hasPriorPar(f_prior, f_model, TRUE)
+#' }
 #' 
 #' @seealso 
-#' * [prior][prior-class] for the definition of the `prior` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [prior-class] for the definition of the `prior` class
+#' * [model-class] for the definition of the `model` class
 setMethod(
   "hasPriorPar", signature(
     object = "prior",

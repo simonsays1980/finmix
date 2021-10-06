@@ -418,6 +418,7 @@ setMethod(
 #' @param index An array specifying the extraction of the sub-chain.
 #' @return An `mcmcoutput` object containing the values from the sub-chain.
 #' @noRd
+#' @export subseq
 setMethod(
   "subseq", signature(
     object = "mcmcoutputfixhierpost",
@@ -427,7 +428,7 @@ setMethod(
     ## TODO: Check arguments via .validObject ##
     dist <- object@model@dist
     ## Call 'subseq()' from 'mcmcoutputfixhier'
-    callNextMethod(object, index)
+    object <- callNextMethod(object, index)
     ## post ##
     if (dist == "poisson") {
       .subseq.Poisson.Post(object, index)

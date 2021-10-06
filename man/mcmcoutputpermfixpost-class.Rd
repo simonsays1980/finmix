@@ -9,3 +9,6 @@
 This class defines the storage of parameters of the posterior distribution.
 It inherits from the
 }
+\seealso{
+
+}

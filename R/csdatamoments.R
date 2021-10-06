@@ -124,7 +124,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn csdatamoments_class
+#' @describeIn csdatamoments-class Shows a short summary of the object's slots.
 setMethod(
   "show", "csdatamoments",
   function(object) {

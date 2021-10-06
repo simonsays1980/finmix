@@ -337,7 +337,7 @@ setGeneric("plotSampRep", function(x, dev = TRUE, ...) standardGeneric("plotSamp
 #' @describeIn mcmcoutput_class
 setGeneric("plotPostDens", function(x, dev = TRUE, ...) standardGeneric("plotPostDens"))
 
-#' @describeIn mcmcoutput_class
+#' @describeIn mcmcoutput_class 
 setGeneric("subseq", function(object, index) standardGeneric("subseq"))
 
 #' @describeIn mcmcoutput_class

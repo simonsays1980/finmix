@@ -22,7 +22,7 @@
 #' @description
 #' This class defines the basic slots for the MCMC sampling output when 
 #' indicators are not known. It inherits from the 
-#' [mcmcoutfix][mcmcoutput_class]. 
+#' [mcmcoutputfix-class]. 
 #' 
 #' @slot weight An `array` of dimension `M x K` containing the sampled 
 #'   weights.
@@ -41,7 +41,7 @@
 #'   indicators defining the last "clustering" of observations into the 
 #'   mixture components.
 #' @exportClass mcmcoutputbase
-#' @describeIn mcmcoutput_class
+#' @rdnam mcmcoutputbase-class
 .mcmcoutputbase <- setClass("mcmcoutputbase",
   representation(
     weight = "array",
@@ -75,7 +75,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutput_class
+#' @describeIn mcmcoutputbase-class Shows a short summary of the object's slots
 setMethod(
   "show", "mcmcoutputbase",
   function(object) {
@@ -146,7 +146,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @describeIn mcmcoutput_class
+#' @describeIn mcmcoutputbase-class
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -220,7 +220,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutput_class
+#' @describeIn mcmcoutputbase-class
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -272,7 +272,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutput_class
+#' @describeIn mcmcoutputbase-class
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -323,7 +323,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point processes of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @describeIn mcmcoutput_class
+#' @describeIn mcmcoutputbase-class
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -370,7 +370,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling representations of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @describeIn mcmcoutput_class
+#' @describeIn mcmcoutputbase-class
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -417,7 +417,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutput_class
+#' @describeIn mcmcoutputbase-class
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -528,7 +528,7 @@ setMethod(
 #' getWeight(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput][mcmcoutputbase-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getWeight", "mcmcoutputbase",
@@ -562,7 +562,7 @@ setMethod(
 #' getEntropy(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput][mcmcoutputbase-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getEntropy", "mcmcoutputbase",
@@ -596,7 +596,7 @@ setMethod(
 #' getST(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput][mcmcoutputbase-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getST", "mcmcoutputbase",
@@ -630,7 +630,7 @@ setMethod(
 #' getS(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput][mcmcoutputbase-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getS", "mcmcoutputbase",
@@ -664,7 +664,7 @@ setMethod(
 #' getNK(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput][mcmcoutputbase-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getNK", "mcmcoutputbase",
@@ -698,7 +698,7 @@ setMethod(
 #' getClust(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput][mcmcoutputbase-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getClust", "mcmcoutputbase",

@@ -21,6 +21,15 @@ Calling \code{\link[=sdatamoments]{sdatamoments()}} constructs an object of clas
 this slot is \code{"discrete"} an \code{sdatamoments} object is returned and if the
 slot is \code{"continuous"}, a \code{csdatamoments} object is returned.
 }
+\examples{
+# Define a model of exponential mixtures.
+f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+# Simulate data from the model.
+f_data <- simulate(f_model)
+# Compute data moments for the indicators.
+sdatamoments(f_data)
+
+}
 \seealso{
 \itemize{
 \item \link[=sdatamoments_class]{sdatamoments} for the class of indicator

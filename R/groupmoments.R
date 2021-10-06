@@ -74,7 +74,7 @@
 #' @export
 #' @name groupmoments
 #' 
-#' @example 
+#' @examples 
 #' # Define a mixture model with exponential components.
 #' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
 #' # Simulate data from the mixture model.
@@ -148,7 +148,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn groupmoments_class
+#' @describeIn groupmoments-class Shows a short summary of the object's slots
 setMethod(
   "show", "groupmoments",
   function(object) {

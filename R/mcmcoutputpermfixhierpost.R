@@ -69,7 +69,7 @@
 #'   hierarchical prior.
 #' @param postperm A named list containing a named list `par` with array(s) of 
 #'   parameters from the posterior density. 
-#' 
+#' @exportMethod initialize
 #' @keywords internal
 #' 
 #' @seealso 
@@ -108,7 +108,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputperm_class
+#' @describeIn mcmcoutputpermfixhierpost-class
 setMethod(
   "show", "mcmcoutputpermfixhierpost",
   function(object) {
@@ -184,9 +184,9 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @describeIn mcmcoutputperm_class
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
 #'                  indicfix = TRUE)
@@ -200,6 +200,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotTraces(f_outputperm, lik = 0)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
@@ -258,9 +259,9 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutputperm_class
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
 #'                  indicfix = TRUE)
@@ -274,6 +275,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotHist(f_outputperm)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
@@ -314,9 +316,9 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutputperm_class
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
 #'                  indicfix = TRUE)
@@ -330,6 +332,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotDens(f_outputperm)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
@@ -369,9 +372,9 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point process of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @describeIn mcmcoutputperm_class
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
 #'                  indicfix = TRUE)
@@ -385,6 +388,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotPointProc(f_outputperm)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
@@ -424,9 +428,9 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampliing representations of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @describeIn mcmcoutputperm_class
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
 #'                  indicfix = TRUE)
@@ -440,6 +444,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotSampRep(f_outputperm)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
@@ -479,9 +484,9 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutputperm_class
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
 #'                  indicfix = TRUE)
@@ -495,6 +500,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotPostDens(f_outputperm)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
