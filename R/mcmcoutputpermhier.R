@@ -32,7 +32,8 @@
 #' Note that this class inherits all of its slots from the parent classes.
 #' 
 #' @exportClass mcmcoutputpermhier
-#' @rdname mcmcoutputperm-class
+#' @rdname mcmcoutputpermhier-class
+#' @keywords internal
 #' @seealso 
 #' * [mcmcoutputhier-class] for the parent class
 #' * [mcmcpermindhier-class] for the parent class
@@ -71,13 +72,13 @@
 #' @param entropyperm An `array` of dimension `Mperm\ x 1` containing the 
 #'   entropy for each MCMC permuted draw.
 #' @param STperm An `array` of dimension `Mperm\ x 1` containing all permuted 
-#'   MCMC states, for the last observation in slot `@@y` of the `fdata` object 
+#'   MCMC states, for the last observation in slot `y` of the `fdata` object 
 #'   passed in to [mixturemcmc()] where a state is defined for non-Markov 
 #'   models as the last indicator of this observation.  
-#' @param An `array` of dimension `N\ x storeS` containing the last 
-#'   `storeS` permuted indicators. `storeS` is defined in the slot `@@storeS` 
+#' @param An `array` of dimension `NxstoreS` containing the last 
+#'   `storeS` permuted indicators. `storeS` is defined in the slot `storeS` 
 #'   of the `mcmc` object passed into [mixturemcmc()].
-#' @param NKperm An `array` of dimension `Mperm\ x K` containing the numbers 
+#' @param NKperm An `array` of dimension `MpermxK` containing the numbers 
 #'   of observations assigned to each component.
 #' 
 #' @keywords internal
@@ -129,7 +130,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 setMethod(
   "show", "mcmcoutputpermhier",
   function(object) {
@@ -236,7 +237,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @describeIn mcmcoutputperm_class Plots traces of MCMC samples
+#' @keywords internal 
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -246,6 +247,7 @@ setMethod(
 #' # Define the hyper-parameters for MCMC sampling.
 #' f_mcmc <- mcmc(storepost = FALSE)
 #' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
 #' # Start MCMC sampling.
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
@@ -303,7 +305,7 @@ setMethod(
 #' from MCMC sampling. In addition the parameters of the hierarchical prior are 
 #' plotted.
 #' 
-#' Note, this method is so far only implemented for mictures of Poisson and 
+#' Note, this method is so far only implemented for mixtures of Poisson and 
 #' Binomial distributions.
 #' 
 #' @param x An `mcmcoutputpermhier` object containing all sampled values.
@@ -312,7 +314,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist 
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -368,7 +370,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -530,7 +532,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.

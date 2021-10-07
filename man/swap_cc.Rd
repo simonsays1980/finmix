@@ -21,7 +21,7 @@ columns via the indices provided in the \code{index} matrix. All
 to \verb{C++} using the packages \code{Rcpp} and \code{RcppArmadillo}.
 }
 \examples{
-values <- matrix(rnorm(10), nrow = 2)
+values <- matrix(rnorm(10), ncol = 2)
 index <- matrix(c(2,1), nrow = 5, ncol = 2)
 swap_cc(values, index)
 

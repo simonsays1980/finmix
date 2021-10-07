@@ -42,7 +42,7 @@
 //' @export
 //' 
 //' @examples 
-//' values <- matrix(rnorm(10), nrow = 2)
+//' values <- matrix(rnorm(10), ncol = 2)
 //' index <- matrix(c(2,1), nrow = 5, ncol = 2)
 //' swap_cc(values, index)
 //' 

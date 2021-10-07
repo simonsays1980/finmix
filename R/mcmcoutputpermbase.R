@@ -32,10 +32,10 @@
 #' Note that this class inherits all of its slots from the parent classes.
 #' 
 #' @exportClass mcmcoutputpermbase
-#' @describeIn mcmcoutputperm_class
+#' @rdname mcmcoutputpermbase-class
 #' @seealso 
-#' * [mcmcoutputbase][mcmcoutput_class] for the parent class
-#' * [mcmcpermind][mcmcperm_class] for the parent class
+#' * [mcmcoutputbase-class] for the parent class
+#' * [mcmcpermind-class] for the parent class
 #' * [mcmcpermute()] for performing permutation of MCMC samples
 .mcmcoutputpermbase <- setClass("mcmcoutputpermbase",
   contains = c(
@@ -56,7 +56,7 @@
 #' 
 #' @param .Object An object: see the "initialize Methods" section in 
 #'   [initialize].
-#' @param mcmcoutput An `mcmcoutput` class containing the results from MCMC 
+#' @param mcmcoutput An `mcmcoutputpermbase` class containing the results from MCMC 
 #'   sampling.
 #' @param Mperm An integer defining the number of permuted MCMC samples.
 #' @param parperm A named list containing the permuted component parameter 
@@ -126,7 +126,8 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputperm_class
+#' @describeIn mcmcoutputpermbase-class Shows a short summary of the object's 
+#'   slots
 setMethod(
   "show", "mcmcoutputpermbase",
   function(object) {
@@ -225,9 +226,10 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @describeIn mcmcoutputperm_class
+#' @describeIn mcmcoutputpermbase-class
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
 #' # Simulate data from the mixture model.
@@ -242,6 +244,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotTraces(f_outputperm, lik = 0)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
@@ -303,9 +306,11 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutputperm_class
+#' @describeIn mcmcoutputpermbase-class Plot histograms of the parameters and 
+#'   weights
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
 #' # Simulate data from the mixture model.
@@ -320,6 +325,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotHist(f_outputperm)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
@@ -356,7 +362,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutputperm_class
+#' @describeIn mcmcoutputpermbase-class
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -412,9 +418,11 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point process of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @describeIn mcmcoutputperm_class
+#' @describeIn mcmcoutputpermbase-class Plots point process for the component 
+#'   parameters
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
 #' # Simulate data from the mixture model.
@@ -429,6 +437,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotPointProc(f_outputperm)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
@@ -468,9 +477,11 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling representation of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @describeIn mcmcoutputperm_class
+#' @describeIn mcmcoutputpermbase-class Plots sampling representations of the 
+#'   component parameters
 #' 
-#' @examples 
+#' @examples
+#' \dontrun{ 
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
 #' # Simulate data from the mixture model.
@@ -485,6 +496,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotSampRep(f_outputperm)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
@@ -524,9 +536,11 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutputperm_class
+#' @describeIn mcmcoutputpermbase-class Plots the posterior density of the 
+#'   component parameters
 #' 
 #' @examples 
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
 #' # Simulate data from the mixture model.
@@ -541,6 +555,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_outputperm <- mcmcpermute(f_output)
 #' plotPostDens(f_outputperm)
+#' }
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling

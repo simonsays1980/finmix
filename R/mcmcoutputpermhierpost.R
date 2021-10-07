@@ -32,11 +32,12 @@
 #' Note that this class inherits all of its slots from the parent classes.
 #' 
 #' @exportClass mcmcoutputpermhierpost
+#' @rdname mcmcoutputpermhierpost-class
+#' @keywords internal
 #' 
-#' @describeIn mcmcoutputperm_class Finmix `mcmcoutputpermhierpost` class
 #' @seealso 
-#' * [mcmcoutputbase][mcmcoutput_class] for the parent class
-#' * [mcmcpermind][mcmcperm_class] for the parent class
+#' * [mcmcoutputbase-class] for the parent class
+#' * [mcmcpermind-class] for the parent class
 #' * [mcmcpermute()] for performing permutation of MCMC samples
 .mcmcoutputpermhierpost <- setClass("mcmcoutputpermhierpost",
   contains = c(
@@ -138,7 +139,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 setMethod(
   "show", "mcmcoutputpermhierpost",
   function(object) {
@@ -258,7 +259,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod  plotTraces
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -338,7 +339,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -393,7 +394,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -447,7 +448,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -501,7 +502,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -555,7 +556,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -594,14 +595,24 @@ setMethod(
   }
 )
 
-#' Finmix `mcmcoutputperm` class union
+#' Finmix `mcmcoutputperm` class
 #' 
 #' @description 
+#' The mcmcoutputperm class stores MCMC samples after relabeling (permuting). 
+#' 
+#' @details 
+#' Calling [mcmcpermute()] on an `mcmcoutput` class permutes the labels of the 
+#' components and generates an object of class `mcmcoutputperm`. Note, the 
+#' number of samples of the `mcmcoutputperm` object could be less than the 
+#' original number of MCMC samples due to some samples where both components 
+#' get assigned to the same label and henceforth get eliminated from further 
+#' analysis.
+#' 
 #' This class union includes all classes that define objects for permuted 
 #' MCMC samples and is used to dispatch methods for `mcmcoutputperm` objects.
 #' 
 #' @exportClass mcmcoutputperm
-#' @noRd
+#' @rdname mcmcoutputperm-class
 setClassUnion(
   "mcmcoutputperm",
   c(

@@ -19,7 +19,7 @@
 #' 
 #' @examples 
 #' f_model <- model(K=2, dist= 'poisson', par=list(lambda=c(0.17, 0.12))) 
-#' f_data <- simulate(model) 
+#' f_data <- simulate(f_model) 
 #' mcmc <- mcmc() 
 #' (f_data~f_model~mcmc) %=% mcmcstart(f_data, f_model, mcmc)
 #'

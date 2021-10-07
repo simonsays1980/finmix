@@ -15,7 +15,7 @@
 #' @export
 #' 
 #' @examples 
-#' values <- matrix(rnorm(10), nrow = 2)
+#' values <- matrix(rnorm(10), ncol = 2)
 #' index <- matrix(c(2,1), nrow = 5, ncol = 2)
 #' swap_cc(values, index)
 #' 
@@ -297,7 +297,7 @@ permmoments_cc <- function(classS4) {
 #' * [mixturemcmc()] for performing MCMC sampling
 #' * [fdata][fdata_class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
-#' * [prior][prior-class] for the `prior` class definition
+#' * [prior][prior_class] for the `prior` class definition
 #' * [mcmc][mcmc_class] for the `mcmc` class definition
 #' 
 #' @references
@@ -340,7 +340,7 @@ mcmc_binomial_cc <- function(fdata_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S
 #' * [mixturemcmc()] for performing MCMC sampling
 #' * [fdata][fdata_class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
-#' * [prior][prior-class] for the `prior` class definition
+#' * [prior][prior_class] for the `prior` class definition
 #' * [mcmc][mcmc_class] for the `mcmc` class definition
 #' 
 #' @references
@@ -383,7 +383,7 @@ mcmc_condpoisson_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput
 #' * [mixturemcmc()] for performing MCMC sampling
 #' * [fdata][fdata_class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
-#' * [prior][prior-class] for the `prior` class definition
+#' * [prior][prior_class] for the `prior` class definition
 #' * [mcmc][mcmc_class] for the `mcmc` class definition
 #' 
 #' @references
@@ -426,7 +426,7 @@ mcmc_exponential_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput
 #' * [mixturemcmc()] for performing MCMC sampling
 #' * [fdata][fdata_class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
-#' * [prior][prior-class] for the `prior` class definition
+#' * [prior][prior_class] for the `prior` class definition
 #' * [mcmc][mcmc_class] for the `mcmc` class definition
 #' 
 #' @references
@@ -469,7 +469,7 @@ mcmc_normal_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4) 
 #' * [mixturemcmc()] for performing MCMC sampling
 #' * [fdata][fdata_class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
-#' * [prior][prior-class] for the `prior` class definition
+#' * [prior][prior_class] for the `prior` class definition
 #' * [mcmc][mcmc_class] for the `mcmc` class definition
 #' 
 #' @references
@@ -512,7 +512,7 @@ mcmc_normult_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
 #' * [mixturemcmc()] for performing MCMC sampling
 #' * [fdata][fdata_class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
-#' * [prior][prior-class] for the `prior` class definition
+#' * [prior][prior_class] for the `prior` class definition
 #' * [mcmc][mcmc_class] for the `mcmc` class definition
 #' 
 #' @references
@@ -555,7 +555,7 @@ mcmc_poisson_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
 #' * [mixturemcmc()] for performing MCMC sampling
 #' * [fdata][fdata_class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
-#' * [prior][prior-class] for the `prior` class definition
+#' * [prior][prior_class] for the `prior` class definition
 #' * [mcmc][mcmc_class] for the `mcmc` class definition
 #' 
 #' @references
@@ -598,7 +598,7 @@ mcmc_student_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
 #' * [mixturemcmc()] for performing MCMC sampling
 #' * [fdata][fdata_class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
-#' * [prior][prior-class] for the `prior` class definition
+#' * [prior][prior_class] for the `prior` class definition
 #' * [mcmc][mcmc_class] for the `mcmc` class definition
 #' 
 #' @references
@@ -610,7 +610,7 @@ mcmc_studmult_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4
     .Call('_finmix_mcmc_studmult_cc', PACKAGE = 'finmix', data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
 }
 
-#' Relabeling algorithm from Stephens (1997a) for Poisson mixture models
+#' Stephens (1997a) relabeling algorithm for Poisson mixtures
 #' 
 #' @description
 #' For internal usage only. This function runs the re-labeling algorithm from 
@@ -630,12 +630,13 @@ mcmc_studmult_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4
 #' @param perm A matrix with all possible permutations of the labels. 
 #' @return A matrix of dimension `MxK` that holding the optimal labeling.
 #' @export
+#' @keywords internal
 #' 
 #' @seealso 
-#' * \code{\link{mcmcpermute}} for the calling function 
-#' * \code{\link{stephens1997b_poisson_cc}} for the re-labeling algorithm from 
+#' * [mcmcpermute()] for the calling function 
+#' * [stephens1997b_poisson_cc()] for the re-labeling algorithm from 
 #'   Stephens (1997b)
-#' * \code{\link{stephens1997a_binomial_cc}} for the equivalent implementation 
+#' * [stephens1997a_binomial_cc()] for the equivalent implementation 
 #'   for mixtures of Binomial distributions
 #' 
 #' @references
@@ -646,7 +647,7 @@ stephens1997a_poisson_cc <- function(values1, values2, pars, perm) {
     .Call('_finmix_stephens1997a_poisson_cc', PACKAGE = 'finmix', values1, values2, pars, perm)
 }
 
-#' Relabeling algorithm from Stephens (1997a) for Binomial mixture models
+#' Stephens (1997a) relabeling algorithm for Binomial mixtures
 #'
 #' @description For internal usage only. This function runs the re-labeling
 #' algorithm from Stephens (1997a) for MCMC samples of a Binomial mixture
@@ -665,12 +666,12 @@ stephens1997a_poisson_cc <- function(values1, values2, pars, perm) {
 #' @param perm A matrix with all possible permutations of the labels.
 #' @return A matrix of dimension `MxK` that holding the optimal labeling.
 #' @export
-#' 
+#' @keywords internal
 #' @seealso 
-#' * \code{\link{mcmcpermute}} for the calling function 
-#' * \code{\link{stephens1997b_poisson_cc}} for the re-labeling algorithm from 
+#' * [mcmcpermute()] for the calling function 
+#' * [stephens1997b_poisson_cc()] for the re-labeling algorithm from 
 #'   Stephens (1997b)
-#' * \code{\link{stephens1997a_binomial_cc}} for the equivalent implementation 
+#' * [stephens1997a_binomial_cc()] for the equivalent implementation 
 #'   for mixtures of Binomial distributions
 #' 
 #' @references
@@ -681,7 +682,7 @@ stephens1997a_binomial_cc <- function(values1, values2, pars, perm) {
     .Call('_finmix_stephens1997a_binomial_cc', PACKAGE = 'finmix', values1, values2, pars, perm)
 }
 
-#' Relabeling algorithm from Stephens (1997b) for Poisson mixture models
+#' Stephens (1997b) relabeling algorithm for Poisson mixtures
 #' 
 #' @description
 #' For internal usage only. This function runs the re-labeling algorithm from 
@@ -697,12 +698,12 @@ stephens1997a_binomial_cc <- function(values1, values2, pars, perm) {
 #' @return An integer matrix of dimension `MxK` that holding the optimal 
 #'   labeling.
 #' @export
-#' 
+#' @kewords internal
 #' @seealso 
-#' * \code{\link{mcmcpermute}} for the calling function 
-#' * \code{\link{stephens1997a_poisson_cc}} for the re-labeling algorithm from 
+#' * [mcmcpermute()] for the calling function 
+#' * [stephens1997a_poisson_cc()] for the re-labeling algorithm from 
 #'   Stephens (1997a)
-#' * \code{\link{stephens1997b_binomial_cc}} for the equivalent implementation 
+#' * [stephens1997b_binomial_cc()] for the equivalent implementation 
 #'   for mixtures of Binomial distributions
 #' 
 #' @references
@@ -712,7 +713,7 @@ stephens1997b_poisson_cc <- function(values, comp_par, weight_par, max_iter = 20
     .Call('_finmix_stephens1997b_poisson_cc', PACKAGE = 'finmix', values, comp_par, weight_par, max_iter)
 }
 
-#' Relabeling algorithm from Stephens (1997b) for Binomial mixture models
+#' Stephens (1997b) relabeling algorithm for Binomial mixtures
 #' 
 #' @description
 #' For internal usage only. This function runs the re-labeling algorithm from 
@@ -730,10 +731,10 @@ stephens1997b_poisson_cc <- function(values, comp_par, weight_par, max_iter = 20
 #' @export
 #' 
 #' @seealso 
-#' * \code{\link{mcmcpermute}} for the calling function 
-#' * \code{\link{stephens1997a_binomial_cc}} for the re-labeling algorithm from 
+#' * [mcmcpermute()] for the calling function 
+#' * [stephens1997a_binomial_cc()] for the re-labeling algorithm from 
 #'   Stephens (1997a)
-#' * \code{\link{stephens1997b_poisson_cc}} for the equivalent implementation 
+#' * [stephens1997b_poisson_cc()] for the equivalent implementation 
 #'   for mixtures of Poisson distributions
 #' 
 #' @references
@@ -743,7 +744,7 @@ stephens1997b_binomial_cc <- function(values, reps, comp_par, weight_par) {
     .Call('_finmix_stephens1997b_binomial_cc', PACKAGE = 'finmix', values, reps, comp_par, weight_par)
 }
 
-#' Relabeling algorithm from Stephens (1997b) for Exponential mixture models
+#' Stephens (1997b) relabeling algorithm for Exponential mixtures
 #' 
 #' @description
 #' For internal usage only. This function runs the re-labeling algorithm from 
@@ -759,12 +760,12 @@ stephens1997b_binomial_cc <- function(values, reps, comp_par, weight_par) {
 #' @return An integer matrix of dimension `MxK` that holding the optimal 
 #'   labeling.
 #' @export
-#' 
+#' @keywords internal 
 #' @seealso 
-#' * \code{\link{mcmcpermute}} for the calling function 
-#' * \code{\link{stephens1997b_poisson_cc}} for the equivalent implementation 
+#' * [mcmcpermute()] for the calling function 
+#' * [stephens1997b_poisson_cc()] for the equivalent implementation 
 #'   for mixtures of Poisson distributions
-#' * \code{\link{stephens1997b_binomial_cc}} for the equivalent implementation 
+#' * [stephens1997b_binomial_cc()] for the equivalent implementation 
 #'   for mixtures of Binomial distributions
 #' 
 #' @references

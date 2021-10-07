@@ -2,7 +2,7 @@
 % Please edit documentation in R/mcmcoutputpermfixhierpost.R
 \name{initialize,mcmcoutputpermfixhierpost-method}
 \alias{initialize,mcmcoutputpermfixhierpost-method}
-\title{Initializer of the \code{mcmcoutputpermfixhier} class}
+\title{Initializer of the \code{mcmcoutputpermfixhierpost} class}
 \usage{
 \S4method{initialize}{mcmcoutputpermfixhierpost}(
   .Object,
@@ -18,8 +18,8 @@
 \item{.Object}{An object: see the "initialize Methods" section in
 \link{initialize}.}
 
-\item{mcmcoutput}{An \code{mcmcoutput} class containing the results from MCMC
-sampling.}
+\item{mcmcoutput}{An \code{mcmcoutputpermfixhierpost} class containing the
+results from MCMC sampling.}
 
 \item{Mperm}{An integer defining the number of permuted MCMC samples.}
 

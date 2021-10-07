@@ -17,3 +17,4 @@ each of them.
 Calling \code{\link[=show]{show()}} on an \code{mcmcoutputpermhier} object gives an overview
 of the \code{mcmcoutputpermhier} object.
 }
+\keyword{internal}

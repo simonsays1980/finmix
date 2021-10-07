@@ -45,15 +45,15 @@ for the permuted MCMC samples.}
 entropy for each MCMC permuted draw.}
 
 \item{STperm}{An \code{array} of dimension \verb{Mperm\\ x 1} containing all permuted
-MCMC states, for the last observation in slot \verb{@y} of the \code{fdata} object
+MCMC states, for the last observation in slot \code{y} of the \code{fdata} object
 passed in to \code{\link[=mixturemcmc]{mixturemcmc()}} where a state is defined for non-Markov
 models as the last indicator of this observation.}
 
-\item{NKperm}{An \code{array} of dimension \verb{Mperm\\ x K} containing the numbers
+\item{NKperm}{An \code{array} of dimension \code{MpermxK} containing the numbers
 of observations assigned to each component.}
 
-\item{An}{\code{array} of dimension \verb{N\\ x storeS} containing the last
-\code{storeS} permuted indicators. \code{storeS} is defined in the slot \verb{@storeS}
+\item{An}{\code{array} of dimension \code{NxstoreS} containing the last
+\code{storeS} permuted indicators. \code{storeS} is defined in the slot \code{storeS}
 of the \code{mcmc} object passed into \code{\link[=mixturemcmc]{mixturemcmc()}}.}
 }
 \description{

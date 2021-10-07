@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{stephens1997b_binomial_cc}
 \alias{stephens1997b_binomial_cc}
-\title{Relabeling algorithm from Stephens (1997b) for Binomial mixture models}
+\title{Stephens (1997b) relabeling algorithm for Binomial mixtures}
 \usage{
 stephens1997b_binomial_cc(values, reps, comp_par, weight_par)
 }
@@ -34,10 +34,10 @@ distributions, DPhil Thesis, University of Oxford, Oxford.
 }
 \seealso{
 \itemize{
-\item \code{\link{mcmcpermute}} for the calling function
-\item \code{\link{stephens1997a_binomial_cc}} for the re-labeling algorithm from
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for the calling function
+\item \code{\link[=stephens1997a_binomial_cc]{stephens1997a_binomial_cc()}} for the re-labeling algorithm from
 Stephens (1997a)
-\item \code{\link{stephens1997b_poisson_cc}} for the equivalent implementation
+\item \code{\link[=stephens1997b_poisson_cc]{stephens1997b_poisson_cc()}} for the equivalent implementation
 for mixtures of Poisson distributions
 }
 }

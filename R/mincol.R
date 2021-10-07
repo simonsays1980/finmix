@@ -11,6 +11,7 @@
 #' 
 #' @param q A vector of dimension `r(r+1)/2x1`.
 #' @return A symmetric matrix of dimension `rxr`.
+#' @export
 #' 
 #' @examples 
 #' # Define a vector.
@@ -51,6 +52,7 @@
 #' 
 #' @param q A matrix or array of vectors of dimension `r(r+1)/2x1`. 
 #' @return An array of symmetric matrices, all of dimension `rxr`.
+#' @export
 #' 
 #' @examples 
 #' # Convert a matrix of vectors
@@ -82,6 +84,7 @@
 #' 
 #' @param q A symmetric matrix or dimension `rxr`. 
 #' @return A vector of length `r(r+1)/2`.
+#' @export
 #' 
 #' @examples 
 #' # Define a vector.
@@ -121,6 +124,7 @@
 #' 
 #' @param q A symmetric matrix or dimension `rxr`. 
 #' @return A vector of length `r(r+1)/2`.
+#' @export
 #' 
 #' @examples 
 #' # Convert a matrix of vectors

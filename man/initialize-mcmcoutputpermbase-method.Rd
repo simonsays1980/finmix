@@ -22,7 +22,7 @@
 \item{.Object}{An object: see the "initialize Methods" section in
 \link{initialize}.}
 
-\item{mcmcoutput}{An \code{mcmcoutput} class containing the results from MCMC
+\item{mcmcoutput}{An \code{mcmcoutputpermbase} class containing the results from MCMC
 sampling.}
 
 \item{Mperm}{An integer defining the number of permuted MCMC samples.}

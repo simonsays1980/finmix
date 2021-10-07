@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{stephens1997b_exponential_cc}
 \alias{stephens1997b_exponential_cc}
-\title{Relabeling algorithm from Stephens (1997b) for Exponential mixture models}
+\title{Stephens (1997b) relabeling algorithm for Exponential mixtures}
 \usage{
 stephens1997b_exponential_cc(values, comp_par, weight_par)
 }
@@ -34,10 +34,11 @@ distributions, DPhil Thesis, University of Oxford, Oxford.
 }
 \seealso{
 \itemize{
-\item \code{\link{mcmcpermute}} for the calling function
-\item \code{\link{stephens1997b_poisson_cc}} for the equivalent implementation
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for the calling function
+\item \code{\link[=stephens1997b_poisson_cc]{stephens1997b_poisson_cc()}} for the equivalent implementation
 for mixtures of Poisson distributions
-\item \code{\link{stephens1997b_binomial_cc}} for the equivalent implementation
+\item \code{\link[=stephens1997b_binomial_cc]{stephens1997b_binomial_cc()}} for the equivalent implementation
 for mixtures of Binomial distributions
 }
 }
+\keyword{internal}

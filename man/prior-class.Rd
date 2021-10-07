@@ -65,15 +65,15 @@ f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
 f_prior <- prior()
 # Check if the prior has appropriate parameters defined.
 hasPriorPar(f_prior, f_model)
-hasPriorPar(f_prior, f_model, TRUE)
+\dontrun{hasPriorPar(f_prior, f_model, TRUE)}
 
 # Define a Poisson mixture model.
 f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
 # Call the default constructor.
 f_prior <- prior()
 # Check if the prior has appropriate parameters defined.
-hasPriorWeight(f_prior)
-hasPriorWeight(f_prior, TRUE)
+hasPriorWeight(f_prior, f_model)
+\dontrun{hasPriorWeight(f_prior, f_model, TRUE)}
 
 }
 \references{
@@ -88,8 +88,8 @@ hasPriorWeight(f_prior, TRUE)
 }
 
 \itemize{
-\item \link[=prior-class]{prior} for the definition of the \code{prior} class
-\item \link[=model_class]{model} for the definition of the \code{model} class
+\item \linkS4class{prior} for the definition of the \code{prior} class
+\item \linkS4class{model} for the definition of the \code{model} class
 }
 
 \itemize{

@@ -21,8 +21,9 @@ Note that this class inherits all of its slots from the parent classes.
 }
 \seealso{
 \itemize{
-\item \link[=mcmcoutput_class]{mcmcoutputbase} for the parent class
-\item \link[=mcmcperm_class]{mcmcpermind} for the parent class
+\item \linkS4class{mcmcoutputbase} for the parent class
+\item \linkS4class{mcmcpermind} for the parent class
 \item \code{\link[=mcmcpermute]{mcmcpermute()}} for performing permutation of MCMC samples
 }
 }
+\keyword{internal}

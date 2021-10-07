@@ -34,7 +34,7 @@
 // Stephens Relabeling Algorithm (1997a)
 // ------------------------------------------------------------
 
-//' Relabeling algorithm from Stephens (1997a) for Poisson mixture models
+//' Stephens (1997a) relabeling algorithm for Poisson mixtures
 //' 
 //' @description
 //' For internal usage only. This function runs the re-labeling algorithm from 
@@ -54,12 +54,13 @@
 //' @param perm A matrix with all possible permutations of the labels. 
 //' @return A matrix of dimension `MxK` that holding the optimal labeling.
 //' @export
+//' @keywords internal
 //' 
 //' @seealso 
-//' * \code{\link{mcmcpermute}} for the calling function 
-//' * \code{\link{stephens1997b_poisson_cc}} for the re-labeling algorithm from 
+//' * [mcmcpermute()] for the calling function 
+//' * [stephens1997b_poisson_cc()] for the re-labeling algorithm from 
 //'   Stephens (1997b)
-//' * \code{\link{stephens1997a_binomial_cc}} for the equivalent implementation 
+//' * [stephens1997a_binomial_cc()] for the equivalent implementation 
 //'   for mixtures of Binomial distributions
 //' 
 //' @references
@@ -139,7 +140,7 @@ arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
    return arma::conv_to<arma::imat>::from(index);
 }
 
-//' Relabeling algorithm from Stephens (1997a) for Binomial mixture models
+//' Stephens (1997a) relabeling algorithm for Binomial mixtures
 //'
 //' @description For internal usage only. This function runs the re-labeling
 //' algorithm from Stephens (1997a) for MCMC samples of a Binomial mixture
@@ -158,12 +159,12 @@ arma::imat stephens1997a_poisson_cc(Rcpp::NumericMatrix values1,
 //' @param perm A matrix with all possible permutations of the labels.
 //' @return A matrix of dimension `MxK` that holding the optimal labeling.
 //' @export
-//' 
+//' @keywords internal
 //' @seealso 
-//' * \code{\link{mcmcpermute}} for the calling function 
-//' * \code{\link{stephens1997b_poisson_cc}} for the re-labeling algorithm from 
+//' * [mcmcpermute()] for the calling function 
+//' * [stephens1997b_poisson_cc()] for the re-labeling algorithm from 
 //'   Stephens (1997b)
-//' * \code{\link{stephens1997a_binomial_cc}} for the equivalent implementation 
+//' * [stephens1997a_binomial_cc()] for the equivalent implementation 
 //'   for mixtures of Binomial distributions
 //' 
 //' @references
@@ -251,7 +252,7 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
    return arma::conv_to<arma::imat>::from(index);
 }
 
-//' Relabeling algorithm from Stephens (1997b) for Poisson mixture models
+//' Stephens (1997b) relabeling algorithm for Poisson mixtures
 //' 
 //' @description
 //' For internal usage only. This function runs the re-labeling algorithm from 
@@ -267,12 +268,12 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
 //' @return An integer matrix of dimension `MxK` that holding the optimal 
 //'   labeling.
 //' @export
-//' 
+//' @kewords internal
 //' @seealso 
-//' * \code{\link{mcmcpermute}} for the calling function 
-//' * \code{\link{stephens1997a_poisson_cc}} for the re-labeling algorithm from 
+//' * [mcmcpermute()] for the calling function 
+//' * [stephens1997a_poisson_cc()] for the re-labeling algorithm from 
 //'   Stephens (1997a)
-//' * \code{\link{stephens1997b_binomial_cc}} for the equivalent implementation 
+//' * [stephens1997b_binomial_cc()] for the equivalent implementation 
 //'   for mixtures of Binomial distributions
 //' 
 //' @references
@@ -378,7 +379,7 @@ arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values,
    return arma::conv_to<arma::imat>::from(index_out);
 }
 
-//' Relabeling algorithm from Stephens (1997b) for Binomial mixture models
+//' Stephens (1997b) relabeling algorithm for Binomial mixtures
 //' 
 //' @description
 //' For internal usage only. This function runs the re-labeling algorithm from 
@@ -396,10 +397,10 @@ arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values,
 //' @export
 //' 
 //' @seealso 
-//' * \code{\link{mcmcpermute}} for the calling function 
-//' * \code{\link{stephens1997a_binomial_cc}} for the re-labeling algorithm from 
+//' * [mcmcpermute()] for the calling function 
+//' * [stephens1997a_binomial_cc()] for the re-labeling algorithm from 
 //'   Stephens (1997a)
-//' * \code{\link{stephens1997b_poisson_cc}} for the equivalent implementation 
+//' * [stephens1997b_poisson_cc()] for the equivalent implementation 
 //'   for mixtures of Poisson distributions
 //' 
 //' @references
@@ -505,7 +506,7 @@ arma::imat stephens1997b_binomial_cc(Rcpp::NumericVector values,
    return arma::conv_to<arma::imat>::from(index_out);
 }
 
-//' Relabeling algorithm from Stephens (1997b) for Exponential mixture models
+//' Stephens (1997b) relabeling algorithm for Exponential mixtures
 //' 
 //' @description
 //' For internal usage only. This function runs the re-labeling algorithm from 
@@ -521,12 +522,12 @@ arma::imat stephens1997b_binomial_cc(Rcpp::NumericVector values,
 //' @return An integer matrix of dimension `MxK` that holding the optimal 
 //'   labeling.
 //' @export
-//' 
+//' @keywords internal 
 //' @seealso 
-//' * \code{\link{mcmcpermute}} for the calling function 
-//' * \code{\link{stephens1997b_poisson_cc}} for the equivalent implementation 
+//' * [mcmcpermute()] for the calling function 
+//' * [stephens1997b_poisson_cc()] for the equivalent implementation 
 //'   for mixtures of Poisson distributions
-//' * \code{\link{stephens1997b_binomial_cc}} for the equivalent implementation 
+//' * [stephens1997b_binomial_cc()] for the equivalent implementation 
 //'   for mixtures of Binomial distributions
 //' 
 //' @references

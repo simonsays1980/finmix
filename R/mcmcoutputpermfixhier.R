@@ -99,7 +99,8 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputpermfixhier-class
+#' @describeIn mcmcoutputpermfixhier-class Shows a short summary of the 
+#'   object's slots
 setMethod(
   "show", "mcmcoutputpermfixhier",
   function(object) {

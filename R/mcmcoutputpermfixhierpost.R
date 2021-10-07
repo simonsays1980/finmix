@@ -32,10 +32,11 @@
 #' Note this class inherits all slots from its parent classes.  
 #' 
 #' @exportClass mcmcoutputpermfixhierpost
-#' @describeIn mcmcoutputperm_class
+#' @rdname mcmcoutputpermfixhierpost-class
 #' @seealso 
-#' * [mcmcoutputfixhierpost][mcmcoutput_class] for the parent class
-#' * [mcmcpermfix][mcmcperm_class] for the parent class
+#' * [mcmcoutputfixhierpost-class] for the parent class
+#' * [mcmcpermfixhier-class] for the parent class
+#' * [mcmcpermfixpost-class] for the parent class
 #' * [mcmcpermute()] for performing permutation of MCMC samples
 .mcmcoutputpermfixhierpost <- setClass("mcmcoutputpermfixhierpost",
   contains = c(
@@ -49,7 +50,7 @@
   }
 )
 
-#' Initializer of the `mcmcoutputpermfixhier` class
+#' Initializer of the `mcmcoutputpermfixhierpost` class
 #' 
 #' @description
 #' Only used implicitly. The initializer stores the data into the slots of the 
@@ -57,8 +58,8 @@
 #' 
 #' @param .Object An object: see the "initialize Methods" section in 
 #'   [initialize].
-#' @param mcmcoutput An `mcmcoutput` class containing the results from MCMC 
-#'   sampling.
+#' @param mcmcoutput An `mcmcoutputpermfixhierpost` class containing the 
+#'   results from MCMC sampling.
 #' @param Mperm An integer defining the number of permuted MCMC samples.
 #' @param parperm A named list containing the permuted component parameter 
 #'   samples from MCMC sampling
@@ -108,7 +109,8 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputpermfixhierpost-class
+#' @describeIn mcmcoutputpermfixhierpost-class Shows a short summary of the 
+#'   object's slots
 setMethod(
   "show", "mcmcoutputpermfixhierpost",
   function(object) {

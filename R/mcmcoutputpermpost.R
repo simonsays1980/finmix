@@ -32,10 +32,11 @@
 #' Note that this class inherits all of its slots from the parent classes. 
 #' 
 #' @exportClass mcmcoutputpermpost
-#' @describeIn mcmcoutputperm_class
+#' @describeIn mcmcoutputpermpost-class
+#' @keywords internal
 #' @seealso 
-#' * [mcmcoutputbase][mcmcoutput_class] for the parent class
-#' * [mcmcpermind][mcmcperm_class] for the parent class
+#' * [mcmcoutputbase-class] for the parent class
+#' * [mcmcpermind-class] for the parent class
 #' * [mcmcpermute()] for performing permutation of MCMC samples
 .mcmcoutputpermpost <- setClass("mcmcoutputpermpost",
   contains = c(
@@ -132,7 +133,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 setMethod(
   "show", "mcmcoutputpermpost",
   function(object) {
@@ -243,7 +244,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @describeIn mcmcoutputperm_class
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -322,7 +323,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutputperm_class Plots histograms of MCMC samples
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -378,7 +379,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens 
-#' @describeIn mcmcoutputperm_class Plots densities of MCMC samples
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -434,7 +435,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @describeIn mcmcoutputperm_class Plots point process of MCMC samples
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -490,8 +491,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotSampRep  
-#' @describeIn mcmcoutputperm_class Plots sampling representations of MCMC 
-#' samples
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -547,8 +547,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutputperm_class Plots posterior densities of component 
-#'   parameters
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
