@@ -24,6 +24,6 @@ only use this function, if you really know what you are doing.
 \itemize{
 \item \code{\link[=swapInteger_cc]{swapInteger_cc()}} for the equivalent function not using R memory
 \item \code{\link[=swap_3d_cc]{swap_3d_cc()}} for an equivalent function for three-dimensional arrays
-\item \link[=mcmcoutput_class]{swapElements()} for the calling method
+\item \code{\link[=swapElements]{swapElements()}} for the calling method
 }
 }

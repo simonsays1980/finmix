@@ -25,7 +25,7 @@ Returns the \code{Mperm} slot.
 }
 \seealso{
 \itemize{
-\item \code{\link{mcmcoutputpermfix_class}} for the inheriting class
-\item \code{\link{mcmcpermute}} for function permuting MCMC samples
+\item \linkS4class{mcmcoutputpermfix} for the inheriting class
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for function permuting MCMC samples
 }
 }

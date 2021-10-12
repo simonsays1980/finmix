@@ -56,12 +56,12 @@ MCMC states, for the last observation in slot \verb{@y} of the \code{fdata} obje
 passed in to \code{\link[=mixturemcmc]{mixturemcmc()}} where a state is defined for non-Markov
 models as the last indicator of this observation.}
 
-\item{NKperm}{An \code{array} of dimension \verb{Mperm x K} containing the numbers
-of observations assigned to each component.}
-
-\item{An}{\code{array} of dimension \verb{N x storeS} containing the last
+\item{Sperm}{An \code{array} of dimension \verb{N x storeS} containing the last
 \code{storeS} permuted indicators. \code{storeS} is defined in the slot \verb{@storeS}
 of the \code{mcmc} object passed into \code{\link[=mixturemcmc]{mixturemcmc()}}.}
+
+\item{NKperm}{An \code{array} of dimension \verb{Mperm x K} containing the numbers
+of observations assigned to each component.}
 }
 \description{
 Only used implicitly. The initializer stores the data into the slots of the

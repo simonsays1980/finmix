@@ -38,7 +38,8 @@
 #' @slot prior The `prior` object defining the prior distributions for the 
 #'   component parameters that has been used in MCMC sampling.
 #' @exportClass mcmcoutputfix
-#' @name mcmcoutput_class
+#' @rdname mcmcoutput-class
+#' @keywords internal
 .mcmcoutputfix <- setClass("mcmcoutputfix",
   representation(
     M = "integer",
@@ -74,7 +75,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutput_class
+#' @noRd
 setMethod(
   "show", "mcmcoutputfix",
   function(object) {
@@ -123,7 +124,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -194,7 +195,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -256,7 +257,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -318,7 +319,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point process of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -370,7 +371,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling representation of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -420,7 +421,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -542,7 +543,7 @@ setMethod(
 
 #' Extracts samples from `mcmcoutput` object of a multivariate Normal mixture
 #' 
-#' @ðescription
+#' @description
 #' This function extracts samples from a multivariate Normal mixture output. 
 #' 
 #' @param object An `mcmcoutput` object from MCMC sampling of a multivariate 
@@ -551,7 +552,7 @@ setMethod(
 #'   mixture should be extracted.
 #' @return An object class `mcmcextract` containing all samples of an extracted 
 #'   dimension.
-#' @describeIn mcmcoutput_class
+#' @export
 setMethod(
   "extract", signature(
     object = "mcmcoutputfix",
@@ -570,13 +571,14 @@ setMethod(
 #' Computes multivariate Normal sample moments
 #' 
 #' @description 
-#' Calling [moments()] calculates the sample moments for the samples of a 
+#' Calling `moments()` calculates the sample moments for the samples of a 
 #' multivariate Normal mixture model.  
 #' 
 #' @param object An `mcmcoutputfix` object containing all data from MCMC 
 #'   sampling.
 #' @return The moments on the samples of a multivariate Normal mixture.
-#' @describeIn mcmcoutput_class
+#' @exportMethod moments
+#' @noRd
 setMethod(
   "moments", signature(object = "mcmcoutputfix"),
   function(object) {
@@ -612,7 +614,7 @@ setMethod(
 #' getM(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getM", "mcmcoutputfix",
@@ -645,7 +647,7 @@ setMethod(
 #' getBurnin(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getBurnin", "mcmcoutputfix",
@@ -678,7 +680,7 @@ setMethod(
 #' getRanperm(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getRanperm", "mcmcoutputfix",
@@ -711,7 +713,7 @@ setMethod(
 #' getPar(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getPar", "mcmcoutputfix",
@@ -744,7 +746,7 @@ setMethod(
 #' getLog(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getLog", "mcmcoutputfix",
@@ -778,7 +780,7 @@ setMethod(
 #' getModel(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getModel", "mcmcoutputfix",
@@ -811,7 +813,7 @@ setMethod(
 #' getPrior(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getPrior", "mcmcoutputfix",

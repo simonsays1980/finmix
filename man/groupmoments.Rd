@@ -17,7 +17,7 @@ A \code{groupmoments} object containing component-specific moments of the
 \description{
 Calling \code{\link[=groupmoments]{groupmoments()}} creates an object holding various
 component-specific moments. These moments can only constructed if the
-\link[=fdata_class]{fdata} object contains in addition to observations also
+\linkS4class{fdata} object contains in addition to observations also
 indicators defining from which component a certain observation stems.
 }
 \examples{
@@ -31,10 +31,10 @@ groupmoments(f_data)
 }
 \seealso{
 \itemize{
-\item \link[=fdata_class]{fdata} for the \code{fdata} class definition
+\item \linkS4class{fdata} for the \code{fdata} class definition
 \item \link[=groupmments_class]{groupmoments} for the definition of the \code{groupmoments}
 class
-\item \link[=datamoments_class]{datamoments} for the base class for data moments
+\item \linkS4class{datamoments} for the base class for data moments
 \item \code{\link[=datamoments]{datamoments()}} for the constructor of any object of the \code{datamoments}
 class family
 }

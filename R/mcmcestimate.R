@@ -60,7 +60,7 @@
 #'   case of fixed indicators
 #' * [mcmcestfix][mcmcest_class] for object storing the parameter estimates in 
 #'   case of unknown indicators
-#' * [mcmcoutputperm][mcmcoutputperm_class] for classes storing re-labeled 
+#' * [mcmcoutputperm-class] for classes storing re-labeled 
 #'   MCMC samples
 "mcmcestimate" <- function(mcmcout, method = "kmeans", fdata = NULL,
                            permOut = FALSE, opt_ctrl = list(max_iter = 200L)) {

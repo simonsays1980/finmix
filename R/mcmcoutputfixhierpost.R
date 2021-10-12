@@ -20,19 +20,19 @@
 #' @description 
 #' This class inherits from the `mcmcoutputfixhier` class and adds posterior 
 #' density parameters to the MCMC sampling output. The storage of posterior 
-#' parameters is controlled by the slot `storepost` in the [mcmc][mcmc_class] 
+#' parameters is controlled by the slot `storepost` in the [mcmc-class] 
 #' class. If set to `TRUE` posterior parameters are stored in the output of the 
 #' MCMC sampling.
 #' 
 #' @slot post A named list containing a named list `par` with arrays for the 
 #'   posterior density parameters.
 #' @exportClass mcmcoutputfixhierpost
-#' @describeIn mcmcoutput_class
+#' @rdname mcmcoutputfixhierpost-class
 #' 
 #' @seealso 
-#' * [mcmcoutputfixhier][mcmcoutput_class] for the parent class
+#' * [mcmcoutputfixhier-class] for the parent class
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [mcmc][mcmc_class] for the class defining the MCMC hyper-parameters 
+#' * [mcmc-class] for the class defining the MCMC hyper-parameters 
 #' * [mcmc()] for the `mcmc` class constructor
 .mcmcoutputfixhierpost <- setClass("mcmcoutputfixhierpost",
   representation(post = "list"),
@@ -54,7 +54,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutput_class
+#' @noRd
 setMethod(
   "show", "mcmcoutputfixhierpost",
   function(object) {
@@ -165,7 +165,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{

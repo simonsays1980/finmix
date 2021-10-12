@@ -28,6 +28,6 @@ swap_cc(values, index)
 }
 \seealso{
 \itemize{
-\item \link[=mcmcoutput_class]{swapElements()} for the calling function
+\item \code{\link[=swapElements]{swapElements()}} for the calling function
 }
 }

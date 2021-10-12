@@ -5,11 +5,123 @@
 \alias{mcmcoutputperm-class}
 \title{Finmix \code{mcmcoutputperm} class}
 \description{
-The mcmcoutputperm class stores MCMC samples after relabeling (permuting).
+The \code{mcmcoutputperm} class stores MCMC samples after relabeling (permuting).
 }
 \details{
 Calling \code{\link[=mcmcpermute]{mcmcpermute()}} on an \code{mcmcoutput} class permutes the labels of the
-components
-This class union includes all classes that define objects for permuted
-MCMC samples and is used to dispatch methods for \code{mcmcoutputperm} objects.
+components and generates an object of class \code{mcmcoutputperm}. Note, the
+number of samples of the \code{mcmcoutputperm} object could be less than the
+original number of MCMC samples due to some samples where both components
+get assigned to the same label and henceforth get eliminated from further
+analysis.
+
+The class \code{mcmcoutputperm} is a class union and includes all classes that
+define objects for permuted MCMC samples and is used to dispatch methods for
+\code{mcmcoutputperm} objects. For the user this detail is not important,
+especially as this class has no exported constructor. Objects are solely
+constructed internally within the function \code{\link[=mcmcpermute]{mcmcpermute()}}.
+
+An object of class \code{mcmcoutputperm} inherits all slots from its parent class
+\link[=mcmcoutput-class]{mcmcoutput}. In addition it contains slots that store
+data from permutation. These slots are listed below
+\subsection{Class methods}{
+
+Similar to the parent class \link[=mcmcoutput-class]{mcmcoutput} this class comes
+along with a couple of methods that should give the user some comfort in
+handling the permuted sampling results. There are no setters for this class
+as the slots are only set internally.
+\subsection{Show}{
+\itemize{
+\item \code{show()} shows a short summary of the object's slots.
 }
+}
+
+\subsection{Getters}{
+\itemize{
+\item \code{getMperm()} returns the \code{Mperm} slot.
+\item \code{getParperm()} returns the \code{parperm} slot.
+\item \code{getLogperm()} returns the \code{parperm} slot.
+\item \code{getHyperperm()} returns the \code{hyperparm} slot.
+\item \code{getPostperm()} returns the \code{postperm} slot.
+\item \code{getEntropyperm()} returns the \code{entropyperm} slot.
+\item \code{getSTperm()} returns the \code{STperm} slot.
+\item \code{getSperm()} returns the \code{Sperm} slot.
+\item \code{getNKperm()} returns the \code{NKperm} slot.
+}
+}
+
+\subsection{Plotting}{
+
+Plotting functionality for the \code{mcmcoutputperm} class is so far only
+implemented for mixtures of Binomial or Poisson distributions.
+\itemize{
+\item \code{plotTraces()} plots traces of relabeled MCMC sampling. See \code{\link[=plotTraces]{plotTraces()}}
+for further information.
+\item \code{plotHist()} plots histograms of relabeled parameters and weights. See
+\code{\link[=plotHist]{plotHist()}} for further information.
+\item \code{plotDens()} plots densities of relabeled parameters and weights. See
+\code{\link[=plotDens]{plotDens()}} for further information.
+\item \code{plotPointProc()} plots the point process of relabeled component
+parameters. See \link{plotPointProc} for further information.
+\item \code{plotSampRep()} plots the sampling representation of relabeled component
+parameters. See \code{\link[=plotSampRep]{plotSampRep()}} for further information.
+\item \code{plotPostDens()} plots the posterior density of component parameters. Note
+that this function can only be applied for mixtures of two components. See
+\code{\link[=plotPostDens]{plotPostDens()}} for further information.
+}
+}
+
+}
+
+\subsection{Slots}{
+}
+}
+\section{Slots}{
+
+\describe{
+\item{\code{Mperm}}{An integer defining the number of permuted MCMC samples.}
+
+\item{\code{parperm}}{A named list containing the permuted component parameter
+samples from MCMC sampling.}
+
+\item{\code{relabel}}{A character specifying the relabeling algorithm used for
+permuting the MCMC samples.}
+
+\item{\code{weightperm}}{An array of dimension \code{MpermxK} containing the
+relabeled weight parameters. This slot is not available for models with
+fixed indicators as weights do not get sampled for such models.}
+
+\item{\code{logperm}}{A named list containing the mixture log-likelihood, the
+prior log-likelihood, and for models with unknown indicators the complete
+data posterior log-likelihood for the permuted MCMC samples.}
+
+\item{\code{hyperperm}}{A named list containing the (permuted) parameters of the
+hierarchical prior. This slot is only available, if a hierarchical prior
+had been used for sampling, i.e. the slot \code{hier} of the
+\link[=prior-class]{prior} had been set to \code{TRUE}.}
+
+\item{\code{postperm}}{A named list containing a named list \code{par} with array(s) of
+parameters from the posterior density. This slot is only available if
+the hyperparameter \code{storepost} in the \link[=mcmc-class]{mcmc} object had been
+set to \code{TRUE}.}
+
+\item{\code{entropyperm}}{An \code{array} of dimension \code{Mpermx1} containing the
+entropy for each MCMC permuted draw. This slot is only available for
+models with unknown indicators.}
+
+\item{\code{STperm}}{An \code{array} of dimension \code{Mpermx1} containing all permuted
+MCMC states, for the last observation in slot \code{y} of the \code{fdata} object
+passed in to \code{\link[=mixturemcmc]{mixturemcmc()}} where a state is defined for non-Markov
+models as the last indicator of this observation. This slot is only
+available for models with unknown indicators.}
+
+\item{\code{Sperm}}{An \code{array} of dimension \verb{N x storeS} containing the last
+\code{storeS} permuted indicators. \code{storeS} is defined in the slot \verb{@storeS}
+of the \code{mcmc} object passed into \code{\link[=mixturemcmc]{mixturemcmc()}}. This slot is only
+available for models with unknown indicators.}
+
+\item{\code{NKperm}}{An \code{array} of dimension \verb{Mperm x K} containing the numbers
+of observations assigned to each component. This slot is only available for
+models with unknown indicators.}
+}}
+

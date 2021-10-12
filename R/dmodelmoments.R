@@ -24,7 +24,7 @@
 #' @slot factorial An array containing the first four factorial moments.
 #' @slot zero An numeric cotaining the excess zeros.  
 #' @exportClass dmodelmoments
-#' @name dmodelmoments
+#' @rdname dmodelmoments-class
 #' 
 #' @seealso 
 #' * [modelmoments] for the base class

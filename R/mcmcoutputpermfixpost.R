@@ -23,7 +23,11 @@
 #' 
 #' @exportClass mcmcoutputpermfixpost
 #' @rdname mcmcoutputpermfixpost-class
+#' @keywords internal
 #' @seealso 
+#' * [mcmcoutputfixpost-class] for the parent class
+#' * [mcmcpermfixpost] for the parent class
+#' * [mcmcpermute()] for permuting MCMC samples
 .mcmcoutputpermfixpost <- setClass("mcmcoutputpermfixpost",
   contains = c(
     "mcmcpermfixpost",
@@ -91,8 +95,10 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputpermfixpost-class Shows a short summary of the 
-#'   object's slots
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmcoutputpermfixpost-class] for the class definition
 setMethod(
   "show", "mcmcoutputpermfixpost",
   function(object) {

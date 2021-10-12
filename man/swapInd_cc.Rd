@@ -25,7 +25,7 @@ you are doing.
 \seealso{
 \itemize{
 \item \code{\link[=mcmc]{mcmc()}} for the hyper-parameter \code{storeS}
-\item \link[=mcmcoutput_class]{swapElements()} for the calling method
+\item \code{\link[=swapElements]{swapElements()}} for the calling method
 \item \code{\link[=swapInteger_cc]{swapInteger_cc()}} for the equivalent function that swaps simple integer
 matrices
 \item \code{\link[=swap_3d_cc]{swap_3d_cc()}} for a function that swaps values in three-dimensional

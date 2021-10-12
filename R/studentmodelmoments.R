@@ -99,7 +99,10 @@ setMethod(
 #' @param object An `studentmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
-#' @describeIn studentmodelmoments
+#' @noRd
+#' @seealso
+#' * [modelmoments-class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 setMethod(
   "show", "studentmodelmoments",
   function(object) {

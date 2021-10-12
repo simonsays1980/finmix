@@ -91,7 +91,7 @@
 #' \dontrun{getRelabel(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermbase][mcmcoutput_class] for the inheriting class
+#' * [mcmcoutputpermbase-class] for the inheriting class
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getRelabel", "mcmcpermind",
@@ -112,7 +112,7 @@ setMethod(
 #' \dontrun{getWeightperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermbase][mcmcoutput_class] for the inheriting class
+#' * [mcmcoutputpermbase-class] for the inheriting class
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getWeightperm", "mcmcpermind",
@@ -133,7 +133,7 @@ setMethod(
 #' \dontrun{getEntropyperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermbase][mcmcoutput_class] for the inheriting class
+#' * [mcmcoutputpermbase-class] for the inheriting class
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getEntropyperm", "mcmcpermind",
@@ -154,7 +154,7 @@ setMethod(
 #' \dontrun{getSTperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermbase][mcmcoutput_class] for the inheriting class
+#' * [mcmcoutputpermbase-class] for the inheriting class
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getSTperm", "mcmcpermind",
@@ -175,7 +175,7 @@ setMethod(
 #' \dontrun{getSperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermbase][mcmcoutput_class] for the inheriting class
+#' * [mcmcoutputpermbase-class] for the inheriting class
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getSperm", "mcmcpermind",
@@ -196,7 +196,7 @@ setMethod(
 #' \dontrun{getNKperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermbase][mcmcoutput_class] for the inheriting class
+#' * [mcmcoutputpermbase-class] for the inheriting class
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getNKperm", "mcmcpermind",

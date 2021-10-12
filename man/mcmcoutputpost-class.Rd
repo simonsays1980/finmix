@@ -8,7 +8,7 @@
 \description{
 This class inherits from the \code{mcmcoutputbase} class and adds posterior
 density parameters to the MCMC sampling output. The storage of posterior
-parameters is controlled by the slot \code{storepost} in the \link[=mcmc_class]{mcmc}
+parameters is controlled by the slot \code{storepost} in the \linkS4class{mcmc}
 class. If set to \code{TRUE} posterior parameters are stored in the output of the
 MCMC sampling.
 }

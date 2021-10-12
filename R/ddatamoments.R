@@ -16,8 +16,8 @@
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 #' Finmix `ddatamoments` class
 #' 
-#' Stores moments of an [fdata][fdata_class] object containing discrete data. 
-#' The `fdata` object is stored in the parent [datamoments][datamoments_class] 
+#' Stores moments of an [fdata-class] object containing discrete data. 
+#' The `fdata` object is stored in the parent [datamoments-class] 
 #' class.
 #' 
 #' @slot factorial An array containing the first four factorial moments of the 
@@ -28,12 +28,13 @@
 #' @slot smoments An `sdatamoments` object, if the `fdata` object also holds 
 #'   indicators. `NULL`, if no indicators are present in the `fdata` object. 
 #' @exportClass ddatamoments
-#' @name ddatamoments_class
+#' @rdname ddatamoments-class
+#' @keywords internal
 #' @seealso 
-#' * [datamoments][datamoments_class] for the parent class
-#' * [ddatamoments][ddatamoments_class] for the corresponding class for 
+#' * [datamoments-class] for the parent class
+#' * [ddatamoments-class] for the corresponding class for 
 #'   continuous data
-#' * [sdatamoments][sdatamoments_class] for the contained class if indicators
+#' * [sdatamoments-class] for the contained class if indicators
 #'   are present in the `fdata` object 
 .ddatamoments <- setClass("ddatamoments",
   representation(
@@ -111,7 +112,10 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn ddatamoments_class
+#' @noRd
+#' @seealso 
+#' * [datamoments-class] for the parent class definition
+#' * [datamoments()] for the mutual constructor of all datamoments classes
 setMethod(
   "show", "ddatamoments",
   function(object) {
@@ -169,7 +173,7 @@ setMethod(
 #' getSmoments(f_datamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments-class] for the base class for model moments
 #' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getSmoments", "ddatamoments",
@@ -197,7 +201,7 @@ setMethod(
 #' getFactorial(f_datamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments-class] for the base class for model moments
 #' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getFactorial", "ddatamoments",
@@ -225,7 +229,7 @@ setMethod(
 #' getOver(f_datamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments-class] for the base class for model moments
 #' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getOver", "ddatamoments",
@@ -253,7 +257,7 @@ setMethod(
 #' getZero(f_datamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments-class] for the base class for model moments
 #' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getZero", "ddatamoments",

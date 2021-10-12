@@ -28,7 +28,7 @@
 #' @name exponentialmodelmoments
 #' 
 #' @seealso 
-#' * [modelmoments_class] for the base class for model moments
+#' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes
 .exponentialmodelmoments <- setClass("exponentialmodelmoments",
   representation(
@@ -97,8 +97,11 @@ setMethod(
 #' 
 #' @param object An `exponentialmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
-#'   each of them. 
-#' @describeIn exponentialmodelmoments
+#'   each of them.
+#' @noRd
+#' @seealso 
+#' * [modelmoments-class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 setMethod(
   "show", "exponentialmodelmoments",
   function(object) {
@@ -134,7 +137,7 @@ setMethod(
 #' 
 #' @param object An `exponentialmodelmoments` object.
 #' @returns The `B` slot of the `object`.
-#' @describeIn modelmoments Getter method for slot `B`
+#' @noRd
 #' 
 #' @examples 
 #' f_model <- model("exponential", par=list(lambda=c(0.3, 0.1)), 

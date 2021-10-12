@@ -54,7 +54,7 @@ f_mcmc <- mcmc()
 }
 \seealso{
 \itemize{
-\item \link[=mcmc_class]{mcmc} for the definition of the \code{mcmc} class
+\item \linkS4class{mcmc} for the definition of the \code{mcmc} class
 \item \code{\link[=mcmcstart]{mcmcstart()}} for setting up all objects for MCMC sampling
 \item \code{\link[=mixturemcmc]{mixturemcmc()}} for running MCMC sampling for finite mixture models
 }

@@ -20,11 +20,55 @@
 #' Permute MCMC samples
 #' 
 #' @description 
-#' This function 
+#' Calling `mcmcpermute()` on an `mcmcoutput` object relabels the MCMC samples 
+#' by using a relabeling algorithm. `"kmeans"` is the standard relabeling 
+#' algorithm used. For mixtures of Poisson and Binomial distributions there are 
+#' also the relabeling algorithms `"Stephens1997a"` of Stephens (1997a) and 
+#' `"Stephens1997b"` of Stephens (1997b) available. For Exponential mixture 
+#' models only the alternative `"Stephens1997b"` is available. Note that the 
+#' argument `opt_ctrl` is a relict from older versions and deprecated. In 
+#' future versions this argument will be removed from the R function. 
+#' 
+#' @details 
+#' Relabeling of the MCMC samples is performed to assign each MCMC draw to its 
+#' "right" component as in MCMC sampling the components are from time to time 
+#' permuted or, if random permutation sampling was used, samples were 
+#' intentionally permuted. This results ususally in multimodal posterior 
+#' distributions. To reassign each draw to its potentially correct 
+#' component, a relabeling algorithm is used (see Frühwirth-Schnatter (2006) 
+#' as well as Stephens (1997a) and Stephens (1997b)). 
+#' 
+#' Relabeling is performed on the point process of the component parameters 
+#' and parameter pairs which are both assigned to the same component get 
+#' removed from the resulting MCMC sample. Note that this results usually in 
+#' a reduced number of MCMC samples. the returned object is of class 
+#' `mcmcoutputperm` and carries the samples and statistics (like 
+#' log-likelihood values) of the permuted samples. 
 #' 
 #' @export mcmcpermute
+#' @rdname mcmcpermute
 #' @import nloptr
-"mcmcpermute" <- function(mcmcout, fdata = NULL, method = "kmeans", opt_ctrl = list(max_iter = 200L)) {
+#' 
+#' @examples 
+#' # Define a mixture model.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' # Relabel the MCMC samples.
+#' f_outputperm <- mcmcpermute(f_output)
+#' f_outputperm
+#' 
+#' @seealso 
+#' * [mcmcoutputperm-class] for the class definition of the output objects
+#' * [mcmcestimate()] for a function that uses relabeling 
+"mcmcpermute" <- function(mcmcout, fdata = NULL, method = "kmeans", 
+                          opt_ctrl = list(max_iter = 200L)) {
   ## Check arguments ##
   .check.arg.Mcmcpermute(mcmcout)
   match.arg(method, c("kmeans", "Stephens1997a", "Stephens1997b"))

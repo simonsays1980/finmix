@@ -42,9 +42,9 @@ f_data <- simulate(f_model)
 }
 \seealso{
 \itemize{
-\item \link[=fdata_class]{fdata} for the definition of the \code{fdata} class
+\item \linkS4class{fdata} for the definition of the \code{fdata} class
 \item \link[=model_class]{model} for the definition of the \code{model} class
-\item \link[=mcmc_class]{mcmc} for the definition of the \code{mcmc} class
+\item \linkS4class{mcmc} for the definition of the \code{mcmc} class
 \item \code{\link[=mixturemcmc]{mixturemcmc()}} for the starting MCMC sampling
 }
 }

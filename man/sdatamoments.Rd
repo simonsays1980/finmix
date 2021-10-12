@@ -7,7 +7,7 @@
 sdatamoments(value = fdata())
 }
 \arguments{
-\item{value}{An \link[=fdata_class]{fdata} object containing the indicators for
+\item{value}{An \linkS4class{fdata} object containing the indicators for
 which moments should be calculated.}
 }
 \value{
@@ -32,10 +32,10 @@ sdatamoments(f_data)
 }
 \seealso{
 \itemize{
-\item \link[=sdatamoments_class]{sdatamoments} for the class of indicator
+\item \linkS4class{sdatamoments} for the class of indicator
 moments for discrete data
-\item \link[=csdatamoments_class]{csdatamoments} for the class of indicator moments
+\item \linkS4class{csdatamoments} for the class of indicator moments
 for continuous
-\item \link[=groupmoments_class]{groupmoments} for the parent class## Copyright (C) 2013 Lars Simon Zehnder
+\item \linkS4class{groupmoments} for the parent class## Copyright (C) 2013 Lars Simon Zehnder
 }
 }

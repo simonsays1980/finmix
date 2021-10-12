@@ -25,7 +25,7 @@ If slot \verb{@startpar} is \code{TRUE} sampling starts by sampling the paramete
 Henceforth, it needs starting indicators.}
 }
 \value{
-An object of class \link[=mcmcoutput_class]{mcmcoutput} storing the MCMC
+An object of class \linkS4class{mcmcoutput} storing the MCMC
 sampling results.
 }
 \description{
@@ -103,12 +103,12 @@ Models", Springer
 }
 \seealso{
 \itemize{
-\item \link[=fdata_class]{fdata} for the \code{fdata} class definition
+\item \linkS4class{fdata} for the \code{fdata} class definition
 \item \link[=model_class]{model} for the \code{model} class definition
 \item \link[=prior-class]{prior} for the \code{prior} class definition
 \item \code{\link[=prior]{prior()}} for the \code{prior} class constructor
 \item \code{\link[=priordefine]{priordefine()}} for the advanced class constructor of the \code{prior} class
-\item \link[=mcmc_class]{mcmc} for the \code{mcmc} class definition
+\item \linkS4class{mcmc} for the \code{mcmc} class definition
 \item \code{\link[=mcmc]{mcmc()}} for the \code{mcmc} class constructor
 \item \code{\link[=mcmcstart]{mcmcstart()}} for defining starting parameters and/or indicators
 }

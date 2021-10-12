@@ -27,6 +27,6 @@ modelmoments(f_model)
 }
 \seealso{
 \itemize{
-\item \link{modelmoments_class} for all slots of the \code{modelmoments} class
+\item \linkS4class{modelmoments} for all slots of the \code{modelmoments} class
 }
 }

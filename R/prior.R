@@ -35,11 +35,11 @@
 #'   Hierarchical prior are often more robust, but need an additional layer in 
 #'   sampling, so computing costs increase.
 #' @exportClass prior
-#' @name prior-class
+#' @rdname prior-class
 #' 
 #' @seealso 
-#' * \code{\link{prior}} for the general constructor of this class
-#' * \code{\link{priordefine}} for the advanced constructor of this class
+#' * [prior()] for the general constructor of this class
+#' * [priordefine()] for the advanced constructor of this class
 #' 
 #' @references 
 #' * Frühwirth-Schnatter, S (2006), "Finite Mixture and Markov Switching Models"
@@ -264,7 +264,7 @@ setMethod(
 #' Generates `prior` object
 #' 
 #' @description 
-#' Calling [generatePrior()] generates the `prior` object when [priordefine()] 
+#' Calling `generatePrior()` generates the `prior` object when [priordefine()] 
 #' had been called. When this function is called all checks have been passed 
 #' and `prior` construction can take place. 
 #' 
@@ -277,11 +277,12 @@ setMethod(
 #' @param prior.wagner A logical indicating, if the prior from Wagner (2007) 
 #'   should be used in case of an exponential mixture model. 
 #' @param s A numeric specifying the standard deviation `s` for the 
-#'   Metropolis-Hastings proposal.  
+#'   Metropolis-Hastings proposal. 
+#' @rdname generatePrior
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [prior][prior-class] for the class definition
+#' * [prior-class] for the class definition
 #' * [priordefine()] for the advanced class constructor using this method 
 setMethod(
   "generatePrior", "prior",
@@ -331,7 +332,11 @@ setMethod(
 #' @param object A `prior` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
-#' @describeIn prior-class
+#' @noRd
+#' @seealso 
+#' * [prior-class] for the class definition
+#' * [prior()] for the basic constructor of the class
+#' * [priordefine()] for the advanced constructor of the class
 setMethod(
   "show", "prior",
   function(object) {

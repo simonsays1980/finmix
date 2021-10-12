@@ -95,7 +95,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputpermfix-class
+#' @noRd
 setMethod(
   "show", "mcmcoutputpermfix",
   function(object) {
@@ -228,7 +228,7 @@ setMethod(
 #' @describeIn mcmcoutputpermfix-class
 #' 
 #' @examples 
-#' \dontrun{}
+#' \dontrun{
 #' # Define a Poisson mixture model with two components.
 #' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
 #'                  indicfix = TRUE)

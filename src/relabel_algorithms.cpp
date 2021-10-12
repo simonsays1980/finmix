@@ -268,7 +268,7 @@ arma::imat stephens1997a_binomial_cc(Rcpp::NumericMatrix& values1,
 //' @return An integer matrix of dimension `MxK` that holding the optimal 
 //'   labeling.
 //' @export
-//' @kewords internal
+//' @keywords internal
 //' @seealso 
 //' * [mcmcpermute()] for the calling function 
 //' * [stephens1997a_poisson_cc()] for the re-labeling algorithm from 

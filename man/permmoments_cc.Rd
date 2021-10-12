@@ -22,9 +22,9 @@ moments are used when plotting the traces of an MCMC sample output.
 }
 \seealso{
 \itemize{
-\item \link[=mcmcoutputperm_class]{mcmcoutputperm} for the \code{mcmcoutput} class definition
+\item \linkS4class{mcmcoutputperm} for the \code{mcmcoutput} class definition
 \item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
 \item \code{\link[=mcmcpermute]{mcmcpermute()}} for re-labeling MCMC samples
-\item \link[=mcmcoutputperm_class]{plotTraces} for the calling function
+\item \code{\link[=plotTraces]{plotTraces()}} for the calling function
 }
 }

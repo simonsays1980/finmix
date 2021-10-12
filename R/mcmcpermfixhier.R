@@ -60,19 +60,16 @@
 #' 
 #' @param object An `mcmcpermfixhier` object.
 #' @returns The `hyperperm` slot of the `object`.
-#' @docType methods
-#' @rdname mcmcpermfixhier-methods
-#' @aliases mcmcpermfixhierpost_class, mcmcoutputpermfixhier_class, 
-#'   mcmcpermoutputpermfixhierpost_class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{getHyperpem(mcmcperm)}
 #' 
 #' @seealso 
-#' * \code{\link{mcmcoutputpermfix-class}} for the inheriting class
-#' * \code{\link{mcmcpermute}} for function permuting MCMC samples
+#' * [mcmcpermfixhier-class] for the inheriting class
+#' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
-  "getHyperperm", "mcmcpermfixpost",
+  "getHyperperm", "mcmcpermfixhier",
   function(object) {
     return(object@hyperperm)
   }

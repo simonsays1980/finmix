@@ -17,7 +17,7 @@ Either \code{FALSE}/\code{TRUE}, if \code{verbose} is \code{FALSE} and the \code
 empty or filled or a message, if \code{verbose} is \code{TRUE}.
 }
 \description{
-\code{\link[=hasY]{hasY()}} checks, if the object contains \code{S} data.
+\code{\link[=hasS]{hasS()}} checks, if the object contains \code{S} data.
 }
 \examples{
 # Generate an fdata object with Poisson data

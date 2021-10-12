@@ -63,7 +63,7 @@ estimation, see Fr\"uhwirth-Schnatter (2006).
 case of fixed indicators
 \item \link[=mcmcest_class]{mcmcestfix} for object storing the parameter estimates in
 case of unknown indicators
-\item \link[=mcmcoutputperm_class]{mcmcoutputperm} for classes storing re-labeled
+\item \linkS4class{mcmcoutputperm} for classes storing re-labeled
 MCMC samples
 }
 }

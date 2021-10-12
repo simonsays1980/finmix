@@ -18,5 +18,5 @@ An object class \code{mcmcextract} containing all samples of an extracted
 dimension.
 }
 \description{
-Extracts samples from \code{mcmcoutput} object of a multivariate Normal mixture
+This function extracts samples from a multivariate Normal mixture output.
 }

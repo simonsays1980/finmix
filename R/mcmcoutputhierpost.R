@@ -52,17 +52,124 @@
   prototype(post = list())
 )
 
-## Set 'mcmcoutput' to the virtual class inheriting ##
-## to each other 'mcmcoutput' class. 			    ##
-## This is done to simplify dispatching methods.	##
-#' Finmix `mcmcoutput` class union
+#' Finmix `mcmcoutput` class
 #' 
 #' @description 
-#' This class union is set to dispatch methods for `mcmcoutput` objects from 
-#' MCMC sampling.
+#' The `mcmcoutput` class stores all MCMC samples and corresponding information.
 #' 
+#' @detail  
+#' Calling [mixturemcmc()] on appropriate input arguments performs MCMC 
+#' sampling and returns an `mcmcoutput` object that stores all samples and 
+#' corresponding information like hyper-parameters, the finite mixture model 
+#' specified in a `model` object and the `prior` that specifies the prior 
+#' distribution. All slots are listed below. Note that not all slots must be 
+#' available in a object of class `mcmcoutput`. Some slots get only occupied, 
+#' if a hierarchical prior had been used in MCMC sampling, or if posterior 
+#' samples should be stored. Furthermore, the slots also look different, if 
+#' MCMC sampling had been performed for a model with fixed indicators (see for 
+#' subclasses for example [mcmcoutputfix-class], [mcmcoutputbase-class],
+#' [mcmcoutputhier-class] or [mcmcoutputpost-class]). 
+#' 
+#' The class `mcmcoutput` is a class union and includes all classes that 
+#' define objects to store MCMC samples and is used to dispatch methods for 
+#' `mcmcoutput` objects. For the user this detail is not important, 
+#' especially as this class has no exported constructor. Objects are solely 
+#' constructed internally within the function [mixturemcmc()]. 
+#' 
+#' ## Class methods 
+#' 
+#' This class comes along with a couple of methods that should give the user 
+#' some comfort in handling the MCMC sampling results. There are no setters for 
+#' this class as the slots are only set internally. 
+#' 
+#' ### Show 
+#' * `show()` shows a short summary of the object's slots.
+#' 
+#' ### Getters
+#' * `getM()` returns the `M` slot.
+#' * `getBurnin()` returns the `burnin` slot.
+#' * `getRanperm()` returns the `ranperm` slot.
+#' * `getPar()` returns the `par` slot.
+#' * `gteWeight()` returns the `weight` slot, if available.
+#' * `getLog()` returns the `log` slot.
+#' * `getEntropy()` returns the `entropy` slot, if available.
+#' * `getHyper()` returns the `hyper` slot, if available.
+#' * `getPost()` returns the `post` slot, if available.
+#' * `getST()` returns the `ST` slot, if available.
+#' * `getS()` returns the `S` slot, if available.
+#' * `getNK()` returns the `NK` slot, if available.
+#' * `getClust()` returns the `clust` slot, if available.
+#' * `getModel()` returns the `model` slot. 
+#' * `getPrior()` returns the `prior` slot.   
+#' 
+#' ### Plotting
+#' Plotting functionality for the `mcmcoutput` helps the user to inspect MCMC 
+#' results.
+#' 
+#' * `plotTraces()` plots traces of MCMC samples. See [plotTraces()] for 
+#'   further information.
+#' * `plotHist()` plots histograms of parameters and weights. See [plotHist()] 
+#'   for further information.
+#' * `plotDens()` plots densities of parameters and weights. See [plotDens()] 
+#'   for further information.
+#' * `plotPointProc()` plots the point process of component parameters. See 
+#'   [plotPointProc] for further information.
+#' * `plotSampRep()` plots the sampling representation of component parameters. 
+#'   See [plotSampRep()] for further information. 
+#' * `plotPostDens()` plots the posterior density of component parameters. Note 
+#'   that this function can only be applied for mixtures of two components. See 
+#'   [plotPostDens()] for further information.  
+#'
+#' ## Slots
+#' @slot M An integer defining the number of iterations in MCMC sampling. 
+#' @slot burnin An integer defining the number of iterations in the burn-in 
+#'   phase of MCMC sampling. These number of sampling steps are not stored 
+#'   in the output.
+#' @slot ranperm A logical indicating, if MCMC sampling has been performed 
+#'   with random permutations of components.
+#' @slot par A named list containing the sampled component parameters. 
+#' @slot weight An `array` of dimension `M x K` containing the sampled 
+#'   weights.
+#' @slot log A named list containing the values of the mixture log-likelihood, 
+#'   mixture prior log-likelihood, and the complete data posterior 
+#'   log-likelihood.
+#' @slot hyper A list storing the sampled parameters from the hierarchical 
+#'   prior. 
+#' @slot post A named list containing a list `par` that contains the posterior 
+#'   parameters as named arrays. 
+#' @slot entropy An `array` of dimension `M x 1` containing the entropy 
+#'   for each MCMC draw.
+#' @slot ST An `array` of dimension `M x 1` containing all MCMC states, 
+#'   for the last observation in slot `y` of the `fdata` object passed in to 
+#'   [mixturemcmc()] where a state is defined for non-Markov models as the 
+#'   last indicator of this observation. 
+#' @slot S An `array` of dimension `N x storeS` containing the last 
+#'   `storeS` indicators sampled. `storeS` is defined in the slot `@@storeS` of 
+#'   the `mcmc` object passed into [mixturemcmc()].
+#' @slot NK An `array` of dimension `M x K` containing the number of 
+#'   observations assigned to each component for each MCMC draw.
+#' @slot clust An `array` of dimension `N x 1` containing the recent 
+#'   indicators defining the last "clustering" of observations into the 
+#'   mixture components.
+#' @slot model The `model` object that specifies the finite mixture model for 
+#'   whcih MCMC sampling has been performed. 
+#' @slot prior The `prior` object defining the prior distributions for the 
+#'   component parameters that has been used in MCMC sampling.
+#'   
 #' @exportClass mcmcoutput
-#' @describeIn mcmcoutput_class
+#' @rdname mcmcoutput-class
+#' 
+#' @seealso 
+#' * [mcmcoutputperm-class] for the corresponding class defined for relabeled 
+#'   MCMC samples
+#' * [mcmcoutputfix-class] for the `mcmcoutput` sub-class for models with 
+#'   fixed indicators
+#' * [mcmcoutputbase-class] for the `mcmcoutput` sub-class for models with 
+#'   unknown indicators
+#' * [mcmcoutputhier-class] for the `mcmcoutput` sub-class for MCMC samples 
+#'   with hierarchical priors
+#' * [mcmcoutputpost-class] for the `mcmcoutput` sub-class for MCMC samples 
+#'   with stored posterior density parameters
 setClassUnion(
   "mcmcoutput",
   c(
@@ -87,8 +194,7 @@ setClassUnion(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputhierpost-class SHows a short summary of the object's 
-#'   slots
+#' @noRd
 setMethod(
   "show", "mcmcoutputhierpost",
   function(object) {
@@ -167,7 +273,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -219,7 +325,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -270,7 +376,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -416,7 +522,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -548,7 +654,7 @@ setMethod(
 #' getPost(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getPost", "mcmcoutputhierpost",

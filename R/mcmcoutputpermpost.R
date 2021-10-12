@@ -32,7 +32,6 @@
 #' Note that this class inherits all of its slots from the parent classes. 
 #' 
 #' @exportClass mcmcoutputpermpost
-#' @describeIn mcmcoutputpermpost-class
 #' @keywords internal
 #' @seealso 
 #' * [mcmcoutputbase-class] for the parent class

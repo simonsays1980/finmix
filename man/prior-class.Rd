@@ -83,8 +83,8 @@ hasPriorWeight(f_prior, f_model)
 }
 \seealso{
 \itemize{
-\item \code{\link{prior}} for the general constructor of this class
-\item \code{\link{priordefine}} for the advanced constructor of this class
+\item \code{\link[=prior]{prior()}} for the general constructor of this class
+\item \code{\link[=priordefine]{priordefine()}} for the advanced constructor of this class
 }
 
 \itemize{

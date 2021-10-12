@@ -4,37 +4,19 @@
 \name{binomialmodelmoments-class}
 \alias{binomialmodelmoments-class}
 \alias{.binomialmodelmoments}
-\alias{show,binomialmodelmoments-method}
 \title{Finmix \code{binomialmodelmoments} class}
-\usage{
-\S4method{show}{binomialmodelmoments}(object)
-}
-\arguments{
-\item{object}{An \code{binomialmodelmoments} object.}
-}
-\value{
-A console output listing the slots and summary information about
-each of them.
-}
 \description{
 Defines a class that holds modelmoments for a finite mixture of Binomial
 distributions. Note that this class is not directly used, but indirectly
-when calling the \code{modelmoments} constructor \code{\link{modelmoments}}.
+when calling the \code{modelmoments} constructor \code{\link[=modelmoments]{modelmoments()}}.
 
 This is a class that directly inherits from the \code{dmodelmoments} class.
-
-Calling \code{\link[=show]{show()}} on an \code{binomialmodelmoments} object gives an overview
-of the moments of an binomial finite mixture.
 }
-\section{Methods (by generic)}{
-\itemize{
-\item \code{show}: Shows a summary of an object
-}}
-
 \seealso{
 \itemize{
-\item \link{modelmoments_class} for the base class for model moments
-\item \code{\link{modelmoments}} for the constructor of \code{modelmoments} classes
-\item \code{\link{dmodelmoments-class}} class for the parent class
+\item \linkS4class{modelmoments} for the base class for model moments
+\item \code{\link[=modelmoments]{modelmoments()}} for the constructor of \code{modelmoments} classes
+\item \linkS4class{dmodelmoments} class for the parent class
 }
 }
+\keyword{internal}

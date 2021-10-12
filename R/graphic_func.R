@@ -48,7 +48,6 @@
 #'   or multivariate.
 #' @param lab.names A vector of characters describing the axis names.
 #' @return A plot containing the histograms of each of `y`'s dimensions.
-#' @describeIn graphical_funs
 #' @noRd 
 ".symmetric.Hist" <- function(y, lab.names) {
   r <- NCOL(y)
@@ -163,7 +162,6 @@
 #'   or multivariate.
 #' @param lab.names A vector of characters describing the axis names.
 #' @return A plot containing the densities of each of `y`'s dimensions.
-#' @describeIn graphical_funs
 #' @noRd 
 ".symmetric.Dens" <- function(y, lab.names) {
   r <- NCOL(y)
@@ -279,7 +277,6 @@
 #' @param lab.name A vector of characters describing the axis names.
 #' @return A plot containing the histogram of the data stored in `y` together
 #'   with rug representation of the data. 
-#' @describeIn graphical_funs
 #' @import graphics
 #' @noRd 
 ".comb.Hist" <- function(y, lab.name) {
@@ -291,7 +288,7 @@
   )
   rug(y, col = "gray47")
   mtext(
-    side = 1, do.call(bquote, lab.name),
+    side = 1, do.call(bquote, as.list(lab.name)),
     cex = 0.7, line = 3
   )
 }
@@ -309,7 +306,6 @@
 #' @param lab.name A vector of characters describing the axis names.
 #' @return A plot containing the density of the data stored in `y` together
 #'   with rug representation of the data. 
-#' @describeIn graphical_funs
 #' @importFrom KernSmooth bkde
 #' @noRd 
 ".comb.Dens" <- function(y, lab.name) {
@@ -322,7 +318,7 @@
   )
   rug(y, col = "gray47")
   mtext(
-    side = 1, do.call(bquote, lab.name),
+    side = 1, do.call(bquote, as.list(lab.name)),
     cex = 0.7, line = 3
   )
 }

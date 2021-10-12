@@ -34,14 +34,14 @@
 #' @slot Mperm An integer storing the MCMC sample size after relabeling.
 #' @slot parperm A named list containing the permuted component parameters. 
 #' @slot logperm A named list containing the mixture log-likelihood, the prior 
-#' log-likelihood, and the complete data posterior log-likelihood.
+#'   log-likelihood, and the complete data posterior log-likelihood.
 #' @exportClass mcmcpermfix
 #' @family mcmcperm-classes
 #' @rdname mcmcpermfix-class
 #' 
 #' @seealso 
-#' * \code{\link{mcmcpermute}} for the calling function
-#' * \code{\link{mcmcpermind}} for the corresponding class for models with 
+#' * [mcmcpermute()] for the calling function
+#' * [mcmcpermind-class] for the corresponding class for models with 
 #'   unknown indicators
 .mcmcpermfix <- setClass("mcmcpermfix",
   representation(
@@ -75,8 +75,8 @@
 #' \dontrun{getMperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * \code{\link{mcmcoutputpermfix_class}} for the inheriting class
-#' * \code{\link{mcmcpermute}} for function permuting MCMC samples
+#' * [mcmcoutputpermfix-class] for the inheriting class
+#' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getMperm", "mcmcpermfix",
   function(object) {
@@ -96,7 +96,7 @@ setMethod(
 #' \dontrun{getParperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermfix][mcmcoutput_class] for the inheriting class
+#' * [mcmcoutput-class] for the inheriting class
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getParperm", "mcmcpermfix",
@@ -117,7 +117,7 @@ setMethod(
 #' \dontrun{getLogperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermfix][mcmcoutput_class] for the inheriting class
+#' * [mcmcoutput-class] for the inheriting class
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getLogperm", "mcmcpermfix",

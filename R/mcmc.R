@@ -38,7 +38,7 @@
 #' @slot storeinv A logical indicating if the inverse variance-covariance 
 #'   matrices for multivariate normal or Student-t mixtures should be stored. 
 #' @exportClass mcmc
-#' @name mcmc_class
+#' @rdname mcmc-class
 #' 
 #' @seealso 
 #' * [mcmc()] for the class constructor
@@ -103,7 +103,7 @@
 #' f_mcmc <- mcmc()
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mcmcstart()] for setting up all objects for MCMC sampling
 #' * [mixturemcmc()] for running MCMC sampling for finite mixture models
 "mcmc" <- function(burnin = 0, M = 5000,
@@ -127,7 +127,11 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmc_class
+#' @noRd
+#' 
+#' @seealso 
+#' * [mcmc-class] for the class definition
+#' * [mcmc()] for the constructor of the class 
 setMethod(
   "show", "mcmc",
   function(object) {
@@ -159,7 +163,7 @@ setMethod(
 #' getBurnin(f_mcmc)
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setMethod(
   "getBurnin", "mcmc",
@@ -183,7 +187,7 @@ setMethod(
 #' getM(f_mcmc)
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setMethod(
   "getM", "mcmc",
@@ -207,7 +211,7 @@ setMethod(
 #' getStartpar(f_mcmc)
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setMethod(
   "getStartpar", "mcmc",
@@ -231,7 +235,7 @@ setMethod(
 #' getStoreS(f_mcmc)
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setMethod(
   "getStoreS", "mcmc",
@@ -255,7 +259,7 @@ setMethod(
 #' getStorepost(f_mcmc)
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setMethod(
   "getStorepost", "mcmc",
@@ -279,7 +283,7 @@ setMethod(
 #' getRanperm(f_mcmc)
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setMethod(
   "getRanperm", "mcmc",
@@ -305,7 +309,7 @@ setMethod(
 #' setBurnin(f_mcmc) <- as.integer(2000)
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setReplaceMethod(
   "setBurnin", "mcmc",
@@ -332,7 +336,7 @@ setReplaceMethod(
 #' setM(f_mcmc) <- as.integer(20000)
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setReplaceMethod(
   "setM", "mcmc",
@@ -359,7 +363,7 @@ setReplaceMethod(
 #' setStartpar(f_mcmc) <- FALSE
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setReplaceMethod(
   "setStartpar", "mcmc",
@@ -386,7 +390,7 @@ setReplaceMethod(
 #' setStoreS(f_mcmc) <- as.integer(500)
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setReplaceMethod(
   "setStoreS", "mcmc",
@@ -414,7 +418,7 @@ setReplaceMethod(
 #' setStorepost(f_mcmc) <- FALSE
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setReplaceMethod(
   "setStorepost", "mcmc",
@@ -441,7 +445,7 @@ setReplaceMethod(
 #' setRanperm(f_mcmc) <- FALSE
 #' 
 #' @seealso 
-#' * [mcmc][mcmc_class] for the class definition
+#' * [mcmc-class] for the class definition
 #' * [mcmc()] for the constructor of the `mcmc` class
 setReplaceMethod(
   "setRanperm", "mcmc",

@@ -25,10 +25,9 @@
 #' distributions covariance matrices. 
 #' @slot model The corresponding `model` object.
 #' @exportClass modelmoments
-#' 
-#' @name modelmoments_class
+#' @rdname modelmoments-class
 #' @seealso 
-#' * [modelmoments()] the constructor of the `modelmoments` class
+#' * [modelmoments()] for the constructor of the `modelmoments` class
 setClass("modelmoments",
   representation(
     mean = "vector",
@@ -64,7 +63,7 @@ setClass("modelmoments",
 #' modelmoments(f_model)
 #' 
 #' @seealso 
-#' * [modelmoments_class] for all slots of the `modelmoments` class
+#' * [modelmoments-class] for all slots of the `modelmoments` class
 "modelmoments" <- function(model) {
   dist <- model@dist
   if (dist == "normult") {
@@ -92,7 +91,7 @@ setClass("modelmoments",
 #' @param object A `modelmoments` object.
 #' @returns The `mean` slot of the `object`.
 #' @exportMethod getMean
-#' @describeIn modelmoments_class
+#' @noRd
 #' 
 #' @examples 
 #' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
@@ -100,7 +99,7 @@ setClass("modelmoments",
 #' f_moments <- modelmoments(f_model)
 #' getMean(f_moments)
 #' 
-#' @seealso [modelmoments_class] for all slots of the `modelmoments` class
+#' @seealso [modelmoments-class] for all slots of the `modelmoments` class
 setMethod(
   "getMean", "modelmoments",
   function(object) {
@@ -115,15 +114,14 @@ setMethod(
 #' @param object A `modelmoments` object.
 #' @returns The `var` slot of the `object`.
 #' @exportMethod getVar
-#' @describeIn modelmoments_class
-#' 
+#' @noRd 
 #' @examples 
 #' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
 #'                  weight=matrix(c(0.3, 0.7), nrow=1))
 #' f_moments <- modelmoments(f_model)
 #' getVar(f_moments)
 #' 
-#' @seealso [modelmoments_class] for all slots of the `modelmoments` class
+#' @seealso [modelmoments-class] for all slots of the `modelmoments` class
 setMethod(
   "getVar", "modelmoments",
   function(object) {
@@ -138,7 +136,7 @@ setMethod(
 #' @param object A `modelmoments` object.
 #' @returns The `model` slot of the `object`.
 #' @exportMethod getModel
-#' @describeIn modelmoments_class
+#' @noRd
 #' 
 #' @examples 
 #' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
@@ -146,7 +144,7 @@ setMethod(
 #' f_moments <- modelmoments(f_model)
 #' getModel(f_moments)
 #' 
-#' @seealso [modelmoments_class] for all slots of the `modelmoments` class
+#' @seealso [modelmoments-class] for all slots of the `modelmoments` class
 setMethod(
   "getModel", "modelmoments",
   function(object) {

@@ -65,10 +65,10 @@
 //' 
 //' @seealso 
 //' * [mixturemcmc()] for performing MCMC sampling
-//' * [fdata][fdata_class] for the `fdata` class definition
-//' * [model][model_class] for the `model` class definition
-//' * [prior][prior_class] for the `prior` class definition
-//' * [mcmc][mcmc_class] for the `mcmc` class definition
+//' * [fdata-class] for the `fdata` class definition
+//' * [model-class] for the `model` class definition
+//' * [prior-class] for the `prior` class definition
+//' * [mcmc-class] for the `mcmc` class definition
 //' 
 //' @references
 //' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 

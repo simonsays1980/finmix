@@ -28,7 +28,7 @@ indicators in slot \verb{@S} of the corresponding \code{fdata} object.
 }
 \seealso{
 \itemize{
-\item \link[=dataclass_class]{dataclass} for the class definition
+\item \linkS4class{dataclass} for the class definition
 }
 
 #' @references

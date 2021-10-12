@@ -135,6 +135,24 @@ setHier(f_prior) <- FALSE
 # Start MCMC sampling.
 f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 f_outputperm <- mcmcpermute(f_output)
+plotHist(f_outputperm)
+}
+
+\dontrun{
+# Define a Poisson mixture model with two components.
+f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2, 
+                 indicfix = TRUE)
+# Simulate data from the mixture model.
+f_data <- simulate(f_model)
+# Define the hyper-parameters for MCMC sampling.
+f_mcmc <- mcmc(storepost = FALSE)
+# Define the prior distribution by relying on the data.
+f_prior <- priordefine(f_data, f_model)
+# Do not use a hierarchical prior.
+setHier(f_prior) <- FALSE
+# Start MCMC sampling.
+f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+f_outputperm <- mcmcpermute(f_output)
 plotDens(f_outputperm)
 }
 

@@ -50,7 +50,8 @@
 #' @slot sdpost A named list containing the standard deviations of the 
 #'   parameter estimates from the posterior distributions.
 #' @exportClass mcmcestfix
-#' @name mcmcest_class
+#' @rdname mcmcest-class
+#' @keywords internal
 #' 
 #' @seealso
 #' * [mcmcestind][mcmcest_class] for the equivalent class for models with 
@@ -98,7 +99,6 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcest_class
 setMethod(
   "show", "mcmcestfix",
   function(object) {
@@ -144,7 +144,6 @@ setMethod(
 #' @returns A console output listing the formatted slots and summary 
 #'   information about each of them. 
 #' @exportMethod Summary
-#' @describeIn mcmcest_class
 setMethod(
   "Summary", "mcmcestfix",
   function(x, ..., na.rm = FALSE) {
@@ -225,7 +224,7 @@ setMethod(
 #' getDist(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -260,7 +259,7 @@ setMethod(
 #' getK(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -295,7 +294,7 @@ setMethod(
 #' getIndicmod(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -330,7 +329,7 @@ setMethod(
 #' getBurnin(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -365,7 +364,7 @@ setMethod(
 #' getM(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -400,7 +399,7 @@ setMethod(
 #' getRanperm(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -435,7 +434,7 @@ setMethod(
 #' getRelabel(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -470,7 +469,7 @@ setMethod(
 #' getMap(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -505,7 +504,7 @@ setMethod(
 #' getBml(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -540,7 +539,7 @@ setMethod(
 #' getIeavg(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
@@ -575,7 +574,7 @@ setMethod(
 #' getIeavg(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestind][mcmcoutput_class] for the corresponding class for models 
+#' * [mcmcestind-class] for the corresponding class for models 
 #'   with unknown indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(

@@ -15,408 +15,408 @@
 # You should have received a copy of the GNU General Public License
 # along with Rcpp.  If not, see <http://www.gnu.org/licenses/>.
 
-## Load the dyanmic library
+## Load the dynamic library
 #' @useDynLib finmix
 #' @importFrom Rcpp sourceCpp
 NULL
 
 ## Class 'model' --------------------------------------------------
-#' @describeIn model_class Simulates data from mixture model
+#' @noRd
 setGeneric("simulate", function(model, N = 100, varargin, seed = 0) standardGeneric("simulate"))
 
-#' @describeIn model_class Plots point process of mixture model
+#' @noRd
 setGeneric("plotPointProc", function(x, dev = TRUE, ...) standardGeneric("plotPointProc"))
 
-#' @describeIn model_class Checker for slot `weight` of model class
+#' @noRd
 setGeneric("hasWeight", function(object, verbose = FALSE) standardGeneric("hasWeight"))
 
-#' @describeIn model_class Checker for slot `T` of model class
+#' @noRd
 setGeneric("hasT", function(object, verbose = FALSE) standardGeneric("hasT"))
 
-#' @describeIn model_class Checker for slot `par` of model class
+#' @noRd
 setGeneric("hasPar", function(object, verbose = FALSE) standardGeneric("hasPar"))
 
-#' @describeIn model_class Extract marginal distribution 
+#' @noRd 
 setGeneric("mixturemar", function(object, J) standardGeneric("mixturemar"))
 
-#' @describeIn model_class Getter for slot `dist` of model class
+#' @noRd
 setGeneric("getDist", function(object) standardGeneric("getDist"))
 
-#' @describeIn model_class Getter for slot `r` of model class
+#' @noRd
 setGeneric("getR", function(object) standardGeneric("getR"))
 
-#' @describeIn model_class Getter for slot `K` of model class
+#' @noRd
 setGeneric("getK", function(object) standardGeneric("getK"))
 
-#' @describeIn model_class Getter for slot `weight` of model class
+#' @noRd
 setGeneric("getWeight", function(object) standardGeneric("getWeight"))
 
-#' @describeIn model_class Getter for slot `par` of model class
+#' @noRd
 setGeneric("getPar", function(object) standardGeneric("getPar"))
 
-#' @describeIn model_class Getter for slot `indicmod` of model class
+#' @noRd
 setGeneric("getIndicmod", function(object) standardGeneric("getIndicmod"))
 
-#' @describeIn model_class Getter for slot `indicfix` of model class
+#' @noRd
 setGeneric("getIndicfix", function(object) standardGeneric("getIndicfix"))
 
-#' @describeIn model_class Getter for slot `T` of model class
+#' @noRd
 setGeneric("getT", function(object) standardGeneric("getT"))
 
-#' @describeIn model_class Setter for slot `dist` of model class
+#' @noRd
 setGeneric("setDist<-", function(object, value) standardGeneric("setDist<-"))
 
-#' @describeIn model_class Setter for slot `r` of model class
+#' @noRd
 setGeneric("setR<-", function(object, value) standardGeneric("setR<-"))
 
-#' @describeIn model_class Setter for slot `K` of model class
+#' @noRd
 setGeneric("setK<-", function(object, value) standardGeneric("setK<-"))
 
-#' @describeIn model_class Setter for slot `weight` of model class
+#' @noRd
 setGeneric("setWeight<-", function(object, value) standardGeneric("setWeight<-"))
 
-#' @describeIn model_class Setter for slot `par` of model class
+#' @noRd
 setGeneric("setPar<-", function(object, value) standardGeneric("setPar<-"))
 
-#' @describeIn model_class Setter for slot `indicmod` of model class
+#' @noRd
 setGeneric("setIndicmod<-", function(object, value) standardGeneric("setIndicmod<-"))
 
-#' @describeIn model_class Setter for slot `indicfix` of model class
+#' @noRd
 setGeneric("setIndicfix<-", function(object, value) standardGeneric("setIndicfix<-"))
 
-#' @describeIn model_class Setter for slot `T` of model class
+#' @noRd
 setGeneric("setT<-", function(object, value) standardGeneric("setT<-"))
 
 ## Class 'modelmoments' --------------------------------------------
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getMean", function(object) standardGeneric("getMean"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getVar", function(object) standardGeneric("getVar"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getModel", function(object) standardGeneric("getModel"))
 
 ## Class 'cmodelmoments' -------------------------------------------
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getHigher", function(object) standardGeneric("getHigher"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getSkewness", function(object) standardGeneric("getSkewness"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getKurtosis", function(object) standardGeneric("getKurtosis"))
 
 ## Class 'dmodelmoments' -------------------------------------------
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getOver", function(object) standardGeneric("getOver"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getFactorial", function(object) standardGeneric("getFactorial"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getZero", function(object) standardGeneric("getZero"))
 
 ## Class 'normultmodelmoments' -------------------------------------
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("generateMoments", function(object) standardGeneric("generateMoments"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getB", function(object) standardGeneric("getB"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getW", function(object) standardGeneric("getW"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getRdet", function(object) standardGeneric("getRdet"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getRtr", function(object) standardGeneric("getRtr"))
 
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getCorr", function(object) standardGeneric("getCorr"))
 
 ## Class 'exponentialmodelmoments' ---------------------------------
-#' @describeIn modelmoments_class
+#' @noRd
 setGeneric("getExtrabinvar", function(object) standardGeneric("getExtrabinvar"))
 
 ## Class 'fdata' ----------------------------------------------------
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("hasY", function(object, verbose = FALSE) standardGeneric("hasY"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("hasS", function(object, verbose = FALSE) standardGeneric("hasS"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("hasExp", function(object, verbose = FALSE) standardGeneric("hasExp"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("hasT", function(object, verbose = FALSE) standardGeneric("hasT"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getColY", function(object) standardGeneric("getColY"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getRowY", function(object) standardGeneric("getRowY"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getColS", function(object) standardGeneric("getColS"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getRowS", function(object) standardGeneric("getRowS"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getColExp", function(object) standardGeneric("getColExp"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getRowExp", function(object) standardGeneric("getRowExp"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getColT", function(object) standardGeneric("getColT"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getRowT", function(object) standardGeneric("getRowT"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getY", function(object) standardGeneric("getY"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getBycolumn", function(object) standardGeneric("getBycolumn"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getN", function(object) standardGeneric("getN"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getS", function(object) standardGeneric("getS"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getName", function(object) standardGeneric("getName"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getType", function(object) standardGeneric("getType"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getSim", function(object) standardGeneric("getSim"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("getExp", function(object) standardGeneric("getExp"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("setY<-", function(object, value) standardGeneric("setY<-"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("setN<-", function(object, value) standardGeneric("setN<-"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("setS<-", function(object, value) standardGeneric("setS<-"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("setBycolumn<-", function(object, value) standardGeneric("setBycolumn<-"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("setName<-", function(object, value) standardGeneric("setName<-"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("setType<-", function(object, value) standardGeneric("setType<-"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("setSim<-", function(object, value) standardGeneric("setSim<-"))
 
-#' @describeIn fdata_class
+#' @noRd
 setGeneric("setExp<-", function(object, value) standardGeneric("setExp<-"))
 
 ## Class 'groupmoments' ----------------------------------------------
-#' @describeIn groupmoments_class
+#' @noRd
 setGeneric("getNK", function(object) standardGeneric("getNK"))
 
-#' @describeIn groupmoments_class
+#' @noRd
 setGeneric("getWK", function(object) standardGeneric("getWK"))
 
-#' @describeIn groupmoments_class
+#' @noRd
 setGeneric("getFdata", function(object) standardGeneric("getFdata"))
 
 ## Class 'sdatamoments' ----------------------------------------------
-#' @describeIn sdatamoments_class
+#' @noRd
 setGeneric("getGmoments", function(object) standardGeneric("getGmoments"))
 
 ## Class 'cdatamoments' ---------------------------------------------
-#' @describeIn cdatamoments_class
+#' @noRd
 setGeneric("getSmoments", function(object) standardGeneric("getSmoments"))
 
 ## Class 'prior' -----------------------------------------------------
-#' @describeIn prior-class
+#' @noRd
 setGeneric("hasPriorPar", function(object, model, verbose = FALSE) standardGeneric("hasPriorPar"))
 
-#' @describeIn prior-class
+#' @noRd
 setGeneric("hasPriorWeight", function(object, model, verbose = FALSE) standardGeneric("hasPriorWeight"))
 
-#' @describeIn prior-class
+#' @noRd
 setGeneric("generatePrior", function(object, ...) standardGeneric("generatePrior"))
 
-#' @describeIn prior-class
+#' @noRd
 setGeneric("getHier", function(object) standardGeneric("getHier"))
 
-#' @describeIn prior-class
+#' @noRd
 setGeneric("setHier<-", function(object, value) standardGeneric("setHier<-"))
 
 ## Class 'mcmc' -------------------------------------------------------
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("getBurnin", function(object) standardGeneric("getBurnin"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("getM", function(object) standardGeneric("getM"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("getStartpar", function(object) standardGeneric("getStartpar"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("getStoreS", function(object) standardGeneric("getStoreS"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("getStorepost", function(object) standardGeneric("getStorepost"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("getRanperm", function(object) standardGeneric("getRanperm"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("setBurnin<-", function(object, value) standardGeneric("setBurnin<-"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("setM<-", function(object, value) standardGeneric("setM<-"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("setStartpar<-", function(object, value) standardGeneric("setStartpar<-"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("setStoreS<-", function(object, value) standardGeneric("setStoreS<-"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("setStorepost<-", function(object, value) standardGeneric("setStorepost<-"))
 
-#' @describeIn mcmc_class
+#' @noRd
 setGeneric("setRanperm<-", function(object, value) standardGeneric("setRanperm<-"))
 
 ## Class 'dataclass' ----------------------------------------------------
-#' @describeIn dataclass
+#' @noRd
 setGeneric("getLogpy", function(object) standardGeneric("getLogpy"))
 
-#' @describeIn dataclass
+#' @noRd
 setGeneric("getProb", function(object) standardGeneric("getProb"))
 
-#' @describeIn dataclass
+#' @noRd
 setGeneric("getMixlik", function(object) standardGeneric("getMixlik"))
 
-#' @describeIn dataclass
+#' @noRd
 setGeneric("getEntropy", function(object) standardGeneric("getEntropy"))
 
-#' @describeIn dataclass
+#' @noRd
 setGeneric("getPostS", function(object) standardGeneric("getPostS"))
 
-#' @describeIn dataclass
+#' @noRd
 setGeneric("getLoglikcd", function(object) standardGeneric("getLoglikcd"))
 
 ## Class 'mcmcextract' --------------------------------------------------------------------------
-#' @describeIn mcmcextract_class
+#' @noRd
 setGeneric("moments", function(object) standardGeneric("moments"))
 
 ## Class 'mcmcoutputfix' ------------------------------------------------
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("plotTraces", function(x, dev = TRUE, lik = 1, col = FALSE, ...) standardGeneric("plotTraces"))
 
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("plotHist", function(x, dev = TRUE, ...) standardGeneric("plotHist"))
 
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("plotDens", function(x, dev = TRUE, ...) standardGeneric("plotDens"))
 
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("plotSampRep", function(x, dev = TRUE, ...) standardGeneric("plotSampRep"))
 
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("plotPostDens", function(x, dev = TRUE, ...) standardGeneric("plotPostDens"))
 
-#' @describeIn mcmcoutput_class 
+#' @noRd
 setGeneric("subseq", function(object, index) standardGeneric("subseq"))
 
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("swapElements", function(object, index) standardGeneric("swapElements"))
 
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("extract", function(object, index) standardGeneric("extract"))
 
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("getLog", function(object) standardGeneric("getLog"))
 
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("getPrior", function(object) standardGeneric("getPrior"))
 
 ## Class 'mcmcoutputhier' -----------------------------------------------
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("getHyper", function(object) standardGeneric("getHyper"))
 
 ## Class 'mcmcoutputpost' -----------------------------------------------
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("getPost", function(object) standardGeneric("getPost"))
 
 ## Class 'mcmcoutputbase' -----------------------------------------------
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("getST", function(object) standardGeneric("getST"))
 
-#' @describeIn mcmcoutput_class
+#' @noRd
 setGeneric("getClust", function(object) standardGeneric("getClust"))
 
 ## Class 'mcmcpermfix' ---------------------------------------------------
-#' @describeIn mcmcperm_class
+#' @noRd
 setGeneric("getMperm", function(object) standardGeneric("getMperm"))
 
-#' @describeIn mcmcperm_class
+#' @noRd
 setGeneric("getParperm", function(object) standardGeneric("getParperm"))
 
-#' @describeIn mcmcperm_class
+#' @noRd
 setGeneric("getLogperm", function(object) standardGeneric("getLogperm"))
 
 ## Class 'mcmcpermfixhier' -----------------------------------------------
-#' @noRd mcmcperm_class
+#' @noRd
 setGeneric("getHyperperm", function(object) standardGeneric("getHyperperm"))
 
 ## Class 'mcmcpermfixpost' -----------------------------------------------
-#' @noRd mcmcperm_class
+#' @noRd
 setGeneric("getPostperm", function(object) standardGeneric("getPostperm"))
 
 ## Class 'mcmcpermind' ---------------------------------------------------
-#' @describeIn mcmcperm_class
+#' @noRd
 setGeneric("getRelabel", function(object) standardGeneric("getRelabel"))
 
-#' @describeIn mcmcperm_class
+#' @noRd
 setGeneric("getWeightperm", function(object) standardGeneric("getWeightperm"))
 
-#' @describeIn mcmcperm_class
+#' @noRd
 setGeneric("getEntropyperm", function(object) standardGeneric("getEntropyperm"))
 
-#' @describeIn mcmcperm_class
+#' @noRd
 setGeneric("getSTperm", function(object) standardGeneric("getSTperm"))
 
-#' @describeIn mcmcperm_class
+#' @noRd
 setGeneric("getSperm", function(object) standardGeneric("getSperm"))
 
-#' @describeIn mcmcperm_class
+#' @noRd
 setGeneric("getNKperm", function(object) standardGeneric("getNKperm"))
 
 ## Class 'mcmcestfix' -----------------------------------------------------
-#' @describeIn mcmcest_class
+#' @noRd
 setGeneric("getMap", function(object) standardGeneric("getMap"))
 
-#' @describeIn mcmcest_class
+#' @noRd
 setGeneric("getBml", function(object) standardGeneric("getBml"))
 
-#' @describeIn mcmcest_class
+#' @noRd
 setGeneric("getIeavg", function(object) standardGeneric("getIeavg"))
 
-#' @describeIn mcmcest_class
+#' @noRd
 setGeneric("getSdpost", function(object) standardGeneric("getSdpost"))
 
 ## Class 'mcmcestind' ------------------------------------------------------
-#' @describeIn mcmcest_class
+#' @noRd
 setGeneric("getEavg", function(object) standardGeneric("getEavg"))

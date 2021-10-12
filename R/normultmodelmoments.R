@@ -28,7 +28,7 @@
 #' @name normultmodelmoments
 #' 
 #' @seealso 
-#' * [modelmoments_class] for the base class for model moments
+#' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes
 .normultmodelmoments <- setClass("normultmodelmoments",
   representation(
@@ -102,7 +102,10 @@ setMethod(
 #' @param object An `normultmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
-#' @describeIn normultmodelmoments
+#' @noRd
+#' @seealso 
+#' * [modelmoments-class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 setMethod(
   "show", "normultmodelmoments",
   function(object) {
@@ -158,7 +161,7 @@ setMethod(
 #' 
 #' @param object An `normultmodelmoments` object.
 #' @returns The `B` slot of the `object`.
-#' @describeIn datamoments_class Getter method for slot `B`
+#' @noRd
 #' 
 #' @examples 
 #' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))

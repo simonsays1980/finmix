@@ -33,7 +33,8 @@
 #'   `weight` contains the weight estimates. The difference between the EAVG 
 #'   and the IEAVG is that the IEAVG is based on re-labeled samples.
 #' @exportClass mcmcestind
-#' @describeIn mcmcest_class Finmix `mcmcestind` class
+#' @rdname mcmcestind-class
+#' @keywords internal
 #' 
 #' @seealso
 #' * [mcmcestfix][mcmcest_class] for the parent class with fixed indicators
@@ -73,7 +74,7 @@ setClassUnion(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcest_class
+#' @noRd
 setMethod(
   "show", "mcmcestind",
   function(object) {
@@ -124,7 +125,6 @@ setMethod(
 #' @returns A console output listing the formatted slots and summary 
 #'   information about each of them. 
 #' @exportMethod Summary
-#' @describeIn mcmcest_class
 setMethod(
   "Summary", "mcmcestind",
   function(x, ..., na.rm = FALSE) {
@@ -220,7 +220,7 @@ setMethod(
 #' getEavg(f_output)
 #' 
 #' @seealso 
-#' * [mcmcestfix][mcmcoutput_class] for the parent class with fixed indicators
+#' * [mcmcestfix-class] for the parent class with fixed indicators
 #' * [mcmcestimate()] for calculating point estimates from MCMC samples
 setMethod(
   "getEavg", "mcmcestind",

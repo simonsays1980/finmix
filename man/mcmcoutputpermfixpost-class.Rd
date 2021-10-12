@@ -4,31 +4,16 @@
 \name{mcmcoutputpermfixpost-class}
 \alias{mcmcoutputpermfixpost-class}
 \alias{.mcmcoutputpermfixpost}
-\alias{show,mcmcoutputpermfixpost-method}
 \title{Finmix \code{mcmcoutput} class for fixed indicators and posterior parameters}
-\usage{
-\S4method{show}{mcmcoutputpermfixpost}(object)
-}
-\arguments{
-\item{object}{An \code{mcmcoutputpermfixpost} object.}
-}
-\value{
-A console output listing the slots and summary information about
-each of them.
-}
 \description{
 This class defines the storage of parameters of the posterior distribution.
 It inherits from the
-
-Calling \code{\link[=show]{show()}} on an \code{mcmcoutputpermfixpost} object gives an overview
-of the \code{mcmcoutputpermfixpost} object.
 }
-\section{Functions}{
-\itemize{
-\item \code{show,mcmcoutputpermfixpost-method}: Shows a short summary of the
-object's slots
-}}
-
 \seealso{
-
+\itemize{
+\item \linkS4class{mcmcoutputfixpost} for the parent class
+\item \link{mcmcpermfixpost} for the parent class
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for permuting MCMC samples
 }
+}
+\keyword{internal}

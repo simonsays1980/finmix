@@ -39,11 +39,12 @@
 #' @slot postS A numeric storing the posterior probability of the indicators 
 #'   `S` in the data, if indicators have been simulated.
 #' @exportClass dataclass
-#' @name dataclass_class
+#' @rdname dataclass-class
+#'
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the class holding the data
-#' * [model][model_class] for the class defining a finite mixture model
+#' * [fdata-class] for the class holding the data
+#' * [model-class] for the class defining a finite mixture model
 #' * [dataclass()] for the constructor of this class
 #' 
 #' @references 
@@ -89,7 +90,7 @@
 #' @export
 #' 
 #' @seealso 
-#' * [dataclass][dataclass_class] for the class definition
+#' * [dataclass-class] for the class definition
 #' 
 #' #' @references 
 #' Frühwirth-Schnatter, S. (2006), "Finite Mixture and Markov Switching Models"
@@ -131,7 +132,10 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod  show
-#' @describeIn dataclass_class
+#' @noRd
+#' @seealso 
+#' * [dataclass-class] for the class definition
+#' * [dataclass()] for the class constructor
 setMethod(
   "show", "dataclass",
   function(object) {
@@ -188,7 +192,7 @@ setMethod(
 #' getLogpy(f_datamoms)
 #' 
 #' @seealso 
-#' * [dataclass][dataclass_class] for the base class
+#' * [dataclass-class] for the base class
 #' * [dataclass()] for the constructor of the `dataclass` class
 setMethod(
   "getLogpy", "dataclass",
@@ -215,7 +219,7 @@ setMethod(
 #' getProb(f_datamoms)
 #' 
 #' @seealso 
-#' * [dataclass][dataclass_class] for the base class
+#' * [dataclass-class] for the base class
 #' * [dataclass()] for the constructor of the `dataclass` class
 setMethod(
   "getProb", "dataclass",
@@ -242,7 +246,7 @@ setMethod(
 #' getMixlik(f_datamoms)
 #' 
 #' @seealso 
-#' * [dataclass][dataclass_class] for the base class
+#' * [dataclass-class] for the base class
 #' * [dataclass()] for the constructor of the `dataclass` class<
 setMethod(
   "getMixlik", "dataclass",
@@ -269,7 +273,7 @@ setMethod(
 #' getEntropy(f_datamoms)
 #' 
 #' @seealso 
-#' * [dataclass][dataclass_class] for the base class
+#' * [dataclass-class] for the base class
 #' * [dataclass()] for the constructor of the `dataclass` class
 setMethod(
   "getEntropy", "dataclass",
@@ -297,7 +301,7 @@ setMethod(
 #' getLoglikcd(f_datamoms)
 #' 
 #' @seealso 
-#' * [dataclass][dataclass_class] for the base class
+#' * [dataclass-class] for the base class
 #' * [dataclass()] for the constructor of the `dataclass` class
 setMethod(
   "getLoglikcd", "dataclass",
@@ -325,7 +329,7 @@ setMethod(
 #' getPostS(f_datamoms)
 #' 
 #' @seealso 
-#' * [dataclass][dataclass_class] for the base class
+#' * [dataclass-class] for the base class
 #' * [dataclass()] for the constructor of the `dataclass` class
 setMethod(
   "getPostS", "dataclass",
@@ -364,8 +368,8 @@ setMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
 #' * [dataclass()] for the calling function
 ".check.fdata.model.Dataclass" <- function(fdata.obj, model.obj) {
   if (class(fdata.obj) != "fdata") {
@@ -393,8 +397,8 @@ setMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
 #' * [dataclass()] for the calling function
 ".check.model.Dataclass" <- function(model.obj) {
   if (class(model.obj) != "model") {
@@ -425,8 +429,8 @@ setMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
 #' * [dataclass()] for the calling function
 ".check.S.Dataclass" <- function(fdata.obj, model.obj) {
   values <- levels(as.factor(fdata.obj@S))
@@ -456,8 +460,8 @@ setMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
 #' * [dataclass()] for the calling function
 ".check.Logdet.Norstud" <- function(model.obj) {
   has.sigmainv <- "sigmainv" %in% names(model.obj@par)
@@ -499,8 +503,8 @@ setMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
 #' * [dataclass()] for the calling function
 ".liklist.Dataclass" <- function(fdata.obj, model.obj) {
   K <- model.obj@K
@@ -574,8 +578,8 @@ setMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
 #' * [dataclass()] for the calling function
 ".multinomial.Dataclass" <- function(fdata.obj, model.obj,
                                      lik.list, simS) {
@@ -650,8 +654,8 @@ setMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
 #' * [dataclass()] for the calling function
 ".mixlik.Dataclass" <- function(model.obj, lik.list, prob = FALSE) {
   ## p is an N x K matrix ##
@@ -687,8 +691,8 @@ setMethod(
 #' @noRd
 #' @importFrom stats runif
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
 #' * [dataclass()] for the calling function
 ".simulate.S.Dataclass" <- function(p, K, N) {
   ## Simulate classifications from classification probability
@@ -722,8 +726,8 @@ setMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
 #' * [dataclass()] for the calling function
 ".indicfix.Dataclass" <- function(fdata.obj, model.obj, lik.list) {
   K <- model.obj@K

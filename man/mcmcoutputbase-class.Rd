@@ -119,12 +119,12 @@ weights.}
 for each MCMC draw.}
 
 \item{\code{ST}}{An \code{array} of dimension \verb{M x 1} containing all MCMC states,
-for the last observation in slot \verb{@y} of the \code{fdata} object passed in to
+for the last observation in slot \code{y} of the \code{fdata} object passed in to
 \code{\link[=mixturemcmc]{mixturemcmc()}} where a state is defined for non-Markov models as the
 last indicator of this observation.}
 
 \item{\code{S}}{An \code{array} of dimension \verb{N x storeS} containing the last
-\code{storeS} indicators sampled. \code{storeS} is defined in the slot \verb{@storeS} of
+\code{storeS} indicators sampled. \code{storeS} is defined in the slot \code{storeS} of
 the \code{mcmc} object passed into \code{\link[=mixturemcmc]{mixturemcmc()}}.}
 
 \item{\code{NK}}{An \code{array} of dimension \verb{M x K} containing the number of

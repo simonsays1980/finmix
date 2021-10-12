@@ -20,7 +20,7 @@
 #' swap_cc(values, index)
 #' 
 #' @seealso
-#' * [swapElements()][mcmcoutput_class] for the calling function
+#' * [swapElements()] for the calling function
 swap_cc <- function(values, index) {
     .Call('_finmix_swap_cc', PACKAGE = 'finmix', values, index)
 }
@@ -43,7 +43,7 @@ swap_cc <- function(values, index) {
 #' swap_3d_cc(values, index)
 #' 
 #' @seealso 
-#' * [swapElements()][mcmcoutput_class] for the calling method
+#' * [swapElements()] for the calling method
 #' * [swap_cc()] for the equivalent function for 2-dimensional arrays 
 swap_3d_cc <- function(values, index) {
     .Call('_finmix_swap_3d_cc', PACKAGE = 'finmix', values, index)
@@ -91,7 +91,7 @@ swapInteger_cc <- function(values, index) {
 #' 
 #' @seealso
 #' * [mcmc()] for the hyper-parameter `storeS`
-#' * [swapElements()][mcmcoutput_class] for the calling method 
+#' * [swapElements()] for the calling method 
 #' * [swapInteger_cc()] for the equivalent function that swaps simple integer 
 #'   matrices
 #' * [swap_3d_cc()] for a function that swaps values in three-dimensional 
@@ -116,7 +116,7 @@ swapInd_cc <- function(values, index) {
 #' @seealso 
 #' * [swapInteger_cc()] for the equivalent function not using R memory
 #' * [swap_3d_cc()] for an equivalent function for three-dimensional arrays 
-#' * [swapElements()][mcmcoutput_class] for the calling method
+#' * [swapElements()] for the calling method
 swapST_cc <- function(values, index) {
     .Call('_finmix_swapST_cc', PACKAGE = 'finmix', values, index)
 }
@@ -237,9 +237,9 @@ hungarian_cc <- function(cost) {
 #'   iteration in the MCMC sample.
 #' @export
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the `mcmcoutput` class definition
+#' * [mcmcoutput-class] for the `mcmcoutput` class definition
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [plotTraces][mcmcoutput_class] for the calling function
+#' * [plotTraces()] for the calling function
 moments_cc <- function(classS4) {
     .Call('_finmix_moments_cc', PACKAGE = 'finmix', classS4)
 }
@@ -258,10 +258,10 @@ moments_cc <- function(classS4) {
 #'   iteration in the re-labeled MCMC sample.
 #' @export
 #' @seealso 
-#' * [mcmcoutputperm][mcmcoutputperm_class] for the `mcmcoutput` class definition
+#' * [mcmcoutputperm-class] for the `mcmcoutput` class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 #' * [mcmcpermute()] for re-labeling MCMC samples
-#' * [plotTraces][mcmcoutputperm_class] for the calling function
+#' * [plotTraces()] for the calling function
 permmoments_cc <- function(classS4) {
     .Call('_finmix_permmoments_cc', PACKAGE = 'finmix', classS4)
 }
@@ -295,10 +295,10 @@ permmoments_cc <- function(classS4) {
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
-#' * [prior][prior_class] for the `prior` class definition
-#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
+#' * [prior-class] for the `prior` class definition
+#' * [mcmc-class] for the `mcmc` class definition
 #' 
 #' @references
 #' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 
@@ -338,10 +338,10 @@ mcmc_binomial_cc <- function(fdata_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
-#' * [prior][prior_class] for the `prior` class definition
-#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
+#' * [prior-class] for the `prior` class definition
+#' * [mcmc-class] for the `mcmc` class definition
 #' 
 #' @references
 #' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 
@@ -381,10 +381,10 @@ mcmc_condpoisson_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
-#' * [prior][prior_class] for the `prior` class definition
-#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
+#' * [prior-class] for the `prior` class definition
+#' * [mcmc-class] for the `mcmc` class definition
 #' 
 #' @references
 #' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 
@@ -424,10 +424,10 @@ mcmc_exponential_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
-#' * [prior][prior_class] for the `prior` class definition
-#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
+#' * [prior-class] for the `prior` class definition
+#' * [mcmc-class] for the `mcmc` class definition
 #' 
 #' @references
 #' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 
@@ -467,10 +467,10 @@ mcmc_normal_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4) 
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
-#' * [prior][prior_class] for the `prior` class definition
-#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
+#' * [prior-class] for the `prior` class definition
+#' * [mcmc-class] for the `mcmc` class definition
 #' 
 #' @references
 #' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 
@@ -510,10 +510,10 @@ mcmc_normult_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
-#' * [prior][prior_class] for the `prior` class definition
-#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
+#' * [prior-class] for the `prior` class definition
+#' * [mcmc-class] for the `mcmc` class definition
 #' 
 #' @references
 #' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 
@@ -553,10 +553,10 @@ mcmc_poisson_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
-#' * [prior][prior_class] for the `prior` class definition
-#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
+#' * [prior-class] for the `prior` class definition
+#' * [mcmc-class] for the `mcmc` class definition
 #' 
 #' @references
 #' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 
@@ -596,10 +596,10 @@ mcmc_student_cc <- function(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
 #' 
 #' @seealso 
 #' * [mixturemcmc()] for performing MCMC sampling
-#' * [fdata][fdata_class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
-#' * [prior][prior_class] for the `prior` class definition
-#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [fdata-class] for the `fdata` class definition
+#' * [model-class] for the `model` class definition
+#' * [prior-class] for the `prior` class definition
+#' * [mcmc-class] for the `mcmc` class definition
 #' 
 #' @references
 #' * Smaragdakis, Y. and Butory, D. (1998), "Implementing layered designs with 
@@ -698,7 +698,7 @@ stephens1997a_binomial_cc <- function(values1, values2, pars, perm) {
 #' @return An integer matrix of dimension `MxK` that holding the optimal 
 #'   labeling.
 #' @export
-#' @kewords internal
+#' @keywords internal
 #' @seealso 
 #' * [mcmcpermute()] for the calling function 
 #' * [stephens1997a_poisson_cc()] for the re-labeling algorithm from 

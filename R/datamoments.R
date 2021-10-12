@@ -27,11 +27,11 @@
 #'   in the `fdata` object.
 #' @slot VIRTUAL Virtual class containing further data moments.
 #' @exportClass datamoments
-#' @name datamoments_class
+#' @rdname datamoments-class
 #' @seealso 
-#' * [cdatamoments] for data moments of continuous data
-#' * [ddatamoments] for data moments of discrete data
-#' * [sdatamoments] for data moments of the indicators
+#' * [cdatamoments-class] for data moments of continuous data
+#' * [ddatamoments-class] for data moments of discrete data
+#' * [sdatamoments-class] for data moments of the indicators
 #' 
 .datamoments <- setClass(
   "datamoments",
@@ -66,9 +66,9 @@
 #' datamoments(f_data)
 #' 
 #' @seealso 
-#' * [datamoments] class for all slots of this class
-#' * [cdatamoments] for the class for continuous data
-#' * [ddatamoments] for the class for discrete data
+#' * [datamoments-class] for all slots of this class
+#' * [cdatamoments-class] for the class for continuous data
+#' * [ddatamoments-class] for the class for discrete data
 "datamoments" <- function(value = fdata()) {
   hasY(value, verbose = TRUE)
   if (value@type == "continuous") {

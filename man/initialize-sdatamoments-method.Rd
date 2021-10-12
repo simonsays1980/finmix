@@ -13,11 +13,11 @@
 \item{...}{Arguments to specify properties of the new object, to be passed
 to \code{initialize()}.}
 
-\item{model}{A finmix \link[=fdata_class]{fdata} object containing the observations.}
+\item{model}{A finmix \linkS4class{fdata} object containing the observations.}
 }
 \description{
 Only used implicitly. The initializer calls the constructor for a
-\link[=groupmoments_class]{groupmoments} object. to generate in the initialization
+\linkS4class{groupmoments} object. to generate in the initialization
 step the moments for a passed-in \code{fdata} object.
 }
 \seealso{

@@ -20,17 +20,17 @@
 #' @description
 #' Defines a class that holds modelmoments for a finite mixture of Binomial
 #' distributions. Note that this class is not directly used, but indirectly 
-#' when calling the `modelmoments` constructor \code{\link{modelmoments}}.
+#' when calling the `modelmoments` constructor [modelmoments()].
 #' 
 #' This is a class that directly inherits from the `dmodelmoments` class. 
 #' @import methods
 #' @exportClass binomialmodelmoments
 #' @name binomialmodelmoments-class
-#' 
+#' @keywords internal 
 #' @seealso 
-#' * [modelmoments_class] for the base class for model moments
-#' * \code{\link{modelmoments}} for the constructor of `modelmoments` classes
-#' * \code{\link{dmodelmoments-class}} class for the parent class
+#' * [modelmoments-class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
+#' * [dmodelmoments-class] class for the parent class
 .binomialmodelmoments <- setClass("binomialmodelmoments",
   representation(extrabinvar = "numeric"),
   contains = c("dmodelmoments"),
@@ -57,8 +57,8 @@
 #' @noRd
 #' 
 #' @seealso 
-#' * \code{\link{Classes_Details}} for details of class definitions, and 
-#' * \code{\link{setOldClass}} for the relation to S3 classes
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
 setMethod(
   "initialize", "binomialmodelmoments",
   function(.Object, ..., model) {
@@ -92,7 +92,10 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn binomialmodelmoments Shows a summary of an object
+#' @noRd
+#' @seealso 
+#' * [modelmoments()] for the mutual constructor for all modelmoments
+#' * [binomialmodelmoments-class] for the class definition 
 setMethod(
   "show", "binomialmodelmoments",
   function(object) {
@@ -171,8 +174,8 @@ setMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' * \code{\link{dmodelmoments-class}} for the class definition of `dmodelmoments` 
-#' * \code{\link{modelmoments}} for the constructor calling this function 
+#' * [dmodelmoments-class] for the class definition of `dmodelmoments` 
+#' * [modelmoments()] for the constructor calling this function 
 ".generateMomentsBinomial" <- function(object) {
   p <- object@model@par$p
   T <- object@model@T[1]

@@ -4,18 +4,7 @@
 \name{mcmcoutputhierpost-class}
 \alias{mcmcoutputhierpost-class}
 \alias{.mcmcoutputhierpost}
-\alias{show,mcmcoutputhierpost-method}
 \title{Finmix \code{mcmcoutputhierpost} class}
-\usage{
-\S4method{show}{mcmcoutputhierpost}(object)
-}
-\arguments{
-\item{object}{An \code{mcmcoutputhierpost} object.}
-}
-\value{
-A console output listing the slots and summary information about
-each of them.
-}
 \description{
 This class stores samples from bayesian estimation with hierarchical prior
 and unknown indicators. It inherits from \code{mcmcoutputhier} and adds to it a
@@ -26,16 +15,7 @@ hierarchical prior is activated by setting the slot \verb{@hier} in the \code{pr
 object to \code{TRUE} (default). Finally, to store parameters for the posterior
 density the hyper-parameter \code{storepost} in the \code{mcmc} object must be set to
 \code{TRUE} (default).
-
-Calling \code{\link[=show]{show()}} on an \code{mcmcoutputhierpost} object gives an overview
-of the \code{mcmcoutputhierpost} object.
 }
-\section{Functions}{
-\itemize{
-\item \code{show,mcmcoutputhierpost-method}: SHows a short summary of the object's
-slots
-}}
-
 \section{Slots}{
 
 \describe{

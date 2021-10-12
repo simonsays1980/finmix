@@ -32,7 +32,7 @@
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
 #' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.normal" <- function(y, mu, sigma) {
@@ -75,7 +75,7 @@
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
 #' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.student" <- function(y, mu, sigma, df) {
@@ -118,7 +118,7 @@
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
 #' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.exponential" <- function(y, lambda) {
@@ -154,7 +154,7 @@
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
 #' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.poisson" <- function(y, lambda) {
@@ -195,7 +195,7 @@
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
 #' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.binomial" <- function(y, T, p) {
@@ -237,7 +237,7 @@
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
 #' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.normult" <- function(y, mu, sigmainv, logdet) {
@@ -279,7 +279,7 @@
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
 #' * [dataclass()] for the constructor of the `dataclass` class
 ".likelihood.studmult" <- function(y, mu, sigmainv, logdet, df) {

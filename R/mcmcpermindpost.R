@@ -62,8 +62,8 @@
 #' \dontrun{getMperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermpost][mcmcoutput_class] for the inheriting class
-#' * [mcmcoutputpermhierpost][mcmcoutput_class] for the inheriting class with 
+#' * [mcmcoutputpermpost-class] for the inheriting class
+#' * [mcmcoutputpermhierpost-class] for the inheriting class with 
 #'   hierarchical prior
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(

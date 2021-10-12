@@ -26,7 +26,7 @@ swap_3d_cc(values, index)
 }
 \seealso{
 \itemize{
-\item \link[=mcmcoutput_class]{swapElements()} for the calling method
+\item \code{\link[=swapElements]{swapElements()}} for the calling method
 \item \code{\link[=swap_cc]{swap_cc()}} for the equivalent function for 2-dimensional arrays
 }
 }

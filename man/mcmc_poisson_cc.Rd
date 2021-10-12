@@ -48,9 +48,9 @@ Berlin, Heidelberg.
 \seealso{
 \itemize{
 \item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
-\item \link[=fdata_class]{fdata} for the \code{fdata} class definition
-\item \link[=model_class]{model} for the \code{model} class definition
-\item \link[=prior_class]{prior} for the \code{prior} class definition
-\item \link[=mcmc_class]{mcmc} for the \code{mcmc} class definition
+\item \linkS4class{fdata} for the \code{fdata} class definition
+\item \linkS4class{model} for the \code{model} class definition
+\item \linkS4class{prior} for the \code{prior} class definition
+\item \linkS4class{mcmc} for the \code{mcmc} class definition
 }
 }

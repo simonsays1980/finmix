@@ -21,8 +21,8 @@ used when plotting the traces of an MCMC sample output.
 }
 \seealso{
 \itemize{
-\item \link[=mcmcoutput_class]{mcmcoutput} for the \code{mcmcoutput} class definition
+\item \linkS4class{mcmcoutput} for the \code{mcmcoutput} class definition
 \item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
-\item \link[=mcmcoutput_class]{plotTraces} for the calling function
+\item \code{\link[=plotTraces]{plotTraces()}} for the calling function
 }
 }

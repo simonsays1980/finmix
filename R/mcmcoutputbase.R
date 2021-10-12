@@ -29,11 +29,11 @@
 #' @slot entropy An `array` of dimension `M x 1` containing the entropy 
 #'   for each MCMC draw.
 #' @slot ST An `array` of dimension `M x 1` containing all MCMC states, 
-#'   for the last observation in slot `@@y` of the `fdata` object passed in to 
+#'   for the last observation in slot `y` of the `fdata` object passed in to 
 #'   [mixturemcmc()] where a state is defined for non-Markov models as the 
 #'   last indicator of this observation. 
 #' @slot S An `array` of dimension `N x storeS` containing the last 
-#'   `storeS` indicators sampled. `storeS` is defined in the slot `@@storeS` of 
+#'   `storeS` indicators sampled. `storeS` is defined in the slot `storeS` of 
 #'   the `mcmc` object passed into [mixturemcmc()].
 #' @slot NK An `array` of dimension `M x K` containing the number of 
 #'   observations assigned to each component for each MCMC draw.
@@ -41,7 +41,7 @@
 #'   indicators defining the last "clustering" of observations into the 
 #'   mixture components.
 #' @exportClass mcmcoutputbase
-#' @rdnam mcmcoutputbase-class
+#' @rdname mcmcoutputbase-class
 .mcmcoutputbase <- setClass("mcmcoutputbase",
   representation(
     weight = "array",

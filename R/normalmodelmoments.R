@@ -25,10 +25,10 @@
 #' @slot W A numeric defining the within-group heterogeneity. 
 #' @slot R A numeric defining the coefficient of determination.
 #' @exportClass normalmodelmoments
-#' @name normalmodelmoments
-#' 
+#' @rdname normalmodelmoments
+#' @keywords internal
 #' @seealso 
-#' * [modelmoments_class] for the base class for model moments
+#' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes
 .normalmodelmoments <- setClass("normalmodelmoments",
   representation(
@@ -78,7 +78,7 @@ setMethod(
 #' Generate moments for normal mixture
 #' 
 #' @description 
-#' Implicit method. Calling [generateMoments()] generates the moments of an
+#' Implicit method. Calling `generateMoments()` generates the moments of an
 #' normal mixture distribution.
 #' 
 #' @param object An `normalmodelmoments` object. 
@@ -99,7 +99,10 @@ setMethod(
 #' @param object An `normalmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
-#' @describeIn normalmodelmoments
+#' @noRd
+#' @seealso 
+#' * [modelmoments-class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 setMethod(
   "show", "normalmodelmoments",
   function(object) {

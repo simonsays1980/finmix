@@ -32,8 +32,8 @@ log-likelihood, and the complete data posterior log-likelihood.}
 
 \seealso{
 \itemize{
-\item \code{\link{mcmcpermute}} for the calling function
-\item \code{\link{mcmcpermind}} for the corresponding class for models with
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for the calling function
+\item \linkS4class{mcmcpermind} for the corresponding class for models with
 unknown indicators
 }
 }

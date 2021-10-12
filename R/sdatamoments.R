@@ -19,18 +19,18 @@
 #' 
 #' Stores moments for indicators of discrete data. 
 #' 
-#' @slot gmoments A [groupmoments][groupmoments_class] object storing the 
+#' @slot gmoments A [groupmoments-class] object storing the 
 #'   moments for each mixture component. 
-#' @slot fdata An [fdata][fdata_class] object with data from a discrete valued
+#' @slot fdata An [fdata-class] object with data from a discrete valued
 #'   mixture distribution.
 #' @exportClass sdatamoments
-#' @name sdatamoments_class
+#' @rdname sdatamoments-class
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for data moments
+#' * [datamoments-class] for the base class for data moments
 #' * [datamoments()] for the constructor of any object of the `datamoments` 
 #'   class family
-#' * [groupmoments][groupmoments_class] for the parent class 
-#' * [csdatamoments][csdatamoments_class] for the corresponding class defining
+#' * [groupmoments-class] for the parent class 
+#' * [csdatamoments-class] for the corresponding class defining
 #'   moments for data from a continuous-valued finite mixture
 .sdatamoments <- setClass("sdatamoments",
   representation(
@@ -61,7 +61,7 @@ setClassUnion("sdatamomentsOrNULL", members = c("sdatamoments", "NULL"))
 #' this slot is `"discrete"` an `sdatamoments` object is returned and if the 
 #' slot is `"continuous"`, a `csdatamoments` object is returned. 
 #' 
-#' @param value An [fdata][fdata_class] object containing the indicators for 
+#' @param value An [fdata-class] object containing the indicators for 
 #'   which moments should be calculated.
 #' @return If slot `type` of the argument `value` is `"discrete"` an 
 #'   `sdatamoments` object is returned and if the slot is `"continuous"`, 
@@ -78,11 +78,11 @@ setClassUnion("sdatamomentsOrNULL", members = c("sdatamoments", "NULL"))
 #' sdatamoments(f_data)
 #' 
 #' @seealso 
-#' * [sdatamoments][sdatamoments_class] for the class of indicator 
+#' * [sdatamoments-class] for the class of indicator 
 #'   moments for discrete data
-#' * [csdatamoments][csdatamoments_class] for the class of indicator moments
+#' * [csdatamoments-class] for the class of indicator moments
 #'   for continuous
-#' * [groupmoments][groupmoments_class] for the parent class## Copyright (C) 2013 Lars Simon Zehnder
+#' * [groupmoments-class] for the parent class## Copyright (C) 2013 Lars Simon Zehnder
 "sdatamoments" <- function(value = fdata()) {
   hasY(value, verbose = TRUE)
   hasS(value, verbose = TRUE)
@@ -98,14 +98,14 @@ setClassUnion("sdatamomentsOrNULL", members = c("sdatamoments", "NULL"))
 #' 
 #' @description
 #' Only used implicitly. The initializer calls the constructor for a 
-#' [groupmoments][groupmoments_class] object. to generate in the initialization 
+#' [groupmoments-class] object. to generate in the initialization 
 #' step the moments for a passed-in `fdata` object.
 #' 
 #' @param .Object An object: see the "initialize Methods" section in 
 #'   [initialize].
 #' @param ... Arguments to specify properties of the new object, to be passed 
 #'   to `initialize()`.
-#' @param model A finmix [fdata][fdata_class] object containing the observations.
+#' @param model A finmix [fdata-class] object containing the observations.
 #' @keywords internal
 #' 
 #' @seealso 
@@ -166,11 +166,11 @@ setMethod(
 #' getGmoments(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [sdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [sdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getGmoments", "sdatamoments",
   function(object) {
@@ -197,11 +197,11 @@ setMethod(
 #' getFdata(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [sdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [sdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getFdata", "sdatamoments",
   function(object) {

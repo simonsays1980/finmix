@@ -109,8 +109,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputpermfixhierpost-class Shows a short summary of the 
-#'   object's slots
+#' @noRd
 setMethod(
   "show", "mcmcoutputpermfixhierpost",
   function(object) {

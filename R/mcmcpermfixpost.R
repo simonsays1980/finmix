@@ -65,7 +65,7 @@
 #' \dontrun{getMperm(mcmcperm)}
 #' 
 #' @seealso 
-#' * [mcmcoutputpermfix][mcmcoutput_class] for the inheriting class
+#' * [mcmcoutputpermfix-class] for the inheriting class
 #' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getPostperm", "mcmcpermfixpost",

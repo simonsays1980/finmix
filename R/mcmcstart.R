@@ -48,9 +48,9 @@
 #' (f_data ~ f_model ~ f_mcmc) %=% mcmcstart(f_data, f_model)
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 "mcmcstart" <- function(fdata, model, varargin) {
   ## Check arguments
@@ -122,9 +122,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".check.fdata.model.Mcmcstart" <- function(fdata.obj, model.obj) {
   .valid.Fdata(fdata.obj)
@@ -161,9 +161,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".check.mcmc.Mcmcstart" <- function(mcmc.obj) {
   if (class(mcmc.obj) != "mcmc") {
@@ -192,9 +192,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".parameters.Mcmcstart" <- function(fdata.obj, model.obj, mcmc.obj) {
   K <- model.obj@K
@@ -236,9 +236,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".mcmcstart.Exp" <- function(data.obj) {
   r <- data.obj@r
@@ -293,9 +293,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".parameters.multinomial.Mcmcstart" <- function(model.obj) {
   K <- model.obj@K
@@ -317,9 +317,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.poisson.Mcmcstart" <- function(fdata.obj, model.obj) {
   K <- model.obj@K
   datam <- getColY(fdata.obj)
@@ -355,9 +355,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.exponential.Mcmcstart" <- function(fdata.obj, model.obj,
                                                 mcmc.obj) {
   if (!hasPar(model.obj)) {
@@ -385,9 +385,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.binomial.Mcmcstart" <- function(fdata.obj, model.obj) {
   if (!hasPar(model.obj) && hasT(fdata.obj, verbose = TRUE)) {
     datam <- getColY(fdata.obj)
@@ -418,9 +418,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.Norstud.Mcmcstart" <- function(fdata.obj, model.obj,
                                        mcmc.obj) {
   datam <- getColY(fdata.obj)
@@ -472,9 +472,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.Norstudmult.Mcmcstart" <- function(fdata.obj, model.obj,
                                            mcmc.obj) {
   K <- model.obj@K
@@ -532,9 +532,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".mcmcstart.Student.Df" <- function(model.obj) {
   K <- model.obj@K
   has.par <- (length(model.obj@par) > 0)
@@ -564,9 +564,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".indicators.Mcmcstart" <- function(fdata.obj, model.obj) {
   dist <- model.obj@dist
   if (dist %in% c("poisson", "cond.poisson", "exponential")) {
@@ -598,9 +598,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".indicators.poisson.Mcmcstart" <- function(fdata.obj, model.obj) {
   K <- model.obj@K
   if (!hasS(fdata.obj)) {
@@ -630,9 +630,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".indicators.binomial.Mcmcstart" <- function(fdata.obj, model.obj) {
   if (!hasS(fdata.obj)) {
     K <- model.obj@K
@@ -679,9 +679,9 @@
 #' @keywords internal
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the definition of the `fdata` class
+#' * [fdata-class] for the definition of the `fdata` class
 #' * [model][model_class] for the definition of the `model` class
-#' * [mcmc][mcmc_class] for the definition of the `mcmc` class
+#' * [mcmc-class] for the definition of the `mcmc` class
 ".mcmcstart.Ind.Norstud" <- function(data.obj, model.obj) {
   K <- model.obj@K
   # Checks, if slot 'S' ist in 'data.obj'. If not, throws an error

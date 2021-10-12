@@ -76,7 +76,7 @@
 #' @param mcmc An `mcmc` object storing the hyper-parameters for MCMC sampling. 
 #'   If slot `@@startpar` is `TRUE` sampling starts by sampling the parameters. 
 #'   Henceforth, it needs starting indicators. 
-#' @return An object of class [mcmcoutput][mcmcoutput_class] storing the MCMC 
+#' @return An object of class [mcmcoutput-class] storing the MCMC 
 #'   sampling results. 
 #' @export
 #' 
@@ -97,12 +97,12 @@
 #' getPar(f_output)
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
 #' * [prior][prior-class] for the `prior` class definition
 #' * [prior()] for the `prior` class constructor
 #' * [priordefine()] for the advanced class constructor of the `prior` class
-#' * [mcmc][mcmc_class] for the `mcmc` class definition
+#' * [mcmc-class] for the `mcmc` class definition
 #' * [mcmc()] for the `mcmc` class constructor
 #' * [mcmcstart()] for defining starting parameters and/or indicators
 #' 
@@ -169,7 +169,7 @@
 #' @param n.args An integer specifying how many arguments have been provided 
 #'   by the user. As all arguments must be provided values below four throw an 
 #'   error. 
-#' @return An object of class [mcmc][mcmc_class]. If any check does not pass an 
+#' @return An object of class [mcmc-class]. If any check does not pass an 
 #'   error is thrown to let the user know, why MCMC sampling cannot be 
 #'   performed with the actual setting.
 #' @noRd
@@ -318,7 +318,7 @@
 #' @noRd
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [model][model_class] for the `model` class definition
 ".valid.Reps.Binomial" <- function(data, model) {
   has.reps <- !all(is.na(data@T))
@@ -419,7 +419,7 @@
 #' @param prior.obj A `prior` object specifying the prior distribution.
 #' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
 #'   sampling.
-#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#' @param An object of class [mcmcoutput-class] containing the 
 #'   results of MCMC sampling.
 #' @noRd
 #' 
@@ -645,7 +645,7 @@
 #' @param prior.obj A `prior` object specifying the prior distribution.
 #' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
 #'   sampling.
-#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#' @param An object of class [mcmcoutput-class] containing the 
 #'   results of MCMC sampling.
 #' @noRd
 #' 
@@ -765,7 +765,7 @@
 #' @param prior.obj A `prior` object specifying the prior distribution.
 #' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
 #'   sampling.
-#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#' @param An object of class [mcmcoutput-class] containing the 
 #'   results of MCMC sampling.
 #' @noRd
 #' 
@@ -870,7 +870,7 @@
 #' @param prior.obj A `prior` object specifying the prior distribution.
 #' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
 #'   sampling.
-#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#' @param An object of class [mcmcoutput-class] containing the 
 #'   results of MCMC sampling.
 #' @noRd
 #' 
@@ -1105,7 +1105,7 @@
 #' @param prior.obj A `prior` object specifying the prior distribution.
 #' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
 #'   sampling.
-#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#' @param An object of class [mcmcoutput-class] containing the 
 #'   results of MCMC sampling.
 #' @noRd
 #' 
@@ -1335,7 +1335,7 @@
 #' @param prior.obj A `prior` object specifying the prior distribution.
 #' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
 #'   sampling.
-#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#' @param An object of class [mcmcoutput-class] containing the 
 #'   results of MCMC sampling.
 #' @noRd
 #' 
@@ -1567,7 +1567,7 @@
 #' @param prior.obj A `prior` object specifying the prior distribution.
 #' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
 #'   sampling.
-#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#' @param An object of class [mcmcoutput-class] containing the 
 #'   results of MCMC sampling.
 #' @noRd
 #' 
@@ -1813,7 +1813,7 @@
 #' @param prior.obj A `prior` object specifying the prior distribution.
 #' @param mcmc.obj An `mcmc` object cotnaining the hyper-parameters for MCMC 
 #'   sampling.
-#' @param An object of class [mcmcoutput][mcmcoutput_class] containing the 
+#' @param An object of class [mcmcoutput-class] containing the 
 #'   results of MCMC sampling.
 #' @noRd
 #' 

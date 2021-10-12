@@ -25,10 +25,11 @@
 #' @slot W A numeric defining the within-group heterogeneity. 
 #' @slot R A numeric defining the coefficient of determination.
 #' @exportClass poissonmodelmoments
-#' @name poissonmodelmoments
+#' @rdname poissonmodelmoments-class
+#' @keywords internal
 #' 
 #' @seealso 
-#' * [modelmoments_class] for the base class for model moments
+#' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes
 .poissonmodelmoments <- setClass("poissonmodelmoments",
   contains = c("dmodelmoments"),
@@ -88,7 +89,10 @@ setMethod(
 #' @param object An `poissonmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
-#' @describeIn poissonmodelmoments
+#' @noRd
+#' @seealso
+#' * [modelmoments-class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 setMethod(
   "show", "poissonmodelmoments",
   function(object) {

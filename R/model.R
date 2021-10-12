@@ -37,8 +37,12 @@
 #' therefore fixed. 
 #' @slot T A matrix containing the repetitions in case of a \code{"binomial"} or 
 #'  \code{"poisson"} model.
-#' @noRd
 #' @exportClass model
+#' @rdname model-class
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling with a mixture model
+#' * [modelmoments()] for compute theoretical moments of a finite mixture model
 .model <- setClass("model",
   representation(
     dist = "character",

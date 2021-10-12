@@ -20,7 +20,7 @@
 #' Stores moments for finite mixture component distributions. These are only
 #' available, if the data contains in addition to observations also indicators 
 #' defining to which component a certain observation belongs. These indicators 
-#' are stored in an [fdata][fdata_class] object in the slot `S`. 
+#' are stored in an [fdata-class] object in the slot `S`. 
 #' 
 #' @slot NK An array containing the group sizes for each component.
 #' @slot mean A matrix containing the group averages for each component.
@@ -30,12 +30,13 @@
 #' @slot var An array containing the within-group (co)variance. For multivariate 
 #'   data this is an array of dimension `K x r x r` and for univariate 
 #'   data this is simply an array of dimension `1 x K`.
-#' @slot fdata An [fdata][fdata_class] object containing the data. 
+#' @slot fdata An [fdata-class] object containing the data. 
 #' @exportClass groupmoments
-#' @name groupmoments_class
+#' @rdname groupmoments-class
+#' @keywords internal
 #' @seealso 
 #' * [groupmoments()] for the class constructor
-#' * [datamoments][datamoments_class] for the base class for data moments
+#' * [datamoments-class] for the base class for data moments
 #' * [datamoments()] for the constructor of any object of the `datamoments` 
 #'   class family
 .groupmoments <- setClass("groupmoments",
@@ -64,7 +65,7 @@
 #' @description
 #' Calling [groupmoments()] creates an object holding various 
 #' component-specific moments. These moments can only constructed if the 
-#' [fdata][fdata_class] object contains in addition to observations also 
+#' [fdata-class] object contains in addition to observations also 
 #' indicators defining from which component a certain observation stems.
 #' 
 #' @param value An `fdata` object containing observations in slot `y` and 
@@ -83,10 +84,10 @@
 #' groupmoments(f_data)
 #' 
 #' @seealso 
-#' * [fdata][fdata_class] for the `fdata` class definition
+#' * [fdata-class] for the `fdata` class definition
 #' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
 #'   class
-#' * [datamoments][datamoments_class] for the base class for data moments
+#' * [datamoments-class] for the base class for data moments
 #' * [datamoments()] for the constructor of any object of the `datamoments` 
 #'   class family
 "groupmoments" <- function(value = fdata()) {
@@ -108,7 +109,7 @@
 #'   [initialize].
 #' @param ... Arguments to specify properties of the new object, to be passed 
 #'   to `initialize()`.
-#' @param model A finmix [fdata][fdata_class] object containing the observations.
+#' @param model A finmix [fdata-class] object containing the observations.
 #' @noRd
 #' 
 #' @seealso 

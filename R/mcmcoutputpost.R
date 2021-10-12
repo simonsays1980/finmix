@@ -20,7 +20,7 @@
 #' @description 
 #' This class inherits from the `mcmcoutputbase` class and adds posterior 
 #' density parameters to the MCMC sampling output. The storage of posterior 
-#' parameters is controlled by the slot `storepost` in the [mcmc][mcmc_class] 
+#' parameters is controlled by the slot `storepost` in the [mcmc-class] 
 #' class. If set to `TRUE` posterior parameters are stored in the output of the 
 #' MCMC sampling.
 #' 
@@ -53,7 +53,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutput_class Shows a short summary of the object's slots
+#' @noRd
 setMethod(
   "show", "mcmcoutputpost",
   function(object) {
@@ -368,7 +368,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{

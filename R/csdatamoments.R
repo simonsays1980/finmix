@@ -18,7 +18,7 @@
 #' Finmix `csdatamoments` class
 #' 
 #' Stores moments for indicators of continuous data. Inherited directly from 
-#' the [sdatamoments][sdatamoments_class] class. 
+#' the [sdatamoments-class] class. 
 #' 
 #' @slot B A vector storing the between-group heterogeneity.
 #' @slot W A vector storing the within-group heterogeneity.
@@ -30,12 +30,13 @@
 #' @slot Rtr A numeric storing the coefficient of determination using the 
 #'   determinants for multivariate data. 
 #' @exportClass csdatamoments
-#' @name csdatamoments_class
+#' @rdname csdatamoments-class
+#' @keywords internal
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for data moments
+#' * [datamoments-class] for the base class for data moments
 #' * [datamoments()] for the constructor of any object of the `datamoments` 
 #'   class family
-#' * [sdatamoments][csdatamoments_class] for the corresponding class defining
+#' * [csdatamoments-class] for the corresponding class defining
 #'   moments for data from a discrete-valued finite mixture
 .csdatamoments <- setClass("csdatamoments",
   representation(
@@ -82,7 +83,7 @@ setClassUnion("csdatamomentsOrNULL", members = c("csdatamoments", "NULL"))
 #'   [initialize].
 #' @param ... Arguments to specify properties of the new object, to be passed 
 #'   to `initialize()`.
-#' @param model A finmix [fdata][fdata_class] object containing the observations.
+#' @param model A finmix [fdata-class] object containing the observations.
 #' @noRd
 #' 
 #' @seealso 
@@ -176,11 +177,11 @@ setMethod(
 #' getGmoments(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][csdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getGmoments", "csdatamoments",
   function(object) {
@@ -207,11 +208,11 @@ setMethod(
 #' getWK(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getWK", "csdatamoments",
   function(object) {
@@ -238,11 +239,11 @@ setMethod(
 #' getVar(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getVar", "csdatamoments",
   function(object) {
@@ -256,7 +257,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `B` slot of the `object`.
-#' @describeIn datamoments_class
+#' @exportMethod getB
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -269,11 +270,11 @@ setMethod(
 #' getB(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getB", "csdatamoments",
   function(object) {
@@ -300,11 +301,11 @@ setMethod(
 #' getW(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getW", "csdatamoments",
   function(object) {
@@ -331,11 +332,11 @@ setMethod(
 #' getT(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getT", "csdatamoments",
   function(object) {
@@ -362,11 +363,11 @@ setMethod(
 #' getR(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getR", "csdatamoments",
   function(object) {
@@ -393,11 +394,11 @@ setMethod(
 #' getRtr(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getRtr", "csdatamoments",
   function(object) {
@@ -424,11 +425,11 @@ setMethod(
 #' getRdet(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getRdet", "csdatamoments",
   function(object) {
@@ -455,11 +456,11 @@ setMethod(
 #' getFdata(f_sdatamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
-#' * [datamoments()][datamoments] for the constructor of the `datamoments` 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` 
 #'   class family
-#' * [csdatamoments][sdatamoments_class] for the class definition
-#' * [sdatamoments()][sdatamoments] for the constructor of the class
+#' * [csdatamoments-class] for the class definition
+#' * [sdatamoments()] for the constructor of the class
 setMethod(
   "getFdata", "csdatamoments",
   function(object) {

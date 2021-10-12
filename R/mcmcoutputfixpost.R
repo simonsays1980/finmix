@@ -21,20 +21,21 @@
 #' The `mcmcoutputfixpost` class inherits from the `mcmcoutputfix` class and 
 #' adds a slot to store the parameters of the posterior distribution from which 
 #' the component parameters are drawn. The storage of posterior parameters is 
-#' controlled by the slot `storepost` in the [mcmc][mcmc_class] class. If set 
+#' controlled by the slot `storepost` in the [mcmc-class] class. If set 
 #' to `TRUE` posterior parameters are stored in the output of the MCMC sampling. 
 #' 
 #' @slot post A named list containing a list `par` that contains the posterior 
 #'   parameters as named arrays. 
 #' @exportClass mcmcoutputfixpost
-#' @describeIn mcmcoutput_class
+#' @rdname mcmcoutputfixpost-class
+#' @keywords internal
 #' 
 #' @seealso 
-#' * [mcmcoutputfix][mcmcoutput_class] for the parent class
-#' * [mcmcoutputpost][mcmcoutput_class] for the corresponding class for unknown 
+#' * [mcmcoutputfix-class] for the parent class
+#' * [mcmcoutputpost-class] for the corresponding class for unknown 
 #'   indicators.
-#' * [mcmc][mcmc_class] for the class defining the MCMC hyper-parameters
-#' * [mcmc()] for the constructor of the [mcmc][mcmc_class] class
+#' * [mcmc-class] for the class defining the MCMC hyper-parameters
+#' * [mcmc()] for the constructor of the [mcmc-class] class
 .mcmcoutputfixpost <- setClass("mcmcoutputfixpost",
   representation(post = "list"),
   contains = c("mcmcoutputfix"),
@@ -55,7 +56,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutput_class
+#' @noRd
 setMethod(
   "show", "mcmcoutputfixpost",
   function(object) {
@@ -109,7 +110,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -161,7 +162,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -212,7 +213,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -261,7 +262,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point process of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -310,7 +311,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling representation of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -359,7 +360,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutput_class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -489,7 +490,7 @@ setMethod(
 #' getPost(f_output)
 #' 
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the class definition
+#' * [mcmcoutput-class] for the class definition
 #' * [mixturemcmc()] for performing MCMC sampling
 setMethod(
   "getPost", "mcmcoutputfixpost",

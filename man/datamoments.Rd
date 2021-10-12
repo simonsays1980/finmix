@@ -29,8 +29,8 @@ datamoments(f_data)
 }
 \seealso{
 \itemize{
-\item \link{datamoments} class for all slots of this class
-\item \link{cdatamoments} for the class for continuous data
-\item \link{ddatamoments} for the class for discrete data
+\item \linkS4class{datamoments} for all slots of this class
+\item \linkS4class{cdatamoments} for the class for continuous data
+\item \linkS4class{ddatamoments} for the class for discrete data
 }
 }

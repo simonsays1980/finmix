@@ -463,7 +463,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutputperm_class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{

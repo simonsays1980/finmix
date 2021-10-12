@@ -41,3 +41,4 @@ Stephens (1997a)
 for mixtures of Binomial distributions
 }
 }
+\keyword{internal}

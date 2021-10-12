@@ -1,6 +1,6 @@
 #' Finmix `mcmcextract` class
 #' 
-#' @desfription
+#' @description
 #' This is a leight-weighted class containing the major results from MCMC 
 #' sampling to calculate model moments from MCMC samples. Note that momentarily
 #' only methods for the multivariate Normal mixture are implemented.
@@ -50,8 +50,8 @@
 #' @exportMethod moments
 #' @noRd
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the results from MCMC sampling
-#' * [extract()][mcmcoutput_class] for the calling method
+#' * [mcmcoutput-class] for the results from MCMC sampling
+#' * [extract()] for the calling method
 setMethod(
   "moments", signature(object = "mcmcextract"),
   function(object) {
@@ -73,8 +73,8 @@ setMethod(
 #' @return A list containing the model moments calculated from MCMC samples.
 #' @noRd
 #' @seealso 
-#' * [mcmcoutput][mcmcoutput_class] for the results from MCMC sampling
-#' * [extract()][mcmcoutput_class] for the calling method
+#' * [mcmcoutput-class] for the results from MCMC sampling
+#' * [extract()] for the calling method
 ".moments.Normult.Mcmcextract" <- function(obj) {
   K <- obj@K
   r <- obj@r

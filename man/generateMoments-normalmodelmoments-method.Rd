@@ -13,7 +13,7 @@
 An \code{normalmodelmoments} object with calculated moments.
 }
 \description{
-Implicit method. Calling \code{\link[=generateMoments]{generateMoments()}} generates the moments of an
+Implicit method. Calling \code{generateMoments()} generates the moments of an
 normal mixture distribution.
 }
 \keyword{internal}

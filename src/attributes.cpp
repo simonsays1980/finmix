@@ -47,7 +47,7 @@
 //' swap_cc(values, index)
 //' 
 //' @seealso
-//' * [swapElements()][mcmcoutput_class] for the calling function
+//' * [swapElements()] for the calling function
 // [[Rcpp::export]]
 Rcpp::NumericMatrix swap_cc(Rcpp::NumericMatrix values, Rcpp::IntegerMatrix index)
 {
@@ -95,7 +95,7 @@ Rcpp::NumericMatrix swap_cc(Rcpp::NumericMatrix values, Rcpp::IntegerMatrix inde
 //' swap_3d_cc(values, index)
 //' 
 //' @seealso 
-//' * [swapElements()][mcmcoutput_class] for the calling method
+//' * [swapElements()] for the calling method
 //' * [swap_cc()] for the equivalent function for 2-dimensional arrays 
 // [[Rcpp::export]]
 Rcpp::NumericVector swap_3d_cc(Rcpp::NumericVector values, Rcpp::IntegerMatrix index)
@@ -211,7 +211,7 @@ Rcpp::IntegerMatrix swapInteger_cc(Rcpp::IntegerMatrix values, Rcpp::IntegerMatr
 //' 
 //' @seealso
 //' * [mcmc()] for the hyper-parameter `storeS`
-//' * [swapElements()][mcmcoutput_class] for the calling method 
+//' * [swapElements()] for the calling method 
 //' * [swapInteger_cc()] for the equivalent function that swaps simple integer 
 //'   matrices
 //' * [swap_3d_cc()] for a function that swaps values in three-dimensional 
@@ -260,7 +260,7 @@ Rcpp::IntegerMatrix swapInd_cc(Rcpp::IntegerMatrix values, Rcpp::IntegerMatrix i
 //' @seealso 
 //' * [swapInteger_cc()] for the equivalent function not using R memory
 //' * [swap_3d_cc()] for an equivalent function for three-dimensional arrays 
-//' * [swapElements()][mcmcoutput_class] for the calling method
+//' * [swapElements()] for the calling method
 // [[Rcpp::export]]
 Rcpp::IntegerVector swapST_cc(Rcpp::IntegerVector values, Rcpp::IntegerMatrix index)
 {
@@ -448,9 +448,9 @@ arma::imat hungarian_cc(const arma::mat cost)
 //'   iteration in the MCMC sample.
 //' @export
 //' @seealso 
-//' * [mcmcoutput][mcmcoutput_class] for the `mcmcoutput` class definition
+//' * [mcmcoutput-class] for the `mcmcoutput` class definition
 //' * [mixturemcmc()] for performing MCMC sampling
-//' * [plotTraces][mcmcoutput_class] for the calling function
+//' * [plotTraces()] for the calling function
 // [[Rcpp::export]]
 Rcpp::List moments_cc(Rcpp::S4 classS4)
 {
@@ -481,10 +481,10 @@ Rcpp::List moments_cc(Rcpp::S4 classS4)
 //'   iteration in the re-labeled MCMC sample.
 //' @export
 //' @seealso 
-//' * [mcmcoutputperm][mcmcoutputperm_class] for the `mcmcoutput` class definition
+//' * [mcmcoutputperm-class] for the `mcmcoutput` class definition
 //' * [mixturemcmc()] for performing MCMC sampling
 //' * [mcmcpermute()] for re-labeling MCMC samples
-//' * [plotTraces][mcmcoutputperm_class] for the calling function
+//' * [plotTraces()] for the calling function
 // [[Rcpp::export]]
 Rcpp::List permmoments_cc(Rcpp::S4 classS4)
 {

@@ -17,8 +17,8 @@
 
 #' Finmix `cdatamoments` class
 #' 
-#' Stores moments of an [fdata][fdata_class] object containing continuous data. 
-#' The `fdata` object is stored in the parent [datamoments][datamoments_class] 
+#' Stores moments of an [fdata-class] object containing continuous data. 
+#' The `fdata` object is stored in the parent [datamoments-class] 
 #' class.
 #' 
 #' @slot higher An array containing the four higher centralized moments of the 
@@ -33,12 +33,13 @@
 #' @slot smoments A `csdatamoments` object, if the `fdata` object also holds 
 #'   indicators. `NULL`, if no indicators are present in the `fdata` object. 
 #' @exportClass cdatamoments
-#' @name cdatamoments_class
+#' @rdname cdatamoments-class
+#' @keywords internal
 #' @seealso 
-#' * [datamoments][datamoments_class] for the parent class
-#' * [ddatamoments][ddatamoments_class] for the corresponding class for 
+#' * [datamoments-class] for the parent class
+#' * [ddatamoments-class] for the corresponding class for 
 #'   discrete data
-#' * [csdatamoments][csdatamoments_class] for the contained class if indicators
+#' * [csdatamoments-class] for the contained class if indicators
 #'   are present in the `fdata` object 
 .cdatamoments <- setClass("cdatamoments",
   representation(
@@ -117,7 +118,10 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn cdatamoments_class
+#' @noRd
+#' @seealso 
+#' * [datamoments-class] for the parent class
+#' * [datamoments()] for the class constructor
 setMethod(
   "show", "cdatamoments",
   function(object) {
@@ -181,7 +185,7 @@ setMethod(
 #' getSmoments(f_datamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments-class] for the base class for model moments
 #' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getSmoments", "cdatamoments",
@@ -209,7 +213,7 @@ setMethod(
 #' getHigher(f_datamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments-class] for the base class for model moments
 #' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getHigher", "cdatamoments",
@@ -237,7 +241,7 @@ setMethod(
 #' getSkewness(f_datamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments-class] for the base class for model moments
 #' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getSkewness", "cdatamoments",
@@ -265,7 +269,7 @@ setMethod(
 #' getKurtosis(f_datamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments-class] for the base class for model moments
 #' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getKurtosis", "cdatamoments",
@@ -293,7 +297,7 @@ setMethod(
 #' getCorr(f_datamoms)
 #' 
 #' @seealso 
-#' * [datamoments][datamoments_class] for the base class for model moments
+#' * [datamoments-class] for the base class for model moments
 #' * [datamoments()] for the constructor of the `datamoments` class family
 setMethod(
   "getCorr", "cdatamoments",

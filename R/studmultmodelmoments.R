@@ -28,7 +28,7 @@
 #' @name studmultmodelmoments
 #' 
 #' @seealso 
-#' * [modelmoments_class] for the base class for model moments
+#' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes
 .studmultmodelmoments <- setClass("studmultmodelmoments",
   representation(
