@@ -25,7 +25,7 @@
 #' @slot W A numeric defining the within-group heterogeneity. 
 #' @slot R A numeric defining the coefficient of determination.
 #' @exportClass exponentialmodelmoments
-#' @name exponentialmodelmoments
+#' @name exponentialmodelmoments-class
 #' 
 #' @seealso 
 #' * [modelmoments-class] for the base class for model moments
@@ -98,6 +98,7 @@ setMethod(
 #' @param object An `exponentialmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them.
+#' @exportMethod show
 #' @noRd
 #' @seealso 
 #' * [modelmoments-class] for the base class for model moments
@@ -137,6 +138,7 @@ setMethod(
 #' 
 #' @param object An `exponentialmodelmoments` object.
 #' @returns The `B` slot of the `object`.
+#' @exportMethod getB
 #' @noRd
 #' 
 #' @examples 
@@ -161,6 +163,7 @@ setMethod(
 #' 
 #' @param object An `exponentialmodelmoments` object.
 #' @returns The `W` slot of the `object`.
+#' @exportMethod getW
 #' @noRd
 #' 
 #' @examples 
@@ -185,6 +188,7 @@ setMethod(
 #' 
 #' @param object An `exponentialmodelmoments` object.
 #' @returns The `R` slot of the `object`.
+#' @exportMethod getR
 #' @noRd
 #' 
 #' @examples 

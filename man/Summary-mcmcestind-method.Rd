@@ -14,7 +14,7 @@ A console output listing the formatted slots and summary
 information about each of them.
 }
 \description{
-Calling \code{\link[=show]{show()}} on an \code{mcmcestind} object gives an advanced overview
+Calling \code{\link[=Summary]{Summary()}} on an \code{mcmcestind} object gives an advanced overview
 of the \code{mcmcestind} object.
 }
 \details{

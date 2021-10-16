@@ -47,11 +47,12 @@
 #' @slot NKperm An `array` of dimension `Mperm x K` containing the numbers 
 #'   of observations assigned to each component.
 #' @exportClass mcmcpermind
-#' @describeIn mcmcperm_class
+#' @rdname mcmcpermind-class
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [mcmcpermute()] for the calling function
-#' * [mcmcperfix][mcmcperm_class] for the corresponding class for models with 
+#' * [mcmcpermfix-class] for the corresponding class for models with 
 #'   fixed indicators
 .mcmcpermind <- setClass("mcmcpermind",
   representation(
@@ -85,6 +86,7 @@
 #' 
 #' @param object An `mcmcpermind` object.
 #' @returns The `relabel` slot of the `object`.
+#' @exportMethod getRelabel
 #' @noRd
 #' 
 #' @examples 
@@ -106,6 +108,7 @@ setMethod(
 #' 
 #' @param object An `mcmcpermind` object.
 #' @returns The `weightperm` slot of the `object`.
+#' @exportMethod getWeightperm
 #' @noRd
 #' 
 #' @examples 
@@ -127,6 +130,7 @@ setMethod(
 #' 
 #' @param object An `mcmcpermind` object.
 #' @returns The `entropyperm` slot of the `object`.
+#' @exportMethod getEntropyperm
 #' @noRd
 #' 
 #' @examples 
@@ -148,6 +152,7 @@ setMethod(
 #' 
 #' @param object An `mcmcpermind` object.
 #' @returns The `STperm` slot of the `object`.
+#' @exportMethod getSTperm
 #' @noRd
 #' 
 #' @examples 
@@ -169,6 +174,7 @@ setMethod(
 #' 
 #' @param object An `mcmcpermind` object.
 #' @returns The `Sperm` slot of the `object`.
+#' @exportMethod getSperm
 #' @noRd
 #' 
 #' @examples 
@@ -190,6 +196,7 @@ setMethod(
 #' 
 #' @param object An `mcmcpermind` object.
 #' @returns The `NKperm` slot of the `object`.
+#' @exportMethod getNKperm
 #' @noRd
 #' 
 #' @examples 

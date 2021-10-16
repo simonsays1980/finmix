@@ -126,8 +126,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn mcmcoutputpermbase-class Shows a short summary of the object's 
-#'   slots
+#' @noRd 
 setMethod(
   "show", "mcmcoutputpermbase",
   function(object) {
@@ -226,7 +225,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @describeIn mcmcoutputpermbase-class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -306,8 +305,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @describeIn mcmcoutputpermbase-class Plot histograms of the parameters and 
-#'   weights
+#' @noRd 
 #' 
 #' @examples 
 #' \dontrun{
@@ -362,7 +360,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutputpermbase-class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -418,8 +416,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point process of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @describeIn mcmcoutputpermbase-class Plots point process for the component 
-#'   parameters
+#' @noRd 
 #' 
 #' @examples 
 #' \dontrun{
@@ -477,8 +474,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling representation of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @describeIn mcmcoutputpermbase-class Plots sampling representations of the 
-#'   component parameters
+#' @noRd 
 #' 
 #' @examples
 #' \dontrun{ 
@@ -536,8 +532,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutputpermbase-class Plots the posterior density of the 
-#'   component parameters
+#' @noRd 
 #' 
 #' @examples 
 #' \dontrun{

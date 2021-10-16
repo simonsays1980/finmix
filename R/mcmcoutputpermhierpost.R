@@ -139,7 +139,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @keywords internal
+#' @noRd
 setMethod(
   "show", "mcmcoutputpermhierpost",
   function(object) {
@@ -259,7 +259,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod  plotTraces
-#' @keywords internal
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -339,7 +339,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @keywords internal
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -394,7 +394,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @keywords internal
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -448,7 +448,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @keywords internal
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -502,7 +502,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @keywords internal
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -556,7 +556,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @keywords internal
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -656,7 +656,6 @@ setMethod(
 #'   that this function can only be applied for mixtures of two components. See 
 #'   [plotPostDens()] for further information.    
 #'   
-#' ## Slots 
 #' @slot Mperm An integer defining the number of permuted MCMC samples.
 #' @slot parperm A named list containing the permuted component parameter 
 #'   samples from MCMC sampling.
@@ -778,7 +777,7 @@ NULL
 #' Plot histograms of the parameters and weights
 #' 
 #' @description 
-#' #' `plotHist()` is a class method for [mcmcoutput][mcmcoutput-class] and 
+#' `plotHist()` is a class method for [mcmcoutput][mcmcoutput-class] and 
 #' [mcmcoutputperm][mcmcoutputperm-class] objects. For the former class it 
 #' plots histograms of MCMC samples and for the latter of the corresponding 
 #' permuted samples coming from relabeling. 
@@ -834,7 +833,7 @@ NULL
 #' @title Plot densities of the parameters and weights
 #' 
 #' @description 
-#' #' `plotDens()` is a class method for [mcmcoutput][mcmcoutput-class] and 
+#' `plotDens()` is a class method for [mcmcoutput][mcmcoutput-class] and 
 #' [mcmcoutputperm][mcmcoutputperm-class] objects. For the former class it 
 #' plots densities of MCMC samples and for the latter of the corresponding 
 #' permuted samples coming from relabeling. 
@@ -944,4 +943,221 @@ NULL
 #' * [plotDens()] for plotting densities of sampled values
 #' * [plotSampRep()] for plotting sampling representations of sampled values
 #' * [plotPostDens()] for plotting posterior densities for sampled values
+NULL
+
+#' Plot the sampling representation of component parameters
+#' 
+#' @description
+#' Calling [plotSampRep()] on an object of class `mcmcoutput` or 
+#' `mcmcoutputperm` plots the sampling representation of the sampled component 
+#' parameters from MCMC sampling, either the original parameters or the 
+#' relabeled ones (`mcmcoutputperm`).
+#' 
+#' @details 
+#' To visualize the posterior density of the component parameters the MCMC 
+#' draws are used as a sampling representation. Each combination of component 
+#' parameters is plotted in a scatter to visualize the contours of the 
+#' posterior density. For bivariate component parameters this could also be 
+#' done by estimating and plotting the density directly, but for 
+#' higher-dimensional parameter vectors this is not anymore possible and so 
+#' sampling representations define a proper solution for visualization and 
+#' allow us to study how a specific dimension of the parameter vector differs 
+#' among the various components of the mixture distribution. If this element 
+#' is significantly different among components we will observe `K(K-1)` modes 
+#' in the sampling representation. On the other side, if this element is 
+#' mainly the same among the components of the mixture, we will rather observe 
+#' a single cluster.
+#' 
+#' As Frühwirth-Schnatter (2006) writes, "One informal method for diagnosing 
+#' mixtures is mode hunting in the mixture posterior density 
+#' (Frühwirth-Schnatter, 2001b). It is based on the observation that with an 
+#' increasing number of observations, the mixture likelihood function has `K!` 
+#' dominant modes if the data actually arise from a finite mixture distribution 
+#' with `K` components, and that less than `K!` dominant modes are present if 
+#' the finite mixture model is overfitting the number of components." The 
+#' sampling representation helps to perform this mode hunting in practice.
+#' 
+#' Note that this method for `mcmcoutputperm` objects is only implemented for 
+#' mixtures of Poisson and Binomial distributions.
+#' 
+#' @param x An `mcmcoutput` or `mcmcoutputperm` object containing all sampled 
+#'   values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return The sampling representation of the MCMC samples.
+#' @rdname plotSampRep-method
+#' @name plotSampRep
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc()
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' plotSampRep(f_output)
+#' 
+#' @references 
+#' * Frühwirth-Schnatter (2006), "Finite Mixture and Markov Switching Models"
+#' * Frühwirth-Schnatter, S. (2001b), "Markov chain Monte Carlo estimation of 
+#'   classical and dynamic switching and mixture models." Journal of the 
+#'   American Statistical Association 96, 194–209.
+#'   
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [mcmcpermute()] for permuting MCMC samples
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotPointProc()] for plotting the point process of sampled values
+#' * [plotPostDens()] for plotting posterior densities for sampled values
+NULL
+
+#' Plot the posterior density of component parameters
+#' 
+#' @description
+#' Calling [plotPostDens()] on an object of class `mcmcoutput` or 
+#' `mcmcoutputperm` plots the posterior density of the sampled component 
+#' parameters from MCMC sampling, either the original parameters or the 
+#' relabeled ones (`mcmcoutputperm`).
+#' 
+#' @details 
+#' Next to sampling representations and the point process of MCMC samples the 
+#' posterior density of component parameters can also be plotted directly for 
+#' finite mixture distributions with ` K=2` components and a single parameter.
+#' The posterior density will always be bimodal due to to label-switching in 
+#' the MCMC sampling. This could change when considering a relabeld MCMC sample 
+#' (`mcmcoutputperm` object). 
+#' 
+#' Note that this method for `mcmcoutputperm` objects is only implemented for 
+#' mixtures of Poisson and Binomial distributions.
+#' 
+#' @param x An `mcmcoutput` or `mcmcoutputperm` object containing all sampled 
+#'   values.
+#' @param dev A logical indicating, if the plots should be shown by a graphical 
+#'   device. If plots should be stored to a file set `dev` to `FALSE`. 
+#' @param ... Further arguments to be passed to the plotting function.
+#' @return The posterior density of the MCMC samples.
+#' @rdname plotPostDens-method
+#' @name plotPostDens
+#' 
+#' @examples 
+#' # Define a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
+#' # Simulate data from the mixture model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc()
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' plotPostDens(f_output)
+#' 
+#' @seealso 
+#' * [mixturemcmc()] for performing MCMC sampling
+#' * [mcmcpermute()] for permuting MCMC samples
+#' * [plotTraces()] for plotting the traces of sampled values
+#' * [plotHist()] for plotting histograms of sampled values
+#' * [plotDens()] for plotting densities of sampled values
+#' * [plotPointProc()] for plotting the point process of sampled values
+#' * [plotSampRep()] for plotting the sampling representation for sampled values
+NULL
+
+#' Extract sub-chains from MCMC samples
+#' 
+#' @description 
+#' Calling [subseq()] on an `mcmcoutput` or `mcmcoutputperm` object creates a 
+#' sub-chain defined by the argument `index`. Sub-chains can be used to further 
+#' investigate convergence of MCMC sampling. 
+#' 
+#' @details 
+#' Running MCMC sampling should by time result in a roughly stationary sequence 
+#' of random draws. If trace plots do not show this stationary pattern MCMC 
+#' sampling should be run with a longer burn-in period until the sampling 
+#' distribution has converged. Another possibility is to remove the first draws. 
+#' Removing the first draws can be achieved by calling `subseq()` on the object 
+#' holding the MCMC samples. 
+#' In case of autocorrelations in the traces it is also possible to extract 
+#' every `t`-th value by setting the `index` argument accordingly. 
+#' 
+#' @param object An `mcmcoutput` or `mcmcoutputperm` object containing samples 
+#'   from MCMC samples.
+#' @param index A logical `array` of dimension `Mx1` defining the schema for 
+#'   the sub-chain.
+#' @return An `mcmcoutput` or `mcmcoutputperm` object containing the 
+#'   sub-chained MCMC samples.
+#' @rdname subseq-method
+#' @name subseq
+#' 
+#' @examples 
+#' # Define a mixture of Poisson distributions.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' # Define a sub-chain randomly.
+#' index <- array(sample(c(FALSE, TRUE), size = getM(f_output), replace = TRUE))
+#' # Extract the sub-chain.
+#' subseq(f_output, index)
+#' 
+#' @seealso 
+#' * [mcmcoutput-class] for the class storing MCMC samples
+#' * [mcmcoutputperm-class] for the corresponding class for re-labeled MCMC 
+#'   samples
+#' * [plotTraces()] for plotting traces to be used for a convergence analysis
+#' * [swapElements()] for swapping elements in MCMC samples
+NULL
+
+#' Swap elements of MCMC samples
+#' 
+#' @description 
+#' Calling `swapElements()` on an `mcmcoutput` object 
+#' swaps all labels by the schema given in the `index` argument. 
+#' 
+#' @details 
+#' This function is merely a utility function that simplifies relabeling for 
+#' users and developers. For relabeling the labels have to be permuted and 
+#' depending on the MCMC sampling chosen there could be a lot of different 
+#' slots that need to be permuted. `swapElements()` swaps the elements in any 
+#' slot that needs to be relabeled. 
+#'  
+#' @param object An `mcmcoutput` object containing the 
+#'   sampled values.
+#' @param index An array specifying the extraction of the values.
+#' @return An `mcmcoutput` object with swapped elements.
+#' @rdname swapElements-method
+#' @name swapElements
+#' 
+#' @examples 
+#' \dontrun{
+#' # Generate a model of Poisson distributions.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 1.2)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' index <- matrix(c(1, 2), nrow = getM(f_output) + 1, 
+#'                 ncol = 2)[1:getM(f_output),]
+#' swapElements(f_output, index)
+#' }
+#' 
+#' @seealso 
+#' * [mcmcoutput-class] for the class definition
+#' * [subseq()] for generating sub-chains from MCMC samples
+#' * [mcmcpermute()] for a calling function
 NULL

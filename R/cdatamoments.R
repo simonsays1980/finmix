@@ -159,7 +159,7 @@ setMethod(
       )
     }
     cat(
-      "     fdata        : Object of class",
+      "     fdata         : Object of class",
       class(object@fdata), "\n"
     )
   }

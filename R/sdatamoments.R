@@ -129,7 +129,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn sdatamoments_class Shows a summary of an object
+#' @noRd
 setMethod(
   "show", "sdatamoments",
   function(object) {

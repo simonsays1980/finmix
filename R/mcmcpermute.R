@@ -46,7 +46,6 @@
 #' log-likelihood values) of the permuted samples. 
 #' 
 #' @export mcmcpermute
-#' @rdname mcmcpermute
 #' @import nloptr
 #' 
 #' @examples 

@@ -33,12 +33,13 @@
 #' @slot hyperperm A named list containing the (permuted) parameters of the 
 #'   hierarchical prior. 
 #' @exportClass mcmcpermindhier
-#' @describeIn mcmcperm_class
+#' @rdname mcmcpermindhier-class
+#' @keywords internal
 #' 
 #' @seealso 
-#' * \code{\link{mcmcpermute()}} for the calling function
-#' * \code{\link{mcmcpermind}} for the parent class definition
-#' * \code{\link{mcmcpermfixhier}} for the corresponding class for models with 
+#' * [mcmcpermute()] for the calling function
+#' * [mcmcpermind-class] for the parent class definition
+#' * [mcmcpermfixhier-class] for the corresponding class for models with 
 #'   fixed indicators
 .mcmcpermindhier <- setClass("mcmcpermindhier",
                              representation(hyperperm = "list"),
@@ -58,6 +59,7 @@
 #' 
 #' @param object An `mcmcpermindhier` object.
 #' @returns The `hyperperm` slot of the `object`.
+#' @exportMethod getHyperperm
 #' @noRd
 #' 
 #' @examples 

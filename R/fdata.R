@@ -132,7 +132,6 @@
 #'   argument `dev` should be put to `FALSE` if the output should be in a file. 
 #'   `...` allows the user to pass further arguments to the internal functions.
 #' 
-#' ## Slots
 #' @slot y A matrix containing the observations for finite mixture estimation. 
 #'   Can be by column or row depending on the slot `bycolumn`.
 #' @slot N An integer holding the number of observations.
@@ -365,15 +364,10 @@ setMethod(
   }
 )
 
-### Has
-### The 'hasSlot()' methods check, if the slot is not NA and returns
-### TRUE if it is not NA and FALSE if it is NA.
-### If argument 'verbose' is set to TRUE, an error is thrown, if
-### the 'fdata' object has not the questioned slot filled.
 #' Checker method for `y` slot of an `fdata` object. 
 #' 
 #' @description 
-#' [hasY()] checks, if the object contains `y` data.
+#' `hasY()` checks, if the object contains `y` data.
 #' 
 #' @param object An `fdata` object. 
 #' @param verbose A logical indicating, if the function should print out 
@@ -381,6 +375,7 @@ setMethod(
 #' @returns Either `FALSE`/`TRUE`, if `verbose` is `FALSE` and the `y` slot is 
 #'   empty or filled or a message, if `verbose` is `TRUE`.
 #' @exportMethod hasY
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an fdata object with Poisson data
@@ -409,7 +404,7 @@ setMethod(
 #' Checker method for `S` slot of an `fdata` object. 
 #' 
 #' @description 
-#' [hasS()] checks, if the object contains `S` data.
+#' `hasS()` checks, if the object contains `S` data.
 #' 
 #' @param object An `fdata` object. 
 #' @param verbose A logical indicating, if the function should print out 
@@ -417,12 +412,15 @@ setMethod(
 #' @returns Either `FALSE`/`TRUE`, if `verbose` is `FALSE` and the `S` slot is 
 #'   empty or filled or a message, if `verbose` is `TRUE`.
 #' @exportMethod hasS
+#' @keywords internal 
+#' 
 #' @examples 
 #' # Generate an fdata object with Poisson data
 #' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
 #' hasS(f_data)
 #' 
-#' @seealso [fdata] class for an overview of its slots
+#' @seealso 
+#' * [fdata-class] for the class definition
 setMethod(
   "hasS", "fdata",
   function(object, verbose = FALSE) {
@@ -444,7 +442,7 @@ setMethod(
 #' Checker method for `exp` slot of an `fdata` object. 
 #' 
 #' @description 
-#' [hasY()] checks, if the object contains `exp` data.
+#' `hasExp()` checks, if the object contains `exp` data.
 #' 
 #' @param object An `fdata` object. 
 #' @param verbose A logical indicating, if the function should print out 
@@ -452,13 +450,15 @@ setMethod(
 #' @returns Either `FALSE`/`TRUE`, if `verbose` is `FALSE` and the `exp` slot is 
 #'   empty or filled or a message, if `verbose` is `TRUE`.
 #' @exportMethod hasExp
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an fdata object with Poisson data
 #' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
 #' hasExp(f_data)
 #' 
-#' @seealso [fdata] class for an overview of its slots
+#' @seealso 
+#' * [fdata-class] for the class definition
 setMethod(
   "hasExp", "fdata",
   function(object, verbose = FALSE) {
@@ -480,7 +480,7 @@ setMethod(
 #' Checker method for `T` slot of an `fdata` object. 
 #' 
 #' @description 
-#' [hasY()] checks, if the object contains `T` data.
+#' `hasY()` checks, if the object contains `T` data.
 #' 
 #' @param object An `fdata` object. 
 #' @param verbose A logical indicating, if the function should print out 
@@ -488,13 +488,14 @@ setMethod(
 #' @returns Either `FALSE`/`TRUE`, if `verbose` is `FALSE` and the `T` slot is 
 #'   empty or filled or a message, if `verbose` is `TRUE`.
 #' @exportMethod hasT
-#' 
+#' @keywords internal
 #' @examples 
 #' # Generate an fdata object with Poisson data
 #' f_data <- fdata(y = rpois(100, 312), sim = TRUE)
 #' hasT(f_data)
 #' 
-#' @seealso [fdata] class for an overview of its slots
+#' @seealso 
+#' * [fdata-class] for the class defintion
 setMethod(
   "hasT", "fdata",
   function(object, verbose = FALSE) {

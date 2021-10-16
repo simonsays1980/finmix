@@ -28,7 +28,7 @@
 #' @slot kurtosis A vector containing the kurtosis(es) of the finite mixture 
 #'   model.
 #' @exportClass cmodelmoments
-#' @name cmodelmoments
+#' @rdname cmodelmoments-class
 #' 
 #' @seealso 
 #' * [modelmoments] for the base class
@@ -58,6 +58,7 @@
 #' 
 #' @param object An `cmodelmoments` object.
 #' @returns The `higher` slot of the `object`.
+#' @exportMethod getHigher
 #' @noRd
 #' 
 #' @examples 
@@ -79,6 +80,7 @@ setMethod("getHigher", "cmodelmoments", function(object) {
 #' 
 #' @param object An `cmodelmoments` object.
 #' @returns The `skewness` slot of the `object`.
+#' @exportMethod getSkewness
 #' @noRd
 #' 
 #' @examples 
@@ -100,6 +102,7 @@ setMethod("getSkewness", "cmodelmoments", function(object) {
 #' 
 #' @param object An `cmodelmoments` object.
 #' @returns The `kurtosis` slot of the `object`.
+#' @exportMethod getKurtosis
 #' @noRd
 #' 
 #' @examples 

@@ -176,7 +176,7 @@
 #' @param model A `model` object containing the specifications for the model.
 #' @param verbose A logical indicating, if the output should be verbose.
 #' @exportMethod hasPriorPar
-#' @describeIn prior-class Checks for parameters in `prior` object 
+#' @noRd 
 #' 
 #' @examples 
 #' # Define a Poisson mixture model.
@@ -204,14 +204,15 @@ setMethod(
 #' Checks for parameters in a `prior` object
 #' 
 #' @description 
-#' Calling [hasPriorWeight()] checks if `model`-appropriate weight parameters 
+#' Calling `hasPriorWeight()` checks if `model`-appropriate weight parameters 
 #' are stored in the `prior` object.
 #' 
 #' @param object A `prior` object containing the specifications for the prior.
 #' @param model A `model` object containing the specifications for the model.
 #' @param verbose A logical indicating, if the output should be verbose.
 #' @exportMethod hasPriorWeight
-#' @describeIn prior-class Checks for prior weights in `prior` object
+#' @rdname hasPriorWeight
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model.

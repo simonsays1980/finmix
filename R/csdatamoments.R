@@ -68,7 +68,7 @@
 #' Defines a class union such that the object held by a child class can also
 #' be `NULL`.
 #' 
-#' @export
+#' @exportClass csdatamomentsOrNULL
 #' @noRd
 setClassUnion("csdatamomentsOrNULL", members = c("csdatamoments", "NULL"))
 
@@ -125,7 +125,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn csdatamoments-class Shows a short summary of the object's slots.
+#' @noRd
 setMethod(
   "show", "csdatamoments",
   function(object) {
@@ -164,6 +164,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `gmoments` slot of the `object`.
+#' @exportMethod getGmoments
 #' @noRd
 #' 
 #' @examples 
@@ -195,6 +196,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `WK` slot of the `object`.
+#' @exportMethod getWK
 #' @noRd
 #' 
 #' @examples 
@@ -226,6 +228,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `var` slot of the `object`.
+#' @exportMethod getVar
 #' @noRd
 #' 
 #' @examples 
@@ -288,6 +291,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `W` slot of the `object`.
+#' @exportMethod getW
 #' @noRd
 #' 
 #' @examples 
@@ -319,6 +323,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `T` slot of the `object`.
+#' @exportMethod getT
 #' @noRd
 #' 
 #' @examples 
@@ -350,6 +355,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `R` slot of the `object`.
+#' @exportMethod getR
 #' @noRd
 #' 
 #' @examples 
@@ -381,6 +387,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `Rtr` slot of the `object`.
+#' @exportMethod getRtr
 #' @noRd
 #' 
 #' @examples 
@@ -412,6 +419,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `Rdet` slot of the `object`.
+#' @exportMethod getRdet
 #' @noRd
 #' 
 #' @examples 
@@ -443,6 +451,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object.
 #' @returns The `fdata` slot of the `object`.
+#' @exportMethod getFdata
 #' @noRd
 #' 
 #' @examples 

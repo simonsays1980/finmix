@@ -36,11 +36,9 @@
 #' @rdname mcmcpermfixhier-class
 #' 
 #' @seealso 
-#' * \code{\link{mcmcpermute()}} for the calling function
-#' 
-#' * \code{\link{mcmcpermfix-class}} for the parent class definition
-#' 
-#' * \code{\link{mcmcpermindhier-class}} for the corresponding class for models 
+#' * [mcmcpermute()] for the calling function
+#' * [mcmcpermfix-class] for the parent class definition
+#' * [mcmcpermindhier-class] for the corresponding class for models 
 #'   with unknown indicators
 .mcmcpermfixhier <- setClass("mcmcpermfixhier",
                              representation(hyperperm = "list"),
@@ -60,6 +58,7 @@
 #' 
 #' @param object An `mcmcpermfixhier` object.
 #' @returns The `hyperperm` slot of the `object`.
+#' @exportMethod getHyperperm
 #' @noRd
 #' 
 #' @examples 

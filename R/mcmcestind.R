@@ -37,7 +37,7 @@
 #' @keywords internal
 #' 
 #' @seealso
-#' * [mcmcestfix][mcmcest_class] for the parent class with fixed indicators
+#' * [mcmcestfix-class] for the parent class with fixed indicators
 #' * [mcmcestimate()] to calculate point estimates
 .mcmcestind <- setClass("mcmcestind",
   representation(eavg = "list"),
@@ -56,6 +56,7 @@
 #' parameter estimates and is used to dispatch methods for `mcmcest` objects.
 #' 
 #' @exportClass mcmcest
+#' @name mcmcest-class
 #' @noRd
 setClassUnion(
   "mcmcest",
@@ -115,7 +116,7 @@ setMethod(
 # TODO: The Std. Error is the same for both components.
 #' Shows an advanced summary of an `mcmcestind` object.
 #' 
-#' Calling [show()] on an `mcmcestind` object gives an advanced overview 
+#' Calling [Summary()] on an `mcmcestind` object gives an advanced overview 
 #' of the `mcmcestind` object.
 #' 
 #' Note, this method is so far only implemented for mixtures of Poisson 
@@ -202,6 +203,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestind` object.
 #' @returns The `eavg` slot of the `object`.
+#' @exportMethod getEavg
 #' @noRd
 #' 
 #' @examples 
@@ -251,7 +253,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.map.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.map.poisson.Mcmcestind(obj)
@@ -270,7 +272,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.map.poisson.Mcmcestind" <- function(obj) {
   K <- obj@K
   parout <- matrix(0, nrow = 2 * K, ncol = 2)
@@ -300,7 +302,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.bml.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.bml.poisson.Mcmcestind(obj)
@@ -319,7 +321,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.bml.poisson.Mcmcestind" <- function(obj) {
   K <- obj@K
   parout <- matrix(0, nrow = 2 * K, ncol = 2)
@@ -349,7 +351,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.ieavg.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.ieavg.poisson.Mcmcestind(obj)
@@ -368,7 +370,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.ieavg.poisson.Mcmcestind" <- function(obj) {
   K <- obj@K
   parout <- matrix(0, nrow = 2 * K, ncol = 2)
@@ -399,7 +401,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.eavg.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.eavg.poisson.Mcmcestind(obj)
@@ -418,7 +420,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.eavg.poisson.Mcmcestind" <- function(obj) {
   K <- obj@K
   parout <- matrix(0, nrow = 2 * K, ncol = 2)
@@ -434,7 +436,7 @@ setMethod(
   return(parout)
 }
 
-#' Create summary row names
+#' Create row names for summary
 #' 
 #' @description 
 #' For internal usage only. This function generates row names for the explicit 
@@ -448,7 +450,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".rownames.Mcmcestind" <- function(obj) {
   if (obj@dist == "poisson") {
     .rownames.poisson.Mcmcestind(obj)
@@ -467,7 +469,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".rownames.poisson.Mcmcestind" <- function(obj) {
   rnames <- rep("", 2 * obj@K)
   for (k in seq(1, obj@K)) {

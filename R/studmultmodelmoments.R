@@ -25,7 +25,7 @@
 #' @slot W A numeric defining the within-group heterogeneity. 
 #' @slot R A numeric defining the coefficient of determination.
 #' @exportClass studmultmodelmoments
-#' @name studmultmodelmoments
+#' @name studmultmodelmoments-class
 #' 
 #' @seealso 
 #' * [modelmoments-class] for the base class for model moments
@@ -103,7 +103,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn studmultmodelmoments Shows a summary of an object
+#' @noRd
 setMethod(
   "show", "studmultmodelmoments",
   function(object) {
@@ -158,6 +158,7 @@ setMethod(
 #' @returns The `B` slot of the `object`.
 #' @noRd
 #' @exportMethod getB
+#' 
 #' @examples 
 #' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))
 #' means           <- matrix(c(-2, -2, 2, 2),nrow = 2)
@@ -183,6 +184,7 @@ setMethod(
 #' 
 #' @param object An `studmultmodelmoments` object.
 #' @returns The `W` slot of the `object`.
+#' @exportMethod getW
 #' @noRd
 #' 
 #' @examples 
@@ -210,6 +212,7 @@ setMethod(
 #' 
 #' @param object An `studmultmodelmoments` object.
 #' @returns The `Rdet` slot of the `object`.
+#' @exportMethod getRdet
 #' @noRd
 #' 
 #' @examples 
@@ -237,6 +240,7 @@ setMethod(
 #' 
 #' @param object An `studmultmodelmoments` object.
 #' @returns The `Rtr` slot of the `object`.
+#' @exportMethod getRtr
 #' @noRd
 #' 
 #' @examples 
@@ -264,6 +268,7 @@ setMethod(
 #' 
 #' @param object An `studmultmodelmoments` object.
 #' @returns The `Corr` slot of the `object`.
+#' @exportMethod getCorr
 #' @noRd
 #' 
 #' @examples 

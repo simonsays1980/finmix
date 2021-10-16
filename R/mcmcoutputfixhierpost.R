@@ -112,6 +112,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
+#' @noRd 
 #' 
 #' @examples 
 #' \dontrun{
@@ -217,6 +218,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
+#' @noRd 
 #' 
 #' @examples 
 #' \dontrun{
@@ -267,6 +269,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point process of the MCMC samples.
 #' @exportMethod plotPointProc
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -317,6 +320,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling representation of the MCMC samples.
 #' @exportMethod plotSampRep
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -367,6 +371,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -417,7 +422,9 @@ setMethod(
 #' @param object An `mcmcoutput` object containing all sampled values.
 #' @param index An array specifying the extraction of the sub-chain.
 #' @return An `mcmcoutput` object containing the values from the sub-chain.
+#' @exportMethod subseq
 #' @noRd
+#' 
 #' @export subseq
 setMethod(
   "subseq", signature(
@@ -450,6 +457,7 @@ setMethod(
 #' @param object An `mcmcoutput` object containing the sampled values.
 #' @param index An array specifying the extraction of the values.
 #' @return An `mcmcoutput` object with swapped elements.
+#' @exportMethod swapElements
 #' @noRd 
 setMethod(
   "swapElements", signature(

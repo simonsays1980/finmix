@@ -26,7 +26,7 @@
 #' @keywords internal
 #' @seealso 
 #' * [mcmcoutputfixpost-class] for the parent class
-#' * [mcmcpermfixpost] for the parent class
+#' * [mcmcpermfixpost-class] for the parent class
 #' * [mcmcpermute()] for permuting MCMC samples
 .mcmcoutputpermfixpost <- setClass("mcmcoutputpermfixpost",
   contains = c(

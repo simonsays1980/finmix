@@ -72,9 +72,6 @@ that this function can only be applied for mixtures of two components. See
 }
 
 }
-
-\subsection{Slots}{
-}
 }
 \section{Slots}{
 

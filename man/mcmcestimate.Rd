@@ -59,10 +59,10 @@ estimation, see Fr\"uhwirth-Schnatter (2006).
 }
 \seealso{
 \itemize{
-\item \link[=mcmcest_class]{mcmcestfix} for object storing the parameter estimates in
-case of fixed indicators
-\item \link[=mcmcest_class]{mcmcestfix} for object storing the parameter estimates in
-case of unknown indicators
+\item \linkS4class{mcmcestfix} for object storing the parameter estimates in case of
+fixed indicators
+\item \linkS4class{mcmcestind} for object storing the parameter estimates in case of
+unknown indicators
 \item \linkS4class{mcmcoutputperm} for classes storing re-labeled
 MCMC samples
 }

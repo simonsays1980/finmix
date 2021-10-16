@@ -17,7 +17,7 @@ Either \code{FALSE}/\code{TRUE}, if \code{verbose} is \code{FALSE} and the \code
 empty or filled or a message, if \code{verbose} is \code{TRUE}.
 }
 \description{
-\code{\link[=hasS]{hasS()}} checks, if the object contains \code{S} data.
+\code{hasS()} checks, if the object contains \code{S} data.
 }
 \examples{
 # Generate an fdata object with Poisson data
@@ -26,5 +26,8 @@ hasS(f_data)
 
 }
 \seealso{
-\link{fdata} class for an overview of its slots
+\itemize{
+\item \linkS4class{fdata} for the class definition
 }
+}
+\keyword{internal}

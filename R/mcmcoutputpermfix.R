@@ -153,7 +153,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces 
-#' @describeIn mcmcoutputpermfix-class
+#' @noRd
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -225,7 +225,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist 
-#' @describeIn mcmcoutputpermfix-class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -281,7 +281,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @describeIn mcmcoutputpermfix-class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -337,7 +337,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @describeIn mcmcoutputpermfix-class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -393,7 +393,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling represetnation of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @describeIn mcmcoutputpermfix-class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{
@@ -449,7 +449,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @describeIn mcmcoutputpermfix-class
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{

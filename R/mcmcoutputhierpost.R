@@ -57,7 +57,7 @@
 #' @description 
 #' The `mcmcoutput` class stores all MCMC samples and corresponding information.
 #' 
-#' @detail  
+#' @details  
 #' Calling [mixturemcmc()] on appropriate input arguments performs MCMC 
 #' sampling and returns an `mcmcoutput` object that stores all samples and 
 #' corresponding information like hyper-parameters, the finite mixture model 
@@ -120,7 +120,6 @@
 #'   that this function can only be applied for mixtures of two components. See 
 #'   [plotPostDens()] for further information.  
 #'
-#' ## Slots
 #' @slot M An integer defining the number of iterations in MCMC sampling. 
 #' @slot burnin An integer defining the number of iterations in the burn-in 
 #'   phase of MCMC sampling. These number of sampling steps are not stored 
@@ -572,7 +571,9 @@ setMethod(
 #' 
 #' @param object An `mcmcoutputhierpost` object containing all sampled values.
 #' @param index An array specifying the extraction of the sub-chain.
-#' @return An `mcmcoutputhierpost` object containing the values from the sub-chain.
+#' @return An `mcmcoutputhierpost` object containing the values from the 
+#'   sub-chain.
+#' @exportMethod subseq
 #' @noRd
 setMethod(
   "subseq", signature(
@@ -604,6 +605,7 @@ setMethod(
 #' @param object An `mcmcoutputhierpost` object containing the sampled values.
 #' @param index An array specifying the extraction of the values.
 #' @return An `mcmcoutputhierpost` object with swapped elements.
+#' @exportMethod swapElements
 #' @noRd 
 setMethod(
   "swapElements", signature(

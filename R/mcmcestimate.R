@@ -56,10 +56,10 @@
 #' @name mcmcestimate
 #'   
 #' @seealso 
-#' * [mcmcestfix][mcmcest_class] for object storing the parameter estimates in 
-#'   case of fixed indicators
-#' * [mcmcestfix][mcmcest_class] for object storing the parameter estimates in 
-#'   case of unknown indicators
+#' * [mcmcestfix-class] for object storing the parameter estimates in case of 
+#'   fixed indicators
+#' * [mcmcestind-class] for object storing the parameter estimates in case of 
+#'   unknown indicators
 #' * [mcmcoutputperm-class] for classes storing re-labeled 
 #'   MCMC samples
 "mcmcestimate" <- function(mcmcout, method = "kmeans", fdata = NULL,

@@ -12,7 +12,7 @@ It inherits from the
 \seealso{
 \itemize{
 \item \linkS4class{mcmcoutputfixpost} for the parent class
-\item \link{mcmcpermfixpost} for the parent class
+\item \linkS4class{mcmcpermfixpost} for the parent class
 \item \code{\link[=mcmcpermute]{mcmcpermute()}} for permuting MCMC samples
 }
 }

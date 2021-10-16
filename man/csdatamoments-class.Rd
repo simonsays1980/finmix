@@ -4,30 +4,11 @@
 \name{csdatamoments-class}
 \alias{csdatamoments-class}
 \alias{.csdatamoments}
-\alias{show,csdatamoments-method}
 \title{Finmix \code{csdatamoments} class}
-\usage{
-\S4method{show}{csdatamoments}(object)
-}
-\arguments{
-\item{object}{An \code{csdatamoments} object.}
-}
-\value{
-A console output listing the slots and summary information about
-each of them.
-}
 \description{
 Stores moments for indicators of continuous data. Inherited directly from
 the \linkS4class{sdatamoments} class.
-
-Calling \code{\link[=show]{show()}} on an \code{csdatamoments} object gives an overview
-of the moments of a finite mixture with continuous data.
 }
-\section{Functions}{
-\itemize{
-\item \code{show,csdatamoments-method}: Shows a short summary of the object's slots.
-}}
-
 \section{Slots}{
 
 \describe{

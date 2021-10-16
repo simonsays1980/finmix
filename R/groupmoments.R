@@ -85,7 +85,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the `fdata` class definition
-#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#' * [groupmoments-class] for the definition of the `groupmoments` 
 #'   class
 #' * [datamoments-class] for the base class for data moments
 #' * [datamoments()] for the constructor of any object of the `datamoments` 
@@ -149,7 +149,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @describeIn groupmoments-class Shows a short summary of the object's slots
+#' @noRd
 setMethod(
   "show", "groupmoments",
   function(object) {

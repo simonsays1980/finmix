@@ -26,11 +26,11 @@
 #' @slot W A numeric defining the within-group heterogeneity. 
 #' @slot R A numeric defining the coefficient of determination.
 #' @exportClass studentmodelmoments
-#' @name studentmodelmoments
+#' @name studentmodelmoments-class
 #' 
 #' @seealso 
-#' * \code{\link{modelmoments_class}} for the base class for model moments
-#' * \code{\link{modelmoments}} for the constructor of `modelmoments` classes
+#' * [modelmoments-class] for the base class for model moments
+#' * [modelmoments()] for the constructor of `modelmoments` classes
 .studentmodelmoments <- setClass("studentmodelmoments",
   representation(
     B = "numeric",
@@ -99,6 +99,7 @@ setMethod(
 #' @param object An `studentmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
+#' @exportMethod show
 #' @noRd
 #' @seealso
 #' * [modelmoments-class] for the base class for model moments
@@ -144,6 +145,7 @@ setMethod(
 #' 
 #' @param object An `studentmodelmoments` object.
 #' @returns The `B` slot of the `object`.
+#' @exportMethod getB
 #' @noRd
 #' 
 #' @examples 
@@ -170,6 +172,7 @@ setMethod(
 #' 
 #' @param object An `studentmodelmoments` object.
 #' @returns The `W` slot of the `object`.
+#' @exportMethod getW
 #' @noRd
 #' 
 #' @examples 
@@ -196,6 +199,7 @@ setMethod(
 #' 
 #' @param object An `studentmodelmoments` object.
 #' @returns The `R` slot of the `object`.
+#' @exportMethod getR
 #' @noRd
 #' 
 #' @examples 

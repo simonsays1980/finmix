@@ -68,8 +68,8 @@
 #' 
 #' @param object An `mcmcpermfix` object.
 #' @returns The `Mperm` slot of the `object`.
-#' @aliases mcmcpermfix_class, mcmcpermfixhier_class, mcmcpermfixpost_class, 
-#'   mcmcpermfixhierpost
+#' @exportMethod getMperm
+#' @noRd
 #' 
 #' @examples 
 #' \dontrun{getMperm(mcmcperm)}
@@ -90,6 +90,7 @@ setMethod(
 #' 
 #' @param object An `mcmcpermfix` object.
 #' @returns The `parperm` slot of the `object`.
+#' @exportMethod getParperm
 #' @noRd
 #' 
 #' @examples 
@@ -111,6 +112,7 @@ setMethod(
 #' 
 #' @param object An `mcmcpermfix` object.
 #' @returns The `logperm` slot of the `object`.
+#' @exportMethod getLogperm
 #' @noRd
 #' 
 #' @examples 

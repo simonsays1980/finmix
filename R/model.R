@@ -15,11 +15,47 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
-#' An S4 class to represent a finite mixture model
+#' Finmix `model` class
 #' 
 #' @description 
 #' This class specifies a finite mixture model. Entities are created from it by 
-#' calling its constructor [model()]. 
+#' calling its constructor [model()].
+#' 
+#' @details 
+#' A finite mixture model in the ` finmix` package is defined by its number of 
+#' components `K`, the component distributions `dist`, the data dimension `r` 
+#' and an indicator defining, if the model has fixed or unknown indicators. 
+#' Finite mixture models for the following distributions can be constructed: 
+#' 
+#'  * Poisson,
+#'  * Conditional Poisson,
+#'  * Exponential,
+#'  * Binomial,
+#'  * Normal,
+#'  * Multivariate Normal,
+#'  * Student-t,
+#'  * Multivariate Student-t.
+#'  
+#' Using the constructor [model()] a finite mixture model can be created, the 
+#' default being a mixture model of Poisson distributions. 
+#' 
+#' ## Fully defined finite mixture models
+#' A fully defined finite mixture model contains next to the distribution and 
+#' the components also weights and parameters. The weights are defined in slot 
+#' `weight` and must be of class ` matrix` with as many weights as there are 
+#' components in the mixture model (dimension `Kx1`). Parameters are defined in 
+#' a ` list` named `par`. The elements of this list depend on the chosen 
+#' distribution in slot `dist`: 
+#' 
+#'  * Poisson: A `matrix` named `lambda` of dimension `Kx1` holding the rate 
+#'    parameters.
+#'  * Exponential: A `matrix` named `lambda` of dimension `Kx1` holding the rate 
+#'    parameters.
+#'  * Binomial: A `matrix` of dimension `Kx1` named `p` storing the 
+#'    probabilities.
+#'  
+#' 
+#'  
 #' 
 #' @slot dist A character, defining the distribution family. Possible choices
 #' are binomial, exponential, normal, normult, poisson, student, and studmult.
@@ -262,28 +298,31 @@ setMethod(
 
 #' Simulates data from a model. 
 #' 
-#' \code{simulate} simulates values for a specified mixture model in an 
-#' S4 \code{model} object.
+#' `simulate()` simulates values for a specified mixture model in an 
+#' S4 `model` object.
 #' 
 #' @param model An S4 model object with specified parameters and weights.
 #' @param N An integer specifying the number of values to be simulated. 
-#' @param varargin An S4 fdata object with specified variable dimensions.
+#' @param varargin An S4 fdata object with specified variable dimensions, `r` 
+#'   and repetitions `T`. 
 #' @param seed An integer specifying the seed for the RNG. 
-#' \code{r} and repetitions \code{T}.
 #' @return An S4 fdata object holding the simulated values.
 #' @exportMethod simulate
-#' @describeIn model_class Simulates data from a finite mixture model
+#' @keywords internal
 #' 
-#' @seealso \code{model}, \code{fdata}
 #' @examples 
 #' \dontrun{
 #' f_data <- simulate(model, 100)
 #' }
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
+#' * [fdata-class] for the class defining `finmix` data objects
 setMethod(
   "simulate", "model",
   function(model, N = 100, varargin, seed = 0) {
     ## TODO: Check model for parameters. Check varargin for dimension. Check
-    ##      model anf varargin for consistency.
+    ##      model and varargin for consistency.
     if (!missing(seed)) {
       set.seed(seed)
     } ## Implemented maybe finmixOptions with a state variable seed

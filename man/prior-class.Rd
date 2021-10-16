@@ -4,41 +4,14 @@
 \name{prior-class}
 \alias{prior-class}
 \alias{.prior}
-\alias{hasPriorPar,prior,model-method}
-\alias{hasPriorWeight,prior,model-method}
 \title{Finmix \code{prior} class}
-\usage{
-\S4method{hasPriorPar}{prior,model}(object, model, verbose = FALSE)
-
-\S4method{hasPriorWeight}{prior,model}(object, model, verbose = FALSE)
-}
-\arguments{
-\item{object}{A \code{prior} object containing the specifications for the prior.}
-
-\item{model}{A \code{model} object containing the specifications for the model.}
-
-\item{verbose}{A logical indicating, if the output should be verbose.}
-}
 \description{
 The \code{prior} class stores the specifications for the prior distribution used
 for Bayesian estimation of the finite mixture parameters and weights. There
 exists next to the general constructor also an advanced constructor that
 specifies a data dependent prior. See \code{\link[=priordefine]{priordefine()}} for this advanced
 constructor.
-
-Calling \code{\link[=hasPriorPar]{hasPriorPar()}} checks if \code{model}-appropriate parameters are stored
-in the \code{prior} object.
-
-Calling \code{\link[=hasPriorWeight]{hasPriorWeight()}} checks if \code{model}-appropriate weight parameters
-are stored in the \code{prior} object.
 }
-\section{Functions}{
-\itemize{
-\item \code{hasPriorPar,prior,model-method}: Checks for parameters in \code{prior} object
-
-\item \code{hasPriorWeight,prior,model-method}: Checks for prior weights in \code{prior} object
-}}
-
 \section{Slots}{
 
 \describe{
@@ -58,24 +31,6 @@ Hierarchical prior are often more robust, but need an additional layer in
 sampling, so computing costs increase.}
 }}
 
-\examples{
-# Define a Poisson mixture model.
-f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
-# Call the default constructor.
-f_prior <- prior()
-# Check if the prior has appropriate parameters defined.
-hasPriorPar(f_prior, f_model)
-\dontrun{hasPriorPar(f_prior, f_model, TRUE)}
-
-# Define a Poisson mixture model.
-f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
-# Call the default constructor.
-f_prior <- prior()
-# Check if the prior has appropriate parameters defined.
-hasPriorWeight(f_prior, f_model)
-\dontrun{hasPriorWeight(f_prior, f_model, TRUE)}
-
-}
 \references{
 \itemize{
 \item Frühwirth-Schnatter, S (2006), "Finite Mixture and Markov Switching Models"
@@ -85,15 +40,5 @@ hasPriorWeight(f_prior, f_model)
 \itemize{
 \item \code{\link[=prior]{prior()}} for the general constructor of this class
 \item \code{\link[=priordefine]{priordefine()}} for the advanced constructor of this class
-}
-
-\itemize{
-\item \linkS4class{prior} for the definition of the \code{prior} class
-\item \linkS4class{model} for the definition of the \code{model} class
-}
-
-\itemize{
-\item \link[=prior-class]{prior} for the definition of the \code{prior} class
-\item \link[=model_class]{model} for the definition of the \code{model} class
 }
 }

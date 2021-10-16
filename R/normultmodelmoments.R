@@ -25,7 +25,7 @@
 #' @slot W A numeric defining the within-group heterogeneity. 
 #' @slot R A numeric defining the coefficient of determination.
 #' @exportClass normultmodelmoments
-#' @name normultmodelmoments
+#' @name normultmodelmoments-class
 #' 
 #' @seealso 
 #' * [modelmoments-class] for the base class for model moments
@@ -102,6 +102,7 @@ setMethod(
 #' @param object An `normultmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
+#' @exportMethod show
 #' @noRd
 #' @seealso 
 #' * [modelmoments-class] for the base class for model moments
@@ -161,6 +162,7 @@ setMethod(
 #' 
 #' @param object An `normultmodelmoments` object.
 #' @returns The `B` slot of the `object`.
+#' @exportMethod getB
 #' @noRd
 #' 
 #' @examples 
@@ -188,6 +190,7 @@ setMethod(
 #' 
 #' @param object An `normultmodelmoments` object.
 #' @returns The `W` slot of the `object`.
+#' @exportMethod getW
 #' @noRd
 #' 
 #' @examples 
@@ -215,6 +218,7 @@ setMethod(
 #' 
 #' @param object An `normultmodelmoments` object.
 #' @returns The `Rdet` slot of the `object`.
+#' @exportMethod getRdet
 #' @noRd
 #' 
 #' @examples 
@@ -242,6 +246,7 @@ setMethod(
 #' 
 #' @param object An `normultmodelmoments` object.
 #' @returns The `Rtr` slot of the `object`.
+#' @exportMethod getRtr
 #' @noRd
 #' 
 #' @examples 
@@ -268,6 +273,7 @@ setMethod(
 #' 
 #' @param object An `normultmodelmoments` object.
 #' @returns The `Corr` slot of the `object`.
+#' @exportMethod getCorr
 #' @noRd
 #' 
 #' @examples 

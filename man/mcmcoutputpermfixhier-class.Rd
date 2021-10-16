@@ -4,18 +4,7 @@
 \name{mcmcoutputpermfixhier-class}
 \alias{mcmcoutputpermfixhier-class}
 \alias{.mcmcoutputpermfixhier}
-\alias{show,mcmcoutputpermfixhier-method}
 \title{Finmix \code{mcmcoutputpermfixhier} class}
-\usage{
-\S4method{show}{mcmcoutputpermfixhier}(object)
-}
-\arguments{
-\item{object}{An \code{mcmcoutputpermfixhier} object.}
-}
-\value{
-A console output listing the slots and summary information about
-each of them.
-}
 \description{
 This class defines objects to store the outputs from permuting the MCMC
 samples. Due to label switching the sampled component parameters are usually
@@ -29,16 +18,7 @@ size and the mixture log-likelihood, the prior log-likelihood, and the
 complete data posterior log-likelihood.
 
 Note this class inherits all slots from its parent classes.
-
-Calling \code{\link[=show]{show()}} on an \code{mcmcoutputpermfixhier} object gives an overview
-of the \code{mcmcoutputpermfixhier} object.
 }
-\section{Functions}{
-\itemize{
-\item \code{show,mcmcoutputpermfixhier-method}: Shows a short summary of the
-object's slots
-}}
-
 \seealso{
 \itemize{
 \item \linkS4class{mcmcoutputpermfix} for the parent class

@@ -22,7 +22,7 @@ indirectly when calling the \code{modelmoments} constructor \code{\link[=modelmo
 
 \seealso{
 \itemize{
-\item \code{\link{modelmoments_class}} for the base class for model moments
-\item \code{\link{modelmoments}} for the constructor of \code{modelmoments} classes
+\item \linkS4class{modelmoments} for the base class for model moments
+\item \code{\link[=modelmoments]{modelmoments()}} for the constructor of \code{modelmoments} classes
 }
 }

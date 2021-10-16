@@ -27,9 +27,9 @@ hierarchical prior.}
 
 \seealso{
 \itemize{
-\item \code{\link{mcmcpermute()}} for the calling function
-\item \code{\link{mcmcpermfix-class}} for the parent class definition
-\item \code{\link{mcmcpermindhier-class}} for the corresponding class for models
+\item \code{\link[=mcmcpermute]{mcmcpermute()}} for the calling function
+\item \linkS4class{mcmcpermfix} for the parent class definition
+\item \linkS4class{mcmcpermindhier} for the corresponding class for models
 with unknown indicators
 }
 }

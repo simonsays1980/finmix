@@ -435,6 +435,7 @@ setMethod(
 #' @param index An array specifying the extraction of the sub-chain.
 #' @return An `mcmcoutput` object containing the values from the sub-chain.
 #' @exportMethod subseq
+#' @noRd
 setMethod(
   "subseq", signature(
     object = "mcmcoutputfixhier",
@@ -463,6 +464,7 @@ setMethod(
 #' @param object An `mcmcoutput` object containing the sampled values.
 #' @param index An array specifying the extraction of the values.
 #' @return An `mcmcoutput` object with swapped elements.
+#' @exportMethod swapElements
 #' @noRd 
 setMethod(
   "swapElements", signature(
@@ -487,6 +489,7 @@ setMethod(
 #' 
 #' @param object An `mcmcoutput` object.
 #' @returns The `hyper` slot of the `object`.
+#' @exportMethod getHyper
 #' @noRd
 #' 
 #' @examples 

@@ -31,12 +31,13 @@
 #' @slot postperm A named list containing a named list `par` with array(s) of 
 #'   parameters from the posterior density. 
 #' @exportClass mcmcpermindpost
-#' @describeIn mcmcperm_class
+#' @rdname mcmcpermindpost-class
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [mcmcpermute()] for the calling function
-#' * [mcmcpermind][mcmcperm_class] for the parent class definition
-#' * [mcmcpermfixpost][mcmcperm_class] for the corresponding class for models 
+#' * [mcmcpermind-class] for the parent class definition
+#' * [mcmcpermfixpost-class] for the corresponding class for models 
 #'   with fixed indicators
 .mcmcpermindpost <- setClass("mcmcpermindpost",
   representation(postperm = "list"),
@@ -56,10 +57,11 @@
 #' 
 #' @param object An `mcmcpermindpost` object.
 #' @returns The `postperm` slot of the `object`.
+#' @exportMethod getPostperm
 #' @noRd
 #' 
 #' @examples 
-#' \dontrun{getMperm(mcmcperm)}
+#' \dontrun{getPostperm(mcmcperm)}
 #' 
 #' @seealso 
 #' * [mcmcoutputpermpost-class] for the inheriting class

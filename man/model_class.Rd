@@ -2,13 +2,10 @@
 % Please edit documentation in R/model.R
 \name{hasWeight,model-method}
 \alias{hasWeight,model-method}
-\alias{simulate,model-method}
 \alias{model_class}
 \title{Getter for weights}
 \usage{
 \S4method{hasWeight}{model}(object, verbose = FALSE)
-
-\S4method{simulate}{model}(model, N = 100, varargin, seed = 0)
 
 \S4method{getDist}{model}(object)
 
@@ -45,39 +42,16 @@
 \arguments{
 \item{verbose}{A logical indicating, if the function should give a print out.}
 
-\item{model}{An S4 model object with specified parameters and weights.}
-
-\item{N}{An integer specifying the number of values to be simulated.}
-
-\item{varargin}{An S4 fdata object with specified variable dimensions.}
-
-\item{seed}{An integer specifying the seed for the RNG.
-\code{r} and repetitions \code{T}.}
+\item{model}{An S4 model object.}
 }
 \value{
 Matrix of weights.
-
-An S4 fdata object holding the simulated values.
 }
 \description{
 \code{hasWeight} returns the weight matrix.
-
-\code{simulate} simulates values for a specified mixture model in an
-S4 \code{model} object.
 }
-\section{Functions}{
-\itemize{
-\item \code{simulate,model-method}: Simulates data from a finite mixture model
-}}
-
 \examples{
 \dontrun{
 weight <- hasWeight(model)
 }
-\dontrun{
-f_data <- simulate(model, 100)
-}
-}
-\seealso{
-\code{model}, \code{fdata}
 }

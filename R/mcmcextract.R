@@ -14,6 +14,7 @@
 #' sampling.
 #' 
 #' @exportClass mcmcextract
+#' @name mcmcextract-class
 #' @noRd
 .mcmcextract <- setClass("mcmcextract",
   representation(

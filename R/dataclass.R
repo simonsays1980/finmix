@@ -345,25 +345,20 @@ setMethod(
 ### These functions are not exported.
 
 ### Checking
-### Check fdata/model: 'fdata' must be an object of class
-### 'fdata'. Further, this object must be valid and must
-### contain data in @y. The 'fdata' object and the 'model'
-### object must be consistent to each other, i.e. the 'model'
-### object must have defined a distribution in @dist that
-### conforms with the dimension @r of the #fdata' object.
+
 #' Checking `fdata` object and `model` object for `dataclass`
 #' 
 #' For internal usage only. This function checks an `fdata` object and a 
 #' `model` object in regard to consistency. First of all the data dimensions 
-#' must fit between the two object, meaning that if `@@r>1` in the `fdata` 
-#' object the model object must possess a `@@dist` slot with an appropriate 
+#' must fit between the two object, meaning that if `r>1` in the `fdata` 
+#' object the model object must possess a `@dist` slot with an appropriate 
 #' distribution for multivariate data. The `fdata` object must contain data in 
-#' its slot `@@y`. As a first safeguard this function checks if the first 
+#' its slot `y`. As a first safeguard this function checks if the first 
 #' argument is indeed an `fdata` object. 
 #' 
 #' @param fdata.obj An `fdata` object. 
 #' @param model.obj A `model` object containing a specified distribution, 
-#'   parameters and weigths.
+#'   parameters and weights.
 #' @return None. If the checks do not run through, an error is thrown.
 #' @noRd
 #' 

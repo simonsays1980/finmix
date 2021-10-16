@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
-# TODO: Change to non-hierarchical prior in examples
 
-#' Finmix `mcmcoutput` base class for fixed indicators
+
+#' Finmix `mcmcoutputfix` class
 #' 
 #' @description
 #' This class defines the basic slots for the MCMC sampling output for a 
@@ -38,7 +38,7 @@
 #' @slot prior The `prior` object defining the prior distributions for the 
 #'   component parameters that has been used in MCMC sampling.
 #' @exportClass mcmcoutputfix
-#' @rdname mcmcoutput-class
+#' @rdname mcmcoutputfix-class
 #' @keywords internal
 .mcmcoutputfix <- setClass("mcmcoutputfix",
   representation(
@@ -472,6 +472,7 @@ setMethod(
 #' @param index An array specifying the extraction of the sub-chain.
 #' @return An `mcmcoutput` object containing the values from the sub-chain.
 #' @exportMethod subseq
+#' @noRd
 setMethod(
   "subseq", signature(
     object = "mcmcoutputfix",
@@ -510,6 +511,7 @@ setMethod(
 #' @param object An `mcmcoutput` object containing the sampled values.
 #' @param index An array specifying the extraction of the values.
 #' @return An `mcmcoutput` object with swapped elements.
+#' @exportMethod swapElements
 #' @noRd 
 setMethod(
   "swapElements", signature(
@@ -552,7 +554,8 @@ setMethod(
 #'   mixture should be extracted.
 #' @return An object class `mcmcextract` containing all samples of an extracted 
 #'   dimension.
-#' @export
+#' @noRd
+#' @exportMethod extract
 setMethod(
   "extract", signature(
     object = "mcmcoutputfix",
@@ -596,6 +599,7 @@ setMethod(
 #' 
 #' @param object An `mcmcoutput` object.
 #' @returns The `M` slot of the `object`.
+#' @exportMethod getM
 #' @noRd
 #' 
 #' @examples 
@@ -629,6 +633,7 @@ setMethod(
 #' 
 #' @param object An `mcmcoutput` object.
 #' @returns The `burnin` slot of the `object`.
+#' @exportMethod getBurnin
 #' @noRd
 #' 
 #' @examples 
@@ -662,6 +667,7 @@ setMethod(
 #' 
 #' @param object An `mcmcoutput` object.
 #' @returns The `ranperm` slot of the `object`.
+#' @exportMethod getRanperm
 #' @noRd
 #' 
 #' @examples 
@@ -695,6 +701,7 @@ setMethod(
 #' 
 #' @param object An `mcmcoutput` object.
 #' @returns The `par` slot of the `object`.
+#' @exportMethod getPar
 #' @noRd
 #' 
 #' @examples 
@@ -728,6 +735,7 @@ setMethod(
 #' 
 #' @param object An `mcmcoutput` object.
 #' @returns The `log` slot of the `object`.
+#' @exportMethod getLog
 #' @noRd
 #' 
 #' @examples 
@@ -761,6 +769,7 @@ setMethod(
 #' 
 #' @param object An `mcmcoutput` object.
 #' @returns The `model` slot of the `object`.
+#' @exportMethod getModel
 #' @noRd
 #' 
 #' @examples 
@@ -795,6 +804,7 @@ setMethod(
 #' 
 #' @param object An `mcmcoutput` object.
 #' @returns The `prior` slot of the `object`.
+#' @exportMethod getPrior
 #' @noRd
 #' 
 #' @examples 

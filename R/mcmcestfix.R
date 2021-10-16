@@ -50,11 +50,11 @@
 #' @slot sdpost A named list containing the standard deviations of the 
 #'   parameter estimates from the posterior distributions.
 #' @exportClass mcmcestfix
-#' @rdname mcmcest-class
+#' @rdname mcmcestfix-class
 #' @keywords internal
 #' 
 #' @seealso
-#' * [mcmcestind][mcmcest_class] for the equivalent class for models with 
+#' * [mcmcestind-class] for the equivalent class for models with 
 #'   unknown indicators
 #' * [mcmcestimate()] to calculate point estimates
 .mcmcestfix <- setClass("mcmcestfix",
@@ -99,6 +99,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
+#' @noRd
 setMethod(
   "show", "mcmcestfix",
   function(object) {
@@ -134,7 +135,7 @@ setMethod(
 
 #' Shows an advanced summary of an `mcmcestfix` object.
 #' 
-#' Calling [show()] on an `mcmcestfix` object gives an advanced overview 
+#' Calling [Summary()] on an `mcmcestfix` object gives an advanced overview 
 #' of the `mcmcestfix` object.
 #' 
 #' Note, this method is so far only implemented for mixtures of Poisson 
@@ -144,6 +145,7 @@ setMethod(
 #' @returns A console output listing the formatted slots and summary 
 #'   information about each of them. 
 #' @exportMethod Summary
+#' @noRd 
 setMethod(
   "Summary", "mcmcestfix",
   function(x, ..., na.rm = FALSE) {
@@ -205,6 +207,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `dist` slot of the `object`.
+#' @exportMethod getDist
 #' @noRd
 #' 
 #' @examples 
@@ -240,6 +243,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `K` slot of the `object`.
+#' @exportMethod getK
 #' @noRd
 #' 
 #' @examples 
@@ -275,6 +279,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `indicmod` slot of the `object`.
+#' @exportMethod getIndicmod
 #' @noRd
 #' 
 #' @examples 
@@ -310,6 +315,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `burnin` slot of the `object`.
+#' @exportMethod getBurnin
 #' @noRd
 #' 
 #' @examples 
@@ -345,6 +351,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `M` slot of the `object`.
+#' @exportMethod getM
 #' @noRd
 #' 
 #' @examples 
@@ -380,6 +387,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `ranperm` slot of the `object`.
+#' @exportMethod getRanperm
 #' @noRd
 #' 
 #' @examples 
@@ -415,6 +423,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `relabel` slot of the `object`.
+#' @exportMethod getRelabel
 #' @noRd
 #' 
 #' @examples 
@@ -450,6 +459,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `map` slot of the `object`.
+#' @exportMethod getMap
 #' @noRd
 #' 
 #' @examples 
@@ -485,6 +495,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `bml` slot of the `object`.
+#' @exportMethod getBml
 #' @noRd
 #' 
 #' @examples 
@@ -520,6 +531,7 @@ setMethod(
 #' 
 #' @param object An `mcmcestfix` object.
 #' @returns The `ieavg` slot of the `object`.
+#' @exportMethod getIeavg
 #' @noRd
 #' 
 #' @examples 
@@ -551,10 +563,11 @@ setMethod(
 
 #' Getter method of `mcmcestfix` class.
 #' 
-#' Returns the `ieavg` slot.
+#' Returns the `sdpost` slot.
 #' 
 #' @param object An `mcmcestfix` object.
-#' @returns The `ieavg` slot of the `object`.
+#' @returns The `sdpost` slot of the `object`.
+#' @exportMethod getSdpost
 #' @noRd
 #' 
 #' @examples 
@@ -607,7 +620,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.map.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.map.poisson.Mcmcestfix(obj)
@@ -626,7 +639,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.map.poisson.Mcmcestfix" <- function(obj) {
   parout <- matrix(0, nrow = obj@K, ncol = 2)
   for (k in seq(1, obj@K)) {
@@ -651,7 +664,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.bml.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.bml.poisson.Mcmcestfix(obj)
@@ -670,7 +683,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.bml.poisson.Mcmcestfix" <- function(obj) {
   parout <- matrix(0, nrow = obj@K, ncol = 2)
   for (k in seq(1, obj@K)) {
@@ -695,7 +708,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.ieavg.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     .pars.ieavg.poisson.Mcmcestfix(obj)
@@ -714,7 +727,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".pars.ieavg.poisson.Mcmcestfix" <- function(obj) {
   parout <- matrix(0, nrow = obj@K, ncol = 2)
   for (k in seq(1, obj@K)) {
@@ -738,7 +751,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".rownames.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     .rownames.poisson.Mcmcestfix(obj)
@@ -757,7 +770,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".rownames.poisson.Mcmcestfix" <- function(obj) {
   rnames <- rep("", obj@K)
   for (k in seq(1, obj@K)) {
@@ -781,7 +794,7 @@ setMethod(
 #' @noRd 
 #' 
 #' @seealso 
-#' * [summary][mcmcest_class] for the calling function
+#' * [Summary()] for the calling function
 ".parnames.Mcmcestfix" <- function(obj) {
   if (obj@dist == "poisson") {
     parnames <- c("lambda")

@@ -21,14 +21,12 @@
 #' distributions. Note that this class is not directly used, but indirectly 
 #' when calling the `modelmoments` constructor [modelmoments()].
 #' 
-#' @slot B A numeric defining the between-group heterogeneity.
-#' @slot W A numeric defining the within-group heterogeneity. 
-#' @slot R A numeric defining the coefficient of determination.
 #' @exportClass poissonmodelmoments
 #' @rdname poissonmodelmoments-class
 #' @keywords internal
 #' 
 #' @seealso 
+#' * [dmodelmoments-class] for the parent class 
 #' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes
 .poissonmodelmoments <- setClass("poissonmodelmoments",
@@ -89,6 +87,7 @@ setMethod(
 #' @param object An `poissonmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
+#' @exportMethod show
 #' @noRd
 #' @seealso
 #' * [modelmoments-class] for the base class for model moments

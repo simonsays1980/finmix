@@ -4,32 +4,13 @@
 \name{groupmoments-class}
 \alias{groupmoments-class}
 \alias{.groupmoments}
-\alias{show,groupmoments-method}
 \title{Finmix \code{groupmoments} class}
-\usage{
-\S4method{show}{groupmoments}(object)
-}
-\arguments{
-\item{object}{A \code{groupmoments} object.}
-}
-\value{
-A console output listing the slots and summary information about
-each of them.
-}
 \description{
 Stores moments for finite mixture component distributions. These are only
 available, if the data contains in addition to observations also indicators
 defining to which component a certain observation belongs. These indicators
 are stored in an \linkS4class{fdata} object in the slot \code{S}.
-
-Calling \code{\link[=show]{show()}} on a \code{groupmoments} object gives an overview
-of the moments of a finit mixture with continuous data.
 }
-\section{Functions}{
-\itemize{
-\item \code{show,groupmoments-method}: Shows a short summary of the object's slots
-}}
-
 \section{Slots}{
 
 \describe{

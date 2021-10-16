@@ -32,7 +32,7 @@ groupmoments(f_data)
 \seealso{
 \itemize{
 \item \linkS4class{fdata} for the \code{fdata} class definition
-\item \link[=groupmments_class]{groupmoments} for the definition of the \code{groupmoments}
+\item \linkS4class{groupmoments} for the definition of the \code{groupmoments}
 class
 \item \linkS4class{datamoments} for the base class for data moments
 \item \code{\link[=datamoments]{datamoments()}} for the constructor of any object of the \code{datamoments}
