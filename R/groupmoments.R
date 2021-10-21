@@ -149,7 +149,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "groupmoments",
   function(object) {
@@ -184,7 +184,8 @@ setMethod(
 #' 
 #' @param object An `groupmoments` object.
 #' @returns The `NK` slot of the `object`.
-#' @noRd
+#' @exportMethod getNK
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -197,7 +198,7 @@ setMethod(
 #' getNK(f_gmoments)
 #' 
 #' @seealso 
-#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#' * [groupmoments-class] for the definition of the `groupmoments` 
 #'   class
 #' * [groupmoments()] for the class constructor
 setMethod(
@@ -213,7 +214,8 @@ setMethod(
 #' 
 #' @param object An `groupmoments` object.
 #' @returns The `mean` slot of the `object`.
-#' @noRd
+#' @exportMethod getMean
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -226,7 +228,7 @@ setMethod(
 #' getMean(f_gmoments)
 #' 
 #' @seealso 
-#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#' * [groupmoments-class] for the definition of the `groupmoments` 
 #'   class
 #' * [groupmoments()] for the class constructor
 setMethod(
@@ -242,7 +244,8 @@ setMethod(
 #' 
 #' @param object An `groupmoments` object.
 #' @returns The `WK` slot of the `object`.
-#' @noRd
+#' @exportMethod getWK
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -255,7 +258,7 @@ setMethod(
 #' getWK(f_gmoments)
 #' 
 #' @seealso 
-#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#' * [groupmoments-class] for the definition of the `groupmoments` 
 #'   class
 #' * [groupmoments()] for the class constructor
 setMethod(
@@ -271,7 +274,8 @@ setMethod(
 #' 
 #' @param object An `groupmoments` object.
 #' @returns The `Var` slot of the `object`.
-#' @noRd
+#' @exportMethod getVar
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -284,7 +288,7 @@ setMethod(
 #' getVar(f_gmoments)
 #' 
 #' @seealso 
-#' * [groupmoments][groupmments_class] for the definition of the `groupmoments` 
+#' * [groupmoments-class] for the definition of the `groupmoments` 
 #'   class
 #' * [groupmoments()] for the class constructor
 setMethod(

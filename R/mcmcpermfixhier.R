@@ -59,7 +59,7 @@
 #' @param object An `mcmcpermfixhier` object.
 #' @returns The `hyperperm` slot of the `object`.
 #' @exportMethod getHyperperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getHyperpem(mcmcperm)}

@@ -129,7 +129,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "sdatamoments",
   function(object) {
@@ -152,7 +152,7 @@ setMethod(
 #' 
 #' @param object An `sdatamoments` object.
 #' @returns The `gmoments` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' 
 #' @exportMethod getGmoments
 #' @examples 
@@ -184,7 +184,7 @@ setMethod(
 #' 
 #' @param object An `sdatamoments` object.
 #' @returns The `fdata` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.

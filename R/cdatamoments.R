@@ -172,7 +172,7 @@ setMethod(
 #' 
 #' @param object An `cdatamoments` object.
 #' @returns The `smoments` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -200,7 +200,7 @@ setMethod(
 #' 
 #' @param object An `cdatamoments` object.
 #' @returns The `higher` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -228,7 +228,7 @@ setMethod(
 #' 
 #' @param object An `cdatamoments` object.
 #' @returns The `skewness` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -256,7 +256,7 @@ setMethod(
 #' 
 #' @param object An `cdatamoments` object.
 #' @returns The `kurtosis` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -284,7 +284,7 @@ setMethod(
 #' 
 #' @param object An `cdatamoments` object.
 #' @returns The `corr` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.

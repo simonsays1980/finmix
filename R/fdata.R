@@ -318,7 +318,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate some Poisson data and show the `fdata` object
@@ -1259,7 +1259,6 @@ setReplaceMethod(
 #' @param y An object passed in by the user. 
 #' @returns None. Checks for validity and if validity is not ensured throws an
 #'   error.
-#'   
 #' @noRd
 #' 
 #' @seealso 
@@ -1507,7 +1506,6 @@ setReplaceMethod(
 #' @param y An object passed in by the user. 
 #' @returns None. Checks for validity and if validity is not ensured throws an
 #'   error.
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1534,7 +1532,6 @@ setReplaceMethod(
 #' @param y An object passed in by the user. 
 #' @returns None. Checks for validity and if validity is not ensured throws an
 #'   error.
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1557,7 +1554,6 @@ setReplaceMethod(
 #' @param y An object passed in by the user. 
 #' @returns None. Checks for validity and if validity is not ensured throws an
 #'   error.
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1583,7 +1579,6 @@ setReplaceMethod(
 #' @param obj An `fdata` object. Must contain data.
 #' @returns A barplot. 
 #' 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1641,7 +1636,6 @@ setReplaceMethod(
 #' @returns A histogram. 
 #' @importFrom KernSmooth bkde2D
 #' @importFrom stats sd
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1742,7 +1736,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1772,7 +1765,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1799,7 +1791,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1857,7 +1848,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1921,7 +1911,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -1990,7 +1979,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -2063,7 +2051,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -2131,7 +2118,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -2203,7 +2189,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -2271,7 +2256,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 
@@ -2342,7 +2326,6 @@ setReplaceMethod(
 #' 
 #' @param obj An `fdata` object to be checked.
 #' @returns None. Throws an error, if a certain condition is not true. 
-
 #' @noRd
 #' 
 #' @seealso 

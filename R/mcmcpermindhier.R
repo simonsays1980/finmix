@@ -60,14 +60,14 @@
 #' @param object An `mcmcpermindhier` object.
 #' @returns The `hyperperm` slot of the `object`.
 #' @exportMethod getHyperperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getHyperpem(mcmcperm)}
 #' 
 #' @seealso 
-#' * \code{\link{mcmcoutputpermind}} for the inheriting class
-#' * \code{\link{mcmcpermute}} for function permuting MCMC samples
+#' * [mcmcoutputpermhier-class] for the inheriting class
+#' * [mcmcpermute()] for function permuting MCMC samples
 setMethod(
   "getHyperperm", "mcmcpermfixpost",
   function(object) {

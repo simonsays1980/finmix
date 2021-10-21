@@ -99,7 +99,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them.
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 #' @seealso 
 #' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes
@@ -139,7 +139,7 @@ setMethod(
 #' @param object An `exponentialmodelmoments` object.
 #' @returns The `B` slot of the `object`.
 #' @exportMethod getB
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("exponential", par=list(lambda=c(0.3, 0.1)), 
@@ -164,7 +164,7 @@ setMethod(
 #' @param object An `exponentialmodelmoments` object.
 #' @returns The `W` slot of the `object`.
 #' @exportMethod getW
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("exponential", par=list(lambda=c(0.3, 0.1)), 
@@ -189,7 +189,7 @@ setMethod(
 #' @param object An `exponentialmodelmoments` object.
 #' @returns The `R` slot of the `object`.
 #' @exportMethod getR
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("exponential", par=list(lambda=c(0.3, 0.1)), 

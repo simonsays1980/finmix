@@ -49,15 +49,108 @@
   prototype(eavg = list())
 )
 
-#' Finmix `mcmcest` class union
+#' Finmix `mcmcest` class
 #' 
 #' @description 
-#' This class union includes all classes that define objects for storing the 
-#' parameter estimates and is used to dispatch methods for `mcmcest` objects.
+#' This class stores Bayesian parameter estimates from MCMC samples and 
+#' corresponding metadata. Calling [mcmcestimate()] returns an object of this 
+#' class. 
+#' 
+#' @details 
+#' Calling [mcmcestimate()] on an object of class `mcmcoutput` or 
+#' `mcmcoutputperm` returns an object of class `mcmcest` that contains all 
+#' Bayesian estimates together with corresponding metadata. Three Bayesian 
+#' point estimates are constructed: 
+#' 
+#' * __BML__: The Bayesian Maximum Likelihood, which is the parameter sample 
+#'   from MCMC sampling that maximizes the mixture likelihood.
+#' * __MAP__: The Bayesian Maximum A Posterior, which is the parameter sample 
+#'   from MCMC sampling that maximizes the the posterior maximum likelihood. 
+#' * __EAVG__: The Ergodic Average over the MCMC samples without identification.
+#' * __IEAVG__: The Identified Ergodic Average over the MCMC samples with 
+#'   identification. 
+#' 
+#' Note that a model with fixed indicators (i.e. slot `indicfix=TRUE`) has 
+#' always an identified ergodic average, because in each MCMC sample the 
+#' component labels are the same and therefore identified. In contrast, a 
+#' model with unknown indicators (i.e. `indicfix=FALSE`) suffers usually under 
+#' random label switching during sampling and therefore the ergodic average 
+#' over all MCMC samples is usually not identified as it averages over 
+#' parameters from different components thereby pulling the component 
+#' parameters together (sometimes you get the same average for all components). 
+#' The `ieavg` is calculated for a model with unknown indicators by relabeling 
+#' the component parameter samples. Re-labeling reassigns component parameters 
+#' to the most likely label of the mixture in regard to the observations. As a 
+#' result the `mcmcest` object of a model with unknown indicators will have 
+#' both, an `eavg` and an `ieavg` slot containing the ergodic average over 
+#' samples before and after re-labeling. The `relabel` slot indicates which 
+#' re-labeling algorithm had been chosen. 
+#' 
+#' The uncertainty of parameter estimates is measured by the standard deviation 
+#' over parameters from MCMC sampling and stored in the `sdpost` slot. It is 
+#' an estimate of the standard deviation of the true posterior parameter 
+#' distribution.
+#' 
+#' The class `mcmcest` is a class union and includes all classes that define
+#' objects for Bayesian estimates of MCMC samples and is used to dispatch
+#' methods for `mcmcest` objects. For the user this detail is not important,
+#' especially as this class has no exported constructor. Objects are solely
+#' constructed internally within the function [mcmcestimate()].
+#' 
+#' ## Class Methods 
+#' Similar to the contained classes [mcmcoutput][mcmcoutput-class] this class comes 
+#' along with a couple of methods that should give the user some comfort in 
+#' handling the permuted sampling results. There are no setters for this class 
+#' as the slots are only set internally. 
+#' 
+#' ### Show and Summary
+#' * `show()` gives a short summary of the object's slots.
+#' * `Summary()` prints out a summary of estimation results.
+#' 
+#' ### Getters 
+#' * `getDist()` returns the `dist` slot.
+#' * `getK()` returns the `K` slot.
+#' * `getIndicmod()` returns the `indicmod` slot.
+#' * `getBurnin()` returns the `burnin` slot.
+#' * `getM()` returns the `M` slot.
+#' * `getRanperm()` returns the `ranperm` slot.
+#' * `getRelabel()` returns the `relabel` slot. 
+#' * `getMap()` returns the MAP estimates.
+#' * `getBml()` returns the BML estimates.
+#' * `getEavg()` returns the EAVG estimates. 
+#' * `getIEAVG()` returns the identified EAVG estimates.
+#' * `getSdpost()` returns the `sdpost`.
+#' 
+#' @slot dist A character specifying the distribution family of the mixture 
+#'   model used in MCMC sampling.
+#' @slot K An integer specifying the number of components in the mixture model. 
+#' @slot indicmod A character specifying the indicator model. At this moment 
+#'   only a multinomial model can be chosen. 
+#' @slot burnin An integer specifying the number of iterations in the burn-in 
+#'   phase of MCMC sampling. 
+#' @slot M An integer specifying the number of iterations to store in MCMC 
+#'   sampling.
+#' @slot ranperm A logical specifying, if random permutation has been used 
+#'   during MCMC sampling. 
+#' @slot relabel A character specifying the re-labeling algorithm used during 
+#'   parameter estimation for the identified ergodic average. 
+#' @slot map A named list containing the parameter estimates of the MAP. The 
+#'   element `par` is a named list and contains the component parameters and 
+#'   the element `weight` contains the weights. 
+#' @slot bml A named list containing the parameter estimates of the BML. The 
+#'   element `par` is a named list and contains the component parameters and 
+#'   the element `weight` contains the weights. 
+#' @slot eavg A named list containing the parameter estimates of the 
+#'   unidentified EAVG. Note that this is only the case for a model with 
+#'   unknown indicators.
+#' @slot ieavg A named list containing the parameter estimates of the IEAVG. The 
+#'   element `par` is a named list and contains the component parameters and 
+#'   the element `weight` contains the weights.
+#' @slot sdpost A named list containing the standard deviations of the 
+#'   parameter estimates from the posterior distributions.
 #' 
 #' @exportClass mcmcest
 #' @name mcmcest-class
-#' @noRd
 setClassUnion(
   "mcmcest",
   c(
@@ -75,7 +168,7 @@ setClassUnion(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "mcmcestind",
   function(object) {
@@ -204,7 +297,7 @@ setMethod(
 #' @param object An `mcmcestind` object.
 #' @returns The `eavg` slot of the `object`.
 #' @exportMethod getEavg
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -219,7 +312,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getEavg(f_output)
+#' getEavg(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestfix-class] for the parent class with fixed indicators

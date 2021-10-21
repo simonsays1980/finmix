@@ -99,7 +99,8 @@ setMethod(
 #' @param object An `normalmodelmoments` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
-#' @noRd
+#' @exportMethod show
+#' @keywords internal
 #' @seealso 
 #' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes
@@ -144,7 +145,8 @@ setMethod(
 #' 
 #' @param object An `normalmodelmoments` object.
 #' @returns The `B` slot of the `object`.
-#' @noRd
+#' @exportMethod getB
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("normal", weight = matrix(c(.3, .7), nrow = 1))
@@ -170,7 +172,8 @@ setMethod(
 #' 
 #' @param object An `normalmodelmoments` object.
 #' @returns The `W` slot of the `object`.
-#' @noRd
+#' @exportMethod getW
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("normal", weight = matrix(c(.3, .7), nrow = 1))
@@ -196,7 +199,8 @@ setMethod(
 #' 
 #' @param object An `normalmodelmoments` object.
 #' @returns The `R` slot of the `object`.
-#' @noRd
+#' @exportMethod getR
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("normal", weight = matrix(c(.3, .7), nrow = 1))

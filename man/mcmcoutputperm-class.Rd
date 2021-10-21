@@ -26,10 +26,10 @@ An object of class \code{mcmcoutputperm} inherits all slots from its parent clas
 data from permutation. These slots are listed below
 \subsection{Class methods}{
 
-Similar to the parent class \link[=mcmcoutput-class]{mcmcoutput} this class comes
-along with a couple of methods that should give the user some comfort in
-handling the permuted sampling results. There are no setters for this class
-as the slots are only set internally.
+Similar to the contained classes \link[=mcmcoutput-class]{mcmcoutput} this class
+comes along with a couple of methods that should give the user some comfort
+in handling the permuted sampling results. There are no setters for this
+class as the slots are only set internally.
 \subsection{Show}{
 \itemize{
 \item \code{show()} shows a short summary of the object's slots.

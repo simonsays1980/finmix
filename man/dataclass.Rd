@@ -7,11 +7,11 @@
 dataclass(fdata = NULL, model = NULL, simS = FALSE)
 }
 \arguments{
-\item{fdata}{An \code{fdata} object containing observations in slot \verb{@y} and
-indicators in slot \verb{@S}.}
+\item{fdata}{An \code{fdata} object containing observations in slot \code{y} and
+indicators in slot \code{S}.}
 
-\item{model}{A \code{model} object containing parameters in slot  \verb{@par} and
-and weights in slot \verb{@weight}.}
+\item{model}{A \code{model} object containing parameters in slot  \code{par} and
+and weights in slot \code{weight}.}
 
 \item{simS}{A logical defining, if the indicators \code{S} should be simulated.}
 }
@@ -23,14 +23,17 @@ simulated.
 \description{
 Calling \code{\link[=dataclass]{dataclass()}} classifies data using a fully specified mixture model.
 Henceforth, the finite mixture model \code{model} must be fully specified, i.e.
-containing parameters in slot \verb{@par}, weights in slot \verb{@weight} and
-indicators in slot \verb{@S} of the corresponding \code{fdata} object.
+containing parameters in slot \code{par}, weights in slot \code{weight} and
+indicators in slot \code{S} of the corresponding \code{fdata} object.
+}
+\references{
+\itemize{
+\item Frühwirth-Schnatter, S. (2006), "Finite Mixture and Markov Switching
+Models"
+}
 }
 \seealso{
 \itemize{
 \item \linkS4class{dataclass} for the class definition
 }
-
-#' @references
-Frühwirth-Schnatter, S. (2006), "Finite Mixture and Markov Switching Models"
 }

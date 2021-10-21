@@ -92,7 +92,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 #' @seealso 
 #' * [modelmoments()] for the mutual constructor for all modelmoments
 #' * [binomialmodelmoments-class] for the class definition 
@@ -133,7 +133,8 @@ setMethod(
 #' 
 #' @param object An `binomialmodelmoments` object.
 #' @returns The `extrabinvar` slot of the `object`.
-#' @noRd
+#' @exportMethod getExtrabinvar
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("binomial", par=list(p=c(0.3, 0.5)), 

@@ -619,10 +619,10 @@ setMethod(
 #' data from permutation. These slots are listed below
 #' 
 #' ## Class methods
-#' Similar to the parent class [mcmcoutput][mcmcoutput-class] this class comes 
-#' along with a couple of methods that should give the user some comfort in 
-#' handling the permuted sampling results. There are no setters for this class 
-#' as the slots are only set internally. 
+#' Similar to the contained classes [mcmcoutput][mcmcoutput-class] this class
+#' comes along with a couple of methods that should give the user some comfort
+#' in handling the permuted sampling results. There are no setters for this
+#' class as the slots are only set internally.
 #' 
 #' ### Show
 #' * `show()` shows a short summary of the object's slots.
@@ -655,7 +655,7 @@ setMethod(
 #' * `plotPostDens()` plots the posterior density of component parameters. Note 
 #'   that this function can only be applied for mixtures of two components. See 
 #'   [plotPostDens()] for further information.    
-#'   
+#' 
 #' @slot Mperm An integer defining the number of permuted MCMC samples.
 #' @slot parperm A named list containing the permuted component parameter 
 #'   samples from MCMC sampling.
@@ -1160,4 +1160,49 @@ NULL
 #' * [mcmcoutput-class] for the class definition
 #' * [subseq()] for generating sub-chains from MCMC samples
 #' * [mcmcpermute()] for a calling function
+NULL
+
+#' Extracts single samples from a multivariate Normal mixture
+#' 
+#' @description 
+#' Calling [extract()] on an `mcmcoutput` object with a multivariate Normal 
+#' mixture model extracts single samples. 
+#' 
+#' @details 
+#' This function simplifies the analysis of multivariate Normal mixtures that
+#' come along with matrices instead of vectors for component parameters as it
+#' extracts the mean matrix, the variance matrices and in addition the inverted
+#' variance matrices with a single call. In additon, it enriches the output
+#' object with metadata like the dimension of the data `r`, the number of
+#' components `K`, and the distribution (in this case `"normult`).
+#' 
+#' @param object An `mcmcoutput` or `mcmcoutputperm` object containing the MCMC 
+#'   samples.
+#' @param index An `integer` specifying the dimension to extract.
+#' @return An `mcmcextract` object containing the parameters, weights, and 
+#'   metadata of the extracted dimension. 
+#' @rdname extract-method
+#' @name extract  
+#' 
+#' @examples 
+#' # Generate a multivariate Normal mixture model.
+#' means <- matrix(c(1, 2, 2, 4), nrow = 2) 
+#' var1 <- matrix(c(1, 0.3, 0.3, 2), nrow=2)
+#' var2 <- matrix(c(3, 0.3, 0.3, 6), nrow=2)
+#' vars <- array(c(var1,var2), dim = c(2,2,2))
+#' f_model <- model(dist='normult', K = 2, r = 2, par = list(mu=means, sigma=vars))
+#' f_data <- simulate(f_model)
+#' # Define the hyper-parameters for MCMC sampling.
+#' f_mcmc <- mcmc(storepost = FALSE)
+#' # Define the prior distribution by relying on the data.
+#' f_prior <- priordefine(f_data, f_model)
+#' # Start MCMC sampling.
+#' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
+#' # Extract a single MCMC sample.
+#' f_output1 <- extract(f_output, index = 1000)
+#' 
+#' @seealso 
+#' * [mcmcoutput-class] for the definition of the `mcmcoutput` class
+#' * [mcmcoutputperm-class] for the definition of the `mcmcoutputperm` class
+#' * [mcmcextract-class] for the output class
 NULL

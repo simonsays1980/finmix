@@ -103,7 +103,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 #' @seealso 
 #' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes
@@ -163,7 +163,7 @@ setMethod(
 #' @param object An `normultmodelmoments` object.
 #' @returns The `B` slot of the `object`.
 #' @exportMethod getB
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
@@ -191,7 +191,7 @@ setMethod(
 #' @param object An `normultmodelmoments` object.
 #' @returns The `W` slot of the `object`.
 #' @exportMethod getW
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
@@ -219,7 +219,7 @@ setMethod(
 #' @param object An `normultmodelmoments` object.
 #' @returns The `Rdet` slot of the `object`.
 #' @exportMethod getRdet
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
@@ -247,7 +247,7 @@ setMethod(
 #' @param object An `normultmodelmoments` object.
 #' @returns The `Rtr` slot of the `object`.
 #' @exportMethod getRtr
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
@@ -274,7 +274,7 @@ setMethod(
 #' @param object An `normultmodelmoments` object.
 #' @returns The `Corr` slot of the `object`.
 #' @exportMethod getCorr
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("normult", weight = matrix(c(.3, .7), nrow = 1))
@@ -282,6 +282,7 @@ setMethod(
 #' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
 #' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
 #' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' f_moments       <- modelmoments(f_model) 
 #' getCorr(f_moments)
 #' 
 #' @seealso 

@@ -3118,7 +3118,7 @@ setReplaceMethod(
       ),
       call. = FALSE
       )
-    } else if (!all(is.numeric(obj@par$mu) || is.numeric(obj@par$mu))) {
+    } else if (!all(is.numeric(obj@par$mu) || !is.numeric(obj@par$mu))) {
       stop(paste("Wrong specification of slot @par: ",
         "parameters must be of type 'numeric ",
         "or 'integer'.",

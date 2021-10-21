@@ -581,7 +581,7 @@ setMethod(
 #'   sampling.
 #' @return The moments on the samples of a multivariate Normal mixture.
 #' @exportMethod moments
-#' @noRd
+#' @keywords internal
 setMethod(
   "moments", signature(object = "mcmcoutputfix"),
   function(object) {
@@ -600,7 +600,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `M` slot of the `object`.
 #' @exportMethod getM
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -634,7 +634,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `burnin` slot of the `object`.
 #' @exportMethod getBurnin
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -668,7 +668,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `ranperm` slot of the `object`.
 #' @exportMethod getRanperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -702,7 +702,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `par` slot of the `object`.
 #' @exportMethod getPar
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -736,7 +736,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `log` slot of the `object`.
 #' @exportMethod getLog
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -770,7 +770,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `model` slot of the `object`.
 #' @exportMethod getModel
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -805,7 +805,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `prior` slot of the `object`.
 #' @exportMethod getPrior
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.

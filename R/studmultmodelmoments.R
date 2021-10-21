@@ -103,7 +103,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "studmultmodelmoments",
   function(object) {
@@ -156,7 +156,7 @@ setMethod(
 #' 
 #' @param object An `studmultmodelmoments` object.
 #' @returns The `B` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' @exportMethod getB
 #' 
 #' @examples 
@@ -185,7 +185,7 @@ setMethod(
 #' @param object An `studmultmodelmoments` object.
 #' @returns The `W` slot of the `object`.
 #' @exportMethod getW
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))
@@ -213,7 +213,7 @@ setMethod(
 #' @param object An `studmultmodelmoments` object.
 #' @returns The `Rdet` slot of the `object`.
 #' @exportMethod getRdet
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))
@@ -241,7 +241,7 @@ setMethod(
 #' @param object An `studmultmodelmoments` object.
 #' @returns The `Rtr` slot of the `object`.
 #' @exportMethod getRtr
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))
@@ -269,7 +269,7 @@ setMethod(
 #' @param object An `studmultmodelmoments` object.
 #' @returns The `Corr` slot of the `object`.
 #' @exportMethod getCorr
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model         <- model("studmult", weight = matrix(c(.3, .7), nrow = 1))

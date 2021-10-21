@@ -46,7 +46,7 @@
 #'   returned as well. Optional.
 #' @param opt_ctrl A list with an element `max_iter` controlling the number of 
 #'   iterations in case the "Stephens1997a" re-labeling algorithm is chosen.
-#' @return An `mcmcest` object cotnaining the point estimates together with 
+#' @return An `mcmcest` object containing the point estimates together with 
 #'   additional information about the underlying finite mixture model, MCMC 
 #'   sampling hyper-parameters and the data. In case `permOut` is set to 
 #'   `TRUE`, the output of this function is a named list with an `mcmcest` 
@@ -632,8 +632,12 @@
     )
   } else {
     sdpar <- apply(obj@par$lambda, 2, sd, na.rm = TRUE)
-    sdweight <- apply(obj@weight, 2, sd, na.rm = TRUE)
-    identified <- list(par = list(lambda = sdpar), weight = sdweight)
+    if (!obj@model@indicfix) {
+      sdweight <- apply(obj@weight, 2, sd, na.rm = TRUE)
+      identified <- list(par = list(lambda = sdpar), weight = sdweight)
+    } else {
+      identified <- list(par = list(lambda = sdpar))
+    }
     sdlist <- list(identified = identified)
   }
   return(sdlist)
@@ -673,6 +677,8 @@
       unidentified = unidentified
     )
   } else {
+    # TODO: Make a difference between indicfix. Take the weight from the 
+    # model for fixed indicators.
     sdpar <- apply(obj@par$p, 2, sd, na.rm = TRUE)
     sdweight <- apply(obj@weight, 2, sd, na.rm = TRUE)
     identified <- list(
@@ -720,6 +726,8 @@
       unidentified = unidentified
     )
   } else {
+    # TODO: Make a difference between indicfix. Take the weight from the 
+    # model for fixed indicators.
     sdmu <- apply(obj@par$mu, 2, sd, na.rm = TRUE)
     sdsigma <- apply(obj@par$sigma, 2, sd, na.rm = TRUE)
     sdweight <- apply(obj@weight, 2, sd, na.rm = TRUE)
@@ -776,6 +784,8 @@
       unidentified = unidentified
     )
   } else {
+    # TODO: Make a difference between indicfix. Take the weight from the 
+    # model for fixed indicators.
     sdmu <- apply(obj@par$mu, 2, sd, na.rm = TRUE)
     sdsigma <- apply(obj@par$sigma, 2, sd, na.rm = TRUE)
     sddf <- apply(obj@par$sigma, 2, sd, na.rm = TRUE)
@@ -856,6 +866,8 @@
       unidentified = unidentified
     )
   } else {
+    # TODO: Make a difference between indicfix. Take the weight from the 
+    # model for fixed indicators.
     if (K == 1) {
       sdmu <- cov(obj@par$mu)
       sdsigma <- cov(obj@par$sigma)
@@ -951,6 +963,8 @@
       unidentified = unidentified
     )
   } else {
+    # TODO: Make a difference between indicfix. Take the weight from the 
+    # model for fixed indicators.
     if (K == 1) {
       sdmu <- cov(obj@par$mu)
       sdsigma <- cov(obj@par$sigma)

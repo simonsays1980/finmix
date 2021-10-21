@@ -169,14 +169,14 @@
 #' Checks for parameters in a `prior` object
 #' 
 #' @description 
-#' Calling [hasPriorPar()] checks if `model`-appropriate parameters are stored 
+#' Calling `hasPriorPar()` checks if `model`-appropriate parameters are stored 
 #' in the `prior` object.
 #' 
 #' @param object A `prior` object containing the specifications for the prior.
 #' @param model A `model` object containing the specifications for the model.
 #' @param verbose A logical indicating, if the output should be verbose.
 #' @exportMethod hasPriorPar
-#' @noRd 
+#' @keywords internal 
 #' 
 #' @examples 
 #' # Define a Poisson mixture model.
@@ -280,7 +280,7 @@ setMethod(
 #' @param s A numeric specifying the standard deviation `s` for the 
 #'   Metropolis-Hastings proposal. 
 #' @rdname generatePrior
-#' @keywords internal
+#' @noRd
 #' 
 #' @seealso 
 #' * [prior-class] for the class definition
@@ -333,7 +333,8 @@ setMethod(
 #' @param object A `prior` object.
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
-#' @noRd
+#' @exportMethod show
+#' @keywords internal
 #' @seealso 
 #' * [prior-class] for the class definition
 #' * [prior()] for the basic constructor of the class
@@ -366,7 +367,7 @@ setMethod(
 #' @param object An `prior` object.
 #' @returns The `weight` slot of the `object`.
 #' @exportMethod getWeight
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a prior object. 
@@ -388,7 +389,7 @@ setMethod(
 #' @param object An `prior` object.
 #' @returns The `par` slot of the `object`.
 #' @exportMethod getPar
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a prior object. 
@@ -410,7 +411,7 @@ setMethod(
 #' @param object An `prior` object.
 #' @returns The `type` slot of the `object`.
 #' @exportMethod getType
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a prior object. 
@@ -432,7 +433,7 @@ setMethod(
 #' @param object An `prior` object.
 #' @returns The `hier` slot of the `object`.
 #' @exportMethod getHier
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a prior object. 
@@ -455,7 +456,7 @@ setMethod(
 #' @param value An integer defining the new value for the `@@weight` slot.
 #' @returns None.
 #' @exportMethod setWeight<-
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a prior object.
@@ -479,7 +480,7 @@ setReplaceMethod(
 #' @param value An integer defining the new value for the `@@par` slot.
 #' @returns None.
 #' @exportMethod setPar<-
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a prior object.
@@ -504,7 +505,7 @@ setReplaceMethod(
 #' @param value An integer defining the new value for the `@@type` slot.
 #' @returns None.
 #' @exportMethod setType<-
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a prior object.
@@ -528,7 +529,7 @@ setReplaceMethod(
 #' @param value An integer defining the new value for the `@@hier` slot.
 #' @returns None.
 #' @exportMethod setHier<-
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a prior object.

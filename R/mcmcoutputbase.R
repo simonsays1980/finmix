@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
-# TODO: CHange examples to storepost = FALSE
-
 #' Finmix `mcmcoutput` base class for unknown indicators
 #' 
 #' @description
@@ -510,7 +508,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `weight` slot of the `object`.
 #' @exportMethod getWeight
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -545,7 +543,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `entropy` slot of the `object`.
 #' @exportMethod getEntropy
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -580,7 +578,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `ST` slot of the `object`.
 #' @exportMethod getST
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -614,7 +612,7 @@ setMethod(
 #' 
 #' @param object An `mcmcoutput` object.
 #' @returns The `S` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -649,7 +647,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `NK` slot of the `object`.
 #' @exportMethod getNK
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -684,7 +682,7 @@ setMethod(
 #' @param object An `mcmcoutput` object.
 #' @returns The `clust` slot of the `object`.
 #' @exportMethod getClust
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -1463,7 +1461,7 @@ setMethod(
     index.S <- index[(ms + 1):M]
     N <- dim(obj@S)[1]
     if (any(index.S)) {
-      obj@S <- array(obj@S[, index.S], dim = c(N, storeS))
+      obj@S <- array(obj@S[, index.S], dim = c(N, sum(index.S)))
     } else {
       obj@S <- as.array(NA)
     }
@@ -1493,7 +1491,7 @@ setMethod(
   K <- ncol(index)
   storeS <- ifelse(!all(is.na(obj@S)), dim(obj@S)[2], 0)
   if (storeS != 0) {
-    index.S <- matrix(index[(M - storeS + 1):M, ],
+    index.S <- matrix(index[(M - min(storeS, M) + 1):M, ],
       ncol = K, byrow = TRUE
     )
     obj@S <- swapInd_cc(obj@S, index.S)

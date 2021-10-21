@@ -15,7 +15,7 @@
 #' 
 #' @exportClass mcmcextract
 #' @name mcmcextract-class
-#' @noRd
+#' @keywords internal
 .mcmcextract <- setClass("mcmcextract",
   representation(
     dist = "character",

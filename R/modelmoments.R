@@ -91,7 +91,7 @@ setClass("modelmoments",
 #' @param object A `modelmoments` object.
 #' @returns The `mean` slot of the `object`.
 #' @exportMethod getMean
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
@@ -114,7 +114,7 @@ setMethod(
 #' @param object A `modelmoments` object.
 #' @returns The `var` slot of the `object`.
 #' @exportMethod getVar
-#' @noRd 
+#' @keywords internal 
 #' @examples 
 #' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
 #'                  weight=matrix(c(0.3, 0.7), nrow=1))
@@ -136,7 +136,7 @@ setMethod(
 #' @param object A `modelmoments` object.
 #' @returns The `model` slot of the `object`.
 #' @exportMethod getModel
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 

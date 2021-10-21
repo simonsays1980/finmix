@@ -493,7 +493,7 @@ setMethod(
 #' @param object An `mcmcoutputhier` object.
 #' @returns The `hyper` slot of the `object`.
 #' @exportMethod getHyper
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.

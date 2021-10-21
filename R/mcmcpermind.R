@@ -87,7 +87,7 @@
 #' @param object An `mcmcpermind` object.
 #' @returns The `relabel` slot of the `object`.
 #' @exportMethod getRelabel
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getRelabel(mcmcperm)}
@@ -109,7 +109,7 @@ setMethod(
 #' @param object An `mcmcpermind` object.
 #' @returns The `weightperm` slot of the `object`.
 #' @exportMethod getWeightperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getWeightperm(mcmcperm)}
@@ -131,7 +131,7 @@ setMethod(
 #' @param object An `mcmcpermind` object.
 #' @returns The `entropyperm` slot of the `object`.
 #' @exportMethod getEntropyperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getEntropyperm(mcmcperm)}
@@ -153,7 +153,7 @@ setMethod(
 #' @param object An `mcmcpermind` object.
 #' @returns The `STperm` slot of the `object`.
 #' @exportMethod getSTperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getSTperm(mcmcperm)}
@@ -175,7 +175,7 @@ setMethod(
 #' @param object An `mcmcpermind` object.
 #' @returns The `Sperm` slot of the `object`.
 #' @exportMethod getSperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getSperm(mcmcperm)}
@@ -197,7 +197,7 @@ setMethod(
 #' @param object An `mcmcpermind` object.
 #' @returns The `NKperm` slot of the `object`.
 #' @exportMethod getNKperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getNKperm(mcmcperm)}

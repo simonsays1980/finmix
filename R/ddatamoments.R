@@ -112,7 +112,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 #' @seealso 
 #' * [datamoments-class] for the parent class definition
 #' * [datamoments()] for the mutual constructor of all datamoments classes
@@ -160,7 +160,7 @@ setMethod(
 #' 
 #' @param object An `ddatamoments` object.
 #' @returns The `smoments` slot of the `object`.
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -184,11 +184,12 @@ setMethod(
 
 #' Getter method of `ddatamoments` class.
 #' 
-#' Returns the `smoments` slot.
+#' Returns the `factorial` slot.
 #' 
 #' @param object An `ddatamoments` object.
-#' @returns The `smoments` slot of the `object`.
-#' @noRd
+#' @returns The `factorial` slot of the `object`.
+#' @exportMethod getFactorial
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -212,11 +213,11 @@ setMethod(
 
 #' Getter method of `ddatamoments` class.
 #' 
-#' Returns the `smoments` slot.
+#' Returns the `over` slot.
 #' 
 #' @param object An `ddatamoments` object.
-#' @returns The `smoments` slot of the `object`.
-#' @noRd
+#' @returns The `over` slot of the `object`.
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -240,11 +241,11 @@ setMethod(
 
 #' Getter method of `ddatamoments` class.
 #' 
-#' Returns the `smoments` slot.
+#' Returns the `zero` slot.
 #' 
 #' @param object An `ddatamoments` object.
-#' @returns The `smoments` slot of the `object`.
-#' @noRd
+#' @returns The `zero` slot of the `object`.
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.

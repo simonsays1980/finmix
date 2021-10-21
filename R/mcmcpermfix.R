@@ -69,7 +69,7 @@
 #' @param object An `mcmcpermfix` object.
 #' @returns The `Mperm` slot of the `object`.
 #' @exportMethod getMperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getMperm(mcmcperm)}
@@ -91,7 +91,7 @@ setMethod(
 #' @param object An `mcmcpermfix` object.
 #' @returns The `parperm` slot of the `object`.
 #' @exportMethod getParperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getParperm(mcmcperm)}
@@ -113,7 +113,7 @@ setMethod(
 #' @param object An `mcmcpermfix` object.
 #' @returns The `logperm` slot of the `object`.
 #' @exportMethod getLogperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getLogperm(mcmcperm)}

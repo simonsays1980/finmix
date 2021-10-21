@@ -58,7 +58,7 @@
 #' @param object An `mcmcpermindpost` object.
 #' @returns The `postperm` slot of the `object`.
 #' @exportMethod getPostperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{getPostperm(mcmcperm)}

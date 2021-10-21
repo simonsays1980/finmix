@@ -485,7 +485,7 @@ setMethod(
 #' @param object An `mcmcoutputhier` object.
 #' @returns The `post` slot of the `object`.
 #' @exportMethod getPost
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.

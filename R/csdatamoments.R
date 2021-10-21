@@ -125,7 +125,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "csdatamoments",
   function(object) {
@@ -165,7 +165,7 @@ setMethod(
 #' @param object An `csdatamoments` object.
 #' @returns The `gmoments` slot of the `object`.
 #' @exportMethod getGmoments
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -197,7 +197,7 @@ setMethod(
 #' @param object An `csdatamoments` object.
 #' @returns The `WK` slot of the `object`.
 #' @exportMethod getWK
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -229,7 +229,7 @@ setMethod(
 #' @param object An `csdatamoments` object.
 #' @returns The `var` slot of the `object`.
 #' @exportMethod getVar
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -292,7 +292,7 @@ setMethod(
 #' @param object An `csdatamoments` object.
 #' @returns The `W` slot of the `object`.
 #' @exportMethod getW
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -324,7 +324,7 @@ setMethod(
 #' @param object An `csdatamoments` object.
 #' @returns The `T` slot of the `object`.
 #' @exportMethod getT
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -356,7 +356,7 @@ setMethod(
 #' @param object An `csdatamoments` object.
 #' @returns The `R` slot of the `object`.
 #' @exportMethod getR
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -388,7 +388,7 @@ setMethod(
 #' @param object An `csdatamoments` object.
 #' @returns The `Rtr` slot of the `object`.
 #' @exportMethod getRtr
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -420,7 +420,7 @@ setMethod(
 #' @param object An `csdatamoments` object.
 #' @returns The `Rdet` slot of the `object`.
 #' @exportMethod getRdet
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.
@@ -452,7 +452,7 @@ setMethod(
 #' @param object An `csdatamoments` object.
 #' @returns The `fdata` slot of the `object`.
 #' @exportMethod getFdata
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.

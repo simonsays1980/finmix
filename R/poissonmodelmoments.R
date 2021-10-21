@@ -88,7 +88,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 #' @seealso
 #' * [modelmoments-class] for the base class for model moments
 #' * [modelmoments()] for the constructor of `modelmoments` classes

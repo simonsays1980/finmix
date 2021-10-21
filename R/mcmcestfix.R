@@ -44,7 +44,7 @@
 #' @slot bml A named list containing the parameter estimates of the BML. The 
 #'   element `par` is a named list and contains the component parameters and 
 #'   the element `weight` contains the weights. 
-#' @slot A named list containing the parameter estimates of the IEAVG. The 
+#' @slot ieavg A named list containing the parameter estimates of the IEAVG. The 
 #'   element `par` is a named list and contains the component parameters and 
 #'   the element `weight` contains the weights.
 #' @slot sdpost A named list containing the standard deviations of the 
@@ -99,7 +99,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "mcmcestfix",
   function(object) {
@@ -145,7 +145,7 @@ setMethod(
 #' @returns A console output listing the formatted slots and summary 
 #'   information about each of them. 
 #' @exportMethod Summary
-#' @noRd 
+#' @keywords internal 
 setMethod(
   "Summary", "mcmcestfix",
   function(x, ..., na.rm = FALSE) {
@@ -208,7 +208,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `dist` slot of the `object`.
 #' @exportMethod getDist
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -224,7 +224,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getDist(f_output)
+#' getDist(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -244,7 +244,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `K` slot of the `object`.
 #' @exportMethod getK
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -260,7 +260,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getK(f_output)
+#' getK(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -280,7 +280,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `indicmod` slot of the `object`.
 #' @exportMethod getIndicmod
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -296,7 +296,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getIndicmod(f_output)
+#' getIndicmod(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -316,7 +316,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `burnin` slot of the `object`.
 #' @exportMethod getBurnin
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -332,7 +332,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getBurnin(f_output)
+#' getBurnin(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -352,7 +352,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `M` slot of the `object`.
 #' @exportMethod getM
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -368,7 +368,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getM(f_output)
+#' getM(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -388,7 +388,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `ranperm` slot of the `object`.
 #' @exportMethod getRanperm
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -404,7 +404,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getRanperm(f_output)
+#' getRanperm(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -424,7 +424,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `relabel` slot of the `object`.
 #' @exportMethod getRelabel
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -440,7 +440,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getRelabel(f_output)
+#' getRelabel(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -460,7 +460,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `map` slot of the `object`.
 #' @exportMethod getMap
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -476,7 +476,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getMap(f_output)
+#' getMap(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -496,7 +496,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `bml` slot of the `object`.
 #' @exportMethod getBml
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -512,7 +512,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getBml(f_output)
+#' getBml(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -532,7 +532,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `ieavg` slot of the `object`.
 #' @exportMethod getIeavg
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -548,7 +548,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getIeavg(f_output)
+#' getIeavg(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 
@@ -568,7 +568,7 @@ setMethod(
 #' @param object An `mcmcestfix` object.
 #' @returns The `sdpost` slot of the `object`.
 #' @exportMethod getSdpost
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -584,7 +584,7 @@ setMethod(
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' f_est <- mcmcestimate(f_output)
 #' # Get the slot.
-#' getIeavg(f_output)
+#' getIeavg(f_est)
 #' 
 #' @seealso 
 #' * [mcmcestind-class] for the corresponding class for models 

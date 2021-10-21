@@ -19,10 +19,10 @@
 #' Finmix `dataclass` class
 #' 
 #' @description
-#' Stores objects to classify observations using a fully specified mixture 
-#' model. If the indicators a finite mixture model is fully specified as then 
-#' the likelihood can be calculated for each observation depending on the 
-#' component it stems from. 
+#' Stores objects to classify observations using a fully specified mixture
+#' model. If the indicators are known a finite mixture model is fully specified
+#' as then the likelihood can be calculated for each observation depending on
+#' the component it stems from.
 #' 
 #' @slot logpy An array containing the logarithmized 
 #' @slot prob An array storing the probability classification matrix that 
@@ -76,13 +76,13 @@
 #' 
 #' Calling [dataclass()] classifies data using a fully specified mixture model. 
 #' Henceforth, the finite mixture model `model` must be fully specified, i.e. 
-#' containing parameters in slot `@@par`, weights in slot `@@weight` and 
-#' indicators in slot `@@S` of the corresponding `fdata` object.
+#' containing parameters in slot `par`, weights in slot `weight` and 
+#' indicators in slot `S` of the corresponding `fdata` object.
 #' 
-#' @param fdata An `fdata` object containing observations in slot `@@y` and 
-#'   indicators in slot `@@S`.
-#' @param model A `model` object containing parameters in slot  `@@par` and 
-#'   and weights in slot `@@weight`.
+#' @param fdata An `fdata` object containing observations in slot `y` and 
+#'   indicators in slot `S`.
+#' @param model A `model` object containing parameters in slot  `par` and 
+#'   and weights in slot `weight`.
 #' @param simS A logical defining, if the indicators `S` should be simulated.
 #' @return A `dataclass` object containing the classification matrix, 
 #'   model log-likelihood, entropy and indicators, if the latter have been 
@@ -92,8 +92,9 @@
 #' @seealso 
 #' * [dataclass-class] for the class definition
 #' 
-#' #' @references 
-#' Frühwirth-Schnatter, S. (2006), "Finite Mixture and Markov Switching Models"
+#' @references 
+#' * Frühwirth-Schnatter, S. (2006), "Finite Mixture and Markov Switching
+#'   Models"
 "dataclass" <- function(fdata = NULL, model = NULL, simS = FALSE) {
   .check.fdata.model.Dataclass(fdata, model)
   .check.model.Dataclass(model)
@@ -132,7 +133,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod  show
-#' @noRd
+#' @keywords internal
 #' @seealso 
 #' * [dataclass-class] for the class definition
 #' * [dataclass()] for the class constructor
@@ -180,7 +181,8 @@ setMethod(
 #' 
 #' @param object An `dataclass` object.
 #' @returns The `logpy` slot of the `object`.
-#' @noRd
+#' @exportMethod getLogpy
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -207,7 +209,8 @@ setMethod(
 #' 
 #' @param object An `dataclass` object.
 #' @returns The `prob` slot of the `object`.
-#' @noRd
+#' @exportMethod getProb
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -234,7 +237,8 @@ setMethod(
 #' 
 #' @param object An `dataclass` object.
 #' @returns The `mixlik` slot of the `object`.
-#' @noRd
+#' @exportMethod getMixlik
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -261,7 +265,8 @@ setMethod(
 #' 
 #' @param object An `dataclass` object.
 #' @returns The `entropy` slot of the `object`.
-#' @noRd
+#' @exportMethod getEntropy
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -270,7 +275,7 @@ setMethod(
 #' f_data <- simulate(f_model)
 #' # Classify observations
 #' f_dataclass <- dataclass(f_data, f_model, simS = FALSE)
-#' getEntropy(f_datamoms)
+#' getEntropy(f_dataclass)
 #' 
 #' @seealso 
 #' * [dataclass-class] for the base class
@@ -289,7 +294,8 @@ setMethod(
 #' 
 #' @param object An `dataclass` object.
 #' @returns The `loglikcd` slot of the `object`.
-#' @noRd
+#' @exportMethod getLoglikcd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -317,7 +323,8 @@ setMethod(
 #' 
 #' @param object An `dataclass` object.
 #' @returns The `postS` slot of the `object`.
-#' @noRd
+#' @exportMethod getPostS
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate a Poisson mixture model with two components.
@@ -385,7 +392,7 @@ setMethod(
 #' For internal usage only. This function checks if the `model` object passed
 #' in by the user is first of all indeed a finmix `model` object. Furthermore, 
 #' it is checked if the model is fully specified meaning that parameters are 
-#' defined in slot `@@par` and weights in slot `@@weight`. 
+#' defined in slot `par` and weights in slot `weight`. 
 #' 
 #' @param model.obj A `model` object. Must be fully specified.
 #' @return None. If the checks do not pass, an error is thrown. 
@@ -414,11 +421,11 @@ setMethod(
 #' 
 #' For internal usage only. This function checks if the indicators stored in 
 #' the `fdata` object are correctly specified meaning if the indicator values 
-#' are indeed from as many components as specifed in the slot `@@K` of the 
+#' are indeed from as many components as specifed in the slot `K` of the 
 #' corresponding model object.  
 #' 
 #' @param fdata.obj An `fdata` object containing the indicators in its slot 
-#'   `@@S`.
+#'   `S`.
 #' @param model.obj A `model` object. Must be fully specified. 
 #' @return None. If the checks do not pass, an error is thrown. 
 #' @noRd
@@ -441,17 +448,17 @@ setMethod(
 #' Checking Student-t and normal `model` objects for `dataclass` constructor 
 #' 
 #' For internal usage only. Thiss function checks if the `model` object passed
-#' in by the user is correctly specified in case the slot `@@dist` is one of 
+#' in by the user is correctly specified in case the slot `dist` is one of 
 #' `normult` or `studmult`. Correctly specified for data classification means 
-#' that the slots `@@sigmainv` and `@@logdet` are non-null. `@@sigmainv` is the 
+#' that the slots `sigmainv` and `logdet` are non-null. `sigmainv` is the 
 #' inverse of the variance-covariance matrix of a multivariate normal or 
-#' Student-t distribution. Slot `@@logdet` defines the logarithm of the 
+#' Student-t distribution. Slot `logdet` defines the logarithm of the 
 #' determinant of the inverse of the variance-covariance matrix. If these slots 
 #' are not specified this function specifies these slots for the user.
 #' 
 #' @param model.obj A `model` object. Must be fully specified.
 #' @return The passed-in `model` object by the user possibly enriched by slots 
-#'   `@@sigmainv` and `@@logdet`. If the checks do not pass, an error is thrown. 
+#'   `sigmainv` and `logdet`. If the checks do not pass, an error is thrown. 
 #' @noRd
 #' 
 #' @seealso 
@@ -491,7 +498,7 @@ setMethod(
 #' For internal usage only. This function calls the appropriate function for 
 #' each finite mixture model specified in `model.obj`. 
 #' 
-#' @param fdata.obj An `fdata` object with non-empty slot `@@y`.
+#' @param fdata.obj An `fdata` object with non-empty slot `y`.
 #' @param model.obj A `model` object. Must be fully specified.
 #' @return A list containing the likelihood, the maximum likelihood and the 
 #'   log-likelihood.
@@ -563,7 +570,7 @@ setMethod(
 #' and, if specified, simulates indicators `S`. A corresponding classification 
 #' for a Markov indicator model is not (yet) implemented.
 #' 
-#' @param fdata.obj An `fdata` object with non-empty slot `@@y`.
+#' @param fdata.obj An `fdata` object with non-empty slot `y`.
 #' @param model.obj A `model` object. Must be fully specified.
 #' @param lik.list A list containing the likelihood, maximum likelihood and 
 #'   log-likelihood for the data using the specified model. 
@@ -634,7 +641,7 @@ setMethod(
 #' @description
 #' For internal usage only. This function computes the mixture likelihood for 
 #' the finite mixture model specified in `model.obj` using the likelihoods 
-#' of each single component and the weights specified in slot `@@weight` of the 
+#' of each single component and the weights specified in slot `weight` of the 
 #' `model` object.  
 #' 
 #' @param model.obj A `model` object. Must be fully specified.
@@ -711,9 +718,9 @@ setMethod(
 #' For internal usage only. This function classifies data from a finite 
 #' mixture model with fixed indicators.
 #' 
-#' @param fdata.obj An `fdata` object with non-empty slot `@@y`.
+#' @param fdata.obj An `fdata` object with non-empty slot `y`.
 #' @param model.obj A `model` object. Must be fully specified. The slot 
-#'   `@@indicfix` must be `TRUE`.
+#'   `indicfix` must be `TRUE`.
 #' @param lik.list A list containing the likelihood, maximum likelihood, and 
 #'   log-likelihood for the data in the `fdata` object.
 #' @return An object of class `dataclass` containing the likelihood values for 

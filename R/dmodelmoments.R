@@ -54,7 +54,8 @@
 #' 
 #' @param object An `dmodelmoments` object.
 #' @returns The `higher` slot of the `object`.
-#' @noRd
+#' @exportMethod getHigher
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
@@ -75,7 +76,8 @@ setMethod("getOver", "dmodelmoments", function(object) {
 #' 
 #' @param object An `dmodelmoments` object.
 #' @returns The `skewness` slot of the `object`.
-#' @noRd
+#' @exportMethod getSkewness
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
@@ -96,7 +98,8 @@ setMethod("getFactorial", "dmodelmoments", function(object) {
 #' 
 #' @param object An `dmodelmoments` object.
 #' @returns The `kurtosis` slot of the `object`.
-#' @noRd
+#' @exportMethod getKurtosis
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 

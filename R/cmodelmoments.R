@@ -59,10 +59,10 @@
 #' @param object An `cmodelmoments` object.
 #' @returns The `higher` slot of the `object`.
 #' @exportMethod getHigher
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
-#' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
+#' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
 #'                  weight=matrix(c(0.3, 0.7), nrow=1))
 #' f_moments <- modelmoments(f_model)
 #' getHigher(f_moments)
@@ -81,7 +81,7 @@ setMethod("getHigher", "cmodelmoments", function(object) {
 #' @param object An `cmodelmoments` object.
 #' @returns The `skewness` slot of the `object`.
 #' @exportMethod getSkewness
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
@@ -103,7 +103,7 @@ setMethod("getSkewness", "cmodelmoments", function(object) {
 #' @param object An `cmodelmoments` object.
 #' @returns The `kurtosis` slot of the `object`.
 #' @exportMethod getKurtosis
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 

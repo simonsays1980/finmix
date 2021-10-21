@@ -21,25 +21,39 @@
 NULL
 
 ## Class 'model' --------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("simulate", function(model, N = 100, varargin, seed = 0) standardGeneric("simulate"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("plotPointProc", function(x, dev = TRUE, ...) standardGeneric("plotPointProc"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("hasWeight", function(object, verbose = FALSE) standardGeneric("hasWeight"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("hasT", function(object, verbose = FALSE) standardGeneric("hasT"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("hasPar", function(object, verbose = FALSE) standardGeneric("hasPar"))
 
-#' @noRd 
+#' @export
+#' @docType methods
+#' @keywords internal 
 setGeneric("mixturemar", function(object, J) standardGeneric("mixturemar"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getDist", function(object) standardGeneric("getDist"))
 
 #' @noRd
@@ -123,7 +137,9 @@ setGeneric("getZero", function(object) standardGeneric("getZero"))
 #' @noRd
 setGeneric("generateMoments", function(object) standardGeneric("generateMoments"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getB", function(object) standardGeneric("getB"))
 
 #' @noRd
