@@ -27,3 +27,4 @@ if(hasT(model)) {cat('Has repetitions.')}
 \seealso{
 \code{model}
 }
+\keyword{internal}

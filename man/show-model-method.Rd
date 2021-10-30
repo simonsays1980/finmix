@@ -22,5 +22,8 @@ show(f_model)
 
 }
 \seealso{
-\code{model}
+\itemize{
+\item \linkS4class{model} for the class definition
 }
+}
+\keyword{internal}

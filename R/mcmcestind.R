@@ -118,7 +118,7 @@
 #' * `getMap()` returns the MAP estimates.
 #' * `getBml()` returns the BML estimates.
 #' * `getEavg()` returns the EAVG estimates. 
-#' * `getIEAVG()` returns the identified EAVG estimates.
+#' * `getIeavg()` returns the identified EAVG estimates.
 #' * `getSdpost()` returns the `sdpost`.
 #' 
 #' @slot dist A character specifying the distribution family of the mixture 

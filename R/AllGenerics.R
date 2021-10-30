@@ -56,383 +56,620 @@ setGeneric("mixturemar", function(object, J) standardGeneric("mixturemar"))
 #' @keywords internal
 setGeneric("getDist", function(object) standardGeneric("getDist"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getR", function(object) standardGeneric("getR"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getK", function(object) standardGeneric("getK"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getWeight", function(object) standardGeneric("getWeight"))
 
-#' @noRd
+#' @export 
+#' @docType methods
+#' @keywords internal
 setGeneric("getPar", function(object) standardGeneric("getPar"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getIndicmod", function(object) standardGeneric("getIndicmod"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getIndicfix", function(object) standardGeneric("getIndicfix"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getT", function(object) standardGeneric("getT"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setDist<-", function(object, value) standardGeneric("setDist<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setR<-", function(object, value) standardGeneric("setR<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setK<-", function(object, value) standardGeneric("setK<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setWeight<-", function(object, value) standardGeneric("setWeight<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setPar<-", function(object, value) standardGeneric("setPar<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setIndicmod<-", function(object, value) standardGeneric("setIndicmod<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setIndicfix<-", function(object, value) standardGeneric("setIndicfix<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setT<-", function(object, value) standardGeneric("setT<-"))
 
 ## Class 'modelmoments' --------------------------------------------
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getMean", function(object) standardGeneric("getMean"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getVar", function(object) standardGeneric("getVar"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getModel", function(object) standardGeneric("getModel"))
 
 ## Class 'cmodelmoments' -------------------------------------------
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getHigher", function(object) standardGeneric("getHigher"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getSkewness", function(object) standardGeneric("getSkewness"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getKurtosis", function(object) standardGeneric("getKurtosis"))
 
 ## Class 'dmodelmoments' -------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getOver", function(object) standardGeneric("getOver"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getFactorial", function(object) standardGeneric("getFactorial"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getZero", function(object) standardGeneric("getZero"))
 
 ## Class 'normultmodelmoments' -------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
+#' @aliases generateMoments,cmodelmoments-class,csmodelmoments-class,
+#' exponentialmodelmoments,binomialmodelmoments-class
 setGeneric("generateMoments", function(object) standardGeneric("generateMoments"))
 
 #' @export
 #' @docType methods
 #' @keywords internal
+#' @aliases getB,cmodelmoments-class,exponentialmodelmoments-class
 setGeneric("getB", function(object) standardGeneric("getB"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getW", function(object) standardGeneric("getW"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getRdet", function(object) standardGeneric("getRdet"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getRtr", function(object) standardGeneric("getRtr"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getCorr", function(object) standardGeneric("getCorr"))
 
 ## Class 'exponentialmodelmoments' ---------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getExtrabinvar", function(object) standardGeneric("getExtrabinvar"))
 
 ## Class 'fdata' ----------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("hasY", function(object, verbose = FALSE) standardGeneric("hasY"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("hasS", function(object, verbose = FALSE) standardGeneric("hasS"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("hasExp", function(object, verbose = FALSE) standardGeneric("hasExp"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("hasT", function(object, verbose = FALSE) standardGeneric("hasT"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getColY", function(object) standardGeneric("getColY"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getRowY", function(object) standardGeneric("getRowY"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getColS", function(object) standardGeneric("getColS"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getRowS", function(object) standardGeneric("getRowS"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getColExp", function(object) standardGeneric("getColExp"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getRowExp", function(object) standardGeneric("getRowExp"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getColT", function(object) standardGeneric("getColT"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getRowT", function(object) standardGeneric("getRowT"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getY", function(object) standardGeneric("getY"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getBycolumn", function(object) standardGeneric("getBycolumn"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getN", function(object) standardGeneric("getN"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getS", function(object) standardGeneric("getS"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getName", function(object) standardGeneric("getName"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getType", function(object) standardGeneric("getType"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getSim", function(object) standardGeneric("getSim"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getExp", function(object) standardGeneric("getExp"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setY<-", function(object, value) standardGeneric("setY<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setN<-", function(object, value) standardGeneric("setN<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setS<-", function(object, value) standardGeneric("setS<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setBycolumn<-", function(object, value) standardGeneric("setBycolumn<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setName<-", function(object, value) standardGeneric("setName<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setType<-", function(object, value) standardGeneric("setType<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setSim<-", function(object, value) standardGeneric("setSim<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setExp<-", function(object, value) standardGeneric("setExp<-"))
 
 ## Class 'groupmoments' ----------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getNK", function(object) standardGeneric("getNK"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getWK", function(object) standardGeneric("getWK"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getFdata", function(object) standardGeneric("getFdata"))
 
 ## Class 'sdatamoments' ----------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getGmoments", function(object) standardGeneric("getGmoments"))
 
 ## Class 'cdatamoments' ---------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getSmoments", function(object) standardGeneric("getSmoments"))
 
 ## Class 'prior' -----------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("hasPriorPar", function(object, model, verbose = FALSE) standardGeneric("hasPriorPar"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("hasPriorWeight", function(object, model, verbose = FALSE) standardGeneric("hasPriorWeight"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("generatePrior", function(object, ...) standardGeneric("generatePrior"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getHier", function(object) standardGeneric("getHier"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setHier<-", function(object, value) standardGeneric("setHier<-"))
 
 ## Class 'mcmc' -------------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getBurnin", function(object) standardGeneric("getBurnin"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getM", function(object) standardGeneric("getM"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getStartpar", function(object) standardGeneric("getStartpar"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getStoreS", function(object) standardGeneric("getStoreS"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getStorepost", function(object) standardGeneric("getStorepost"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getRanperm", function(object) standardGeneric("getRanperm"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setBurnin<-", function(object, value) standardGeneric("setBurnin<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setM<-", function(object, value) standardGeneric("setM<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setStartpar<-", function(object, value) standardGeneric("setStartpar<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setStoreS<-", function(object, value) standardGeneric("setStoreS<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setStorepost<-", function(object, value) standardGeneric("setStorepost<-"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("setRanperm<-", function(object, value) standardGeneric("setRanperm<-"))
 
 ## Class 'dataclass' ----------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getLogpy", function(object) standardGeneric("getLogpy"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getProb", function(object) standardGeneric("getProb"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getMixlik", function(object) standardGeneric("getMixlik"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getEntropy", function(object) standardGeneric("getEntropy"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getPostS", function(object) standardGeneric("getPostS"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getLoglikcd", function(object) standardGeneric("getLoglikcd"))
 
 ## Class 'mcmcextract' --------------------------------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("moments", function(object) standardGeneric("moments"))
 
 ## Class 'mcmcoutputfix' ------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("plotTraces", function(x, dev = TRUE, lik = 1, col = FALSE, ...) standardGeneric("plotTraces"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("plotHist", function(x, dev = TRUE, ...) standardGeneric("plotHist"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("plotDens", function(x, dev = TRUE, ...) standardGeneric("plotDens"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("plotSampRep", function(x, dev = TRUE, ...) standardGeneric("plotSampRep"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("plotPostDens", function(x, dev = TRUE, ...) standardGeneric("plotPostDens"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("subseq", function(object, index) standardGeneric("subseq"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("swapElements", function(object, index) standardGeneric("swapElements"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("extract", function(object, index) standardGeneric("extract"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getLog", function(object) standardGeneric("getLog"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getPrior", function(object) standardGeneric("getPrior"))
 
 ## Class 'mcmcoutputhier' -----------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getHyper", function(object) standardGeneric("getHyper"))
 
 ## Class 'mcmcoutputpost' -----------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getPost", function(object) standardGeneric("getPost"))
 
 ## Class 'mcmcoutputbase' -----------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getST", function(object) standardGeneric("getST"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getClust", function(object) standardGeneric("getClust"))
 
 ## Class 'mcmcpermfix' ---------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getMperm", function(object) standardGeneric("getMperm"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getParperm", function(object) standardGeneric("getParperm"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getLogperm", function(object) standardGeneric("getLogperm"))
 
 ## Class 'mcmcpermfixhier' -----------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getHyperperm", function(object) standardGeneric("getHyperperm"))
 
 ## Class 'mcmcpermfixpost' -----------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getPostperm", function(object) standardGeneric("getPostperm"))
 
 ## Class 'mcmcpermind' ---------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getRelabel", function(object) standardGeneric("getRelabel"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getWeightperm", function(object) standardGeneric("getWeightperm"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getEntropyperm", function(object) standardGeneric("getEntropyperm"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getSTperm", function(object) standardGeneric("getSTperm"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getSperm", function(object) standardGeneric("getSperm"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getNKperm", function(object) standardGeneric("getNKperm"))
 
 ## Class 'mcmcestfix' -----------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getMap", function(object) standardGeneric("getMap"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getBml", function(object) standardGeneric("getBml"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getIeavg", function(object) standardGeneric("getIeavg"))
 
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getSdpost", function(object) standardGeneric("getSdpost"))
 
 ## Class 'mcmcestind' ------------------------------------------------------
-#' @noRd
+#' @export
+#' @docType methods
+#' @keywords internal
 setGeneric("getEavg", function(object) standardGeneric("getEavg"))

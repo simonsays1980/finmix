@@ -49,7 +49,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 "mcmcstart" <- function(fdata, model, varargin) {
@@ -123,7 +123,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".check.fdata.model.Mcmcstart" <- function(fdata.obj, model.obj) {
@@ -162,7 +162,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".check.mcmc.Mcmcstart" <- function(mcmc.obj) {
@@ -193,7 +193,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".parameters.Mcmcstart" <- function(fdata.obj, model.obj, mcmc.obj) {
@@ -237,7 +237,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".mcmcstart.Exp" <- function(data.obj) {
@@ -294,7 +294,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 #' * [mixturemcmc()] for the starting MCMC sampling
 ".parameters.multinomial.Mcmcstart" <- function(model.obj) {
@@ -318,7 +318,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.poisson.Mcmcstart" <- function(fdata.obj, model.obj) {
   K <- model.obj@K
@@ -356,7 +356,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.exponential.Mcmcstart" <- function(fdata.obj, model.obj,
                                                 mcmc.obj) {
@@ -386,7 +386,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.binomial.Mcmcstart" <- function(fdata.obj, model.obj) {
   if (!hasPar(model.obj) && hasT(fdata.obj, verbose = TRUE)) {
@@ -419,7 +419,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.Norstud.Mcmcstart" <- function(fdata.obj, model.obj,
                                        mcmc.obj) {
@@ -473,7 +473,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".parameters.Norstudmult.Mcmcstart" <- function(fdata.obj, model.obj,
                                            mcmc.obj) {
@@ -533,7 +533,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".mcmcstart.Student.Df" <- function(model.obj) {
   K <- model.obj@K
@@ -565,7 +565,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".indicators.Mcmcstart" <- function(fdata.obj, model.obj) {
   dist <- model.obj@dist
@@ -599,7 +599,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".indicators.poisson.Mcmcstart" <- function(fdata.obj, model.obj) {
   K <- model.obj@K
@@ -631,7 +631,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".indicators.binomial.Mcmcstart" <- function(fdata.obj, model.obj) {
   if (!hasS(fdata.obj)) {
@@ -680,7 +680,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the definition of the `fdata` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [model-class] for the definition of the `model` class
 #' * [mcmc-class] for the definition of the `mcmc` class
 ".mcmcstart.Ind.Norstud" <- function(data.obj, model.obj) {
   K <- model.obj@K

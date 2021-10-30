@@ -69,7 +69,7 @@
 #' be `NULL`.
 #' 
 #' @exportClass csdatamomentsOrNULL
-#' @noRd
+#' @keywords internal
 setClassUnion("csdatamomentsOrNULL", members = c("csdatamoments", "NULL"))
 
 #' Initializer of the `csdatamoments` class
@@ -256,11 +256,13 @@ setMethod(
 
 #' Getter method of `csdatamoments` class.
 #' 
+#' @description
 #' Returns the `B` slot.
 #' 
 #' @param object An `csdatamoments` object.
-#' @returns The `B` slot of the `object`.
+#' @return The `B` slot of the `object`.
 #' @exportMethod getB
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an exponential mixture model with two components.

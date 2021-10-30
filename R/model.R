@@ -156,7 +156,7 @@
 #' f_model <- model(dist = "poisson", K = 2, par = list(lambda = c(0.17, 0.2)))
 #' 
 #' @seealso 
-#' * [model][model_class] for the class definition
+#' * [model][model-class] for the class definition
 "model" <- function(dist = "poisson", r, K,
                     weight = matrix(), par = list(),
                     indicmod = "multinomial",
@@ -202,12 +202,12 @@
 #' @param verbose A logical indicating, if the function should give a print out.
 #' @return Matrix of weights.
 #' @exportMethod hasWeight
-#'
+#' @keywords internal
+#' 
 #' @examples
 #' \dontrun{
 #' weight <- hasWeight(model)
 #' }
-#' @rdname model_class
 setMethod(
   "hasWeight", "model",
   function(object, verbose = FALSE) {
@@ -249,6 +249,7 @@ setMethod(
 #' @return A logical. \code{TRUE} if repetitions are existent in the model. If 
 #' values of slot \code{T} are \code{NA} it returns \code{FALSE}.
 #' @exportMethod hasT
+#' @keywords internal
 #' 
 #' @examples
 #' \dontrun{
@@ -454,13 +455,15 @@ setMethod(
 #' @param object An S4 model object. 
 #' @return A print out of model information about all slots. 
 #' @exportMethod show
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
 #' show(f_model)
 #' }
 #' 
-#' @seealso \code{model}
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "show", "model",
   function(object) {
@@ -494,8 +497,24 @@ setMethod(
 )
 
 ## Getters ##
-#' @name model_class
+
+#' Getter method of `model` class.
+#' 
+#' Returns the `dist` slot.
+#' 
+#' @param object An `model` object.
+#' @returns The `dist` slot of the `object`.
 #' @exportMethod getDist
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Get the slot
+#' getDist(f_model)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "getDist", "model",
   function(object) {
@@ -503,8 +522,23 @@ setMethod(
   }
 )
 
-#' @name model_class
+#' Getter method of `model` class.
+#' 
+#' Returns the `r` slot.
+#' 
+#' @param object An `model` object.
+#' @returns The `r` slot of the `object`.
 #' @exportMethod getR
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Get the slot
+#' getR(f_model)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "getR", "model",
   function(object) {
@@ -512,8 +546,23 @@ setMethod(
   }
 )
 
-#' @name model_class
+#' Getter method of `model` class.
+#' 
+#' Returns the `K` slot.
+#' 
+#' @param object An `model` object.
+#' @returns The `K` slot of the `object`.
 #' @exportMethod getK
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Get the slot
+#' getK(f_model)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "getK", "model",
   function(object) {
@@ -521,8 +570,23 @@ setMethod(
   }
 )
 
-#' @name model_class
+#' Getter method of `model` class.
+#' 
+#' Returns the `weight` slot.
+#' 
+#' @param object An `model` object.
+#' @returns The `weight` slot of the `object`.
 #' @exportMethod getWeight
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Get the slot
+#' getWeight(f_model)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "getWeight", "model",
   function(object) {
@@ -530,8 +594,23 @@ setMethod(
   }
 )
 
-#' @name model_class
+#' Getter method of `model` class.
+#' 
+#' Returns the `par` slot.
+#' 
+#' @param object An `model` object.
+#' @returns The `par` slot of the `object`.
 #' @exportMethod getPar
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Get the slot
+#' getPar(f_model)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "getPar", "model",
   function(object) {
@@ -539,8 +618,23 @@ setMethod(
   }
 )
 
-#' @name model_class
+#' Getter method of `model` class.
+#' 
+#' Returns the `indicmod` slot.
+#' 
+#' @param object An `model` object.
+#' @returns The `indicmod` slot of the `object`.
 #' @exportMethod getIndicmod
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Get the slot
+#' getIndicmod(f_model)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "getIndicmod", "model",
   function(object) {
@@ -548,8 +642,23 @@ setMethod(
   }
 )
 
-#' @name model_class
+#' Getter method of `model` class.
+#' 
+#' Returns the `indicfix` slot.
+#' 
+#' @param object An `model` object.
+#' @returns The `indicfix` slot of the `object`.
 #' @exportMethod getIndicfix
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Get the slot
+#' getIndicfix(f_model)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "getIndicfix", "model",
   function(object) {
@@ -557,8 +666,23 @@ setMethod(
   }
 )
 
-#' @name model_class
+#' Getter method of `model` class.
+#' 
+#' Returns the `T` slot.
+#' 
+#' @param object An `model` object.
+#' @returns The `T` slot of the `object`.
 #' @exportMethod getT
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an exponential mixture model with two components.
+#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Get the slot
+#' getT(f_model)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "getT", "model",
   function(object) {
@@ -567,8 +691,24 @@ setMethod(
 )
 
 ## Setters ##
-#' @name model_class
+#' Setter method of `model` class.
+#' 
+#' Sets a value for the `dist` slot.
+#' 
+#' @param object An `model` object.
+#' @param value A character defining the distribution.
+#' @returns The `model` object with slot `dist` set to `value`.
 #' @exportMethod setDist<-
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an default mixture model.
+#' f_model <- model()
+#' # Get the slot
+#' setDist(f_model) <- "poisson"
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setReplaceMethod(
   "setDist", "model",
   function(object, value) {
@@ -578,8 +718,24 @@ setReplaceMethod(
   }
 )
 
-#' @name model_class
+#' Setter method of `model` class.
+#' 
+#' Sets a value for the `r` slot.
+#' 
+#' @param object An `model` object.
+#' @param value A character defining the distribution.
+#' @returns The `model` object with slot `r` set to `value`.
 #' @exportMethod setR<-
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an default mixture model.
+#' f_model <- model()
+#' # Set the slot.
+#' setR(f_model) <- 1
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setReplaceMethod(
   "setR", "model",
   function(object, value) {
@@ -589,8 +745,24 @@ setReplaceMethod(
   }
 )
 
-#' @name model_class
+#' Setter method of `model` class.
+#' 
+#' Sets a value for the `K` slot.
+#' 
+#' @param object An `model` object.
+#' @param value An integer specifying the number of components.
+#' @returns The `model` object with slot `K` set to `value`.
 #' @exportMethod setK<-
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an default mixture model.
+#' f_model <- model()
+#' # Set the slot.
+#' setK(f_model) <- 2
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setReplaceMethod(
   "setK", "model",
   function(object, value) {
@@ -607,8 +779,24 @@ setReplaceMethod(
   }
 )
 
-#' @name model_class
+#' Setter method of `model` class.
+#' 
+#' Sets a value for the `weight` slot.
+#' 
+#' @param object An `model` object.
+#' @param value An matrix specifying the weights.
+#' @returns The `model` object with slot `weight` set to `value`.
 #' @exportMethod setWeight<-
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an default mixture model.
+#' f_model <- model()
+#' # Set the slot.
+#' setWeight(f_model) <- matrix(c(0.4, 0.6), nrow = 1)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setReplaceMethod(
   "setWeight", "model",
   function(object, value) {
@@ -619,8 +807,24 @@ setReplaceMethod(
   }
 )
 
-#' @name model_class
+#' Setter method of `model` class.
+#' 
+#' Sets a value for the `par` slot.
+#' 
+#' @param object An `model` object.
+#' @param value A list specifying the component parameters.
+#' @returns The `model` object with slot `par` set to `value`.
 #' @exportMethod setPar<-
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an default mixture model.
+#' f_model <- model()
+#' # Set the slot.
+#' setPar(f_model) <- 2
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setReplaceMethod(
   "setPar", "model",
   function(object, value) {
@@ -630,8 +834,24 @@ setReplaceMethod(
   }
 )
 
-#' @name model_class
-#' @exportMethod setIndicmod<-
+#' Setter method of `model` class.
+#' 
+#' Sets a value for the `indicmod` slot.
+#' 
+#' @param object An `model` object.
+#' @param value An character specifying the indicator model. 
+#' @returns The `model` object with slot `indicmod` set to `value`.
+#' @exportMethod setK<-
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an default mixture model.
+#' f_model <- model()
+#' # Set the slot.
+#' setK(f_model) <- 2
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setReplaceMethod(
   "setIndicmod", "model",
   function(object, value) {
@@ -640,8 +860,24 @@ setReplaceMethod(
   }
 )
 
-#' @name model_class
+#' Setter method of `model` class.
+#' 
+#' Sets a value for the `indicfix` slot.
+#' 
+#' @param object An `model` object.
+#' @param value A logical specifying, if the model is one with fixed indicators.
+#' @returns The `model` object with slot `indicfix` set to `value`.
 #' @exportMethod setIndicfix<-
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an default mixture model.
+#' f_model <- model()
+#' # Set the slot.
+#' setIndicfix(f_model) <- TRUE
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setReplaceMethod(
   "setIndicfix", "model",
   function(object, value) {
@@ -650,8 +886,24 @@ setReplaceMethod(
   }
 )
 
-#' @name model_class
+#' Setter method of `model` class.
+#' 
+#' Sets a value for the `T` slot.
+#' 
+#' @param object An `model` object.
+#' @param value An integer specifying the number of components.
+#' @returns The `model` object with slot `T` set to `value`.
 #' @exportMethod setT<-
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate an default mixture model.
+#' f_model <- model()
+#' # Set the slot.
+#' setT(f_model) <- matrix(4)
+#' 
+#' @seealso 
+#' * [model-class] for the class definition
 setReplaceMethod(
   "setT", "model",
   function(object, value) {
@@ -903,7 +1155,7 @@ setReplaceMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' [simulate()][model_class] for the calling function
+#' [simulate()][model-class] for the calling function
 ".simulate.data.binomial.Model" <- function(obj, N, fdata.obj) {
   if (!hasT(fdata.obj)) {
     fdata.obj@T <- as.matrix(1)
@@ -927,7 +1179,7 @@ setReplaceMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' [simulate()][model_class] for the calling function
+#' [simulate()][model-class] for the calling function
 ".simulate.data.exponential.Model" <- function(obj, N, fdata.obj) {
   fdata.obj@type <- "continuous"
   fdata.obj@sim <- TRUE
@@ -947,7 +1199,7 @@ setReplaceMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' [simulate()][model_class] for the calling function
+#' [simulate()][model-class] for the calling function
 ".simulate.data.normal.Model" <- function(obj, N, fdata.obj) {
   fdata.obj@type <- "continuous"
   fdata.obj@sim <- TRUE
@@ -973,7 +1225,7 @@ setReplaceMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' [simulate()][model_class] for the calling function
+#' [simulate()][model-class] for the calling function
 ".simulate.data.student.Model" <- function(obj, N, fdata.obj) {
   fdata.obj@type <- "continuous"
   fdata.obj@sim <- TRUE
@@ -1001,7 +1253,7 @@ setReplaceMethod(
 #' @noRd
 #' 
 #' @seealso 
-#' [simulate()][model_class] for the calling function
+#' [simulate()][model-class] for the calling function
 ".simulate.data.normult.Model" <- function(obj, N, fdata.obj) {
   fdata.obj@type <- "continuous"
   fdata.obj@sim <- TRUE
@@ -2644,7 +2896,7 @@ setReplaceMethod(
       ),
       call. = FALSE
       )
-    } else if (!all(obj@par$p > 0 && obj@par$p < 1)) {
+    } else if (!all(obj@par$p > 0) || !all(obj@par$p < 1)) {
       stop(paste("Wrong specification of slot @par: ",
         "Binomial parameters must be all ",
         "between 0 and 1.",

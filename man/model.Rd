@@ -75,6 +75,6 @@ f_model <- model(dist = "poisson", K = 2, par = list(lambda = c(0.17, 0.2)))
 }
 \seealso{
 \itemize{
-\item \link[=model_class]{model} for the class definition
+\item \link[=model-class]{model} for the class definition
 }
 }

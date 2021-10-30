@@ -143,8 +143,8 @@ setMethod(
 #' getExtrabinvar(f_moments)
 #' 
 #' @seealso 
-#' * \code{\link{modelmoments-class}} for the base class for model moments
-#' * \code{\link{modelmoments}} for the constructor of the `modelmoments` class family
+#' * [modelmoments-class] for the base class for model moments
+#' * [modelmoments()] for the constructor of the `modelmoments` class family
 setMethod(
   "getExtrabinvar", "binomialmodelmoments",
   function(object) {
@@ -160,7 +160,7 @@ setMethod(
 #' Generates theoretical moments for a binomial mixture
 #' 
 #' @description 
-#' Calling [.genwerateMomentsBinomial()] generates theoretical model moments 
+#' Calling `.generateMomentsBinomial()` generates theoretical model moments 
 #' for the binomial model defined in the `model` object. Next to the general 
 #' mixture moments available to any mixture model, the binomial moments also
 #' include the extra-binomial variation `extrabinvar` 

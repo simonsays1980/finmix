@@ -48,15 +48,16 @@
 #' Constructor for `datamoments` classes
 #' 
 #' @description
-#' Calling [datamoments()] generates the datamoments for an `fdata` object. 
+#' Calling [datamoments()] generates the moments for an `fdata` object. 
 #' Depending on the type of data either an `cdatamoments` or `ddatamoments` 
-#' object is generated. If in addition the `fdata` object containes fixed 
-#' indicators, these `datamoments` object also hold an `sdatamoments` class to
+#' object is generated. If in addition the `fdata` object contains fixed 
+#' indicators, the `datamoments` object also holds an `sdatamoments` object to
 #' store the data moments of these indicators. 
 #' 
 #' @param value An `fdata` object with at least slot `y` non-empty. 
-#' @returns An `datamoments` object containing the data moments for slot `y` 
-#' and if available slot `S`. 
+#' @returns A `datamoments` object containing the data moments for the 
+#'   observations in slot `y` and if available also for the indicators in slot 
+#'   `S`. 
 #' @export
 #' 
 #' @examples 

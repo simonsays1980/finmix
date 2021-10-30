@@ -55,7 +55,7 @@ Journal of Applied Mathematics, Statistics and Informatics 3, 165-183
 }
 \seealso{
 \itemize{
-\item \link[=prior-class]{prior} for the class definition
+\item \linkS4class{prior} for the class definition
 \item \code{\link[=prior]{prior()}} for the default constructor of the class
 }
 }

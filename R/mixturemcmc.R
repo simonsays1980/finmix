@@ -98,8 +98,8 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
-#' * [prior][prior-class] for the `prior` class definition
+#' * [model-class] for the `model` class definition
+#' * [prior-class] for the `prior` class definition
 #' * [prior()] for the `prior` class constructor
 #' * [priordefine()] for the advanced class constructor of the `prior` class
 #' * [mcmc-class] for the `mcmc` class definition
@@ -319,7 +319,7 @@
 #' 
 #' @seealso 
 #' * [fdata-class] for the `fdata` class definition
-#' * [model][model_class] for the `model` class definition
+#' * [model-class] for the `model` class definition
 ".valid.Reps.Binomial" <- function(data, model) {
   has.reps <- !all(is.na(data@T))
   N        <- data@N

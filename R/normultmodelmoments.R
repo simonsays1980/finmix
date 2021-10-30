@@ -158,10 +158,11 @@ setMethod(
 ## Getters ##
 #' Getter method of `normultmodelmoments` class.
 #' 
+#' @description 
 #' Returns the `B` slot.
 #' 
 #' @param object An `normultmodelmoments` object.
-#' @returns The `B` slot of the `object`.
+#' @return The `B` slot of the `object`.
 #' @exportMethod getB
 #' @keywords internal
 #' 

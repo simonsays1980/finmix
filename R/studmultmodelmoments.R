@@ -152,10 +152,11 @@ setMethod(
 ## Getters ##
 #' Getter method of `studmultmodelmoments` class.
 #' 
+#' @description 
 #' Returns the `B` slot.
 #' 
 #' @param object An `studmultmodelmoments` object.
-#' @returns The `B` slot of the `object`.
+#' @return The `B` slot of the `object`.
 #' @keywords internal
 #' @exportMethod getB
 #' 

@@ -28,7 +28,8 @@
 #' For internal use only. 
 #' 
 #' @returns `TRUE` if `title` option exists. 
-#' @name graphic_funs
+#' @name graphic_func
+#' @keywords internal
 ".check.grDevice" <- function() {
   ## title argument ##
   any(names(formals(getOption("device")))

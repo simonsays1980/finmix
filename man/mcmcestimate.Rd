@@ -30,7 +30,7 @@ returned as well. Optional.}
 iterations in case the "Stephens1997a" re-labeling algorithm is chosen.}
 }
 \value{
-An \code{mcmcest} object cotnaining the point estimates together with
+An \code{mcmcest} object containing the point estimates together with
 additional information about the underlying finite mixture model, MCMC
 sampling hyper-parameters and the data. In case \code{permOut} is set to
 \code{TRUE}, the output of this function is a named list with an \code{mcmcest}

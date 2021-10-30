@@ -142,7 +142,7 @@
 #' f_prior <- priordefine(f_data, f_model)
 #' 
 #' @seealso 
-#' * [prior][prior-class] for the class definition
+#' * [prior-class] for the class definition
 #' * [prior()] for the default constructor of the class
 #' 
 #' @references 
@@ -224,8 +224,8 @@ setMethod(
 #' \dontrun{hasPriorWeight(f_prior, f_model, TRUE)}
 #' 
 #' @seealso 
-#' * [prior][prior-class] for the definition of the `prior` class
-#' * [model][model_class] for the definition of the `model` class
+#' * [prior-class] for the definition of the `prior` class
+#' * [model-class] for the definition of the `model` class
 setMethod(
   "hasPriorWeight", signature(
     object = "prior",
@@ -574,7 +574,7 @@ setReplaceMethod(
 #' @description 
 #' For internal usage only. This function checks the optional `prior` object 
 #' passed in to [priordefine()]. This object has to be of class 
-#' [prior][prior-class] and has to be valid as this. 
+#' [model-class] and has to be valid as this. 
 #' 
 #' @param obj Any object. 
 #' @returns None. If the checks do not pass, an error is thrown.
@@ -597,7 +597,7 @@ setReplaceMethod(
 #' 
 #' @description 
 #' For internal usage only. This function checks, if a given 
-#' [prior][prior-class] contains specified parameters in its slot `@@par`.
+#' [model-class] contains specified parameters in its slot `@@par`.
 #' 
 #' @param obj A `prior` object to be checked.
 #' @param model.obj A `model` object providing the model distribution for 

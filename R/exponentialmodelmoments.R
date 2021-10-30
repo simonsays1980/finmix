@@ -134,10 +134,11 @@ setMethod(
 
 #' Getter method of `exponentialmodelmoments` class.
 #' 
+#' @description
 #' Returns the `B` slot.
 #' 
 #' @param object An `exponentialmodelmoments` object.
-#' @returns The `B` slot of the `object`.
+#' @return The `B` slot of the `object`.
 #' @exportMethod getB
 #' @keywords internal
 #' 

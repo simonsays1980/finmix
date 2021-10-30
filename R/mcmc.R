@@ -127,7 +127,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [mcmc-class] for the class definition
@@ -154,8 +154,9 @@ setMethod(
 #' 
 #' @param object An `mcmc` object.
 #' @returns The `burnin` slot of the `object`.
-#' @noRd
-#' @export
+#' @exportMethod getBurnin
+#' @keywords internal
+#' 
 #' @examples 
 #' # Generate an mcmc object
 #' f_mcmc <- mcmc()
@@ -178,7 +179,8 @@ setMethod(
 #' 
 #' @param object An `mcmc` object.
 #' @returns The `M` slot of the `object`.
-#' @noRd
+#' @exportMethod getM
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object
@@ -202,7 +204,8 @@ setMethod(
 #' 
 #' @param object An `mcmc` object.
 #' @returns The `startpar` slot of the `object`.
-#' @noRd
+#' @exportMethod getStartpar
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object
@@ -226,7 +229,8 @@ setMethod(
 #' 
 #' @param object An `mcmc` object.
 #' @returns The `storeS` slot of the `object`.
-#' @noRd
+#' @exportMethod getStoreS
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object
@@ -250,7 +254,8 @@ setMethod(
 #' 
 #' @param object An `mcmc` object.
 #' @returns The `storepost` slot of the `object`.
-#' @noRd
+#' @exportMethod getStorepost
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object
@@ -274,7 +279,8 @@ setMethod(
 #' 
 #' @param object An `mcmc` object.
 #' @returns The `ranperm` slot of the `object`.
-#' @noRd
+#' @exportMethod getRanperm
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object
@@ -300,7 +306,8 @@ setMethod(
 #' @param object An `mcmc` object.
 #' @param value An integer defining the new value for the `@@burnin` slot.
 #' @returns None.
-#' @noRd
+#' @exportMethod setBurnin<-
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object
@@ -327,7 +334,8 @@ setReplaceMethod(
 #' @param object An `mcmc` object.
 #' @param value An integer defining the new value for the `@@M` slot.
 #' @returns None.
-#' @noRd
+#' @exportMethod setM<-
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object
@@ -354,7 +362,8 @@ setReplaceMethod(
 #' @param object An `mcmc` object.
 #' @param value An integer defining the new value for the `@@startpar` slot.
 #' @returns None.
-#' @noRd
+#' @exportMethod setStartpar<-
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object
@@ -381,7 +390,8 @@ setReplaceMethod(
 #' @param object An `mcmc` object.
 #' @param value An integer defining the new value for the `@@storeS` slot.
 #' @returns None.
-#' @noRd
+#' @exportMethod setStoreS<-
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object
@@ -436,7 +446,8 @@ setReplaceMethod(
 #' @param object An `mcmc` object.
 #' @param value An integer defining the new value for the `@@ranperm` slot.
 #' @returns None.
-#' @noRd
+#' @exportMethod setRanperm<- 
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object

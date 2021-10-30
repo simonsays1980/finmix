@@ -10,14 +10,15 @@ datamoments(value = fdata())
 \item{value}{An \code{fdata} object with at least slot \code{y} non-empty.}
 }
 \value{
-An \code{datamoments} object containing the data moments for slot \code{y}
-and if available slot \code{S}.
+A \code{datamoments} object containing the data moments for the
+observations in slot \code{y} and if available also for the indicators in slot
+\code{S}.
 }
 \description{
-Calling \code{\link[=datamoments]{datamoments()}} generates the datamoments for an \code{fdata} object.
+Calling \code{\link[=datamoments]{datamoments()}} generates the moments for an \code{fdata} object.
 Depending on the type of data either an \code{cdatamoments} or \code{ddatamoments}
-object is generated. If in addition the \code{fdata} object containes fixed
-indicators, these \code{datamoments} object also hold an \code{sdatamoments} class to
+object is generated. If in addition the \code{fdata} object contains fixed
+indicators, the \code{datamoments} object also holds an \code{sdatamoments} object to
 store the data moments of these indicators.
 }
 \examples{

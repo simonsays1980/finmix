@@ -58,7 +58,7 @@
 #' @keywords internal
 #' 
 #' @examples 
-#' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
+#' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
 #'                  weight=matrix(c(0.3, 0.7), nrow=1))
 #' f_moments <- modelmoments(f_model)
 #' getHigher(f_moments)
@@ -80,10 +80,10 @@ setMethod("getOver", "dmodelmoments", function(object) {
 #' @keywords internal
 #' 
 #' @examples 
-#' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
+#' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
 #'                  weight=matrix(c(0.3, 0.7), nrow=1))
 #' f_moments <- modelmoments(f_model)
-#' getSkewness(f_moments)
+#' getFactorial(f_moments)
 #' 
 #' @seealso 
 #' * [modelmoments] for the base class for model moments
@@ -102,7 +102,7 @@ setMethod("getFactorial", "dmodelmoments", function(object) {
 #' @keywords internal
 #' 
 #' @examples 
-#' f_model <- model("c", par=list(lambda=c(0.3, 0.1)), 
+#' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
 #'                  weight=matrix(c(0.3, 0.7), nrow=1))
 #' f_moments <- modelmoments(f_model)
 #' getKurtosis(f_moments)

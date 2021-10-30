@@ -191,7 +191,7 @@ setMethod(
 #' f_data <- simulate(f_model)
 #' # Classify observations
 #' f_dataclass <- dataclass(f_data, f_model, simS = FALSE)
-#' getLogpy(f_datamoms)
+#' getLogpy(f_dataclass)
 #' 
 #' @seealso 
 #' * [dataclass-class] for the base class
@@ -219,7 +219,7 @@ setMethod(
 #' f_data <- simulate(f_model)
 #' # Classify observations
 #' f_dataclass <- dataclass(f_data, f_model, simS = FALSE)
-#' getProb(f_datamoms)
+#' getProb(f_dataclass)
 #' 
 #' @seealso 
 #' * [dataclass-class] for the base class
@@ -247,7 +247,7 @@ setMethod(
 #' f_data <- simulate(f_model)
 #' # Classify observations
 #' f_dataclass <- dataclass(f_data, f_model, simS = FALSE)
-#' getMixlik(f_datamoms)
+#' getMixlik(f_dataclass)
 #' 
 #' @seealso 
 #' * [dataclass-class] for the base class
@@ -304,7 +304,7 @@ setMethod(
 #' f_data <- simulate(f_model)
 #' # Classify observations
 #' f_dataclass <- dataclass(f_data, f_model, simS = FALSE)
-#' getLoglikcd(f_datamoms)
+#' getLoglikcd(f_dataclass)
 #' 
 #' @seealso 
 #' * [dataclass-class] for the base class
@@ -333,7 +333,7 @@ setMethod(
 #' f_data <- simulate(f_model)
 #' # Classify observations
 #' f_dataclass <- dataclass(f_data, f_model, simS = TRUE)[[1]]
-#' getPostS(f_datamoms)
+#' getPostS(f_dataclass)
 #' 
 #' @seealso 
 #' * [dataclass-class] for the base class

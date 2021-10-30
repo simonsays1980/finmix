@@ -104,8 +104,8 @@ Models", Springer
 \seealso{
 \itemize{
 \item \linkS4class{fdata} for the \code{fdata} class definition
-\item \link[=model_class]{model} for the \code{model} class definition
-\item \link[=prior-class]{prior} for the \code{prior} class definition
+\item \linkS4class{model} for the \code{model} class definition
+\item \linkS4class{prior} for the \code{prior} class definition
 \item \code{\link[=prior]{prior()}} for the \code{prior} class constructor
 \item \code{\link[=priordefine]{priordefine()}} for the advanced class constructor of the \code{prior} class
 \item \linkS4class{mcmc} for the \code{mcmc} class definition

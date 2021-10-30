@@ -554,8 +554,8 @@ setMethod(
 #'   mixture should be extracted.
 #' @return An object class `mcmcextract` containing all samples of an extracted 
 #'   dimension.
-#' @noRd
 #' @exportMethod extract
+#' @keywords internal
 setMethod(
   "extract", signature(
     object = "mcmcoutputfix",
