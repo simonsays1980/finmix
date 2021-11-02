@@ -55,7 +55,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "mcmcoutputhier",
   function(object) {
@@ -393,7 +393,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
@@ -444,7 +444,7 @@ setMethod(
 #' @param index An array specifying the extraction of the sub-chain.
 #' @return An `mcmcoutput` object containing the values from the sub-chain.
 #' @exportMethod swapElements
-#' @noRd
+#' @keywords internal
 setMethod(
   "subseq", signature(
     object = "mcmcoutputhier",
@@ -473,7 +473,7 @@ setMethod(
 #' @param index An array specifying the extraction of the values.
 #' @return An `mcmcoutput` object with swapped elements.
 #' @exportMethod swapElements
-#' @noRd 
+#' @keywords internal 
 setMethod(
   "swapElements", signature(
     object = "mcmcoutputhier",

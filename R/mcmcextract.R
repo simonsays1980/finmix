@@ -49,7 +49,7 @@
 #'   from MCMC sampling.
 #' @return A list containing the model moments calculated from MCMC samples.
 #' @exportMethod moments
-#' @noRd
+#' @keywords internal
 #' @seealso 
 #' * [mcmcoutput-class] for the results from MCMC sampling
 #' * [extract()] for the calling method

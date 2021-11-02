@@ -53,7 +53,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "mcmcoutputpost",
   function(object) {
@@ -368,7 +368,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
@@ -420,7 +420,7 @@ setMethod(
 #' @param index An array specifying the extraction of the sub-chain.
 #' @return An `mcmcoutputpost` object containing the values from the sub-chain.
 #' @exportMethod subseq
-#' @noRd
+#' @keywords internal
 setMethod(
   "subseq", signature(
     object = "mcmcoutputpost",
@@ -452,7 +452,7 @@ setMethod(
 #' @param index An array specifying the extraction of the values.
 #' @return An `mcmcoutputpost` object with swapped elements.
 #' @exportMethod swapElements
-#' @noRd
+#' @keywords internal
 setMethod(
   "swapElements", signature(
     object = "mcmcoutputpost",
@@ -478,11 +478,11 @@ setMethod(
   }
 )
 
-#' Getter method of `mcmcoutputhier` class.
+#' Getter method of `mcmcoutputpost` class.
 #' 
 #' Returns the `post` slot.
 #' 
-#' @param object An `mcmcoutputhier` object.
+#' @param object An `mcmcoutputpost` object.
 #' @returns The `post` slot of the `object`.
 #' @exportMethod getPost
 #' @keywords internal
@@ -493,9 +493,11 @@ setMethod(
 #' # Simulate data from the mixture model.
 #' f_data <- simulate(f_model)
 #' # Define the hyper-parameters for MCMC sampling.
-#' f_mcmc <- mcmc(storepost = FALSE)
+#' f_mcmc <- mcmc()
 #' # Define the prior distribution by relying on the data.
 #' f_prior <- priordefine(f_data, f_model)
+#' # Do not use a hierarchical prior.
+#' setHier(f_prior) <- FALSE
 #' # Start MCMC sampling.
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' # Get the slot.

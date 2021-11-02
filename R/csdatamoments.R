@@ -84,7 +84,7 @@ setClassUnion("csdatamomentsOrNULL", members = c("csdatamoments", "NULL"))
 #' @param ... Arguments to specify properties of the new object, to be passed 
 #'   to `initialize()`.
 #' @param model A finmix [fdata-class] object containing the observations.
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [Classes_Details] for details of class definitions, and 
@@ -108,7 +108,7 @@ setMethod(
 #' 
 #' @param object An `csdatamoments` object. 
 #' @return An `csdatamoments` object with calculated moments.
-#' @noRd
+#' @keywords internal
 setMethod(
   "generateMoments", "csdatamoments",
   function(object) {
@@ -187,70 +187,6 @@ setMethod(
   "getGmoments", "csdatamoments",
   function(object) {
     return(object@gmoments)
-  }
-)
-
-#' Getter method of `csdatamoments` class.
-#' 
-#' Returns the `WK` slot.
-#' 
-#' @param object An `csdatamoments` object.
-#' @returns The `WK` slot of the `object`.
-#' @exportMethod getWK
-#' @keywords internal
-#' 
-#' @examples 
-#' # Generate an exponential mixture model with two components.
-#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
-#' # Simulate data from the model.
-#' f_data <- simulate(f_model)
-#' # Calculate the mixture moments.
-#' f_sdatamoms <- sdatamoments(f_data)
-#' # Get the moments for the included indicators of the data. 
-#' getWK(f_sdatamoms)
-#' 
-#' @seealso 
-#' * [datamoments-class] for the base class for model moments
-#' * [datamoments()] for the constructor of the `datamoments` 
-#'   class family
-#' * [csdatamoments-class] for the class definition
-#' * [sdatamoments()] for the constructor of the class
-setMethod(
-  "getWK", "csdatamoments",
-  function(object) {
-    return(object@WK)
-  }
-)
-
-#' Getter method of `csdatamoments` class.
-#' 
-#' Returns the `var` slot.
-#' 
-#' @param object An `csdatamoments` object.
-#' @returns The `var` slot of the `object`.
-#' @exportMethod getVar
-#' @keywords internal
-#' 
-#' @examples 
-#' # Generate an exponential mixture model with two components.
-#' f_model <- model("exponential", par = list(lambda = c(0.3, 0.7)), K = 2)
-#' # Simulate data from the model.
-#' f_data <- simulate(f_model)
-#' # Calculate the mixture moments.
-#' f_sdatamoms <- sdatamoments(f_data)
-#' # Get the moments for the included indicators of the data. 
-#' getVar(f_sdatamoms)
-#' 
-#' @seealso 
-#' * [datamoments-class] for the base class for model moments
-#' * [datamoments()] for the constructor of the `datamoments` 
-#'   class family
-#' * [csdatamoments-class] for the class definition
-#' * [sdatamoments()] for the constructor of the class
-setMethod(
-  "getVar", "csdatamoments",
-  function(object) {
-    return(object@var)
   }
 )
 

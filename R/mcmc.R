@@ -419,7 +419,7 @@ setReplaceMethod(
 #' @param value An integer defining the new value for the `@@storepost` slot.
 #' @returns None.
 #' @exportMethod setStorepost<-
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Generate an mcmc object

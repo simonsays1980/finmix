@@ -280,7 +280,7 @@ setMethod(
 #' @param s A numeric specifying the standard deviation `s` for the 
 #'   Metropolis-Hastings proposal. 
 #' @rdname generatePrior
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [prior-class] for the class definition

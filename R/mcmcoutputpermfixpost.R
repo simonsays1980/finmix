@@ -95,7 +95,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [mcmcoutputpermfixpost-class] for the class definition

@@ -62,7 +62,7 @@
 #'   to `initialize()`.
 #' @param model A finmix `model` object containing the definition of the 
 #'   finite mixture distribution.
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [Classes_Details] for details of class definitions, and 
@@ -83,7 +83,7 @@ setMethod(
 #' 
 #' @param object An `studentmodelmoments` object. 
 #' @return An `studentmodelmoments` object with calculated moments.
-#' @noRd
+#' @keywords internal
 setMethod(
   "generateMoments", "studentmodelmoments",
   function(object) {

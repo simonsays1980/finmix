@@ -110,7 +110,7 @@
 #' @param ... Arguments to specify properties of the new object, to be passed 
 #'   to `initialize()`.
 #' @param model A finmix [fdata-class] object containing the observations.
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [Classes_Details] for details of class definitions, and 
@@ -131,7 +131,7 @@ setMethod(
 #' 
 #' @param object A `groupmoments` object. 
 #' @return An `groupmoments` object with calculated moments.
-#' @noRd
+#' @keywords internal
 setMethod(
   "generateMoments", "groupmoments",
   function(object) {
@@ -298,6 +298,29 @@ setMethod(
   }
 )
 
+#' Getter method of `groupmoments` class.
+#' 
+#' Returns the `fdata` slot.
+#' 
+#' @param object An `groupmoments` object.
+#' @returns The `fdata` slot of the `object`.
+#' @exportMethod getFdata
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_gmoments <- groupmoments(f_data)
+#' # Get the data<
+#' getFdata(f_gmoments)
+#' 
+#' @seealso 
+#' * [groupmoments-class] for the definition of the `groupmoments` 
+#'   class
+#' * [groupmoments()] for the class constructor
 setMethod(
   "getFdata", "groupmoments",
   function(object) {

@@ -75,7 +75,7 @@
 #' @param ... Arguments to specify properties of the new object, to be passed 
 #'   to `initialize()`.
 #' @param model A finmix `fdata` object containing the observations.
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [Classes_Details] for details of class definitions, and 
@@ -101,7 +101,7 @@ setMethod(
 #' 
 #' @param object An `cdatamoments` object. 
 #' @return An `cdatamoments` object with calculated moments.
-#' @noRd
+#' @keywords internal
 setMethod(
   "generateMoments", "cdatamoments",
   function(object) {
@@ -118,7 +118,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 #' @seealso 
 #' * [datamoments-class] for the parent class
 #' * [datamoments()] for the class constructor

@@ -99,7 +99,7 @@ setMethod(
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "mcmcoutputpermfixhier",
   function(object) {
@@ -462,7 +462,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{

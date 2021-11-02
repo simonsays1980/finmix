@@ -61,7 +61,7 @@
 #'   to `initialize()`.
 #' @param model A finmix `model` object containing the definition of the 
 #'   finite mixture distribution.
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [Classes_Details] for details of class definitions, and 
@@ -82,7 +82,7 @@ setMethod(
 #' 
 #' @param object An `exponentialmodelmoments` object. 
 #' @return An `exponentialmodelmoments` object with calculated moments.
-#' @noRd
+#' @keywords internal
 setMethod(
   "generateMoments", "exponentialmodelmoments",
   function(object) {

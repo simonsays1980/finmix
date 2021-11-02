@@ -23,7 +23,11 @@
 #' 
 #' @slot B A numeric defining the between-group heterogeneity.
 #' @slot W A numeric defining the within-group heterogeneity. 
-#' @slot R A numeric defining the coefficient of determination.
+#' @slot Rdet A numeric defining the coefficient of determination based on the
+#'   determinant of the covariance matrix. 
+#' @slot Rtr A numeric defining the coefficient of determination based on the 
+#'   trace of the covariance matrix.
+#' @slot corr A `matrix` storing the correlation matrix.
 #' @exportClass normultmodelmoments
 #' @name normultmodelmoments-class
 #' 
@@ -65,7 +69,7 @@
 #'   to `initialize()`.
 #' @param model A finmix `model` object containing the definition of the 
 #'   finite mixture distribution.
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [Classes_Details] for details of class definitions, and 
@@ -86,7 +90,7 @@ setMethod(
 #' 
 #' @param object An `normultmodelmoments` object. 
 #' @return An `normultmodelmoments` object with calculated moments.
-#' @noRd
+#' @keywords internal
 setMethod(
   "generateMoments", "normultmodelmoments",
   function(object) {
@@ -256,6 +260,7 @@ setMethod(
 #' covar           <- matrix(c(1, 1.2, 1.2, 4), nrow = 2)
 #' sigmas          <- array(c(covar, 2*covar), dim = c(2, 2, 2))
 #' setPar(f_model) <- list(mu = means, sigma = sigmas)
+#' f_moments       <- modelmoments(f_model)
 #' getRtr(f_moments)
 #' 
 #' @seealso 

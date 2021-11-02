@@ -56,7 +56,7 @@
 #' @returns A console output listing the slots and summary information about
 #'   each of them. 
 #' @exportMethod show
-#' @noRd
+#' @keywords internal
 setMethod(
   "show", "mcmcoutputfixpost",
   function(object) {
@@ -110,7 +110,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -162,7 +162,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -213,7 +213,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -262,7 +262,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point process of the MCMC samples.
 #' @exportMethod plotPointProc
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -311,7 +311,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling representation of the MCMC samples.
 #' @exportMethod plotSampRep
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -360,7 +360,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
-#' @noRd
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.
@@ -410,7 +410,7 @@ setMethod(
 #' @param index An array specifying the extraction of the sub-chain.
 #' @return An `mcmcoutput` object containing the values from the sub-chain.
 #' @exportMethod subseq
-#' @noRd
+#' @keywords internal
 setMethod(
   "subseq", signature(
     object = "mcmcoutputfixpost",
@@ -442,7 +442,7 @@ setMethod(
 #' @param index An array specifying the extraction of the values.
 #' @return An `mcmcoutput` object with swapped elements.
 #' @exportMethod swapElements
-#' @noRd 
+#' @keywords internal 
 setMethod(
   "swapElements", signature(
     object = "mcmcoutputfixpost",
@@ -487,6 +487,8 @@ setMethod(
 #' f_mcmc <- mcmc()
 #' # Define the prior distribution by relying on the data.
 #' f_prior <- priordefine(f_data, f_model)
+#' # Do not use hierarchical sampling
+#' setHier(f_prior) <- FALSE
 #' # Start MCMC sampling.
 #' f_output <- mixturemcmc(f_data, f_model, f_prior, f_mcmc)
 #' # Get the slot.

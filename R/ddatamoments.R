@@ -68,7 +68,7 @@
 #' @param ... Arguments to specify properties of the new object, to be passed 
 #'   to `initialize()`.
 #' @param model A finmix `fdata` object containing the observations.
-#' @noRd
+#' @keywords internal
 #' 
 #' @seealso 
 #' * [Classes_Details] for details of class definitions, and 
@@ -95,7 +95,7 @@ setMethod(
 #' 
 #' @param object An `ddatamoments` object. 
 #' @return An `ddatamoments` object with calculated moments.
-#' @noRd
+#' @keywords internal
 setMethod(
   "generateMoments", "ddatamoments",
   function(object) {
