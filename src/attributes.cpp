@@ -86,7 +86,7 @@ Rcpp::NumericMatrix swap_cc(Rcpp::NumericMatrix values, Rcpp::IntegerMatrix inde
 //' @param values An array of dimension `M x r x K` of values to swap. 
 //' @param index An integer matrix of dimension `M x K`. containing the scheme 
 //'   by which values should be swapped.
-//' @param A three-dimensional array with swapped values.
+//' @return A three-dimensional array with swapped values.
 //' @export
 //' 
 //' @examples

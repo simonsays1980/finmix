@@ -11,8 +11,9 @@ swap_3d_cc(values, index)
 
 \item{index}{An integer matrix of dimension \verb{M x K}. containing the scheme
 by which values should be swapped.}
-
-\item{A}{three-dimensional array with swapped values.}
+}
+\value{
+A three-dimensional array with swapped values.
 }
 \description{
 This function swaps the elements in a three-dimensional array by using the

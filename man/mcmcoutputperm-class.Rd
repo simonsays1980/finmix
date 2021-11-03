@@ -113,7 +113,7 @@ models as the last indicator of this observation. This slot is only
 available for models with unknown indicators.}
 
 \item{\code{Sperm}}{An \code{array} of dimension \verb{N x storeS} containing the last
-\code{storeS} permuted indicators. \code{storeS} is defined in the slot \verb{@storeS}
+\code{storeS} permuted indicators. \code{storeS} is defined in the slot \code{storeS}
 of the \code{mcmc} object passed into \code{\link[=mixturemcmc]{mixturemcmc()}}. This slot is only
 available for models with unknown indicators.}
 

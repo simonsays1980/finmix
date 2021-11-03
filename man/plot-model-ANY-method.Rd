@@ -13,6 +13,9 @@
 
 \item{dev}{A logical indicating, if the plot should be shown in a graphical
 device. Set to \code{FALSE}, if plotted to a file.}
+
+\item{...}{Arguments to be passed to methods, such as graphical parameters
+(see par).}
 }
 \value{
 Density or barplot of the S4 model object.
@@ -28,5 +31,8 @@ plot(f_model)
 
 }
 \seealso{
-\code{model}
+\itemize{
+\item \linkS4class{model} for the class definition
+\item \code{\link[=model]{model()}} for the class constructor
+}
 }

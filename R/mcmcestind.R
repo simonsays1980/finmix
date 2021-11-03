@@ -215,7 +215,10 @@ setMethod(
 #' Note, this method is so far only implemented for mixtures of Poisson 
 #' distributions.
 #' 
-#' @param object An `mcmcestind` object.
+#' @param x An `mcmcestind` object.
+#' @param ... (Not used) Further arguments to pass to called functions.
+#' @param na.rm (Not used) A logical indicating, if `NA` values should be 
+#'   removed in calculating statistics.
 #' @returns A console output listing the formatted slots and summary 
 #'   information about each of them. 
 #' @exportMethod Summary

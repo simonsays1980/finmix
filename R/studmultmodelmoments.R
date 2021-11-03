@@ -23,7 +23,11 @@
 #' 
 #' @slot B A numeric defining the between-group heterogeneity.
 #' @slot W A numeric defining the within-group heterogeneity. 
-#' @slot R A numeric defining the coefficient of determination.
+#' @slot Rdet A numeric defining the coefficient of determination based on the
+#'   determinant of the covariance matrix. 
+#' @slot Rtr A numeric defining the coefficient of determination based on the 
+#'   trace of the covariance matrix.
+#' @slot corr A `matrix` storing the correlation matrix.
 #' @exportClass studmultmodelmoments
 #' @name studmultmodelmoments-class
 #' 

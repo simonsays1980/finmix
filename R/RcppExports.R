@@ -34,7 +34,7 @@ swap_cc <- function(values, index) {
 #' @param values An array of dimension `M x r x K` of values to swap. 
 #' @param index An integer matrix of dimension `M x K`. containing the scheme 
 #'   by which values should be swapped.
-#' @param A three-dimensional array with swapped values.
+#' @return A three-dimensional array with swapped values.
 #' @export
 #' 
 #' @examples
@@ -280,7 +280,7 @@ permmoments_cc <- function(classS4) {
 #' density parameters. See for more information on mixin layers Smaragdakis 
 #' and Butory (1998). 
 #' 
-#' @param data_S4 An `fdata` object storing the observations and indicators.
+#' @param fdata_S4 An `fdata` object storing the observations and indicators.
 #' @param model_S4 A `model` object specifying the Binomial finite mixture 
 #'   model.
 #' @param prior_S4 A `prior` object specifying the prior distribution for MCMC 
@@ -720,12 +720,11 @@ stephens1997b_poisson_cc <- function(values, comp_par, weight_par, max_iter = 20
 #' Stephens (1997b) for MCMC samples of a Binomial mixture distribution. 
 #' 
 #' @param values A matrix of observations of dimension `Nx1`.
+#' @param reps A vector containing the repetitions.
 #' @param comp_par An array of component parameter samples from MCMC sampling. 
 #'   Dimension is `MxK`.
-#' @param weight An array of weight parameter samples from MCMC sampling. 
+#' @param weight_par An array of weight parameter samples from MCMC sampling. 
 #'   Dimension is `MxK`.
-#' @param max_iter A signed integer specifying the number of iterations to be 
-#'   run in optimization. Unused.  
 #' @return An integer matrix of dimension `MxK` that holding the optimal 
 #'   labeling.
 #' @export

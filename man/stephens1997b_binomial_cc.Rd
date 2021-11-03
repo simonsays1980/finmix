@@ -9,14 +9,13 @@ stephens1997b_binomial_cc(values, reps, comp_par, weight_par)
 \arguments{
 \item{values}{A matrix of observations of dimension \code{Nx1}.}
 
+\item{reps}{A vector containing the repetitions.}
+
 \item{comp_par}{An array of component parameter samples from MCMC sampling.
 Dimension is \code{MxK}.}
 
-\item{weight}{An array of weight parameter samples from MCMC sampling.
+\item{weight_par}{An array of weight parameter samples from MCMC sampling.
 Dimension is \code{MxK}.}
-
-\item{max_iter}{A signed integer specifying the number of iterations to be
-run in optimization. Unused.}
 }
 \value{
 An integer matrix of dimension \code{MxK} that holding the optimal

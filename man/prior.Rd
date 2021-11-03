@@ -11,6 +11,25 @@ prior(
   hier = TRUE
 )
 }
+\arguments{
+\item{weight}{A matrix storing the prior parameters for the \code{weight} of a
+finite mixture model.}
+
+\item{par}{A list storing the prior parameters for the parameters of a finite
+mixture model.}
+
+\item{type}{A character specifying what type of prior should be used in
+Bayesian estimation. Either \code{"independent"} for an independent prior
+distribution or \code{"condconjugate"} for a conditionally conjugate prior
+distribution.}
+
+\item{hier}{A logical defining, if the used prior should be hierarchical.
+Hierarchical prior are often more robust, but need an additional layer in
+sampling, so computing costs increase.}
+}
+\value{
+A \code{prior} object with the specified slots.
+}
 \description{
 Calling \code{\link[=prior]{prior()}} constructs an object of class \link[=prior-class]{prior}. The
 constructor can be called without providing any arguments, but the prior
@@ -21,25 +40,6 @@ There exists next to the general constructor also an advanced constructor
 that specifies a data dependent prior. See \code{\link[=priordefine]{priordefine()}} for this advanced
 constructor.
 }
-\section{Slots}{
-
-\describe{
-\item{\code{weight}}{A matrix storing the prior parameters for the \code{weight} of a
-finite mixture model.}
-
-\item{\code{par}}{A list storing the prior parameters for the parameters of a finite
-mixture model.}
-
-\item{\code{type}}{A character specifying what type of prior should be used in
-Bayesian estimation. Either \code{"independent"} for an independent prior
-distribution or \code{"condconjugate"} for a conditionally conjugate prior
-distribution.}
-
-\item{\code{hier}}{A logical defining, if the used prior should be hierarchical.
-Hierarchical prior are often more robust, but need an additional layer in
-sampling, so computing costs increase.}
-}}
-
 \examples{
 # Call the default constructor without any arguments.
 f_prior <- prior()
@@ -47,7 +47,8 @@ f_prior <- prior()
 }
 \references{
 \itemize{
-\item Fr\"uhwirth-Schnatter, S (2006), "Finite Mixture and Markov Switching Models"
+\item Fr\"uhwirth-Schnatter, S (2006),
+"Finite Mixture and Markov Switching Models"
 }
 }
 \seealso{

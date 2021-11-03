@@ -7,7 +7,7 @@
 qincol(m)
 }
 \arguments{
-\item{q}{A symmetric matrix or dimension \code{rxr}.}
+\item{m}{A symmetric matrix or dimension \code{rxr}.}
 }
 \value{
 A vector of length \code{r(r+1)/2}.

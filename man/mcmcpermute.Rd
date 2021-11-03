@@ -11,6 +11,25 @@ mcmcpermute(
   opt_ctrl = list(max_iter = 200L)
 )
 }
+\arguments{
+\item{mcmcout}{An \code{mcmcoutput} object containing the MCMC samples.}
+
+\item{fdata}{An \code{fdata} object containing the observations and in case of
+fixed indicator models the indicators. This argument is optional for
+relabeling with the \code{"kmeans"} or \code{"Stephens1997a"} methods, but mandatory
+for relabeling with \verb{Stephens1997b"}.}
+
+\item{method}{A character indicating which relabeling method should be used.
+The relabeling method \code{"kmeans"} is the default. \code{"Stephens1997a"} and
+\code{"Stephens1997b"} are only available for mixtures of Poisson or Binomial
+distributions.}
+
+\item{opt_ctrl}{(Deprecated) A list containing hyperparameters for
+optimization with the \code{"Stephens1997a"} relabeling algorithm.}
+}
+\value{
+An \code{mcmcoutputperm} object containing the relabeld MCMC samples.
+}
 \description{
 Calling \code{mcmcpermute()} on an \code{mcmcoutput} object relabels the MCMC samples
 by using a relabeling algorithm. \code{"kmeans"} is the standard relabeling

@@ -79,17 +79,18 @@
 #' that specifies a data dependent prior. See [priordefine()] for this advanced 
 #' constructor.
 #' 
-#' @slot weight A matrix storing the prior parameters for the `weight` of a 
+#' @param weight A matrix storing the prior parameters for the `weight` of a 
 #'   finite mixture model.
-#' @slot par A list storing the prior parameters for the parameters of a finite 
+#' @param par A list storing the prior parameters for the parameters of a finite 
 #'   mixture model.
-#' @slot type A character specifying what type of prior should be used in 
+#' @param type A character specifying what type of prior should be used in 
 #'   Bayesian estimation. Either `"independent"` for an independent prior 
 #'   distribution or `"condconjugate"` for a conditionally conjugate prior 
 #'   distribution.
-#' @slot hier A logical defining, if the used prior should be hierarchical. 
+#' @param hier A logical defining, if the used prior should be hierarchical. 
 #'   Hierarchical prior are often more robust, but need an additional layer in 
 #'   sampling, so computing costs increase.
+#' @return A `prior` object with the specified slots.
 #' @export
 #' @name prior
 #' 
@@ -102,7 +103,8 @@
 #' * [priordefine()] for the advanced constructor of this class
 #' 
 #' @references 
-#' * Fr\"uhwirth-Schnatter, S (2006), "Finite Mixture and Markov Switching Models"
+#' * Fr\"uhwirth-Schnatter, S (2006), 
+#'   "Finite Mixture and Markov Switching Models"
 "prior" <- function(weight = matrix(), par = list(),
                     type = c("independent", "condconjugate"),
                     hier = TRUE) {

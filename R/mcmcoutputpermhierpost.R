@@ -684,7 +684,7 @@ setMethod(
 #'   models as the last indicator of this observation. This slot is only 
 #'   available for models with unknown indicators.  
 #' @slot Sperm An `array` of dimension `N x storeS` containing the last 
-#'   `storeS` permuted indicators. `storeS` is defined in the slot `@@storeS` 
+#'   `storeS` permuted indicators. `storeS` is defined in the slot `storeS` 
 #'   of the `mcmc` object passed into [mixturemcmc()]. This slot is only 
 #'   available for models with unknown indicators.
 #' @slot NKperm An `array` of dimension `Mperm x K` containing the numbers 

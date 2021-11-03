@@ -7,7 +7,12 @@
 \S4method{Summary}{mcmcestind}(x, ..., na.rm = FALSE)
 }
 \arguments{
-\item{object}{An \code{mcmcestind} object.}
+\item{x}{An \code{mcmcestind} object.}
+
+\item{...}{(Not used) Further arguments to pass to called functions.}
+
+\item{na.rm}{(Not used) A logical indicating, if \code{NA} values should be
+removed in calculating statistics.}
 }
 \value{
 A console output listing the formatted slots and summary

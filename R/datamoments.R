@@ -25,14 +25,14 @@
 #' @slot mean A numeric storing the mean of the slot `y` in the `fdata` object.
 #' @slot var A matrix storing the variance(s and covariances) of the `y` slot 
 #'   in the `fdata` object.
-#' @slot VIRTUAL Virtual class containing further data moments.
+#' @slot fdata An `fdata` object containing the observations and possible 
+#'   indicators.
 #' @exportClass datamoments
 #' @rdname datamoments-class
 #' @seealso 
 #' * [cdatamoments-class] for data moments of continuous data
 #' * [ddatamoments-class] for data moments of discrete data
 #' * [sdatamoments-class] for data moments of the indicators
-#' 
 .datamoments <- setClass(
   "datamoments",
   representation(

@@ -7,9 +7,9 @@
 \S4method{hasPar}{model}(object, verbose = FALSE)
 }
 \arguments{
-\item{verbose}{A logical indicating, if the function should give a print out.}
+\item{object}{An S4 model object.}
 
-\item{model}{An S4 model object.}
+\item{verbose}{A logical indicating, if the function should give a print out.}
 }
 \value{
 A matrix with repetitions. Can be empty, if no repetitions are set.

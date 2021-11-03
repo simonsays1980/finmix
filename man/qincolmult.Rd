@@ -7,17 +7,17 @@
 qincolmult(a)
 }
 \arguments{
-\item{q}{A symmetric matrix or dimension \code{rxr}.}
+\item{a}{An array of symmetric matrices or dimension \code{rxrxK}.}
 }
 \value{
-A vector of length \code{r(r+1)/2}.
+A matrix of dimension \verb{r(r+1)/2xK}.
 }
 \description{
 Calling \code{\link[=qincolmult]{qincolmult()}} on an array of symmetric matrices all with dimension
 \code{rxr} converts these matrices into an array of vectors with length
 \code{r(r+1)/2}. This function is used to handle the MCMC sampling output from
 multivariate finite mixture models. To save storage the symmetric
-variance-covariance matrices of multivariate mixtures are stored vector
+variance-covariance matrices of multivariate mixtures are stored in vector
 form. If the covariance matrices are needed for calculations the functions
 \code{\link[=qinmatr]{qinmatr()}} and \code{\link[=qinmatrmult]{qinmatrmult()}} helps to restore these matrices from the
 storage vectors.

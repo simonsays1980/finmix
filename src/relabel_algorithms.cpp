@@ -386,12 +386,11 @@ arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values,
 //' Stephens (1997b) for MCMC samples of a Binomial mixture distribution. 
 //' 
 //' @param values A matrix of observations of dimension `Nx1`.
+//' @param reps A vector containing the repetitions.
 //' @param comp_par An array of component parameter samples from MCMC sampling. 
 //'   Dimension is `MxK`.
-//' @param weight An array of weight parameter samples from MCMC sampling. 
+//' @param weight_par An array of weight parameter samples from MCMC sampling. 
 //'   Dimension is `MxK`.
-//' @param max_iter A signed integer specifying the number of iterations to be 
-//'   run in optimization. Unused.  
 //' @return An integer matrix of dimension `MxK` that holding the optimal 
 //'   labeling.
 //' @export

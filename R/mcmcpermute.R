@@ -45,6 +45,18 @@
 #' `mcmcoutputperm` and carries the samples and statistics (like 
 #' log-likelihood values) of the permuted samples. 
 #' 
+#' @param mcmcout An `mcmcoutput` object containing the MCMC samples.
+#' @param fdata An `fdata` object containing the observations and in case of 
+#'   fixed indicator models the indicators. This argument is optional for 
+#'   relabeling with the `"kmeans"` or `"Stephens1997a"` methods, but mandatory 
+#'   for relabeling with `Stephens1997b"`. 
+#' @param method A character indicating which relabeling method should be used. 
+#'   The relabeling method `"kmeans"` is the default. `"Stephens1997a"` and 
+#'   `"Stephens1997b"` are only available for mixtures of Poisson or Binomial 
+#'   distributions.
+#' @param opt_ctrl (Deprecated) A list containing hyperparameters for 
+#'   optimization with the `"Stephens1997a"` relabeling algorithm.
+#' @return An `mcmcoutputperm` object containing the relabeld MCMC samples. 
 #' @export mcmcpermute
 #' @import nloptr
 #' 

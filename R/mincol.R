@@ -50,7 +50,7 @@
 #' form. If the covariance matrices are needed for calculations this function 
 #' helps to restore these matrices from the storage vectors.
 #' 
-#' @param q A matrix or array of vectors of dimension `r(r+1)/2x1`. 
+#' @param m A matrix or array of vectors of dimension `r(r+1)/2x1`. 
 #' @return An array of symmetric matrices, all of dimension `rxr`.
 #' @export
 #' 
@@ -82,7 +82,7 @@
 #' calculations the functions [qinmatr()] and [qinmatrmult()] helps to restore 
 #' these matrices from the storage vectors.
 #' 
-#' @param q A symmetric matrix or dimension `rxr`. 
+#' @param m A symmetric matrix or dimension `rxr`. 
 #' @return A vector of length `r(r+1)/2`.
 #' @export
 #' 
@@ -117,13 +117,13 @@
 #' `rxr` converts these matrices into an array of vectors with length 
 #' `r(r+1)/2`. This function is used to handle the MCMC sampling output from 
 #' multivariate finite mixture models. To save storage the symmetric 
-#' variance-covariance matrices of multivariate mixtures are stored vector 
+#' variance-covariance matrices of multivariate mixtures are stored in vector 
 #' form. If the covariance matrices are needed for calculations the functions 
 #' [qinmatr()] and [qinmatrmult()] helps to restore these matrices from the 
 #' storage vectors.
 #' 
-#' @param q A symmetric matrix or dimension `rxr`. 
-#' @return A vector of length `r(r+1)/2`.
+#' @param a An array of symmetric matrices or dimension `rxrxK`. 
+#' @return A matrix of dimension `r(r+1)/2xK`.
 #' @export
 #' 
 #' @examples 

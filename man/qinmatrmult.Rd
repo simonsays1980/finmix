@@ -7,7 +7,7 @@
 qinmatrmult(m)
 }
 \arguments{
-\item{q}{A matrix or array of vectors of dimension \verb{r(r+1)/2x1}.}
+\item{m}{A matrix or array of vectors of dimension \verb{r(r+1)/2x1}.}
 }
 \value{
 An array of symmetric matrices, all of dimension \code{rxr}.

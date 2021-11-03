@@ -279,7 +279,7 @@ setMethod(
 #' 
 #' \code{hasPar} checks if the model has parameters defined. 
 #' 
-#' @param model An S4 model object.
+#' @param object An S4 model object.
 #' @param verbose A logical indicating, if the function should give a print out. 
 #' @return A matrix with repetitions. Can be empty, if no repetitions are set.
 #' @exportMethod hasPar
@@ -354,7 +354,9 @@ setMethod(
 #' @param x An S4 model object. Must have specified parameters and weights.
 #' @param y Unused.
 #' @param dev A logical indicating, if the plot should be shown in a graphical 
-#' device. Set to \code{FALSE}, if plotted to a file. 
+#'   device. Set to \code{FALSE}, if plotted to a file. 
+#' @param ...	 Arguments to be passed to methods, such as graphical parameters 
+#'   (see par).
 #' @return Density or barplot of the S4 model object. 
 #' @exportMethod plot
 #' 
@@ -362,7 +364,9 @@ setMethod(
 #' plot(f_model)
 #' }
 #' 
-#' @seealso \code{model}
+#' @seealso 
+#' * [model-class] for the class definition
+#' * [model()] for the class constructor
 setMethod(
   "plot", "model",
   function(x, y, dev = TRUE, ...) {
@@ -389,15 +393,16 @@ setMethod(
   }
 )
 
-#' Plots point process.
+#' Plots the point process of a finite model
 #' 
 #' \code{plotPointProc} plots the point process of an S4 model object that 
 #' defines a finite mixture model. Only available for Poisson mixtures so far.
 #' 
-#' @param x An S4 model object with defined parameters and weigths. 
-#' @param y Unused.
+#' @param x An S4 model object with defined parameters and weights. 
 #' @param dev A logical indicating, if the plot should be shown in a graphical 
-#' device. Set to \code{FALSE}, if plotted to a file. 
+#'   device. Set to \code{FALSE}, if plotted to a file. 
+#' @param ...	 Arguments to be passed to methods, such as graphical parameters 
+#'   (see [par]).
 #' @return A scatter plot of weighted parameters.  
 #' @exportMethod plotPointProc
 #' 
@@ -820,8 +825,10 @@ setReplaceMethod(
 #' @examples 
 #' # Generate an default mixture model.
 #' f_model <- model()
+#' # Set the number of components to two.
+#' setK(f_model) <- 2
 #' # Set the slot.
-#' setPar(f_model) <- 2
+#' setPar(f_model) <- list(lambda=c(0.2, 0.7))
 #' 
 #' @seealso 
 #' * [model-class] for the class definition
@@ -900,7 +907,7 @@ setReplaceMethod(
 #' # Generate an default mixture model.
 #' f_model <- model()
 #' # Set the slot.
-#' setT(f_model) <- matrix(4)
+#' setT(f_model) <- as.integer(4)
 #' 
 #' @seealso 
 #' * [model-class] for the class definition

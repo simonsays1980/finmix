@@ -7,6 +7,8 @@
 mcmc_binomial_cc(fdata_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4)
 }
 \arguments{
+\item{fdata_S4}{An \code{fdata} object storing the observations and indicators.}
+
 \item{model_S4}{A \code{model} object specifying the Binomial finite mixture
 model.}
 
@@ -18,8 +20,6 @@ sampling.}
 
 \item{mcmcoutput_S4}{An \code{mcmcoutput} object storing the outcomes from MCMC
 sampling using R memory.}
-
-\item{data_S4}{An \code{fdata} object storing the observations and indicators.}
 }
 \value{
 An \code{mcmcoutput} object containing the results from MCMC sampling
