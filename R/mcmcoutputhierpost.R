@@ -120,39 +120,40 @@
 #'   that this function can only be applied for mixtures of two components. See 
 #'   [plotPostDens()] for further information.  
 #'
-#' @slot M An integer defining the number of iterations in MCMC sampling. 
-#' @slot burnin An integer defining the number of iterations in the burn-in 
+#' ## Slots
+#' * `M` An integer defining the number of iterations in MCMC sampling. 
+#' * `burnin` An integer defining the number of iterations in the burn-in 
 #'   phase of MCMC sampling. These number of sampling steps are not stored 
 #'   in the output.
-#' @slot ranperm A logical indicating, if MCMC sampling has been performed 
+#' * `ranperm` A logical indicating, if MCMC sampling has been performed 
 #'   with random permutations of components.
-#' @slot par A named list containing the sampled component parameters. 
-#' @slot weight An `array` of dimension `M x K` containing the sampled 
+#' * `par` A named list containing the sampled component parameters. 
+#' * `weight` An `array` of dimension `M x K` containing the sampled 
 #'   weights.
-#' @slot log A named list containing the values of the mixture log-likelihood, 
+#' * `log` A named list containing the values of the mixture log-likelihood, 
 #'   mixture prior log-likelihood, and the complete data posterior 
 #'   log-likelihood.
-#' @slot hyper A list storing the sampled parameters from the hierarchical 
+#' * `hyper` A list storing the sampled parameters from the hierarchical 
 #'   prior. 
-#' @slot post A named list containing a list `par` that contains the posterior 
+#' * `post` A named list containing a list `par` that contains the posterior 
 #'   parameters as named arrays. 
-#' @slot entropy An `array` of dimension `M x 1` containing the entropy 
+#' * `entropy` An `array` of dimension `M x 1` containing the entropy 
 #'   for each MCMC draw.
-#' @slot ST An `array` of dimension `M x 1` containing all MCMC states, 
+#' * `ST` An `array` of dimension `M x 1` containing all MCMC states, 
 #'   for the last observation in slot `y` of the `fdata` object passed in to 
 #'   [mixturemcmc()] where a state is defined for non-Markov models as the 
 #'   last indicator of this observation. 
-#' @slot S An `array` of dimension `N x storeS` containing the last 
-#'   `storeS` indicators sampled. `storeS` is defined in the slot `@@storeS` of 
+#' * `S` An `array` of dimension `N x storeS` containing the last 
+#'   `storeS` indicators sampled. `storeS` is defined in the slot `storeS` of 
 #'   the `mcmc` object passed into [mixturemcmc()].
-#' @slot NK An `array` of dimension `M x K` containing the number of 
+#' * `NK` An `array` of dimension `M x K` containing the number of 
 #'   observations assigned to each component for each MCMC draw.
-#' @slot clust An `array` of dimension `N x 1` containing the recent 
+#' * `clust` An `array` of dimension `N x 1` containing the recent 
 #'   indicators defining the last "clustering" of observations into the 
 #'   mixture components.
-#' @slot model The `model` object that specifies the finite mixture model for 
-#'   whcih MCMC sampling has been performed. 
-#' @slot prior The `prior` object defining the prior distributions for the 
+#' * `model` The `model` object that specifies the finite mixture model for 
+#'   which MCMC sampling has been performed. 
+#' * `prior` The `prior` object defining the prior distributions for the 
 #'   component parameters that has been used in MCMC sampling.
 #'   
 #' @exportClass mcmcoutput

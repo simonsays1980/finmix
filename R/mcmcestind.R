@@ -121,32 +121,32 @@
 #' * `getIeavg()` returns the identified EAVG estimates.
 #' * `getSdpost()` returns the `sdpost`.
 #' 
-#' @slot dist A character specifying the distribution family of the mixture 
+#' * `dist` A character specifying the distribution family of the mixture 
 #'   model used in MCMC sampling.
-#' @slot K An integer specifying the number of components in the mixture model. 
-#' @slot indicmod A character specifying the indicator model. At this moment 
+#' * `K` An integer specifying the number of components in the mixture model. 
+#' * `indicmod` A character specifying the indicator model. At this moment 
 #'   only a multinomial model can be chosen. 
-#' @slot burnin An integer specifying the number of iterations in the burn-in 
+#' * `burnin` An integer specifying the number of iterations in the burn-in 
 #'   phase of MCMC sampling. 
-#' @slot M An integer specifying the number of iterations to store in MCMC 
+#' * `M` An integer specifying the number of iterations to store in MCMC 
 #'   sampling.
-#' @slot ranperm A logical specifying, if random permutation has been used 
+#' * `ranperm` A logical specifying, if random permutation has been used 
 #'   during MCMC sampling. 
-#' @slot relabel A character specifying the re-labeling algorithm used during 
+#' * `relabel` A character specifying the re-labeling algorithm used during 
 #'   parameter estimation for the identified ergodic average. 
-#' @slot map A named list containing the parameter estimates of the MAP. The 
+#' * `map` A named list containing the parameter estimates of the MAP. The 
 #'   element `par` is a named list and contains the component parameters and 
 #'   the element `weight` contains the weights. 
-#' @slot bml A named list containing the parameter estimates of the BML. The 
+#' * `bml` A named list containing the parameter estimates of the BML. The 
 #'   element `par` is a named list and contains the component parameters and 
 #'   the element `weight` contains the weights. 
-#' @slot eavg A named list containing the parameter estimates of the 
+#' * `eavg` A named list containing the parameter estimates of the 
 #'   unidentified EAVG. Note that this is only the case for a model with 
 #'   unknown indicators.
-#' @slot ieavg A named list containing the parameter estimates of the IEAVG. The 
+#' * `ieavg` A named list containing the parameter estimates of the IEAVG. The 
 #'   element `par` is a named list and contains the component parameters and 
 #'   the element `weight` contains the weights.
-#' @slot sdpost A named list containing the standard deviations of the 
+#' * `sdpost` A named list containing the standard deviations of the 
 #'   parameter estimates from the posterior distributions.
 #' 
 #' @exportClass mcmcest

@@ -656,38 +656,38 @@ setMethod(
 #'   that this function can only be applied for mixtures of two components. See 
 #'   [plotPostDens()] for further information.    
 #' 
-#' @slot Mperm An integer defining the number of permuted MCMC samples.
-#' @slot parperm A named list containing the permuted component parameter 
+#' * `Mperm` An integer defining the number of permuted MCMC samples.
+#' * `parperm` A named list containing the permuted component parameter 
 #'   samples from MCMC sampling.
-#' @slot relabel A character specifying the relabeling algorithm used for 
+#' * `relabel` A character specifying the relabeling algorithm used for 
 #'   permuting the MCMC samples.
-#' @slot weightperm An array of dimension `MpermxK` containing the 
+#' * `weightperm` An array of dimension `MpermxK` containing the 
 #'   relabeled weight parameters. This slot is not available for models with 
 #'   fixed indicators as weights do not get sampled for such models.
-#' @slot logperm A named list containing the mixture log-likelihood, the 
+#' * `logperm` A named list containing the mixture log-likelihood, the 
 #'   prior log-likelihood, and for models with unknown indicators the complete 
 #'   data posterior log-likelihood for the permuted MCMC samples.
-#' @slot hyperperm A named list containing the (permuted) parameters of the 
+#' * `hyperperm` A named list containing the (permuted) parameters of the 
 #'   hierarchical prior. This slot is only available, if a hierarchical prior 
 #'   had been used for sampling, i.e. the slot `hier` of the 
 #'   [prior][prior-class] had been set to `TRUE`.
-#' @slot postperm A named list containing a named list `par` with array(s) of 
+#' * `postperm` A named list containing a named list `par` with array(s) of 
 #'   parameters from the posterior density. This slot is only available if 
 #'   the hyperparameter `storepost` in the [mcmc][mcmc-class] object had been 
 #'   set to `TRUE`.
-#' @slot entropyperm An `array` of dimension `Mpermx1` containing the 
+#' * `entropyperm` An `array` of dimension `Mpermx1` containing the 
 #'   entropy for each MCMC permuted draw. This slot is only available for 
 #'   models with unknown indicators.
-#' @slot STperm An `array` of dimension `Mpermx1` containing all permuted 
+#' `STperm` An `array` of dimension `Mpermx1` containing all permuted 
 #'   MCMC states, for the last observation in slot `y` of the `fdata` object 
 #'   passed in to [mixturemcmc()] where a state is defined for non-Markov 
 #'   models as the last indicator of this observation. This slot is only 
 #'   available for models with unknown indicators.  
-#' @slot Sperm An `array` of dimension `N x storeS` containing the last 
+#' * `Sperm` An `array` of dimension `N x storeS` containing the last 
 #'   `storeS` permuted indicators. `storeS` is defined in the slot `storeS` 
 #'   of the `mcmc` object passed into [mixturemcmc()]. This slot is only 
 #'   available for models with unknown indicators.
-#' @slot NKperm An `array` of dimension `Mperm x K` containing the numbers 
+#' * `NKperm` An `array` of dimension `Mperm x K` containing the numbers 
 #'   of observations assigned to each component. This slot is only available for 
 #'   models with unknown indicators.
 #'  

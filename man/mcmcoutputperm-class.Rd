@@ -68,57 +68,42 @@ parameters. See \code{\link[=plotSampRep]{plotSampRep()}} for further informatio
 \item \code{plotPostDens()} plots the posterior density of component parameters. Note
 that this function can only be applied for mixtures of two components. See
 \code{\link[=plotPostDens]{plotPostDens()}} for further information.
-}
-}
-
-}
-}
-\section{Slots}{
-
-\describe{
-\item{\code{Mperm}}{An integer defining the number of permuted MCMC samples.}
-
-\item{\code{parperm}}{A named list containing the permuted component parameter
-samples from MCMC sampling.}
-
-\item{\code{relabel}}{A character specifying the relabeling algorithm used for
-permuting the MCMC samples.}
-
-\item{\code{weightperm}}{An array of dimension \code{MpermxK} containing the
+\item \code{Mperm} An integer defining the number of permuted MCMC samples.
+\item \code{parperm} A named list containing the permuted component parameter
+samples from MCMC sampling.
+\item \code{relabel} A character specifying the relabeling algorithm used for
+permuting the MCMC samples.
+\item \code{weightperm} An array of dimension \code{MpermxK} containing the
 relabeled weight parameters. This slot is not available for models with
-fixed indicators as weights do not get sampled for such models.}
-
-\item{\code{logperm}}{A named list containing the mixture log-likelihood, the
+fixed indicators as weights do not get sampled for such models.
+\item \code{logperm} A named list containing the mixture log-likelihood, the
 prior log-likelihood, and for models with unknown indicators the complete
-data posterior log-likelihood for the permuted MCMC samples.}
-
-\item{\code{hyperperm}}{A named list containing the (permuted) parameters of the
+data posterior log-likelihood for the permuted MCMC samples.
+\item \code{hyperperm} A named list containing the (permuted) parameters of the
 hierarchical prior. This slot is only available, if a hierarchical prior
 had been used for sampling, i.e. the slot \code{hier} of the
-\link[=prior-class]{prior} had been set to \code{TRUE}.}
-
-\item{\code{postperm}}{A named list containing a named list \code{par} with array(s) of
+\link[=prior-class]{prior} had been set to \code{TRUE}.
+\item \code{postperm} A named list containing a named list \code{par} with array(s) of
 parameters from the posterior density. This slot is only available if
 the hyperparameter \code{storepost} in the \link[=mcmc-class]{mcmc} object had been
-set to \code{TRUE}.}
-
-\item{\code{entropyperm}}{An \code{array} of dimension \code{Mpermx1} containing the
+set to \code{TRUE}.
+\item \code{entropyperm} An \code{array} of dimension \code{Mpermx1} containing the
 entropy for each MCMC permuted draw. This slot is only available for
-models with unknown indicators.}
-
-\item{\code{STperm}}{An \code{array} of dimension \code{Mpermx1} containing all permuted
+models with unknown indicators.
+\code{STperm} An \code{array} of dimension \code{Mpermx1} containing all permuted
 MCMC states, for the last observation in slot \code{y} of the \code{fdata} object
 passed in to \code{\link[=mixturemcmc]{mixturemcmc()}} where a state is defined for non-Markov
 models as the last indicator of this observation. This slot is only
-available for models with unknown indicators.}
-
-\item{\code{Sperm}}{An \code{array} of dimension \verb{N x storeS} containing the last
+available for models with unknown indicators.
+\item \code{Sperm} An \code{array} of dimension \verb{N x storeS} containing the last
 \code{storeS} permuted indicators. \code{storeS} is defined in the slot \code{storeS}
 of the \code{mcmc} object passed into \code{\link[=mixturemcmc]{mixturemcmc()}}. This slot is only
-available for models with unknown indicators.}
-
-\item{\code{NKperm}}{An \code{array} of dimension \verb{Mperm x K} containing the numbers
+available for models with unknown indicators.
+\item \code{NKperm} An \code{array} of dimension \verb{Mperm x K} containing the numbers
 of observations assigned to each component. This slot is only available for
-models with unknown indicators.}
-}}
+models with unknown indicators.
+}
+}
 
+}
+}

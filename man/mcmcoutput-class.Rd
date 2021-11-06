@@ -78,60 +78,46 @@ that this function can only be applied for mixtures of two components. See
 }
 
 }
-}
-\section{Slots}{
 
-\describe{
-\item{\code{M}}{An integer defining the number of iterations in MCMC sampling.}
-
-\item{\code{burnin}}{An integer defining the number of iterations in the burn-in
+\subsection{Slots}{
+\itemize{
+\item \code{M} An integer defining the number of iterations in MCMC sampling.
+\item \code{burnin} An integer defining the number of iterations in the burn-in
 phase of MCMC sampling. These number of sampling steps are not stored
-in the output.}
-
-\item{\code{ranperm}}{A logical indicating, if MCMC sampling has been performed
-with random permutations of components.}
-
-\item{\code{par}}{A named list containing the sampled component parameters.}
-
-\item{\code{weight}}{An \code{array} of dimension \verb{M x K} containing the sampled
-weights.}
-
-\item{\code{log}}{A named list containing the values of the mixture log-likelihood,
+in the output.
+\item \code{ranperm} A logical indicating, if MCMC sampling has been performed
+with random permutations of components.
+\item \code{par} A named list containing the sampled component parameters.
+\item \code{weight} An \code{array} of dimension \verb{M x K} containing the sampled
+weights.
+\item \code{log} A named list containing the values of the mixture log-likelihood,
 mixture prior log-likelihood, and the complete data posterior
-log-likelihood.}
-
-\item{\code{hyper}}{A list storing the sampled parameters from the hierarchical
-prior.}
-
-\item{\code{post}}{A named list containing a list \code{par} that contains the posterior
-parameters as named arrays.}
-
-\item{\code{entropy}}{An \code{array} of dimension \verb{M x 1} containing the entropy
-for each MCMC draw.}
-
-\item{\code{ST}}{An \code{array} of dimension \verb{M x 1} containing all MCMC states,
+log-likelihood.
+\item \code{hyper} A list storing the sampled parameters from the hierarchical
+prior.
+\item \code{post} A named list containing a list \code{par} that contains the posterior
+parameters as named arrays.
+\item \code{entropy} An \code{array} of dimension \verb{M x 1} containing the entropy
+for each MCMC draw.
+\item \code{ST} An \code{array} of dimension \verb{M x 1} containing all MCMC states,
 for the last observation in slot \code{y} of the \code{fdata} object passed in to
 \code{\link[=mixturemcmc]{mixturemcmc()}} where a state is defined for non-Markov models as the
-last indicator of this observation.}
-
-\item{\code{S}}{An \code{array} of dimension \verb{N x storeS} containing the last
-\code{storeS} indicators sampled. \code{storeS} is defined in the slot \verb{@storeS} of
-the \code{mcmc} object passed into \code{\link[=mixturemcmc]{mixturemcmc()}}.}
-
-\item{\code{NK}}{An \code{array} of dimension \verb{M x K} containing the number of
-observations assigned to each component for each MCMC draw.}
-
-\item{\code{clust}}{An \code{array} of dimension \verb{N x 1} containing the recent
+last indicator of this observation.
+\item \code{S} An \code{array} of dimension \verb{N x storeS} containing the last
+\code{storeS} indicators sampled. \code{storeS} is defined in the slot \code{storeS} of
+the \code{mcmc} object passed into \code{\link[=mixturemcmc]{mixturemcmc()}}.
+\item \code{NK} An \code{array} of dimension \verb{M x K} containing the number of
+observations assigned to each component for each MCMC draw.
+\item \code{clust} An \code{array} of dimension \verb{N x 1} containing the recent
 indicators defining the last "clustering" of observations into the
-mixture components.}
-
-\item{\code{model}}{The \code{model} object that specifies the finite mixture model for
-whcih MCMC sampling has been performed.}
-
-\item{\code{prior}}{The \code{prior} object defining the prior distributions for the
-component parameters that has been used in MCMC sampling.}
-}}
-
+mixture components.
+\item \code{model} The \code{model} object that specifies the finite mixture model for
+which MCMC sampling has been performed.
+\item \code{prior} The \code{prior} object defining the prior distributions for the
+component parameters that has been used in MCMC sampling.
+}
+}
+}
 \seealso{
 \itemize{
 \item \linkS4class{mcmcoutputperm} for the corresponding class defined for relabeled

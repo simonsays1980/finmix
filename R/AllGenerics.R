@@ -612,7 +612,7 @@ setGeneric("moments", function(object) standardGeneric("moments"))
 #' @export
 #' @docType methods
 #' @keywords internal
-#' @rdname plotTraces-generic
+#' @name plotTraces-generic
 setGeneric("plotTraces", function(x, dev = TRUE, lik = 1, col = FALSE, ...) standardGeneric("plotTraces"))
 
 #' Plots histograms of MCMC samples

@@ -77,51 +77,35 @@ as the slots are only set internally.
 \item \code{getEavg()} returns the EAVG estimates.
 \item \code{getIeavg()} returns the identified EAVG estimates.
 \item \code{getSdpost()} returns the \code{sdpost}.
-}
-}
-
-}
-}
-\section{Slots}{
-
-\describe{
-\item{\code{dist}}{A character specifying the distribution family of the mixture
-model used in MCMC sampling.}
-
-\item{\code{K}}{An integer specifying the number of components in the mixture model.}
-
-\item{\code{indicmod}}{A character specifying the indicator model. At this moment
-only a multinomial model can be chosen.}
-
-\item{\code{burnin}}{An integer specifying the number of iterations in the burn-in
-phase of MCMC sampling.}
-
-\item{\code{M}}{An integer specifying the number of iterations to store in MCMC
-sampling.}
-
-\item{\code{ranperm}}{A logical specifying, if random permutation has been used
-during MCMC sampling.}
-
-\item{\code{relabel}}{A character specifying the re-labeling algorithm used during
-parameter estimation for the identified ergodic average.}
-
-\item{\code{map}}{A named list containing the parameter estimates of the MAP. The
+\item \code{dist} A character specifying the distribution family of the mixture
+model used in MCMC sampling.
+\item \code{K} An integer specifying the number of components in the mixture model.
+\item \code{indicmod} A character specifying the indicator model. At this moment
+only a multinomial model can be chosen.
+\item \code{burnin} An integer specifying the number of iterations in the burn-in
+phase of MCMC sampling.
+\item \code{M} An integer specifying the number of iterations to store in MCMC
+sampling.
+\item \code{ranperm} A logical specifying, if random permutation has been used
+during MCMC sampling.
+\item \code{relabel} A character specifying the re-labeling algorithm used during
+parameter estimation for the identified ergodic average.
+\item \code{map} A named list containing the parameter estimates of the MAP. The
 element \code{par} is a named list and contains the component parameters and
-the element \code{weight} contains the weights.}
-
-\item{\code{bml}}{A named list containing the parameter estimates of the BML. The
+the element \code{weight} contains the weights.
+\item \code{bml} A named list containing the parameter estimates of the BML. The
 element \code{par} is a named list and contains the component parameters and
-the element \code{weight} contains the weights.}
-
-\item{\code{eavg}}{A named list containing the parameter estimates of the
+the element \code{weight} contains the weights.
+\item \code{eavg} A named list containing the parameter estimates of the
 unidentified EAVG. Note that this is only the case for a model with
-unknown indicators.}
-
-\item{\code{ieavg}}{A named list containing the parameter estimates of the IEAVG. The
+unknown indicators.
+\item \code{ieavg} A named list containing the parameter estimates of the IEAVG. The
 element \code{par} is a named list and contains the component parameters and
-the element \code{weight} contains the weights.}
+the element \code{weight} contains the weights.
+\item \code{sdpost} A named list containing the standard deviations of the
+parameter estimates from the posterior distributions.
+}
+}
 
-\item{\code{sdpost}}{A named list containing the standard deviations of the
-parameter estimates from the posterior distributions.}
-}}
-
+}
+}
