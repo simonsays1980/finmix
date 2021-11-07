@@ -29,3 +29,4 @@ setS(f_data) <- matrix(sample.int(4, 100, replace = TRUE))
 \seealso{
 \link{fdata} for all slots of the \code{fdata} class
 }
+\keyword{internal}

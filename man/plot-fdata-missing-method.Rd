@@ -30,3 +30,4 @@ plot(f_data)
 \seealso{
 \link{fdata} class
 }
+\keyword{internal}

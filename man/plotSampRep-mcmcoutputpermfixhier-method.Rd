@@ -50,3 +50,4 @@ plotSampRep(f_outputperm)
 \item \code{\link[=plotPostDens]{plotPostDens()}} for plotting posterior densities for sampled values
 }
 }
+\keyword{internal}

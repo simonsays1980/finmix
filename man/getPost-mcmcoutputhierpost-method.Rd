@@ -36,3 +36,4 @@ getPost(f_output)
 \item \code{\link[=mixturemcmc]{mixturemcmc()}} for performing MCMC sampling
 }
 }
+\keyword{internal}

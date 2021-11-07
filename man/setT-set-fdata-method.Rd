@@ -29,3 +29,4 @@ setT(f_data) <- matrix(rep(100, 100))
 \seealso{
 \link{fdata} for all slots of the \code{fdata} class
 }
+\keyword{internal}

@@ -24,3 +24,4 @@ getBycolumn(f_data)
 \seealso{
 \link{fdata} for all slots of the \code{fdata} class
 }
+\keyword{internal}

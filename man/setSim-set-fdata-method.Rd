@@ -29,3 +29,4 @@ setSim(f_data) <- TRUE
 \seealso{
 \link{fdata} for all slots of the \code{fdata} class
 }
+\keyword{internal}

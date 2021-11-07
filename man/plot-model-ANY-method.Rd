@@ -36,3 +36,4 @@ plot(f_model)
 \item \code{\link[=model]{model()}} for the class constructor
 }
 }
+\keyword{internal}

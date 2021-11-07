@@ -424,6 +424,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotPointProc
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.

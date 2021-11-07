@@ -53,3 +53,4 @@ plotPostDens(f_outputperm)
 \item \code{\link[=plotPointProc]{plotPointProc()}} for plotting point processes for sampled values
 }
 }
+\keyword{internal}

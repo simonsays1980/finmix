@@ -284,6 +284,7 @@
 #' @param ... Further arguments passed to the plotting functions `hist` or 
 #'   `barplot`. 
 #' @exportMethod plot
+#' @keywords internal
 #' 
 #' @examples
 #' # Generate Poisson data and plot it. 
@@ -523,6 +524,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `y` slot of the `object` as a column-ordered matrix.
 #' @exportMethod getColY
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -548,6 +550,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `y` slot of the `object` as a row-ordered matrix.
 #' @exportMethod getRowY
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -573,6 +576,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `S` slot of the `object` as a column-ordered matrix.
 #' @exportMethod getColS
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -598,6 +602,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `S` slot of the `object` as a row-ordered matrix.
 #' @exportMethod getRowS
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -623,6 +628,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `exp` slot of the `object` as a column-ordered matrix.
 #' @exportMethod getColExp
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -648,6 +654,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `exp` slot of the `object` as a row-ordered matrix.
 #' @exportMethod getRowExp
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -673,6 +680,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `T` slot of the `object` as a column-ordered matrix.
 #' @exportMethod getColT
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -698,6 +706,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `T` slot of the `object` as a row-ordered matrix.
 #' @exportMethod getRowT
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -725,6 +734,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `y` slot of the `object` in the order defined `bycolumn`.
 #' @exportMethod getY
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -746,6 +756,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `N` slot of the `object`.
 #' @exportMethod getN
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -767,6 +778,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `r` slot of the `object`.
 #' @exportMethod getR
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -788,6 +800,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `S` slot of the `object` in the order defined `bycolumn`.
 #' @exportMethod getS
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -809,6 +822,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `bycolumn` slot of the `object`.
 #' @exportMethod getBycolumn
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -830,6 +844,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `name` slot of the `object`.
 #' @exportMethod getName
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -851,6 +866,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `type` slot of the `object`.
 #' @exportMethod getType
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -872,6 +888,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `sim` slot of the `object`.
 #' @exportMethod getSim
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -893,6 +910,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `exp` slot of the `object` in the order defined `bycolumn`.
 #' @exportMethod getExp
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -914,6 +932,7 @@ setMethod(
 #' @param object An `fdata` object.
 #' @returns The `T` slot of the `object` in the order defined `bycolumn`.
 #' @exportMethod getT
+#' @keywords internal
 #' 
 #' @examples 
 #' # Create an fdata object with Poisson data
@@ -940,6 +959,7 @@ setMethod(
 #' @returns The `fdata` object with slot `y` set to `value` or an error message
 #'   if the `value` cannot be set as slot `y`.
 #' @exportMethod setY<-
+#' @keywords internal
 #' 
 #' @examples
 #' f_data <- fdata()
@@ -979,6 +999,7 @@ setReplaceMethod(
 #' @returns The `fdata` object with slot `N` set to `value` or an error message
 #'   if the `value` cannot be set as slot `N`.
 #' @exportMethod setN<-
+#' @keywords internal
 #' 
 #' @examples
 #' f_data <- fdata()
@@ -1005,6 +1026,7 @@ setReplaceMethod(
 #' @returns The `fdata` object with slot `R` set to `value` or an error message
 #'   if the `value` cannot be set as slot `R`.
 #' @exportMethod setR<-
+#' @keywords internal
 #' 
 #' @examples
 #' f_data <- fdata()
@@ -1032,6 +1054,7 @@ setReplaceMethod(
 #' @returns The `fdata` object with slot `S` set to `value` or an error message
 #'   if the `value` cannot be set as slot `S`.
 #' @exportMethod setS<-
+#' @keywords internal
 #' 
 #' @examples
 #' # Generate an empty fdata object.
@@ -1065,6 +1088,7 @@ setReplaceMethod(
 #' @returns The `fdata` object with slot `bycolumn` set to `value` or an error message
 #'   if the `value` cannot be set as slot `bycolumn`.
 #' @exportMethod setBycolumn<-
+#' @keywords internal
 #' 
 #' @examples
 #' # Generate an empty fdata object.
@@ -1109,6 +1133,7 @@ setReplaceMethod(
 #' @returns The `fdata` object with slot `name` set to `value` or an error message
 #'   if the `value` cannot be set as slot `name`.
 #' @exportMethod setName<-
+#' @keywords internal
 #' 
 #' @examples
 #' # Generate an empty fdata object.
@@ -1136,6 +1161,7 @@ setReplaceMethod(
 #' @returns The `fdata` object with slot `type` set to `value` or an error message
 #'   if the `value` cannot be set as slot `type`.
 #' @exportMethod setType<-
+#' @keywords internal
 #' 
 #' @examples
 #' # Generate an empty fdata object.
@@ -1164,6 +1190,7 @@ setReplaceMethod(
 #' @returns The `fdata` object with slot `sim` set to `value` or an error message
 #'   if the `value` cannot be set as slot `sim`.
 #' @exportMethod setSim<-
+#' @keywords internal
 #' 
 #' @examples
 #' # Generate an empty fdata object.
@@ -1192,6 +1219,7 @@ setReplaceMethod(
 #' @returns The `fdata` object with slot `exp` set to `value` or an error message
 #'   if the `value` cannot be set as slot `exp`.
 #' @exportMethod setExp<-
+#' @keywords internal
 #' 
 #' @examples
 #' # Generate an empty fdata object.
@@ -1226,6 +1254,7 @@ setReplaceMethod(
 #' @returns The `fdata` object with slot `T` set to `value` or an error message
 #'   if the `value` cannot be set as slot `T`.
 #' @exportMethod setT<-
+#' @keywords internal
 #' 
 #' @examples
 #' # Generate an empty fdata object.

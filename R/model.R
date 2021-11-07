@@ -283,13 +283,15 @@ setMethod(
 #' @param verbose A logical indicating, if the function should give a print out. 
 #' @return A matrix with repetitions. Can be empty, if no repetitions are set.
 #' @exportMethod hasPar
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
 #' if(hasPar(model)) {simulate(model)}
 #' }
 #' 
-#' @seealso \code{model}
+#' @seealso 
+#' * [model-class] for the class definition
 setMethod(
   "hasPar", "model",
   function(object, verbose = FALSE) {
@@ -359,6 +361,7 @@ setMethod(
 #'   (see par).
 #' @return Density or barplot of the S4 model object. 
 #' @exportMethod plot
+#' @keywords internal
 #' 
 #' @examples \dontrun{
 #' plot(f_model)
@@ -405,6 +408,7 @@ setMethod(
 #'   (see [par]).
 #' @return A scatter plot of weighted parameters.  
 #' @exportMethod plotPointProc
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{

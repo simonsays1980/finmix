@@ -49,3 +49,4 @@ plotDens(f_output)
 \item \code{\link[=plotPostDens]{plotPostDens()}} for plotting the posterior density of component parameters
 }
 }
+\keyword{internal}

@@ -164,6 +164,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return A plot of the traces of the MCMC samples.
 #' @exportMethod plotTraces
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
@@ -241,6 +242,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Histograms of the MCMC samples.
 #' @exportMethod plotHist
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
@@ -300,6 +302,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Densities of the MCMC samples.
 #' @exportMethod plotDens
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
@@ -358,6 +361,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point process of the MCMC samples.
 #' @exportMethod plotPointProc
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
@@ -413,6 +417,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling representation of the MCMC samples.
 #' @exportMethod plotSampRep
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
@@ -471,6 +476,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Posterior densities of the MCMC samples.
 #' @exportMethod plotPostDens
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{

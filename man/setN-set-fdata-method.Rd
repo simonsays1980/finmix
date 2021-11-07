@@ -27,3 +27,4 @@ setN(f_data) <- as.integer(100)
 \seealso{
 \link{fdata} for all slots of the \code{fdata} class
 }
+\keyword{internal}

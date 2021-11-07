@@ -60,3 +60,4 @@ plotTraces(f_output, lik = 0)
 \item \code{\link[=plotPostDens]{plotPostDens()}} for plotting the posterior density of component parameters
 }
 }
+\keyword{internal}

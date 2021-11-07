@@ -56,3 +56,4 @@ plotHist(f_outputperm)
 \item \code{\link[=plotPostDens]{plotPostDens()}} for plotting the posterior density of component
 }
 }
+\keyword{internal}

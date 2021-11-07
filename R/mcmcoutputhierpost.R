@@ -426,6 +426,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Point process of the MCMC samples.
 #' @exportMethod plotPointProc
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
@@ -474,6 +475,7 @@ setMethod(
 #' @param ... Further arguments to be passed to the plotting function.
 #' @return Sampling representation of the MCMC samples.
 #' @exportMethod plotSampRep
+#' @keywords internal
 #' 
 #' @examples 
 #' \dontrun{
@@ -641,6 +643,7 @@ setMethod(
 #' @param object An `mcmcoutputhierpost` object.
 #' @returns The `post` slot of the `object`.
 #' @exportMethod getPost
+#' @keywords internal
 #' 
 #' @examples 
 #' # Define a Poisson mixture model with two components.

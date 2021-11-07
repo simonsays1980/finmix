@@ -27,3 +27,4 @@ setY(f_data) <- rpois(100, 312)
 \seealso{
 \linkS4class{fdata} for all slots of the \code{fdata} class
 }
+\keyword{internal}

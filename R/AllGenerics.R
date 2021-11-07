@@ -31,6 +31,7 @@ setGeneric("simulate", function(model, N = 100, varargin, seed = 0) standardGene
 #' @export
 #' @docType methods
 #' @keywords internal
+#' @name plotPointProc-generic
 #' @rdname plotPointProc-generic
 setGeneric("plotPointProc", function(x, dev = TRUE, ...) standardGeneric("plotPointProc"))
 
@@ -619,6 +620,7 @@ setGeneric("plotTraces", function(x, dev = TRUE, lik = 1, col = FALSE, ...) stan
 #' @export
 #' @docType methods
 #' @keywords internal
+#' @name plotHist-generic
 #' @rdname plotHist-generic
 setGeneric("plotHist", function(x, dev = TRUE, ...) standardGeneric("plotHist"))
 
@@ -626,6 +628,7 @@ setGeneric("plotHist", function(x, dev = TRUE, ...) standardGeneric("plotHist"))
 #' @export
 #' @docType methods
 #' @keywords internal
+#' @name plotDens-generic
 #' @rdname plotDens-generic
 setGeneric("plotDens", function(x, dev = TRUE, ...) standardGeneric("plotDens"))
 
@@ -633,6 +636,7 @@ setGeneric("plotDens", function(x, dev = TRUE, ...) standardGeneric("plotDens"))
 #' @export
 #' @docType methods
 #' @keywords internal
+#' @name plotSampRep-generic
 #' @rdname plotSampRep-generic
 setGeneric("plotSampRep", function(x, dev = TRUE, ...) standardGeneric("plotSampRep"))
 
@@ -640,6 +644,7 @@ setGeneric("plotSampRep", function(x, dev = TRUE, ...) standardGeneric("plotSamp
 #' @export
 #' @docType methods
 #' @keywords internal
+#' @name plotPostDens-generic
 #' @rdname plotPostDens-generic
 setGeneric("plotPostDens", function(x, dev = TRUE, ...) standardGeneric("plotPostDens"))
 
@@ -647,6 +652,7 @@ setGeneric("plotPostDens", function(x, dev = TRUE, ...) standardGeneric("plotPos
 #' @export
 #' @docType methods
 #' @keywords internal
+#' @name subseq-generic
 #' @rdname subseq-generic
 setGeneric("subseq", function(object, index) standardGeneric("subseq"))
 
@@ -654,6 +660,7 @@ setGeneric("subseq", function(object, index) standardGeneric("subseq"))
 #' @export
 #' @docType methods
 #' @keywords internal
+#' @name swapElements-generic
 #' @rdname swapElements-generic
 setGeneric("swapElements", function(object, index) standardGeneric("swapElements"))
 
@@ -661,6 +668,8 @@ setGeneric("swapElements", function(object, index) standardGeneric("swapElements
 #' @export
 #' @docType methods
 #' @keywords internal
+#' @name extract-generic
+#' @rdname extract-generic
 setGeneric("extract", function(object, index) standardGeneric("extract"))
 
 #' Getter for the `log` slot

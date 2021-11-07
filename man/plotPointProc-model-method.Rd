@@ -31,3 +31,4 @@ plotPointProc(f_model)
 \seealso{
 \code{model}
 }
+\keyword{internal}
