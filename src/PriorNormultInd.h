@@ -20,7 +20,7 @@
 /* Forward declaration */
 class ParNormultInd;
 
-class PriorNormultInd : virtual public PriorNormultFix {
+class PriorNormultInd : public PriorNormultFix {
 public:
 arma::rowvec weightStart;
 arma::rowvec weightPost;
@@ -29,7 +29,7 @@ PriorNormultInd (const FinmixPrior&);
 virtual ~PriorNormultInd ()
 {
 }
-virtual void update(const unsigned int&,
+void update(const unsigned int&,
                     const arma::mat&, arma::ivec&,
                     const arma::vec&, ParNormultInd&);
 };
