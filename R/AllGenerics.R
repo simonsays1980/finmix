@@ -16,7 +16,7 @@
 # along with Rcpp.  If not, see <http://www.gnu.org/licenses/>.
 
 ## Load the dynamic library
-#' @useDynLib finmix, .registration=TRUE
+#' @useDynLib finmix
 #' @importFrom Rcpp sourceCpp
 NULL
 

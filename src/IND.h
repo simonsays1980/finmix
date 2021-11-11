@@ -43,7 +43,7 @@
  *          neded to perform the permutations for random permutation
  *          Gibbs sampling.
  * @see FIX, HIER, POST, ADAPTER, BASE
- * @author Lars SImon Zehnder
+ * @author Lars Simon Zehnder
  * ------------------------------------------------------------------
  */
 template <typename Super>

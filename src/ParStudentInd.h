@@ -18,7 +18,7 @@
 #include "ParStudentFix.h"
 #include "PriorStudentInd.h"
 
-class ParStudentInd : virtual public ParStudentFix {
+class ParStudentInd : public ParStudentFix {
 public:
 arma::rowvec weight;
 
@@ -27,7 +27,7 @@ ParStudentInd (const bool&,
 virtual ~ParStudentInd ()
 {
 }
-virtual void update(const PriorStudentInd&);
+void update(const PriorStudentInd&);
 };
 #endif /* __FINMIX_PARSTUDENTIND_H__ */
 

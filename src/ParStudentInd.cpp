@@ -15,5 +15,6 @@ ParStudentInd::ParStudentInd (const bool& STARTPAR,
 inline
 void ParStudentInd::update(const PriorStudentInd& hyperPar)
 {
+   // updating the parameters is performed in PriorStudentInd.update()
    weight = rdirichlet(hyperPar.weightPost);
 }
