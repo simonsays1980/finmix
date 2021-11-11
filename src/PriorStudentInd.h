@@ -19,7 +19,7 @@
 
 /* Forward declaration */
 class ParStudentInd;
-class PriorStudentInd : virtual public PriorStudentFix {
+class PriorStudentInd : public PriorStudentFix {
 public:
 arma::rowvec weightStart;
 arma::rowvec weightPost;
@@ -28,9 +28,9 @@ PriorStudentInd (const FinmixPrior&);
 virtual ~PriorStudentInd ()
 {
 }
-virtual void update(const unsigned int&,
-                    const arma::mat&, arma::ivec&,
-                    const arma::vec&, ParStudentInd&);
+void update(const unsigned int&,
+            const arma::mat&, arma::ivec&,
+            const arma::vec&, ParStudentInd&);
 virtual void updateDf(const unsigned int&, const arma::mat&,
                       const arma::ivec&, ParStudentInd&);
 };
