@@ -26,7 +26,7 @@
 #include "PriorExponentialFix.h"
 
 class ParExponentialInd;
-class PriorExponentialInd : virtual public PriorExponentialFix {
+class PriorExponentialInd : public PriorExponentialFix {
 public:
 arma::rowvec weightStart;
 arma::rowvec weightPost;
@@ -35,8 +35,9 @@ PriorExponentialInd (const FinmixPrior&);
 virtual ~PriorExponentialInd ()
 {
 }
-virtual void update(const unsigned int&,
-                    const arma::mat&, arma::ivec&,
-                    const arma::vec&, const ParExponentialInd&);
+using PriorExponentialFix::update;
+void update(const unsigned int&,
+            const arma::mat&, arma::ivec&,
+            const arma::vec&, const ParExponentialInd&);
 };
 #endif /* __FINMIX_PRIOREXPONENTIALIND_H__ */

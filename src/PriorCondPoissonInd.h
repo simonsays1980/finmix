@@ -27,7 +27,7 @@
 #include "PriorCondPoissonFix.h"
 
 class ParCondPoissonInd;
-class PriorCondPoissonInd : virtual public PriorCondPoissonFix {
+class PriorCondPoissonInd : public PriorCondPoissonFix {
 public:
 arma::rowvec weightStart;
 arma::rowvec weightPost;
@@ -36,8 +36,9 @@ PriorCondPoissonInd (const FinmixPrior&);
 virtual ~PriorCondPoissonInd ()
 {
 }
-virtual void update(const unsigned int&,
-                    const arma::mat&, arma::ivec&,
-                    const arma::vec&, const ParCondPoissonInd&);
+using PriorCondPoissonFix::update;
+void update(const unsigned int&,
+            const arma::mat&, arma::ivec&,
+            const arma::vec&, const ParCondPoissonInd&);
 };
 #endif /* __FINMIX_PRIORPOISSONIND_H__ */

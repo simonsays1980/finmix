@@ -27,7 +27,7 @@
 #include "ParCondPoissonFix.h"
 #include "PriorCondPoissonInd.h"
 
-class ParCondPoissonInd : virtual public ParCondPoissonFix {
+class ParCondPoissonInd : public ParCondPoissonFix {
 public:
 arma::rowvec weight;
 
@@ -36,6 +36,7 @@ ParCondPoissonInd (const bool&,
 virtual ~ParCondPoissonInd ()
 {
 }
+using ParCondPoissonFix::update;
 void update(const PriorCondPoissonInd&);
 };
 #endif // __FINMIX_PARCONDPOISSONIND_H_

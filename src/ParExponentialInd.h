@@ -26,7 +26,7 @@
 #include "ParExponentialFix.h"
 #include "PriorExponentialInd.h"
 
-class ParExponentialInd : virtual public ParExponentialFix {
+class ParExponentialInd : public ParExponentialFix {
 public:
 arma::rowvec weight;
 
@@ -35,6 +35,7 @@ ParExponentialInd (const bool&,
 virtual ~ParExponentialInd ()
 {
 }
+using PriorExponentialFix::update;
 void update(const PriorExponentialInd&);
 };
 #endif // __FINMIX_PAREXPONENTIALIND_H__
