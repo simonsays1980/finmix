@@ -28,7 +28,7 @@
 /* Forward declaration to avoid infinite dependency */
 class ParBinomialInd;
 
-class PriorBinomialInd : virtual public PriorBinomialFix {
+class PriorBinomialInd : public PriorBinomialFix {
 public:
 arma::rowvec weightStart;
 arma::rowvec weightPost;
@@ -37,7 +37,8 @@ PriorBinomialInd (const FinmixPrior&);
 virtual ~PriorBinomialInd ()
 {
 }
-virtual void update(const unsigned int&,
+using PriorBinomialFix::update;
+void update(const unsigned int&,
                     const arma::mat&, arma::ivec&,
                     const arma::vec&, const ParBinomialInd&);
 };
