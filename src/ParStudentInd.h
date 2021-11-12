@@ -27,6 +27,7 @@ ParStudentInd (const bool&,
 virtual ~ParStudentInd ()
 {
 }
+using ParStudentFix::update;
 void update(const PriorStudentInd&);
 };
 #endif /* __FINMIX_PARSTUDENTIND_H__ */

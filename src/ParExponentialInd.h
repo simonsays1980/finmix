@@ -35,7 +35,7 @@ ParExponentialInd (const bool&,
 virtual ~ParExponentialInd ()
 {
 }
-using PriorExponentialFix::update;
+using ParExponentialFix::update;
 void update(const PriorExponentialInd&);
 };
 #endif // __FINMIX_PAREXPONENTIALIND_H__

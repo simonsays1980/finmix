@@ -28,6 +28,7 @@ PriorStudentInd (const FinmixPrior&);
 virtual ~PriorStudentInd ()
 {
 }
+using PriorStudentFix::update;
 void update(const unsigned int&,
             const arma::mat&, arma::ivec&,
             const arma::vec&, ParStudentInd&);

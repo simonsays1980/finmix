@@ -29,6 +29,7 @@ PriorNormalInd (const FinmixPrior&);
 virtual ~PriorNormalInd ()
 {
 }
+using PriorNormalFix::update;
 void update(const unsigned int&,
             const arma::mat&, arma::ivec&,
             const arma::vec&, ParNormalInd&);
