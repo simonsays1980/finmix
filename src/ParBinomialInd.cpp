@@ -72,7 +72,7 @@ ParBinomialInd::ParBinomialInd (const bool& STARTPAR,
  * @author  Lars Simon Zehnder
  * ------------------------------------------------------------
  **/
-void ParBinomialInd::update(const PriorBinomialInd& hyperPar) override
+void ParBinomialInd::update(const PriorBinomialInd& hyperPar)
 {
    ParBinomialFix::update(hyperPar);
    weight = rdirichlet(hyperPar.weightPost);

@@ -35,6 +35,7 @@ ParBinomialInd (const bool&,
 virtual ~ParBinomialInd ()
 {
 }
+using ParBinomialFix::update;
 void update(const PriorBinomialInd&);
 };
 #endif /* __FINMIX_PARBINOMIALIND_H__ */
