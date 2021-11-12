@@ -26,7 +26,7 @@
 #include "ParBinomialFix.h"
 #include "PriorBinomialInd.h"
 
-class ParBinomialInd : virtual public ParBinomialFix {
+class ParBinomialInd : public ParBinomialFix {
 public:
 arma::rowvec weight;
 
