@@ -32,8 +32,9 @@ using PriorStudentFix::update;
 void update(const unsigned int&,
             const arma::mat&, arma::ivec&,
             const arma::vec&, ParStudentInd&);
-virtual void updateDf(const unsigned int&, const arma::mat&,
-                      const arma::ivec&, ParStudentInd&);
+using PriorStudentFix::updateDf;
+void updateDf(const unsigned int&, const arma::mat&,
+              const arma::ivec&, ParStudentInd&);
 };
 #endif /* __FINMIX_PRIORSTUDENTIND_H__ */
 

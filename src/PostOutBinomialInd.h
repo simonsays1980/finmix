@@ -26,8 +26,9 @@ PostOutBinomialInd (const Rcpp::List&);
 virtual ~PostOutBinomialInd ()
 {
 }
-virtual void store(const unsigned int& m,
-                   const PriorBinomialInd&);
+using PostOutBinomialFix::store;
+void store(const unsigned int& m,
+           const PriorBinomialInd&);
 };
 
 PostOutBinomialInd::PostOutBinomialInd (const Rcpp::List& list) :

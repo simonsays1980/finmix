@@ -34,8 +34,9 @@ PostOutExponentialInd (const Rcpp::List&);
 virtual ~PostOutExponentialInd ()
 {
 }
-virtual void store(const unsigned int&,
-                   const PriorExponentialInd&);
+using PostOutExponentialFix::store;
+void store(const unsigned int&,
+           const PriorExponentialInd&);
 };
 
 PostOutExponentialInd::PostOutExponentialInd (const Rcpp::List& list) :
