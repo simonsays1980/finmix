@@ -18,7 +18,7 @@
 #include "ParStudmultFix.h"
 #include "PriorStudmultInd.h"
 
-class ParStudmultInd : virtual public ParStudmultFix {
+class ParStudmultInd : public ParStudmultFix {
 public:
 arma::rowvec weight;
 
@@ -26,6 +26,7 @@ ParStudmultInd (const bool&, const FinmixModel&);
 virtual ~ParStudmultInd ()
 {
 }
+using ParStudmultFix::update;
 void update(PriorStudmultInd&);
 };
 #endif /* __FINMIX_PARSTUDMULTIND_H__ */

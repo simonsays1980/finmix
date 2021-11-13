@@ -18,7 +18,7 @@
 #include "ParNormultFix.h"
 #include "PriorNormultInd.h"
 
-class ParNormultInd : virtual public ParNormultFix {
+class ParNormultInd : public ParNormultFix {
 public:
 arma::rowvec weight;
 
@@ -26,6 +26,7 @@ ParNormultInd (const bool&, const FinmixModel&);
 virtual ~ParNormultInd ()
 {
 }
+using ParNormultFix::update;
 void update(PriorNormultInd&);
 };
 #endif /* __FINMIX_PARNORMULTIND_H__ */

@@ -29,6 +29,7 @@ PriorStudmultInd (const FinmixPrior&);
 virtual ~PriorStudmultInd ()
 {
 }
+using PriorStudmultFix::update;
 void update(const unsigned int&,
             const arma::mat&, arma::ivec&,
             const arma::vec&, ParStudmultInd&);
