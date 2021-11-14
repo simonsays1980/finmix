@@ -18,7 +18,7 @@ mixtures are available:
 * Multivariate Student-t.
 
 ## Literature and implementations
-The methods used in this package is based on the major literature on the Bayesian estimation 
+The methods used in this package are based on the major literature on the Bayesian estimation 
 of finite mixture distributions, namely 
 
 *Frühwirth-Schnatter, Sylvia (2006), "Finite Mixture and Markov Switching Models", 
