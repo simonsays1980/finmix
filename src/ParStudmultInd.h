@@ -23,7 +23,7 @@ public:
 arma::rowvec weight;
 
 ParStudmultInd (const bool&, const FinmixModel&);
-virtual ~ParStudmultInd ()
+~ParStudmultInd ()
 {
 }
 using ParStudmultFix::update;

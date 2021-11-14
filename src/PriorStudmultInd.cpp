@@ -8,7 +8,6 @@ PriorStudmultInd::PriorStudmultInd (const FinmixPrior& prior) :
 {
 }
 
-inline
 void PriorStudmultInd::update(const unsigned int& K, const arma::mat& y,
                               arma::ivec& S, const arma::vec& T, ParStudmultInd& par)
 {

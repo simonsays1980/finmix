@@ -26,7 +26,7 @@ arma::rowvec weightStart;
 arma::rowvec weightPost;
 
 PriorNormalInd (const FinmixPrior&);
-virtual ~PriorNormalInd ()
+~PriorNormalInd ()
 {
 }
 using PriorNormalFix::update;

@@ -52,15 +52,15 @@
  *          Gibbs sampling, etc.
  *          The template parameters PriorType, ParType and LogType
  *          determine the specific model for that a Gibbs sampling
- *          should be performed. In particular they must specifiy
+ *          should be performed. In particular they must specify
  *          parameters and an 'update()' function that can be called
  *          from the inner mixin 'Node's 'update()' function. The
  *          ParOutType parameter determines the specific storage
- *          prcocess for the parameters of a chosen model and has to be
+ *          process for the parameters of a chosen model and has to be
  *          provided. It must contain a 'store()' method that can be
  *          called from the inner mixin 'Output's 'store()' function.
  * @see IND, HIER, POST, ADAPTER, BASE
- * @author Lars SImon Zehnder
+ * @author Lars Simon Zehnder
  * ------------------------------------------------------------------
  */
 template <typename PriorType, typename ParType, typename LogType,
@@ -322,7 +322,7 @@ FIX <PriorType, ParType, LogType, ParOutType>::FIX (const FinmixData& data,
 /**
  * -------------------------------------------------------
  * IND<Super>::update
- * @brief   Triggers the update process for each step
+ * @brief   Triggers the update process for each step of
  *          the sampler. Passes responsibility to 'Node's
  *          'update()' method.
  * @see Node::update

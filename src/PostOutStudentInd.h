@@ -18,7 +18,7 @@
 #include "PostOutStudentFix.h"
 #include "PriorStudentInd.h"
 
-class PostOutStudentInd : virtual public PostOutStudentFix {
+class PostOutStudentInd : public PostOutStudentFix {
 public:
 arma::mat* weight;
 
@@ -26,8 +26,9 @@ PostOutStudentInd (const Rcpp::List&);
 virtual ~PostOutStudentInd ()
 {
 }
-virtual void store(const unsigned int&,
-                   const PriorStudentInd&);
+using PostOutStudentFix::store;
+void store(const unsigned int&,
+           const PriorStudentInd&);
 };
 
 PostOutStudentInd::PostOutStudentInd (const Rcpp::List& list) :

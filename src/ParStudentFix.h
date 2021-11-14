@@ -15,6 +15,7 @@
 #ifndef __FINMIX_PARSTUDENTFIX_H__
 #define __FINMIX_PARSTUDENTFIX_H__
 
+#include <RcppArmadillo.h>
 #include "FinmixModel.h"
 #include "PriorStudentFix.h"
 
@@ -27,12 +28,12 @@ arma::rowvec acc;
 bool INDEPENDENT;
 
 ParStudentFix (const bool&, const FinmixModel&);
-virtual ~ParStudentFix ()
+~ParStudentFix ()
 {
 }
-virtual void update(const PriorStudentFix&);
-virtual void permute(const arma::urowvec&,
-                     const arma::urowvec&);
+void update(const PriorStudentFix&);
+void permute(const arma::urowvec&,
+             const arma::urowvec&);
 };
 #endif /* __FINMIX_PARSTUDENTFIX_H__ */
 

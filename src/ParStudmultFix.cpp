@@ -29,13 +29,11 @@ ParStudmultFix::ParStudmultFix (const bool& STARTPAR,
    }
 }
 
-inline
 void ParStudmultFix::update(PriorStudmultFix& hyperPar)
 {
    /* See PriorStudmultFix.cc */
 }
 
-inline
 void ParStudmultFix::permute(const arma::urowvec& compIndex,
                              const arma::urowvec& permIndex)
 {

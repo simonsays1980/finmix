@@ -66,7 +66,6 @@ PriorNormultFix::PriorNormultFix (const FinmixPrior& prior) :
    }
 }
 
-inline
 void PriorNormultFix::update(const unsigned int& K, const arma::mat& y,
                              arma::ivec& S, const arma::vec& T, ParNormultFix& par)
 {
@@ -155,7 +154,6 @@ void PriorNormultFix::update(const unsigned int& K, const arma::mat& y,
    }
 }
 
-inline
 void PriorNormultFix::updateHier(const ParNormultFix& par)
 {
    if (HIER)

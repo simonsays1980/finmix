@@ -23,13 +23,11 @@ ParStudentFix::ParStudentFix (const bool& STARTPAR,
    }
 }
 
-inline
 void ParStudentFix::update(const PriorStudentFix& hyperPar)
 {
    /* See PriorStudentFix.cc */
 }
 
-inline
 void ParStudentFix::permute(const arma::urowvec& compIndex,
                             const arma::urowvec& permIndex)
 {

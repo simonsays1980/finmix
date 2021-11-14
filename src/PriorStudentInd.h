@@ -15,6 +15,7 @@
 #ifndef __FINMIX_PRIORSTUDENTIND_H__
 #define __FINMIX_PRIORSTUDENTIND_H__
 
+#include <RcppArmadillo.h>
 #include "PriorStudentFix.h"
 
 /* Forward declaration */
@@ -25,7 +26,7 @@ arma::rowvec weightStart;
 arma::rowvec weightPost;
 
 PriorStudentInd (const FinmixPrior&);
-virtual ~PriorStudentInd ()
+~PriorStudentInd ()
 {
 }
 using PriorStudentFix::update;

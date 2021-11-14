@@ -9,7 +9,6 @@ PriorNormalInd::PriorNormalInd (const FinmixPrior& prior) :
 {
 }
 
-inline
 void PriorNormalInd::update(const unsigned int& K, const arma::mat& y,
                             arma::ivec& S, const arma::vec& T, ParNormalInd& par)
 {

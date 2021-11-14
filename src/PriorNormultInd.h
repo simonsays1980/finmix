@@ -26,13 +26,13 @@ arma::rowvec weightStart;
 arma::rowvec weightPost;
 
 PriorNormultInd (const FinmixPrior&);
-virtual ~PriorNormultInd ()
+~PriorNormultInd ()
 {
 }
 using PriorNormultFix::update;
 void update(const unsigned int&,
-                    const arma::mat&, arma::ivec&,
-                    const arma::vec&, ParNormultInd&);
+            const arma::mat&, arma::ivec&,
+            const arma::vec&, ParNormultInd&);
 };
 #endif /* __FINMIX_PRIORNORMULTIND_H__ */
 

@@ -26,7 +26,7 @@ arma::rowvec weightStart;
 arma::rowvec weightPost;
 
 PriorStudmultInd (const FinmixPrior&);
-virtual ~PriorStudmultInd ()
+~PriorStudmultInd ()
 {
 }
 using PriorStudmultFix::update;

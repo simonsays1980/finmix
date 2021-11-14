@@ -26,8 +26,9 @@ PostOutNormalInd (const Rcpp::List&);
 virtual ~PostOutNormalInd ()
 {
 }
-virtual void store(const unsigned int&,
-                   const PriorNormalInd&);
+using PostOutNormalFix::store;
+void store(const unsigned int&,
+           const PriorNormalInd&);
 };
 
 inline

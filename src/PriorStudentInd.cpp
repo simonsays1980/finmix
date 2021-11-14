@@ -13,7 +13,6 @@ PriorStudentInd::PriorStudentInd (const FinmixPrior& prior) :
 {
 }
 
-inline
 void PriorStudentInd::update(const unsigned int& K, const arma::mat& y,
                              arma::ivec& S, const arma::vec& T, ParStudentInd& par)
 {
@@ -101,7 +100,6 @@ void PriorStudentInd::update(const unsigned int& K, const arma::mat& y,
    weightPost = posterior_multinomial(K, S, weightStart);
 }
 
-inline
 void PriorStudentInd::updateDf(const unsigned int& K, const arma::mat& y,
                                const arma::ivec& S, ParStudentInd& par)
 {

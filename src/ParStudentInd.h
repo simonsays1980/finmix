@@ -15,6 +15,7 @@
 #ifndef __FINMIX_PARSTUDENTIND_H__
 #define __FINMIX_PARSTUDENTIND_H__
 
+#include <RcppArmadillo.h>
 #include "ParStudentFix.h"
 #include "PriorStudentInd.h"
 
@@ -24,7 +25,7 @@ arma::rowvec weight;
 
 ParStudentInd (const bool&,
                const FinmixModel&);
-virtual ~ParStudentInd ()
+~ParStudentInd ()
 {
 }
 using ParStudentFix::update;

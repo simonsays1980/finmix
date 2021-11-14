@@ -15,6 +15,7 @@
 #ifndef __FINMIX_PARNORMALFIX_H__
 #define __FINMIX_PARNORMALFIX_H__
 
+#include <RcppArmadillo.h>
 #include "FinmixModel.h"
 #include "PriorNormalFix.h"
 
@@ -25,11 +26,11 @@ arma::rowvec sigma;
 bool INDEPENDENT;
 
 ParNormalFix (const bool&, const FinmixModel&);
-virtual ~ParNormalFix ()
+~ParNormalFix ()
 {
 }
 void update(const PriorNormalFix&);
-virtual void permute(const arma::urowvec&,
+void permute(const arma::urowvec&,
                      const arma::urowvec&);
 };
 #endif /* __FINMIX_PARNORMALFIX_H__ */

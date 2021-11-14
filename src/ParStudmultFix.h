@@ -15,6 +15,7 @@
 #ifndef __FINMIX_PARSTUDMULTFIX_H__
 #define __FINMIX_PARSTUDMULTFIX_H__
 
+#include <RcppArmadillo.h>
 #include "FinmixModel.h"
 #include "PriorStudmultFix.h"
 
@@ -28,10 +29,10 @@ arma::rowvec acc;
 bool INDEPENDENT;
 
 ParStudmultFix (const bool&, const FinmixModel&);
-virtual ~ParStudmultFix ()
+~ParStudmultFix ()
 {
 }
-virtual void update(PriorStudmultFix&);
+void update(PriorStudmultFix&);
 virtual void permute(const arma::urowvec&,
                      const arma::urowvec&);
 };

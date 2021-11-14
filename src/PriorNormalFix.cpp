@@ -44,7 +44,6 @@ PriorNormalFix::PriorNormalFix (const FinmixPrior& prior) :
    }
 }
 
-inline
 void PriorNormalFix::update(const unsigned int& K, const arma::mat& y,
                             arma::ivec& S, const arma::vec& T, ParNormalFix& par)
 {
@@ -114,7 +113,6 @@ void PriorNormalFix::update(const unsigned int& K, const arma::mat& y,
    }
 }
 
-inline
 void PriorNormalFix::updateHier(const ParNormalFix& par)
 {
    double gN = arma::sum(cStart) + g;

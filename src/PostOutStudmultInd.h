@@ -26,8 +26,9 @@ PostOutStudmultInd (const Rcpp::List&);
 virtual ~PostOutStudmultInd ()
 {
 }
-virtual void store(const unsigned int&,
-                   const PriorStudmultInd&);
+using PostOutStudmultFix::store;
+void store(const unsigned int&,
+           const PriorStudmultInd&);
 };
 
 inline

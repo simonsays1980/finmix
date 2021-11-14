@@ -15,6 +15,7 @@
 #ifndef __FINMIX_PRIORNORMULTFIX_H__
 #define __FINMIX_PRIORNORMULTFIX_H__
 
+#include <RcppArmadillo.h>
 #include "FinmixPrior.h"
 
 /* Forward declaration */
@@ -43,13 +44,13 @@ arma::mat G;
 
 PriorNormultFix ();
 PriorNormultFix (const FinmixPrior&);
-virtual ~PriorNormultFix ()
+~PriorNormultFix ()
 {
 }
-virtual void update(const unsigned int&,
-                    const arma::mat&, arma::ivec&,
-                    const arma::vec&, ParNormultFix&);
-virtual void updateHier(const ParNormultFix&);
+void update(const unsigned int&,
+            const arma::mat&, arma::ivec&,
+            const arma::vec&, ParNormultFix&);
+void updateHier(const ParNormultFix&);
 };
 #endif /* __FINMIX_PRIORNORMULTFIX_H__ */
 

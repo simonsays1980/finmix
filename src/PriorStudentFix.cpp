@@ -56,7 +56,6 @@ PriorStudentFix::PriorStudentFix (const FinmixPrior& prior) :
    mhTune = arma::rowvec(tmpMhTune.begin(), K, true, true);
 }
 
-inline
 void PriorStudentFix::update(const unsigned int& K, const arma::mat& y,
                              arma::ivec& S, const arma::vec& T, ParStudentFix& par)
 {
@@ -141,7 +140,6 @@ void PriorStudentFix::update(const unsigned int& K, const arma::mat& y,
    updateDf(K, y, S, par);
 }
 
-inline
 void PriorStudentFix::updateDf(const unsigned int& K, const arma::mat& y,
                                const arma::ivec& S, ParStudentFix& par)
 {
@@ -182,7 +180,6 @@ void PriorStudentFix::updateDf(const unsigned int& K, const arma::mat& y,
    }
 }
 
-inline
 void PriorStudentFix::updateHier(const ParStudentFix& par)
 {
    double gN = arma::sum(cStart) + g;

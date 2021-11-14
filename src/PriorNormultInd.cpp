@@ -8,7 +8,6 @@ PriorNormultInd::PriorNormultInd (const FinmixPrior& prior) :
 {
 }
 
-inline
 void PriorNormultInd::update(const unsigned int& K, const arma::mat& y,
                              arma::ivec& S, const arma::vec& T, ParNormultInd& par)
 {

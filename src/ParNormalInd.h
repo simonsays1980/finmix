@@ -24,7 +24,7 @@ arma::rowvec weight;
 
 ParNormalInd (const bool&,
               const FinmixModel&);
-virtual ~ParNormalInd ()
+~ParNormalInd ()
 {
 }
 using ParNormalFix::update;

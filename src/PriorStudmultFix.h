@@ -15,6 +15,7 @@
 #ifndef __FINMIX_PRIORSTUDMULTFIX_H__
 #define __FINMIX_PRIORSTUDMULTFIX_H__
 
+#include <RcppArmadillo.h>
 #include "FinmixPrior.h"
 
 /* Forward declaration */
@@ -50,16 +51,16 @@ double d;
 
 PriorStudmultFix ();
 PriorStudmultFix (const FinmixPrior&);
-virtual ~PriorStudmultFix ()
+~PriorStudmultFix ()
 {
 }
-virtual void update(const unsigned int&,
-                    const arma::mat&, arma::ivec&,
-                    const arma::vec&, ParStudmultFix&);
+void update(const unsigned int&,
+            const arma::mat&, arma::ivec&,
+            const arma::vec&, ParStudmultFix&);
 void updateDf(const unsigned int& K,
               const arma::mat& y, const arma::ivec& S,
               ParStudmultFix& par);
-virtual void updateHier(const ParStudmultFix&);
+void updateHier(const ParStudmultFix&);
 };
 #endif /* __FINMIX_PRIORSTUDMULTFIX_H__ */
 

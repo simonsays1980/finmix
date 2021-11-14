@@ -18,7 +18,6 @@ ParNormultFix::ParNormultFix (const bool& STARTPAR,
    }
 }
 
-inline
 void ParNormultFix::update(PriorNormultFix& hyperPar)
 {
    if (INDEPENDENT)
@@ -39,7 +38,6 @@ void ParNormultFix::update(PriorNormultFix& hyperPar)
    }
 }
 
-inline
 void ParNormultFix::permute(const arma::urowvec& compIndex,
                             const arma::urowvec& permIndex)
 {

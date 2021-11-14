@@ -34,8 +34,9 @@ PostOutPoissonInd (const Rcpp::List&);
 virtual ~PostOutPoissonInd ()
 {
 }
-virtual void store(const unsigned int&,
-                   const PriorPoissonInd&);
+using PostOutPoissonFix::store;
+void store(const unsigned int&,
+           const PriorPoissonInd&);
 };
 
 PostOutPoissonInd::PostOutPoissonInd (const Rcpp::List& list) :

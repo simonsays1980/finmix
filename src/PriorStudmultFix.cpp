@@ -79,7 +79,6 @@ PriorStudmultFix::PriorStudmultFix (const FinmixPrior& prior) :
    mhTune = arma::rowvec(tmpMhTune.begin(), K, true, true);
 }
 
-inline
 void PriorStudmultFix::update(const unsigned int& K, const arma::mat& y,
                               arma::ivec& S, const arma::vec& T, ParStudmultFix& par)
 {
@@ -188,7 +187,6 @@ void PriorStudmultFix::update(const unsigned int& K, const arma::mat& y,
    updateDf(K, y, S, par);
 }
 
-inline
 void PriorStudmultFix::updateDf(const unsigned int& K,
                                 const arma::mat& y, const arma::ivec& S,
                                 ParStudmultFix& par)
@@ -231,7 +229,6 @@ void PriorStudmultFix::updateDf(const unsigned int& K,
    }
 }
 
-inline
 void PriorStudmultFix::updateHier(const ParStudmultFix& par)
 {
    if (HIER)
