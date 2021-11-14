@@ -14,96 +14,257 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
-
+#' Finmix `ddatamoments` class
+#' 
+#' Stores moments of an [fdata-class] object containing discrete data. 
+#' The `fdata` object is stored in the parent [datamoments-class] 
+#' class.
+#' 
+#' @slot factorial An array containing the first four factorial moments of the 
+#'   discrete data stored in the `fdata` object.
+#' @slot over A vector storing the overdispersion of the discrete data in the 
+#'   corresponding `fdata` object. 
+#' @slot zero A vector storing the fractions of zeros in the observed data. <
+#' @slot smoments An `sdatamoments` object, if the `fdata` object also holds 
+#'   indicators. `NULL`, if no indicators are present in the `fdata` object. 
+#' @exportClass ddatamoments
+#' @rdname ddatamoments-class
+#' @keywords internal
+#' @seealso 
+#' * [datamoments-class] for the parent class
+#' * [ddatamoments-class] for the corresponding class for 
+#'   continuous data
+#' * [sdatamoments-class] for the contained class if indicators
+#'   are present in the `fdata` object 
 .ddatamoments <- setClass("ddatamoments",
-                          representation(factorial   = "array",
-                                         over        = "vector",
-                                         zero        = "vector",
-                                         smoments    = "sdatamomentsOrNULL"),
-                          contains = c("datamoments"),
-                          validity = function(object) 
-                          {
-                              ## else: ok
-                              TRUE
-                          },
-                          prototype(factorial   = array(),
-                                    over        = vector(),
-                                    zero        = vector(),
-                                    smoments    = .sdatamoments()
-                                    )
+  representation(
+    factorial = "array",
+    over = "vector",
+    zero = "vector",
+    smoments = "sdatamomentsOrNULL"
+  ),
+  contains = c("datamoments"),
+  validity = function(object) {
+    ## else: ok
+    TRUE
+  },
+  prototype(
+    factorial = array(),
+    over = vector(),
+    zero = vector(),
+    smoments = .sdatamoments()
+  )
 )
 
-setMethod("initialize", "ddatamoments", 
-          function(.Object, ..., value = fdata()) 
-          {
-              .Object@fdata <- value
-			  if (hasS(value)) {
-                  .Object@smoments  <- sdatamoments(value)
-			  } else {
-                  .Object@smoments  <- NULL
-              }
-              generateMoments(.Object)
-          }
+#' Initializer of the `ddatamoments` class
+#' 
+#' @description
+#' Only used implicitly. The initializer calls a function `generateMoments()` 
+#' to generate in the initialization step the moments for a passed-in `fdata`
+#' object.
+#' 
+#' @param .Object An object: see the "initialize Methods" section in 
+#'   [initialize].
+#' @param ... Arguments to specify properties of the new object, to be passed 
+#'   to `initialize()`.
+#' @param model A finmix `fdata` object containing the observations.
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [Classes_Details] for details of class definitions, and 
+#' * [setOldClass] for the relation to S3 classes
+setMethod(
+  "initialize", "ddatamoments",
+  function(.Object, ..., value = fdata()) {
+    .Object@fdata <- value
+    if (hasS(value)) {
+      .Object@smoments <- sdatamoments(value)
+    } else {
+      .Object@smoments <- NULL
+    }
+    generateMoments(.Object)
+  }
 )
 
 ## Generic set in 'groupmoments.R' ##
-setMethod("generateMoments", "ddatamoments",
-          function(object) 
-          {
-              .generateDdatamoments(object)
-          }
+#' Generate moments for continuous data.
+#' 
+#' @description 
+#' Implicit method. Calling [generateMoments()] generates the moments of a
+#' finite mixture with continuous data.
+#' 
+#' @param object An `ddatamoments` object. 
+#' @return An `ddatamoments` object with calculated moments.
+#' @keywords internal
+setMethod(
+  "generateMoments", "ddatamoments",
+  function(object) {
+    .generateDdatamoments(object)
+  }
 )
 
-setMethod("show", "ddatamoments", 
-          function(object) 
-          {
-              cat("Object 'datamoments'\n")
-              cat("     mean        : Vector of", 
-                  length(object@mean), "\n")
-              cat("     var         : Vector of",
-                  length(object@var), "\n")
-              cat("     factorial   :",
-                  paste(dim(object@factorial), collapse = "x"), "\n")
-              cat("     over        : Vector of",
-                  length(object@over), "\n")
-              cat("     zero        : Vector of",
-                  length(object@zero), "\n")
-              if (hasS(object@fdata)) {
-                  cat("     smoments    : Object of class",
-                      class(object@smoments), "\n")
-              }
-              cat("     fdata       : Object of class",
-                  class(object@fdata), "\n")
-          }
+#' Shows a summary of a `ddatamoments` object.
+#' 
+#' Calling [show()] on a `ddatamoments` object gives an overview 
+#' of the moments of a finit mixture with continuous data.
+#' 
+#' @param object A `ddatamoments` object.
+#' @returns A console output listing the slots and summary information about
+#'   each of them. 
+#' @exportMethod show
+#' @keywords internal
+#' @seealso 
+#' * [datamoments-class] for the parent class definition
+#' * [datamoments()] for the mutual constructor of all datamoments classes
+setMethod(
+  "show", "ddatamoments",
+  function(object) {
+    cat("Object 'datamoments'\n")
+    cat(
+      "     mean        : Vector of",
+      length(object@mean), "\n"
+    )
+    cat(
+      "     var         : Vector of",
+      length(object@var), "\n"
+    )
+    cat(
+      "     factorial   :",
+      paste(dim(object@factorial), collapse = "x"), "\n"
+    )
+    cat(
+      "     over        : Vector of",
+      length(object@over), "\n"
+    )
+    cat(
+      "     zero        : Vector of",
+      length(object@zero), "\n"
+    )
+    if (hasS(object@fdata)) {
+      cat(
+        "     smoments    : Object of class",
+        class(object@smoments), "\n"
+      )
+    }
+    cat(
+      "     fdata       : Object of class",
+      class(object@fdata), "\n"
+    )
+  }
 )
 
 ## Getters ##
-setMethod("getSmoments", "ddatamoments", 
-          function(object) 
-          {
-              return(object@smoments)
-          }
+#' Getter method of `ddatamoments` class.
+#' 
+#' Returns the `smoments` slot.
+#' 
+#' @param object An `ddatamoments` object.
+#' @returns The `smoments` slot of the `object`.
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getSmoments(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
+setMethod(
+  "getSmoments", "ddatamoments",
+  function(object) {
+    return(object@smoments)
+  }
 )
 
-setMethod("getFactorial", "ddatamoments", 
-          function(object) 
-          {
-              return(object@factorial)
-          }
+#' Getter method of `ddatamoments` class.
+#' 
+#' Returns the `factorial` slot.
+#' 
+#' @param object An `ddatamoments` object.
+#' @returns The `factorial` slot of the `object`.
+#' @exportMethod getFactorial
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getFactorial(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
+setMethod(
+  "getFactorial", "ddatamoments",
+  function(object) {
+    return(object@factorial)
+  }
 )
 
-setMethod("getOver", "ddatamoments", 
-          function(object) 
-          {
-              return(object@over)
-          }
+#' Getter method of `ddatamoments` class.
+#' 
+#' Returns the `over` slot.
+#' 
+#' @param object An `ddatamoments` object.
+#' @returns The `over` slot of the `object`.
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getOver(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
+setMethod(
+  "getOver", "ddatamoments",
+  function(object) {
+    return(object@over)
+  }
 )
 
-setMethod("getZero", "ddatamoments", 
-          function(object) 
-          {
-              return(object@zero)
-          }
+#' Getter method of `ddatamoments` class.
+#' 
+#' Returns the `zero` slot.
+#' 
+#' @param object An `ddatamoments` object.
+#' @returns The `zero` slot of the `object`.
+#' @keywords internal
+#' 
+#' @examples 
+#' # Generate a Poisson mixture model with two components.
+#' f_model <- model("poisson", par = list(lambda = c(0.3, 0.7)), K = 2)
+#' # Simulate data from the model.
+#' f_data <- simulate(f_model)
+#' # Calculate the mixture moments.
+#' f_datamoms <- datamoments(f_data)
+#' # Get the moments for the included indicators of the data. 
+#' getZero(f_datamoms)
+#' 
+#' @seealso 
+#' * [datamoments-class] for the base class for model moments
+#' * [datamoments()] for the constructor of the `datamoments` class family
+setMethod(
+  "getZero", "ddatamoments",
+  function(object) {
+    return(object@zero)
+  }
 )
 
 ## Setters ##
@@ -111,30 +272,48 @@ setMethod("getZero", "ddatamoments",
 
 ### Private functions
 ### These functions are not exported
-".generateDdatamoments" <- function(object) 
-{
-    ## enforce column-wise ordering ##
-    hasY(object@fdata, verbose = TRUE)
-    datam   <- getColY(object@fdata)
-    ## Compute factorial moments ##
-    ## fact.moments is a L x r array (L = 4) ## 
-    momentsm <- array(NA, dim = c(4, object@fdata@r))
-    means           <- apply(datam, 2, mean, na.rm = TRUE)
-    object@mean <- means
-    object@var    <- var(datam, na.rm = TRUE)
-    momentsm[1, ]   <- t(means)  
-    momentsm[2, ]   <- apply(datam * apply(datam - 1, 2, max, 0), 
-                             2, mean, na.rm = TRUE)
-    momentsm[3, ]   <- apply(datam * apply(datam - 2, 2, max, 0),
-                             2, mean, na.rm = TRUE)
-    momentsm[4, ]   <- apply(datam * apply(datam - 3, 2, max, 0),
-                             2, mean, na.rm = TRUE)
-    dimnames(momentsm) <- list(c("1st", "2nd", "3rd", "4th"),
-                               colnames(datam))
-    object@factorial <- momentsm
-    ## Overdispersions and fractions of zeros ##
-    ## over and zeros are r x 1 matrices ## 
-    object@over <- diag(var(datam)) - means
-    object@zero <- apply(apply(datam, 2, "==", 0), 2, sum)
-    return(object)
+#' Generate data moments for finite mixture data
+#' 
+#' @description 
+#' Only called implicitly. generates all moments of finite mixture data in a 
+#' `fdata` object.
+#' 
+#' @param object A `ddatamoments` object to contain all calculated
+#'   moments. 
+#' @returns A `ddatamoments` object containing all moments of the 
+#'   inite mixture data.
+#' @noRd
+".generateDdatamoments" <- function(object) {
+  ## enforce column-wise ordering ##
+  hasY(object@fdata, verbose = TRUE)
+  datam <- getColY(object@fdata)
+  ## Compute factorial moments ##
+  ## fact.moments is a L x r array (L = 4) ##
+  momentsm <- array(NA, dim = c(4, object@fdata@r))
+  means <- apply(datam, 2, mean, na.rm = TRUE)
+  object@mean <- means
+  object@var <- var(datam, na.rm = TRUE)
+  momentsm[1, ] <- t(means)
+  momentsm[2, ] <- apply(datam * apply(datam - 1, 2, max, 0),
+    2, mean,
+    na.rm = TRUE
+  )
+  momentsm[3, ] <- apply(datam * apply(datam - 2, 2, max, 0),
+    2, mean,
+    na.rm = TRUE
+  )
+  momentsm[4, ] <- apply(datam * apply(datam - 3, 2, max, 0),
+    2, mean,
+    na.rm = TRUE
+  )
+  dimnames(momentsm) <- list(
+    c("1st", "2nd", "3rd", "4th"),
+    colnames(datam)
+  )
+  object@factorial <- momentsm
+  ## Overdispersions and fractions of zeros ##
+  ## over and zeros are r x 1 matrices ##
+  object@over <- diag(var(datam)) - means
+  object@zero <- apply(apply(datam, 2, "==", 0), 2, sum)
+  return(object)
 }

@@ -14,59 +14,142 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
-
+#' Finmix `modelmoments` class
+#' 
+#' @description
+#' Defines a container to hold the moments of a finite mixture model. The 
+#' finmix `model` object should contains parameters and weights. 
+#' 
+#' @slot mean A vector of component means. 
+#' @slot var An array of components variances or in case of multivariate 
+#' distributions covariance matrices. 
+#' @slot model The corresponding `model` object.
+#' @exportClass modelmoments
+#' @rdname modelmoments-class
+#' @seealso 
+#' * [modelmoments()] for the constructor of the `modelmoments` class
 setClass("modelmoments",
-         representation(mean    = "vector",
-                        var     = "array",
-                        model   = "model"
-                        ),
-         validity = function(object) {
-             ## else: OK
-		     TRUE
-         },
-         prototype(
-                   mean     = vector(),
-                   var      = array(),
-                   model    = model()
-                   )
+  representation(
+    mean = "vector",
+    var = "array",
+    model = "model"
+  ),
+  validity = function(object) {
+    ## else: OK
+    TRUE
+  },
+  prototype(
+    mean     = vector(),
+    var      = array(),
+    model    = model()
+  )
 )
 
+#' Constructor of finmix `modelmoments` class
+#' 
+#' Calling [modelmoments()] calculates the corresponding moments of the 
+#' finite mixture distribution defined in the `model` object. The `model` 
+#' object should contain parameters in slot `par` and weights in slot `weight`.
+#' 
+#' @param model A `model` object containing defined parameters in slot `par` 
+#'   and defined weights in slot `weight`.
+#' @returns A `modelmoments` object with calculated moments of the finite 
+#' mixture model defined in the `model` object. 
+#' @export
+#' 
+#' @examples 
+#' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
+#'                  weight=matrix(c(0.3, 0.7), nrow=1))
+#' modelmoments(f_model)
+#' 
+#' @seealso 
+#' * [modelmoments-class] for all slots of the `modelmoments` class
 "modelmoments" <- function(model) {
-    dist <- model@dist
-    if (dist == "normult") {
-        .normultmodelmoments(model = model)
-    } else if (dist == "studmult") {
-        .studmultmodelmoments(model = model)
-    } else if (dist == "student") {
-        .studentmodelmoments(model = model)
-    } else if (dist == "normal") {
-        .normalmodelmoments(model = model)
-    } else if (dist == "exponential") {
-        .exponentialmodelmoments(model = model)
-    } else if (dist %in% c("poisson", "cond.poisson")) {
-        .poissonmodelmoments(model = model)
-    } else if (dist == "binomial") {
-        .binomialmodelmoments(model = model)
-    }
+  dist <- model@dist
+  if (dist == "normult") {
+    .normultmodelmoments(model = model)
+  } else if (dist == "studmult") {
+    .studmultmodelmoments(model = model)
+  } else if (dist == "student") {
+    .studentmodelmoments(model = model)
+  } else if (dist == "normal") {
+    .normalmodelmoments(model = model)
+  } else if (dist == "exponential") {
+    .exponentialmodelmoments(model = model)
+  } else if (dist %in% c("poisson", "cond.poisson")) {
+    .poissonmodelmoments(model = model)
+  } else if (dist == "binomial") {
+    .binomialmodelmoments(model = model)
+  }
 }
 
 ## Getters ##
-setMethod("getMean", "modelmoments", 
-          function(object) {
-              return(object@mean)
-          }		
+#' Getter method of `modelmoments` class.
+#' 
+#' Returns the `mean` slot of a `modelmoments` object. 
+#' 
+#' @param object A `modelmoments` object.
+#' @returns The `mean` slot of the `object`.
+#' @exportMethod getMean
+#' @keywords internal
+#' 
+#' @examples 
+#' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
+#'                  weight=matrix(c(0.3, 0.7), nrow=1))
+#' f_moments <- modelmoments(f_model)
+#' getMean(f_moments)
+#' 
+#' @seealso [modelmoments-class] for all slots of the `modelmoments` class
+setMethod(
+  "getMean", "modelmoments",
+  function(object) {
+    return(object@mean)
+  }
 )
 
-setMethod("getVar", "modelmoments", 
-          function(object) {
-              return(object@var)
-          }
+#' Getter method of `modelmoments` class.
+#' 
+#' Returns the `var` slot of a `modelmoments` object. 
+#' 
+#' @param object A `modelmoments` object.
+#' @returns The `var` slot of the `object`.
+#' @exportMethod getVar
+#' @keywords internal 
+#' @examples 
+#' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
+#'                  weight=matrix(c(0.3, 0.7), nrow=1))
+#' f_moments <- modelmoments(f_model)
+#' getVar(f_moments)
+#' 
+#' @seealso [modelmoments-class] for all slots of the `modelmoments` class
+setMethod(
+  "getVar", "modelmoments",
+  function(object) {
+    return(object@var)
+  }
 )
 
-setMethod("getModel", "modelmoments",
-          function(object) {
-              return(object@model)
-          }
+#' Getter method of `modelmoments` class.
+#' 
+#' Returns the `model` slot of a `modelmoments` object. 
+#' 
+#' @param object A `modelmoments` object.
+#' @returns The `model` slot of the `object`.
+#' @exportMethod getModel
+#' @keywords internal
+#' 
+#' @examples 
+#' f_model <- model("poisson", par=list(lambda=c(0.3, 0.1)), 
+#'                  weight=matrix(c(0.3, 0.7), nrow=1))
+#' f_moments <- modelmoments(f_model)
+#' getModel(f_moments)
+#' 
+#' @seealso [modelmoments-class] for all slots of the `modelmoments` class
+setMethod(
+  "getModel", "modelmoments",
+  function(object) {
+    return(object@model)
+  }
 )
 
 ## Setters are not provided as users are not intended to manipulate ##

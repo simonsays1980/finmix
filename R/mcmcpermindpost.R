@@ -15,24 +15,65 @@
 # You should have received a copy of the GNU General Public License
 # along with finmix. If not, see <http://www.gnu.org/licenses/>.
 
+#' Finmix `mcmcpermindpost` class
+#' 
+#' @description 
+#' This class defines objects to store the outputs from permuting the MCMC 
+#' samples. Due to label switching the sampled component parameters are usually 
+#' not assigned to the same component in each iteration. To overcome this issue 
+#' the samples are permuted by using a relabeling algorithm (usually K-means) 
+#' to reassign parameters. Note that due to assignment of parameters from the 
+#' same iteration to the same component, the sample size could shrink. 
+#' 
+#' This class is supplementing the parent class by adding a slot to store the 
+#' permuted parameter samples of the posterior densities.
+#' 
+#' @slot postperm A named list containing a named list `par` with array(s) of 
+#'   parameters from the posterior density. 
+#' @exportClass mcmcpermindpost
+#' @rdname mcmcpermindpost-class
+#' @keywords internal
+#' 
+#' @seealso 
+#' * [mcmcpermute()] for the calling function
+#' * [mcmcpermind-class] for the parent class definition
+#' * [mcmcpermfixpost-class] for the corresponding class for models 
+#'   with fixed indicators
 .mcmcpermindpost <- setClass("mcmcpermindpost",
-                             representation(postperm = "list"),
-                             contains = c("mcmcpermind"),
-                             validity = function(object) 
-                             {
-                                 ## else: OK
-                                 TRUE
-                             },
-                             prototype(postperm = list())
+  representation(postperm = "list"),
+  contains = c("mcmcpermind"),
+  validity = function(object) {
+    ## else: OK
+    TRUE
+  },
+  prototype(postperm = list())
 )
 
 ## Getters ##
-setMethod("getPostperm", "mcmcpermindpost",
-          function(object) 
-          {
-              return(object@postperm)
-          }
+
+#' Getter method of `mcmcpermindpost` class.
+#' 
+#' Returns the `postperm` slot.
+#' 
+#' @param object An `mcmcpermindpost` object.
+#' @returns The `postperm` slot of the `object`.
+#' @exportMethod getPostperm
+#' @keywords internal
+#' 
+#' @examples 
+#' \dontrun{getPostperm(mcmcperm)}
+#' 
+#' @seealso 
+#' * [mcmcoutputpermpost-class] for the inheriting class
+#' * [mcmcoutputpermhierpost-class] for the inheriting class with 
+#'   hierarchical prior
+#' * [mcmcpermute()] for function permuting MCMC samples
+setMethod(
+  "getPostperm", "mcmcpermindpost",
+  function(object) {
+    return(object@postperm)
+  }
 )
 
-## No setters as users are not intended to manipulate 
+## No setters as users are not intended to manipulate
 ## this objects

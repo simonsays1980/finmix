@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // swap_cc
 Rcpp::NumericMatrix swap_cc(Rcpp::NumericMatrix values, Rcpp::IntegerMatrix index);
 RcppExport SEXP _finmix_swap_cc(SEXP valuesSEXP, SEXP indexSEXP) {
@@ -164,6 +169,51 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// mcmc_condpoisson_cc
+RcppExport SEXP mcmc_condpoisson_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_condpoisson_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_condpoisson_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_exponential_cc
+RcppExport SEXP mcmc_exponential_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_exponential_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_exponential_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_normal_cc
+RcppExport SEXP mcmc_normal_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_normal_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_normal_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
 // mcmc_normult_cc
 RcppExport SEXP mcmc_normult_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
 RcppExport SEXP _finmix_mcmc_normult_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
@@ -176,6 +226,51 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
     Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
     rcpp_result_gen = Rcpp::wrap(mcmc_normult_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_poisson_cc
+RcppExport SEXP mcmc_poisson_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_poisson_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_poisson_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_student_cc
+RcppExport SEXP mcmc_student_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_student_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_student_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
+    return rcpp_result_gen;
+END_RCPP
+}
+// mcmc_studmult_cc
+RcppExport SEXP mcmc_studmult_cc(SEXP data_S4, SEXP model_S4, SEXP prior_S4, SEXP mcmc_S4, SEXP mcmcoutput_S4);
+RcppExport SEXP _finmix_mcmc_studmult_cc(SEXP data_S4SEXP, SEXP model_S4SEXP, SEXP prior_S4SEXP, SEXP mcmc_S4SEXP, SEXP mcmcoutput_S4SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data_S4(data_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type model_S4(model_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type prior_S4(prior_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmc_S4(mcmc_S4SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type mcmcoutput_S4(mcmcoutput_S4SEXP);
+    rcpp_result_gen = Rcpp::wrap(mcmc_studmult_cc(data_S4, model_S4, prior_S4, mcmc_S4, mcmcoutput_S4));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -208,15 +303,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // stephens1997b_poisson_cc
-arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values, Rcpp::NumericMatrix comp_par, Rcpp::NumericMatrix weight_par);
-RcppExport SEXP _finmix_stephens1997b_poisson_cc(SEXP valuesSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP) {
+arma::imat stephens1997b_poisson_cc(Rcpp::NumericVector values, Rcpp::NumericMatrix comp_par, Rcpp::NumericMatrix weight_par, signed int max_iter);
+RcppExport SEXP _finmix_stephens1997b_poisson_cc(SEXP valuesSEXP, SEXP comp_parSEXP, SEXP weight_parSEXP, SEXP max_iterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type values(valuesSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type comp_par(comp_parSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type weight_par(weight_parSEXP);
-    rcpp_result_gen = Rcpp::wrap(stephens1997b_poisson_cc(values, comp_par, weight_par));
+    Rcpp::traits::input_parameter< signed int >::type max_iter(max_iterSEXP);
+    rcpp_result_gen = Rcpp::wrap(stephens1997b_poisson_cc(values, comp_par, weight_par, max_iter));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -271,10 +367,16 @@ static const R_CallMethodDef CallEntries[] = {
     {"_finmix_moments_cc", (DL_FUNC) &_finmix_moments_cc, 1},
     {"_finmix_permmoments_cc", (DL_FUNC) &_finmix_permmoments_cc, 1},
     {"_finmix_mcmc_binomial_cc", (DL_FUNC) &_finmix_mcmc_binomial_cc, 5},
+    {"_finmix_mcmc_condpoisson_cc", (DL_FUNC) &_finmix_mcmc_condpoisson_cc, 5},
+    {"_finmix_mcmc_exponential_cc", (DL_FUNC) &_finmix_mcmc_exponential_cc, 5},
+    {"_finmix_mcmc_normal_cc", (DL_FUNC) &_finmix_mcmc_normal_cc, 5},
     {"_finmix_mcmc_normult_cc", (DL_FUNC) &_finmix_mcmc_normult_cc, 5},
+    {"_finmix_mcmc_poisson_cc", (DL_FUNC) &_finmix_mcmc_poisson_cc, 5},
+    {"_finmix_mcmc_student_cc", (DL_FUNC) &_finmix_mcmc_student_cc, 5},
+    {"_finmix_mcmc_studmult_cc", (DL_FUNC) &_finmix_mcmc_studmult_cc, 5},
     {"_finmix_stephens1997a_poisson_cc", (DL_FUNC) &_finmix_stephens1997a_poisson_cc, 4},
     {"_finmix_stephens1997a_binomial_cc", (DL_FUNC) &_finmix_stephens1997a_binomial_cc, 4},
-    {"_finmix_stephens1997b_poisson_cc", (DL_FUNC) &_finmix_stephens1997b_poisson_cc, 3},
+    {"_finmix_stephens1997b_poisson_cc", (DL_FUNC) &_finmix_stephens1997b_poisson_cc, 4},
     {"_finmix_stephens1997b_binomial_cc", (DL_FUNC) &_finmix_stephens1997b_binomial_cc, 4},
     {"_finmix_stephens1997b_exponential_cc", (DL_FUNC) &_finmix_stephens1997b_exponential_cc, 3},
     {"mcmc_binomial_cc",    (DL_FUNC) &mcmc_binomial_cc,    5},

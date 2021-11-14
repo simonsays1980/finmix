@@ -1,17 +1,38 @@
 Package: finmix
 Type: Package
-Title: Gibbs sampling for finite mixture distributions.
-Version: 0.1
-Date: 2013-07-05
+Title: An R package for Bayesian estimation of finite mixture distributions
+Version: 0.1.0
+Date: 2021-09-10
 Author: Lars Simon Zehnder
-Maintainer: Lars Simon Zehnder <simon.zehnder@gmail.com>
-Description: More about what it does (maybe more than one line)
+Maintainer: Lars Simon Zehnder <simon.zehnder@neway.ai>
+Description: An R package for Bayesian estimation of finite mixture 
+    distributions. The package uses heavily C++ code to enable high performance 
+    MCMC sampling. Each distribution comes along with some support functions 
+    that create needed objects and start parameters. The following mixtures are 
+    available: Poisson, Binomial, Exponential, Normal, Multivariate Normal, 
+    Student-t, and Multivariate Student-t. 
 License: GPL (>= 3)
-Depends: Rcpp (>= 0.10.2), RcppArmadillo (>= 0.3.6.2), graphics, 
-            mvtnorm (>= 0.9-7), KernSmooth (>= 2.23.10), dfoptim(>= 2011.8.1)
-Imports: Rcpp (>= 0.11.4), graphics, mvtnorm (>= 0.9-7), KernSmooth (>= 0.3.6.2)
-Suggests: RUnit
-LinkingTo: Rcpp, RcppArmadillo
+SystemRequirements: C++11
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends: 
+    R (>= 3.0.2)
+Imports: 
+    Rcpp (>= 1.0.7), 
+    RcppArmadillo (>= 0.10.6),
+    methods,
+    stats,
+    graphics, 
+    mvtnorm, 
+    KernSmooth, 
+    nloptr (>= 1.2.0),
+    dfoptim
+LinkingTo: 
+    Rcpp (>= 1.0.7), 
+    RcppArmadillo (>= 0.10.6), 
+    nloptr (>= 1.2.0)
+Extends:
+    bayespin
 Collate:
     AllGenerics.R
     graphic_func.R
@@ -53,8 +74,10 @@ Collate:
     mcmcoutputhierpost.R
     mixturemcmc.R
     mcmcpermfix.R
+    mcmcpermfixhier.R
     mcmcpermfixpost.R
     mcmcpermind.R
+    mcmcpermindhier.R
     mcmcpermindpost.R
     mcmcoutputpermfix.R
     mcmcoutputpermfixhier.R
@@ -69,4 +92,4 @@ Collate:
     mcmcestfix.R
     mcmcestind.R
     mcmcestimate.R
-
+RoxygenNote: 7.1.1
