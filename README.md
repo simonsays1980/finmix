@@ -1,4 +1,8 @@
-[![R-CMD-check](https://github.com/simonsays1980/finmix/actions/workflows/r-check-package.yml/badge.svg)](https://github.com/simonsays1980/finmix/actions/workflows/r-check-package.yml) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+[![R-CMD-check](https://github.com/simonsays1980/finmix/actions/workflows/r-check-package.yml/badge.svg)](https://github.com/simonsays1980/finmix/actions/workflows/r-check-package.yml) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html) [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://GitHub.com/Naereen/StrapDown.js/releases/)
+[![Linux](https://svgshare.com/i/Zhy.svg)](https://svgshare.com/i/Zhy.svg) [![macOS](https://svgshare.com/i/ZjP.svg)](https://svgshare.com/i/ZjP.svg) [![Windows](https://svgshare.com/i/ZhY.svg)](https://svgshare.com/i/ZhY.svg)
+
+
+
 
 
 # finmix
