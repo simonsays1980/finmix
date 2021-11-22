@@ -1,4 +1,5 @@
-[![R-CMD-check](https://github.com/simonsays1980/finmix/actions/workflows/r-check-package.yml/badge.svg)](https://github.com/simonsays1980/finmix/actions/workflows/r-check-package.yml)
+[![R-CMD-check](https://github.com/simonsays1980/finmix/actions/workflows/r-check-package.yml/badge.svg)](https://github.com/simonsays1980/finmix/actions/workflows/r-check-package.yml) [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
+
 
 # finmix
 **An R package for Bayesian estimation of finite mixture distributions** 
